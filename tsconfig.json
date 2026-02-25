@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"lib": ["ES2022"],
+		"moduleResolution": "bundler",
+		"types": ["bun-types"],
+
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+
+		"outDir": "./dist",
+
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"],
+			"@/domains/*": ["src/domains/*"],
+			"@/services/*": ["src/services/*"],
+			"@/shared/*": ["src/shared/*"],
+			"@/types": ["src/types"],
+			"@/types/*": ["src/types/*"]
+		}
+	},
+	"include": ["src/**/*", "tests/**/*", "__tests__/**/*"],
+	"exclude": ["node_modules", "dist", "bin", "src/ui"]
+}

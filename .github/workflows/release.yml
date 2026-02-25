@@ -1,0 +1,159 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  # Build matrices for cross-platform binaries
+  build-binaries:
+    uses: ./.github/workflows/build-binaries.yml
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: build-binaries
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Configure Git for semantic-release
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Debug git state
+        run: |
+          echo "Current branch:"
+          git branch -v
+          echo "Remote branches:"
+          git branch -rv
+          echo "Last 3 commits:"
+          git log --oneline -3
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.2
+
+      - name: Validate package.json
+        run: |
+          echo "Validating package.json..."
+          npm pkg fix
+          git diff --exit-code package.json || (echo "package.json was modified by npm pkg fix" && exit 1)
+
+      - name: Install system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Run type check
+        run: bun run typecheck
+
+      - name: Run linter
+        run: bun run lint
+
+      - name: Run tests
+        run: bun test
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Create bin directory
+        run: mkdir -p bin
+
+      - name: Download all binary artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Copy binaries to bin directory
+        run: |
+          # Copy binaries without silent failures
+          cp artifacts/binary-darwin-arm64/ck-darwin-arm64 bin/
+          cp artifacts/binary-darwin-x64/ck-darwin-x64 bin/
+          cp artifacts/binary-linux-x64/ck-linux-x64 bin/
+          cp artifacts/binary-win32-x64/ck-win32-x64.exe bin/
+
+          # Set executable permissions
+          chmod +x bin/ck-darwin-* bin/ck-linux-* bin/ck.js
+
+          # Verify critical binaries exist
+          test -f bin/ck-linux-x64 || (echo "❌ Linux binary missing" && exit 1)
+          test -f bin/ck-darwin-arm64 || (echo "❌ macOS ARM binary missing" && exit 1)
+          test -f bin/ck-darwin-x64 || (echo "❌ macOS x64 binary missing" && exit 1)
+          test -f bin/ck-win32-x64.exe || (echo "❌ Windows binary missing" && exit 1)
+
+          echo "✅ All critical binaries verified"
+          ls -lh bin/
+
+      - name: Verify binaries
+        run: |
+          echo "Binaries in bin/:"
+          ls -lh bin/
+          echo "Total size:"
+          du -sh bin/
+
+      - name: Build dashboard UI
+        run: bun run ui:build
+
+      - name: Verify UI build
+        run: |
+          if [ ! -f dist/ui/index.html ]; then
+            echo "Error: UI build failed - index.html not found"
+            exit 1
+          fi
+          echo "✅ UI build verified: $(ls dist/ui/ | wc -l) files"
+
+      - name: Get version before release
+        id: before
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Release with semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: npx semantic-release
+
+      - name: Check if new version was released
+        id: check
+        run: |
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          if [ "$NEW_VERSION" = "${{ steps.before.outputs.version }}" ]; then
+            echo "released=false" >> $GITHUB_OUTPUT
+            echo "[i] No new version released (still $NEW_VERSION)"
+          else
+            echo "released=true" >> $GITHUB_OUTPUT
+            echo "[OK] New version released: $NEW_VERSION"
+          fi
+
+      - name: Notify Discord
+        if: steps.check.outputs.released == 'true'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+            echo "[i] DISCORD_WEBHOOK_URL not set, skipping"
+            exit 0
+          fi
+          node scripts/send-discord-release.cjs production
