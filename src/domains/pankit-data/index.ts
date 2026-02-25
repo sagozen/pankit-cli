@@ -1,6 +1,6 @@
 /**
- * ClaudeKit data domain
- * Manages ~/.claudekit/ directory contents
+ * Pankit data domain
+ * Manages ~/.pankit/ directory contents
  */
 export { ProjectsRegistryManager } from "./projects-registry.js";
 export {

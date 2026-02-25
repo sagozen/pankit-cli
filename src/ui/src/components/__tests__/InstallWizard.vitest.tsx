@@ -17,8 +17,8 @@ vi.mock("../../i18n", () => ({
 				back: "Back",
 				next: "Next",
 				install: "Install",
-				kitEngineerName: "ClaudeKit Engineer",
-				kitMarketingName: "ClaudeKit Marketing",
+				kitEngineerName: "Pankit Engineer",
+				kitMarketingName: "Pankit Marketing",
 			};
 			return translations[key] || key;
 		},
@@ -48,7 +48,7 @@ describe("InstallWizard", () => {
 
 		it("shows step 1 content initially", () => {
 			render(<InstallWizard {...defaultProps} />);
-			expect(screen.getByText(/Selected: ClaudeKit Engineer/)).toBeInTheDocument();
+			expect(screen.getByText(/Selected: Pankit Engineer/)).toBeInTheDocument();
 		});
 	});
 
@@ -80,7 +80,7 @@ describe("InstallWizard", () => {
 			render(<InstallWizard {...defaultProps} />);
 			fireEvent.click(screen.getByTestId("wizard-next")); // Go to step 2
 			fireEvent.click(screen.getByTestId("wizard-back")); // Go back to step 1
-			expect(screen.getByText(/Selected: ClaudeKit Engineer/)).toBeInTheDocument();
+			expect(screen.getByText(/Selected: Pankit Engineer/)).toBeInTheDocument();
 		});
 
 		it("advances to step 3 from step 2", () => {
@@ -125,7 +125,7 @@ describe("InstallWizard", () => {
 		it("calls onKitSelect when switch kit button is clicked", () => {
 			const onKitSelect = vi.fn();
 			render(<InstallWizard {...defaultProps} onKitSelect={onKitSelect} />);
-			const switchButton = screen.getByText(/Switch to ClaudeKit Marketing/);
+			const switchButton = screen.getByText(/Switch to Pankit Marketing/);
 			fireEvent.click(switchButton);
 			expect(onKitSelect).toHaveBeenCalledWith(KitType.MARKETING);
 		});
@@ -134,12 +134,12 @@ describe("InstallWizard", () => {
 	describe("Kit Selection", () => {
 		it("shows Marketing kit switch option when Engineer selected", () => {
 			render(<InstallWizard {...defaultProps} selectedKit={KitType.ENGINEER} />);
-			expect(screen.getByText(/Switch to ClaudeKit Marketing/)).toBeInTheDocument();
+			expect(screen.getByText(/Switch to Pankit Marketing/)).toBeInTheDocument();
 		});
 
 		it("shows Engineer kit switch option when Marketing selected", () => {
 			render(<InstallWizard {...defaultProps} selectedKit={KitType.MARKETING} />);
-			expect(screen.getByText(/Switch to ClaudeKit Engineer/)).toBeInTheDocument();
+			expect(screen.getByText(/Switch to Pankit Engineer/)).toBeInTheDocument();
 		});
 
 		it("shows prompt when no kit selected", () => {

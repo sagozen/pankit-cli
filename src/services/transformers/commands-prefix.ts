@@ -1,13 +1,13 @@
 /**
  * Commands Prefix - Facade Module
  *
- * Reorganizes .claude/commands directory to add /ck: prefix.
- * Moves all command files from `.claude/commands/**\/*` to `.claude/commands/ck/**\/*`
- * This enables all slash commands to have a /ck: prefix (e.g., /ck:plan, /ck:fix)
+ * Reorganizes .claude/commands directory to add /pk: prefix.
+ * Moves all command files from `.claude/commands/**\/*` to `.claude/commands/pk/**\/*`
+ * This enables all slash commands to have a /pk: prefix (e.g., /pk:plan, /pk:fix)
  *
  * Also transforms command references in file contents:
- * - `/plan:fast` → `/ck:plan:fast`
- * - `/fix:types` → `/ck:fix:types`
+ * - `/plan:fast` → `/pk:plan:fast`
+ * - `/fix:types` → `/pk:fix:types`
  * - etc.
  *
  * This file re-exports all public APIs from the modular implementation.
@@ -27,17 +27,17 @@ import { cleanupCommandsDirectory } from "./commands-prefix/prefix-cleaner.js";
 import { shouldApplyPrefix } from "./commands-prefix/prefix-utils.js";
 
 /**
- * CommandsPrefix - Reorganizes .claude/commands directory to add /ck: prefix
+ * CommandsPrefix - Reorganizes .claude/commands directory to add /pk: prefix
  *
- * Moves all command files from `.claude/commands/**\/*` to `.claude/commands/ck/**\/*`
- * This enables all slash commands to have a /ck: prefix (e.g., /ck:plan, /ck:fix)
+ * Moves all command files from `.claude/commands/**\/*` to `.claude/commands/pk/**\/*`
+ * This enables all slash commands to have a /pk: prefix (e.g., /pk:plan, /pk:fix)
  */
 export class CommandsPrefix {
 	/**
 	 * Apply prefix reorganization to commands directory
 	 *
-	 * Moves all files from .claude/commands/ to .claude/commands/ck/
-	 * This enables slash commands to have /ck: prefix (e.g., /ck:plan)
+	 * Moves all files from .claude/commands/ to .claude/commands/pk/
+	 * This enables slash commands to have /pk: prefix (e.g., /pk:plan)
 	 *
 	 * @param extractDir - Temporary extraction directory containing .claude folder
 	 *                     Must be absolute path, no path traversal allowed

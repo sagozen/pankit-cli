@@ -1,5 +1,5 @@
 /**
- * CK Config API client - Fetches and saves full .ck.json configuration
+ * CK Config API client - Fetches and saves full .pk.json configuration
  */
 
 import type { ConfigSource } from "../components/schema-form";
@@ -26,7 +26,7 @@ export interface CkConfigSaveResponse {
 }
 
 /**
- * Fetch full .ck.json config with source tracking
+ * Fetch full .pk.json config with source tracking
  */
 export async function fetchCkConfig(projectId?: string): Promise<CkConfigResponse> {
 	const url = projectId
@@ -60,7 +60,7 @@ export async function fetchCkConfigScope(
 }
 
 /**
- * Save .ck.json config to specified scope
+ * Save .pk.json config to specified scope
  */
 export async function saveCkConfig(request: CkConfigSaveRequest): Promise<CkConfigSaveResponse> {
 	const res = await fetch(`${API_BASE}/ck-config`, {
@@ -78,7 +78,7 @@ export async function saveCkConfig(request: CkConfigSaveRequest): Promise<CkConf
 }
 
 /**
- * Fetch the JSON Schema for .ck.json
+ * Fetch the JSON Schema for .pk.json
  */
 export async function fetchCkConfigSchema(): Promise<Record<string, unknown>> {
 	const res = await fetch(`${API_BASE}/ck-config/schema`);

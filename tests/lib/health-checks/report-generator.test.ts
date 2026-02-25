@@ -47,9 +47,9 @@ describe("ReportGenerator", () => {
 				autoFixable: false,
 			},
 			{
-				id: "claudekit-global",
-				name: "ClaudeKit Global",
-				group: "claudekit",
+				id: "pankit-global",
+				name: "Pankit Global",
+				group: "pankit",
 				status: "fail",
 				message: "Not installed",
 				suggestion: "Run: ck init --global",
@@ -64,7 +64,7 @@ describe("ReportGenerator", () => {
 			const generator = new ReportGenerator();
 			const report = generator.generateTextReport(createMockSummary());
 
-			expect(report).toContain("CLAUDEKIT DIAGNOSTIC REPORT");
+			expect(report).toContain("PANKIT DIAGNOSTIC REPORT");
 			expect(report).toContain("2025-12-02T14:30:00.000Z");
 		});
 
@@ -85,11 +85,11 @@ describe("ReportGenerator", () => {
 			// Check grouped sections exist
 			expect(report).toContain("SYSTEM");
 			expect(report).toContain("AUTH");
-			expect(report).toContain("CLAUDEKIT");
+			expect(report).toContain("PANKIT");
 			// Check individual items
 			expect(report).toContain("Node.js Version");
 			expect(report).toContain("GitHub Auth");
-			expect(report).toContain("ClaudeKit Global");
+			expect(report).toContain("Pankit Global");
 		});
 
 		test("includes status symbols", () => {
@@ -106,7 +106,7 @@ describe("ReportGenerator", () => {
 			const report = generator.generateTextReport(createMockSummary());
 
 			expect(report).toContain("ISSUES FOUND");
-			expect(report).toContain("ClaudeKit Global");
+			expect(report).toContain("Pankit Global");
 			expect(report).toContain("Not installed");
 		});
 
@@ -231,8 +231,8 @@ describe("ReportGenerator", () => {
 			const json = JSON.parse(generator.generateJsonReport(createMockSummary()));
 
 			expect(json.errors).toHaveLength(1);
-			expect(json.errors[0].checkId).toBe("claudekit-global");
-			expect(json.errors[0].checkName).toBe("ClaudeKit Global");
+			expect(json.errors[0].checkId).toBe("pankit-global");
+			expect(json.errors[0].checkName).toBe("Pankit Global");
 			expect(json.errors[0].message).toBe("Not installed");
 			expect(json.errors[0].suggestion).toBe("Run: ck init --global");
 		});
@@ -267,7 +267,7 @@ describe("ReportGenerator", () => {
 				includeSystemInfo: true,
 			});
 
-			expect(report).toContain("CLAUDEKIT DIAGNOSTIC REPORT");
+			expect(report).toContain("PANKIT DIAGNOSTIC REPORT");
 		});
 
 		test("returns JSON report when format is json", () => {

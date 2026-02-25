@@ -338,12 +338,12 @@ describe("checkHookConfig", () => {
 		}
 	});
 
-	test("returns info status when no .ck.json exists", async () => {
+	test("returns info status when no .pk.json exists", async () => {
 		const result = await checkHookConfig(projectDir);
 
 		expect(result.id).toBe("hook-config");
 		expect(result.status).toBe("info");
-		expect(result.message).toBe("No .ck.json config");
+		expect(result.message).toBe("No .pk.json config");
 	});
 
 	test("returns pass status when config hooks match actual files", async () => {
@@ -353,7 +353,7 @@ describe("checkHookConfig", () => {
 			"console.log('test');",
 		);
 		await writeFile(
-			join(projectDir, ".claude", ".ck.json"),
+			join(projectDir, ".claude", ".pk.json"),
 			JSON.stringify({
 				hooks: {
 					"session-init": { enabled: true },
@@ -374,7 +374,7 @@ describe("checkHookConfig", () => {
 			"console.log('test');",
 		);
 		await writeFile(
-			join(projectDir, ".claude", ".ck.json"),
+			join(projectDir, ".claude", ".pk.json"),
 			JSON.stringify({
 				hooks: {
 					"existing-hook": { enabled: true },
@@ -391,12 +391,12 @@ describe("checkHookConfig", () => {
 		expect(result.details).toContain("orphaned-hook");
 		expect(result.details).toContain("another-orphan");
 		expect(result.autoFixable).toBe(true);
-		expect(result.suggestion).toBe("Remove orphaned entries from .ck.json");
+		expect(result.suggestion).toBe("Remove orphaned entries from .pk.json");
 	});
 
 	test("returns pass status when no hooks configured", async () => {
 		await mkdir(join(projectDir, ".claude", "hooks"), { recursive: true });
-		await writeFile(join(projectDir, ".claude", ".ck.json"), JSON.stringify({ version: "1.0.0" }));
+		await writeFile(join(projectDir, ".claude", ".pk.json"), JSON.stringify({ version: "1.0.0" }));
 
 		const result = await checkHookConfig(projectDir);
 

@@ -8,7 +8,7 @@ import type { Metadata } from "@/types";
 function formatInstalledKits(metadata: Metadata): string | null {
 	if (!metadata.kits || Object.keys(metadata.kits).length === 0) {
 		if (metadata.version) {
-			const kitName = metadata.name || "ClaudeKit";
+			const kitName = metadata.name || "Pankit";
 			return `${metadata.version} (${kitName})`;
 		}
 		return null;
@@ -122,12 +122,12 @@ describe("version-display helpers", () => {
 
 		it("falls back to legacy format when no kits but has root version", () => {
 			const metadata: Metadata = {
-				name: "ClaudeKit Engineer",
+				name: "Pankit Engineer",
 				version: "v2.0.0",
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("v2.0.0 (ClaudeKit Engineer)");
+			expect(result).toBe("v2.0.0 (Pankit Engineer)");
 		});
 
 		it("uses default name in legacy fallback when name is undefined", () => {
@@ -136,12 +136,12 @@ describe("version-display helpers", () => {
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("v2.0.0 (ClaudeKit)");
+			expect(result).toBe("v2.0.0 (Pankit)");
 		});
 
 		it("returns null when no kits and no root version", () => {
 			const metadata: Metadata = {
-				name: "ClaudeKit Engineer",
+				name: "Pankit Engineer",
 			};
 
 			const result = formatInstalledKits(metadata);

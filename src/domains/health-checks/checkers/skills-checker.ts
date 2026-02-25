@@ -1,12 +1,12 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import type { ClaudeKitSetup } from "@/types";
+import type { PankitSetup } from "@/types";
 import type { CheckResult } from "../types.js";
 
 /**
  * Check skills install scripts (install.sh / install.ps1)
  */
-export function checkSkillsScripts(setup: ClaudeKitSetup): CheckResult[] {
+export function checkSkillsScripts(setup: PankitSetup): CheckResult[] {
 	const results: CheckResult[] = [];
 	const platform = process.platform;
 	const scriptName = platform === "win32" ? "install.ps1" : "install.sh";
@@ -19,7 +19,7 @@ export function checkSkillsScripts(setup: ClaudeKitSetup): CheckResult[] {
 		results.push({
 			id: "ck-global-skills-script",
 			name: "Global Skills Script",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: hasGlobalScript ? "pass" : "info",
 			message: hasGlobalScript ? "Available" : "Not found",
@@ -29,7 +29,7 @@ export function checkSkillsScripts(setup: ClaudeKitSetup): CheckResult[] {
 		});
 	}
 
-	// Check project skills - only if it's a real ClaudeKit project (has metadata)
+	// Check project skills - only if it's a real Pankit project (has metadata)
 	if (setup.project.metadata) {
 		const projectScriptPath = join(setup.project.path, "skills", scriptName);
 		const hasProjectScript = existsSync(projectScriptPath);
@@ -37,7 +37,7 @@ export function checkSkillsScripts(setup: ClaudeKitSetup): CheckResult[] {
 		results.push({
 			id: "ck-project-skills-script",
 			name: "Project Skills Script",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: hasProjectScript ? "pass" : "info",
 			message: hasProjectScript ? "Available" : "Not found",
@@ -53,7 +53,7 @@ export function checkSkillsScripts(setup: ClaudeKitSetup): CheckResult[] {
 /**
  * Check component counts (agents, commands, rules, skills)
  */
-export function checkComponentCounts(setup: ClaudeKitSetup): CheckResult {
+export function checkComponentCounts(setup: PankitSetup): CheckResult {
 	const global = setup.global.components;
 	const project = setup.project.components;
 
@@ -65,15 +65,15 @@ export function checkComponentCounts(setup: ClaudeKitSetup): CheckResult {
 
 	return {
 		id: "ck-component-counts",
-		name: "ClaudeKit Components",
-		group: "claudekit",
+		name: "Pankit Components",
+		group: "pankit",
 		priority: "standard",
 		status: totalComponents > 0 ? "info" : "warn",
 		message:
 			totalComponents > 0
 				? `${totalAgents} agents, ${totalCommands} commands, ${totalRules} rules, ${totalSkills} skills`
 				: "No components found",
-		suggestion: totalComponents === 0 ? "Install ClaudeKit: ck new --kit engineer" : undefined,
+		suggestion: totalComponents === 0 ? "Install Pankit: ck new --kit engineer" : undefined,
 		autoFixable: false,
 	};
 }

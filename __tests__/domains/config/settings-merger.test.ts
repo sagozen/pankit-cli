@@ -514,7 +514,7 @@ describe("SettingsMerger", () => {
 		});
 
 		it("should handle the exact scenario from the issue", () => {
-			// Source - ClaudeKit template
+			// Source - Pankit template
 			const source: SettingsJson = {
 				hooks: {
 					SessionStart: [{ type: "command", command: "node .claude/hooks/session-start.cjs" }],

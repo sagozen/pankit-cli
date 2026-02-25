@@ -1,4 +1,4 @@
-import { DEFAULT_NETWORK_TIMEOUT_MS, getCliUserAgent } from "@/shared/claudekit-constants.js";
+import { DEFAULT_NETWORK_TIMEOUT_MS, getCliUserAgent } from "@/shared/pankit-constants.js";
 import { isCIEnvironment, isTestEnvironment } from "@/shared/environment.js";
 import { logger } from "@/shared/logger.js";
 import { parseTimeoutMs } from "@/shared/parse-timeout.js";
@@ -9,10 +9,10 @@ import type { CheckResult, Checker } from "./types.js";
  * Logs a warning if the configured value is not a valid integer.
  */
 function getNetworkTimeoutMs(): number {
-	const raw = process.env.CLAUDEKIT_NETWORK_TIMEOUT;
+	const raw = process.env.PANKIT_NETWORK_TIMEOUT;
 	if (raw && Number.isNaN(Number.parseInt(raw, 10))) {
 		logger.warning(
-			`Invalid CLAUDEKIT_NETWORK_TIMEOUT value "${raw}", using default ${DEFAULT_NETWORK_TIMEOUT_MS}ms`,
+			`Invalid PANKIT_NETWORK_TIMEOUT value "${raw}", using default ${DEFAULT_NETWORK_TIMEOUT_MS}ms`,
 		);
 	}
 	return parseTimeoutMs(raw, DEFAULT_NETWORK_TIMEOUT_MS);

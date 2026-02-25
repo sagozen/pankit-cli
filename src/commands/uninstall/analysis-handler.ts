@@ -36,14 +36,14 @@ interface FileClassification {
  * Centralizes the ownership-based decision logic for consistent behavior.
  */
 function classifyFileByOwnership(
-	ownership: "ck" | "ck-modified" | "user",
+	ownership: "ck" | "pk-modified" | "user",
 	forceOverwrite: boolean,
 	deleteReason: string,
 ): FileClassification {
 	if (ownership === "ck") {
 		return { action: "delete", reason: deleteReason };
 	}
-	if (ownership === "ck-modified") {
+	if (ownership === "pk-modified") {
 		if (forceOverwrite) {
 			return { action: "delete", reason: "force overwrite" };
 		}

@@ -6,7 +6,7 @@
 
 ## Summary
 
-Updated project documentation to reflect the fully implemented and production-ready `ck doctor` command capabilities.
+Updated project documentation to reflect the fully implemented and production-ready `pk doctor` command capabilities.
 
 ## Files Updated
 
@@ -18,16 +18,16 @@ Updated project documentation to reflect the fully implemented and production-re
 - Complete list of checked dependencies with version requirements
 - Auto-installation support details by platform
 - Security notes about user confirmation and manual fallback
-- Reorganized troubleshooting section to prioritize `ck doctor`
+- Reorganized troubleshooting section to prioritize `pk doctor`
 
 **Key Additions**:
 ```bash
 # Interactive mode - checks and offers to install missing dependencies
-ck doctor
+pk doctor
 
 # Non-interactive mode (CI/CD) - shows status only
-CI=true ck doctor
-NON_INTERACTIVE=1 ck doctor
+CI=true pk doctor
+NON_INTERACTIVE=1 pk doctor
 ```
 
 ### 2. docs/codebase-summary.md
@@ -37,7 +37,7 @@ NON_INTERACTIVE=1 ck doctor
 - Updated command description in project structure (line 42)
 - Comprehensive `doctor.ts` feature documentation (lines 116-137)
 - New utility module documentation:
-  - `claudekit-scanner.ts`: Setup detection logic
+  - `pankit-scanner.ts`: Setup detection logic
   - `dependency-checker.ts`: Validation and version checking
   - `dependency-installer.ts`: Cross-platform installation
 - Updated test coverage metrics
@@ -77,7 +77,7 @@ NON_INTERACTIVE=1 ck doctor
 - Comprehensive command reference in Appendix A (lines 484-503)
 - Features list including all capabilities
 - Usage examples for interactive and non-interactive modes
-- Updated `ck init` command reference (replaced `ck update`)
+- Updated `pk init` command reference (replaced `pk update`)
 
 ## Key Information Documented
 
@@ -88,7 +88,7 @@ NON_INTERACTIVE=1 ck doctor
 - Shows manual instructions as fallback
 - Supports non-interactive mode for CI/CD
 - Cross-platform: Windows, macOS, Linux (+ WSL)
-- Displays ClaudeKit setup (global and project)
+- Displays Pankit setup (global and project)
 - Reports component counts (agents, commands, workflows, skills)
 
 ### Installation Methods

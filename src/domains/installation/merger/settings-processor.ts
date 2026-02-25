@@ -12,7 +12,7 @@ import semver from "semver";
  */
 export class SettingsProcessor {
 	/** Minimum Claude Code version that supports TaskCompleted/TeammateIdle hooks.
-	 * Earlier versions throw "Invalid key in record" errors. See claudekit-engineer#464 */
+	 * Earlier versions throw "Invalid key in record" errors. See pankit-engineer#464 */
 	private static readonly MIN_TEAM_HOOKS_VERSION = "2.1.33";
 
 	private isGlobal = false;

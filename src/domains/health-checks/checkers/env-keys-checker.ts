@@ -5,14 +5,14 @@
 
 import { join } from "node:path";
 import { REQUIRED_ENV_KEYS, checkRequiredKeysExist } from "@/domains/installation/setup-wizard.js";
-import type { ClaudeKitSetup } from "@/types";
+import type { PankitSetup } from "@/types";
 import type { CheckResult } from "../types.js";
 
 /**
  * Check required environment keys in .env files
  * Returns warnings for missing required keys
  */
-export async function checkEnvKeys(setup: ClaudeKitSetup): Promise<CheckResult[]> {
+export async function checkEnvKeys(setup: PankitSetup): Promise<CheckResult[]> {
 	const results: CheckResult[] = [];
 
 	// Check global .env
@@ -25,7 +25,7 @@ export async function checkEnvKeys(setup: ClaudeKitSetup): Promise<CheckResult[]
 			results.push({
 				id: "ck-global-env-keys",
 				name: "Global Environment Keys",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "warn",
 				message: globalCheck.envExists ? `Missing: ${missingKeys}` : ".env file not found",
@@ -37,7 +37,7 @@ export async function checkEnvKeys(setup: ClaudeKitSetup): Promise<CheckResult[]
 			results.push({
 				id: "ck-global-env-keys",
 				name: "Global Environment Keys",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "pass",
 				message: `${REQUIRED_ENV_KEYS.length} required key(s) configured`,
@@ -47,7 +47,7 @@ export async function checkEnvKeys(setup: ClaudeKitSetup): Promise<CheckResult[]
 		}
 	}
 
-	// Check project .env - only if it's a real ClaudeKit project (has metadata)
+	// Check project .env - only if it's a real Pankit project (has metadata)
 	if (setup.project.metadata) {
 		const projectEnvPath = join(setup.project.path, ".env");
 		const projectCheck = await checkRequiredKeysExist(projectEnvPath);
@@ -57,7 +57,7 @@ export async function checkEnvKeys(setup: ClaudeKitSetup): Promise<CheckResult[]
 			results.push({
 				id: "ck-project-env-keys",
 				name: "Project Environment Keys",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "warn",
 				message: projectCheck.envExists ? `Missing: ${missingKeys}` : ".env file not found",
@@ -69,7 +69,7 @@ export async function checkEnvKeys(setup: ClaudeKitSetup): Promise<CheckResult[]
 			results.push({
 				id: "ck-project-env-keys",
 				name: "Project Environment Keys",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "pass",
 				message: `${REQUIRED_ENV_KEYS.length} required key(s) configured`,

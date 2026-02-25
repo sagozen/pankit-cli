@@ -8,7 +8,7 @@ import { join } from "node:path";
 import { discoverSkills, findSkillByName } from "../skills-discovery.js";
 
 describe("skill-discovery", () => {
-	const testDir = join(tmpdir(), "claudekit-skill-test");
+	const testDir = join(tmpdir(), "pankit-skill-test");
 
 	beforeAll(() => {
 		// Create test skill structure

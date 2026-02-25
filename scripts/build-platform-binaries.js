@@ -56,7 +56,7 @@ if (!platform) {
 	process.exit(1);
 }
 
-const sourceBinary = join(rootDir, "ck");
+const sourceBinary = join(rootDir, "pk");
 const targetBinary = join(binDir, `ck-${platformName}${platform.ext}`);
 
 console.log(`📋 Copying ${sourceBinary} -> ${targetBinary}`);

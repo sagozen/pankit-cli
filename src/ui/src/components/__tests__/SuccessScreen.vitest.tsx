@@ -21,8 +21,8 @@ vi.mock("../../i18n", () => ({
 				installSuccessDesc: "You have successfully installed {kit}.",
 				getStarted: "Get Started",
 				goToDashboard: "Go to Dashboard",
-				kitEngineerName: "ClaudeKit Engineer",
-				kitMarketingName: "ClaudeKit Marketing",
+				kitEngineerName: "Pankit Engineer",
+				kitMarketingName: "Pankit Marketing",
 			};
 			return translations[key] || key;
 		},
@@ -73,12 +73,12 @@ describe("SuccessScreen", () => {
 	describe("Kit Name Display", () => {
 		it("displays Engineer kit name when kit is ENGINEER", () => {
 			render(<SuccessScreen {...defaultProps} kit={KitType.ENGINEER} />);
-			expect(screen.getByText(/ClaudeKit Engineer/)).toBeInTheDocument();
+			expect(screen.getByText(/Pankit Engineer/)).toBeInTheDocument();
 		});
 
 		it("displays Marketing kit name when kit is MARKETING", () => {
 			render(<SuccessScreen {...defaultProps} kit={KitType.MARKETING} />);
-			expect(screen.getByText(/ClaudeKit Marketing/)).toBeInTheDocument();
+			expect(screen.getByText(/Pankit Marketing/)).toBeInTheDocument();
 		});
 	});
 

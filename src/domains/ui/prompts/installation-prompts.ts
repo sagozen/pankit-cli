@@ -75,7 +75,7 @@ export async function promptFreshConfirmation(
 	targetPath: string,
 	analysis?: FreshAnalysisResult,
 ): Promise<boolean> {
-	logger.warning("[!] Fresh installation will remove ClaudeKit files:");
+	logger.warning("[!] Fresh installation will remove Pankit files:");
 	logger.info(`Path: ${targetPath}`);
 
 	if (analysis?.hasMetadata) {

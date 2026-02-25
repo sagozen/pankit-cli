@@ -149,11 +149,11 @@ export function flattenSelectedItems(
 }
 
 /**
- * Get default directories for ClaudeKit structure
+ * Get default directories for Pankit structure
  *
  * @param global - Whether to use global installation mode
  */
-export function getClaudeKitDirectories(global = false): {
+export function getPankitDirectories(global = false): {
 	category: string;
 	pattern: string;
 	description: string;
@@ -164,7 +164,7 @@ export function getClaudeKitDirectories(global = false): {
 		{
 			category: "Core",
 			pattern: base ? `${base}/**` : "**",
-			description: "Core ClaudeKit configuration and components",
+			description: "Core Pankit configuration and components",
 		},
 		{
 			category: "Agents",

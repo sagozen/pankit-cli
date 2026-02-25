@@ -1,7 +1,7 @@
 /**
  * GitHub authentication API operations
  */
-import { getCliUserAgent } from "@/shared/claudekit-constants.js";
+import { getCliUserAgent } from "@/shared/pankit-constants.js";
 import { logger } from "@/shared/logger.js";
 import { Octokit } from "@octokit/rest";
 import { AuthManager } from "../github-auth.js";

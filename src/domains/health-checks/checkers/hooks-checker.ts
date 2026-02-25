@@ -52,7 +52,7 @@ export async function checkHooksExist(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "ck-hooks-exist",
 			name: "Hooks Directory",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "No hooks directory",
@@ -63,7 +63,7 @@ export async function checkHooksExist(projectDir: string): Promise<CheckResult> 
 	return {
 		id: "ck-hooks-exist",
 		name: "Hooks Directory",
-		group: "claudekit",
+		group: "pankit",
 		priority: "standard",
 		status: "pass",
 		message: `${hookCount} hook(s) found`,

@@ -1,4 +1,4 @@
-# Implementation Plan: `ck doctor` Command Enhancement
+# Implementation Plan: `pk doctor` Command Enhancement
 
 **Version**: 1.0
 **Date**: 2025-11-16
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-The `ck doctor` command is **largely complete** and functional. Current implementation successfully checks system dependencies (claude, python, pip, nodejs, npm), detects OS/package managers, offers interactive installation, shows manual instructions, displays ClaudeKit setup overview, and supports non-interactive mode for CI/CD.
+The `pk doctor` command is **largely complete** and functional. Current implementation successfully checks system dependencies (claude, python, pip, nodejs, npm), detects OS/package managers, offers interactive installation, shows manual instructions, displays Pankit setup overview, and supports non-interactive mode for CI/CD.
 
 **Key Finding**: Installation URLs verified against official docs (code.claude.com). Core functionality working as designed. Recommended action: **Minor improvements** rather than major refactoring.
 
@@ -309,7 +309,7 @@ The `ck doctor` command is **largely complete** and functional. Current implemen
 
 **Contents**:
 ```markdown
-# Troubleshooting `ck doctor`
+# Troubleshooting `pk doctor`
 
 ## Common Issues
 
@@ -401,7 +401,7 @@ The `ck doctor` command is **largely complete** and functional. Current implemen
 
 Successful run shows:
 ```
-🩺 ClaudeKit Setup Overview
+🩺 Pankit Setup Overview
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 System Dependencies
@@ -430,7 +430,7 @@ System Dependencies
 ## FAQ
 
 **Q: Do I need all dependencies?**
-A: Claude CLI optional. Python and Node.js required for ClaudeKit skills.
+A: Claude CLI optional. Python and Node.js required for Pankit skills.
 
 **Q: Can I skip installation prompts?**
 A: Yes. Set `CI=true` or `NON_INTERACTIVE=true` environment variable.
@@ -551,7 +551,7 @@ A: Restart terminal or manually add to PATH in shell config (.bashrc, .zshrc, pr
 - [x] ✅ Offer interactive installation
 - [x] ✅ Show manual installation instructions
 - [ ] 🔄 Enhanced error messages (network, permissions, partial installs)
-- [x] ✅ Display ClaudeKit setup overview
+- [x] ✅ Display Pankit setup overview
 - [x] ✅ Support non-interactive mode (CI/CD)
 - [ ] 📋 Comprehensive troubleshooting documentation
 
@@ -927,12 +927,12 @@ A: Restart terminal or manually add to PATH in shell config (.bashrc, .zshrc, pr
 
    ```bash
    ck diagnose              # Check authentication, access, releases
-   ck doctor                # Check dependencies and setup
-   ck new --verbose         # Enable detailed logging
+   pk doctor                # Check dependencies and setup
+   pk new --verbose         # Enable detailed logging
    ```
 
    **Common Issues:**
-   - **Dependencies missing**: Run `ck doctor` for installation help
+   - **Dependencies missing**: Run `pk doctor` for installation help
    - **"Access denied"**: Accept GitHub repo invitation, verify `repo` scope
    - **"Authentication failed"**: Check token format (ghp_*), verify env var
    - **Token not persisting (Windows)**: Use `SetEnvironmentVariable` or `gh auth login`
@@ -944,11 +944,11 @@ A: Restart terminal or manually add to PATH in shell config (.bashrc, .zshrc, pr
    ```markdown
    ### Commands
 
-   - `ck new`: Bootstrap new project
-   - `ck init/update`: Update existing project
-   - `ck versions`: List available releases
-   - `ck diagnose`: Check auth and GitHub access
-   - `ck doctor`: Check system dependencies and ClaudeKit setup
+   - `pk new`: Bootstrap new project
+   - `pk init/update`: Update existing project
+   - `pk versions`: List available releases
+   - `pk diagnose`: Check auth and GitHub access
+   - `pk doctor`: Check system dependencies and Pankit setup
    ```
 
 **Testing**:
@@ -1054,7 +1054,7 @@ A: Restart terminal or manually add to PATH in shell config (.bashrc, .zshrc, pr
 
 2. **Should doctor run on every ck command as health check?** Might be intrusive but catches issues early.
 
-3. **Should we add a --fix flag to auto-install without prompting?** E.g., `ck doctor --fix`
+3. **Should we add a --fix flag to auto-install without prompting?** E.g., `pk doctor --fix`
 
 4. **Windows admin prompt**: Should we detect if running as admin and warn if not?
 
@@ -1092,7 +1092,7 @@ A: Restart terminal or manually add to PATH in shell config (.bashrc, .zshrc, pr
 - `src/commands/doctor.ts` - Main doctor command
 - `src/utils/dependency-checker.ts` - Dependency detection
 - `src/utils/dependency-installer.ts` - Installation logic
-- `src/utils/claudekit-scanner.ts` - Setup overview
+- `src/utils/pankit-scanner.ts` - Setup overview
 
 **Tests**:
 - `tests/commands/doctor.test.ts`
@@ -1133,7 +1133,7 @@ A: Restart terminal or manually add to PATH in shell config (.bashrc, .zshrc, pr
 
 ## Summary
 
-**Current Status**: `ck doctor` is **largely complete and functional**.
+**Current Status**: `pk doctor` is **largely complete and functional**.
 
 **Recommended Actions**:
 1. **Implement Windows package manager support** (1-2 hours, high value)
@@ -1143,6 +1143,6 @@ A: Restart terminal or manually add to PATH in shell config (.bashrc, .zshrc, pr
 
 **Total Estimated Effort**: 4-6 hours
 
-**Expected Outcome**: Robust, production-ready `ck doctor` command with excellent Windows support, clear error messages, and comprehensive documentation.
+**Expected Outcome**: Robust, production-ready `pk doctor` command with excellent Windows support, clear error messages, and comprehensive documentation.
 
 **Next Steps**: Review plan, prioritize tasks, begin implementation in Phase 1 order.

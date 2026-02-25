@@ -16,7 +16,7 @@ export async function checkGlobalDirReadable(): Promise<CheckResult> {
 		return {
 			id: "ck-global-dir-readable",
 			name: "Global Dir Readable",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "Skipped in CI/test environment",
@@ -32,7 +32,7 @@ export async function checkGlobalDirReadable(): Promise<CheckResult> {
 		return {
 			id: "ck-global-dir-readable",
 			name: "Global Dir Readable",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: "Read access OK",
@@ -43,7 +43,7 @@ export async function checkGlobalDirReadable(): Promise<CheckResult> {
 		return {
 			id: "ck-global-dir-readable",
 			name: "Global Dir Readable",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: "Read access denied",
@@ -65,7 +65,7 @@ export async function checkGlobalDirWritable(): Promise<CheckResult> {
 		return {
 			id: "ck-global-dir-writable",
 			name: "Global Dir Writable",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "Skipped in CI/test environment",
@@ -88,7 +88,7 @@ export async function checkGlobalDirWritable(): Promise<CheckResult> {
 		return {
 			id: "ck-global-dir-writable",
 			name: "Global Dir Writable",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: "Write access denied",
@@ -110,7 +110,7 @@ export async function checkGlobalDirWritable(): Promise<CheckResult> {
 	return {
 		id: "ck-global-dir-writable",
 		name: "Global Dir Writable",
-		group: "claudekit",
+		group: "pankit",
 		priority: "standard",
 		status: "pass",
 		message: "Write access OK",

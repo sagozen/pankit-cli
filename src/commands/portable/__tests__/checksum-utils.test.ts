@@ -14,7 +14,7 @@ import {
 
 describe("computeContentChecksum", () => {
 	test("computes SHA-256 hex for string content", () => {
-		const content = "Hello, ClaudeKit!";
+		const content = "Hello, Pankit!";
 		const checksum = computeContentChecksum(content);
 
 		// SHA-256 produces 64-character hex string

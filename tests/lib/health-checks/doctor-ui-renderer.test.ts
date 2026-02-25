@@ -57,7 +57,7 @@ describe("DoctorUIRenderer", () => {
 					{
 						id: "claude-config",
 						name: "Claude Config",
-						group: "claudekit",
+						group: "pankit",
 						status: "warn",
 						message: "Outdated",
 						suggestion: "Update .claude/config.json",
@@ -91,7 +91,7 @@ describe("DoctorUIRenderer", () => {
 					{
 						id: "claude-config",
 						name: "Claude Config",
-						group: "claudekit",
+						group: "pankit",
 						status: "warn",
 						message: "Outdated",
 						details: "Found version 1.0, expected 2.0",

@@ -35,8 +35,8 @@ interface UpdateResult {
 type ComponentFilter = "all" | "updates" | "up-to-date" | "cli" | "kits";
 type ComponentStatus = "idle" | "checking" | "up-to-date" | "update-available";
 
-const CHANNEL_KEY = "claudekit-update-channel";
-const COMPONENT_FILTER_KEY = "claudekit-system-filter";
+const CHANNEL_KEY = "pankit-update-channel";
+const COMPONENT_FILTER_KEY = "pankit-system-filter";
 
 // Detect if version is beta/prerelease
 const isBetaVersion = (version: string): boolean => /-(alpha|beta|rc|dev|next)/.test(version);

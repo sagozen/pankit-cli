@@ -1,5 +1,5 @@
 /**
- * CK Config API routes - Full .ck.json config with source tracking
+ * CK Config API routes - Full .pk.json config with source tracking
  *
  * Endpoints:
  * - GET /api/ck-config - Load full config with sources
@@ -12,7 +12,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { CkConfigManager } from "@/domains/config/index.js";
-import ckConfigSchema from "@/schemas/ck-config.schema.json" with { type: "json" };
+import ckConfigSchema from "@/schemas/pk-config.schema.json" with { type: "json" };
 import { logger } from "@/shared/logger.js";
 import { PathResolver } from "@/shared/path-resolver.js";
 import { type CkConfig, CkConfigSchema } from "@/types";
@@ -32,7 +32,7 @@ async function resolveProjectDir(projectId: string | undefined): Promise<string 
 	}
 
 	// Resolve from registry
-	const { ProjectsRegistryManager } = await import("@/domains/claudekit-data/projects-registry.js");
+	const { ProjectsRegistryManager } = await import("@/domains/pankit-data/projects-registry.js");
 	const project = await ProjectsRegistryManager.getProject(projectId);
 	return project?.path ?? null;
 }
@@ -40,13 +40,13 @@ async function resolveProjectDir(projectId: string | undefined): Promise<string 
 export function registerCkConfigRoutes(app: Express): void {
 	/**
 	 * GET /api/ck-config
-	 * Load full .ck.json config with source tracking
+	 * Load full .pk.json config with source tracking
 	 *
 	 * Query params:
 	 * - projectId: string (optional) - Project ID for project-specific config
 	 * - scope: "global" | "project" | "merged" (default: "merged")
 	 */
-	app.get("/api/ck-config", async (req: Request, res: Response) => {
+	app.get("/api/pk-config", async (req: Request, res: Response) => {
 		try {
 			const { projectId, scope = "merged" } = req.query as {
 				projectId?: string;
@@ -92,14 +92,14 @@ export function registerCkConfigRoutes(app: Express): void {
 
 	/**
 	 * PUT /api/ck-config
-	 * Save .ck.json config to specified scope
+	 * Save .pk.json config to specified scope
 	 *
 	 * Request body:
 	 * - scope: "global" | "project"
 	 * - projectId: string (required for project scope)
 	 * - config: CkConfig object
 	 */
-	app.put("/api/ck-config", async (req: Request, res: Response) => {
+	app.put("/api/pk-config", async (req: Request, res: Response) => {
 		try {
 			const { scope, projectId, config } = req.body as {
 				scope: "global" | "project";
@@ -159,7 +159,7 @@ export function registerCkConfigRoutes(app: Express): void {
 
 	/**
 	 * GET /api/ck-config/schema
-	 * Return the JSON Schema for .ck.json
+	 * Return the JSON Schema for .pk.json
 	 */
 	app.get("/api/ck-config/schema", (_req: Request, res: Response) => {
 		res.json(ckConfigSchema);

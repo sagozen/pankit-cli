@@ -8,7 +8,7 @@ import type { CommandHelp } from "../help-types.js";
 
 export const configCommandHelp: CommandHelp = {
 	name: "config",
-	description: "Manage ClaudeKit configuration and launch the config dashboard",
+	description: "Manage Pankit configuration and launch the config dashboard",
 	usage: "ck config [action] [key] [value] [options]",
 	examples: [
 		{
@@ -47,11 +47,11 @@ export const configCommandHelp: CommandHelp = {
 			options: [
 				{
 					flags: "-g, --global",
-					description: "Use global config (~/.claudekit/config.json)",
+					description: "Use global config (~/.pankit/config.json)",
 				},
 				{
 					flags: "-l, --local",
-					description: "Use local config (.claude/.ck.json)",
+					description: "Use local config (.claude/.pk.json)",
 				},
 			],
 		},

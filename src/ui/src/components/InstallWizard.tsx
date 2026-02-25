@@ -1,5 +1,5 @@
 /**
- * Multi-step installation wizard for ClaudeKit projects
+ * Multi-step installation wizard for Pankit projects
  * Guides users through kit selection, configuration, and installation
  */
 import type React from "react";

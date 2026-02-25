@@ -9,9 +9,9 @@ import { PackageManagerDetector } from "@/domains/installation/package-manager-d
 import { normalizeVersion } from "@/domains/versioning/checking/version-utils.js";
 import { VersionChecker } from "@/domains/versioning/version-checker.js";
 import {
-	CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
-	CLAUDEKIT_CLI_NPM_PACKAGE_URL,
-} from "@/shared/claudekit-constants.js";
+	PANKIT_CLI_NPM_PACKAGE_NAME,
+	PANKIT_CLI_NPM_PACKAGE_URL,
+} from "@/shared/pankit-constants.js";
 import { logger } from "@/shared/logger.js";
 import { PathResolver } from "@/shared/path-resolver.js";
 import type { KitType } from "@/types/index.js";
@@ -89,9 +89,9 @@ export function registerSystemRoutes(app: Express): void {
 				// Use beta/dev version for beta channel
 				let latestVersion: string | null = null;
 				if (normalizedChannel === "beta") {
-					latestVersion = await NpmRegistryClient.getDevVersion(CLAUDEKIT_CLI_NPM_PACKAGE_NAME);
+					latestVersion = await NpmRegistryClient.getDevVersion(PANKIT_CLI_NPM_PACKAGE_NAME);
 				} else {
-					latestVersion = await NpmRegistryClient.getLatestVersion(CLAUDEKIT_CLI_NPM_PACKAGE_NAME);
+					latestVersion = await NpmRegistryClient.getLatestVersion(PANKIT_CLI_NPM_PACKAGE_NAME);
 				}
 
 				const updateAvailable = hasCliUpdate(currentVersion, latestVersion);
@@ -100,7 +100,7 @@ export function registerSystemRoutes(app: Express): void {
 					current: currentVersion,
 					latest: latestVersion,
 					updateAvailable,
-					releaseUrl: CLAUDEKIT_CLI_NPM_PACKAGE_URL,
+					releaseUrl: PANKIT_CLI_NPM_PACKAGE_URL,
 				};
 				res.json(response);
 			} else {
@@ -114,7 +114,7 @@ export function registerSystemRoutes(app: Express): void {
 					current: currentVersion,
 					latest: result?.latestVersion ?? null,
 					updateAvailable: result?.updateAvailable ?? false,
-					releaseUrl: `https://github.com/anthropics/claudekit-${kitName}/releases`,
+					releaseUrl: `https://github.com/anthropics/pankit-${kitName}/releases`,
 				};
 				res.json(response);
 			}
@@ -153,7 +153,7 @@ export function registerSystemRoutes(app: Express): void {
 
 			if (target === "cli") {
 				// Fetch from npm registry
-				const packageInfo = await NpmRegistryClient.getPackageInfo(CLAUDEKIT_CLI_NPM_PACKAGE_NAME);
+				const packageInfo = await NpmRegistryClient.getPackageInfo(PANKIT_CLI_NPM_PACKAGE_NAME);
 				if (packageInfo) {
 					const allVersions = Object.keys(packageInfo.versions);
 					const latestStable = packageInfo["dist-tags"]?.latest;
@@ -257,7 +257,7 @@ export function registerSystemRoutes(app: Express): void {
 			const targetVersion = (version as string) || "latest";
 			commandLine = PackageManagerDetector.getUpdateCommand(
 				pm,
-				CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
+				PANKIT_CLI_NPM_PACKAGE_NAME,
 				targetVersion,
 			);
 			res.write(`data: ${JSON.stringify({ type: "phase", name: "downloading" })}\n\n`);

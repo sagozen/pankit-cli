@@ -13,7 +13,7 @@ export type CheckPriority = "critical" | "standard" | "extended";
 /**
  * Domain groups for organizing health checks
  */
-export type CheckGroup = "system" | "claudekit" | "auth" | "platform" | "network";
+export type CheckGroup = "system" | "pankit" | "auth" | "platform" | "network";
 
 /**
  * Fix result returned by FixAction.execute()
@@ -158,7 +158,7 @@ export const CheckStatusSchema = z.enum(["pass", "warn", "fail", "info"]);
 
 export const CheckPrioritySchema = z.enum(["critical", "standard", "extended"]);
 
-export const CheckGroupSchema = z.enum(["system", "claudekit", "auth", "platform", "network"]);
+export const CheckGroupSchema = z.enum(["system", "pankit", "auth", "platform", "network"]);
 
 export const FixResultSchema = z.object({
 	success: z.boolean(),

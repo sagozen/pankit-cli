@@ -156,11 +156,11 @@ describe("SelectiveMerger", () => {
 				const manifest: ReleaseManifest = {
 					version: "v1.0.0",
 					generatedAt: new Date().toISOString(),
-					files: [{ path: "commands/ck/help.md", checksum, size: content.length }],
+					files: [{ path: "commands/pk/help.md", checksum, size: content.length }],
 				};
 
 				const merger = new SelectiveMerger(manifest);
-				const result = await merger.shouldCopyFile(destPath, "commands/ck/help.md");
+				const result = await merger.shouldCopyFile(destPath, "commands/pk/help.md");
 
 				expect(result.changed).toBe(false);
 				expect(result.reason).toBe("unchanged");

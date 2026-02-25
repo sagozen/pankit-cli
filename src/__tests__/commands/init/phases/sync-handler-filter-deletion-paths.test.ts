@@ -179,7 +179,7 @@ describe("filterDeletionPaths", () => {
 			const file: TrackedFile = {
 				path: "agents/developer.md",
 				checksum: "xyz789",
-				ownership: "ck-modified",
+				ownership: "pk-modified",
 				baseChecksum: "abc123",
 				installedVersion: "1.0.0",
 			};

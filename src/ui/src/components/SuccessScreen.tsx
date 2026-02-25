@@ -1,5 +1,5 @@
 /**
- * Success screen shown after successful ClaudeKit installation
+ * Success screen shown after successful Pankit installation
  * Provides next steps and navigation options
  */
 import type React from "react";

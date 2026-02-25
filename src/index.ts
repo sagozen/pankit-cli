@@ -69,7 +69,7 @@ const parsed = cli.parse(process.argv, { run: false });
 
 		// Check environment variable
 		const envVerbose =
-			process.env.CLAUDEKIT_VERBOSE === "1" || process.env.CLAUDEKIT_VERBOSE === "true";
+			process.env.PANKIT_VERBOSE === "1" || process.env.PANKIT_VERBOSE === "true";
 
 		// Enable verbose if flag or env var is set
 		const isVerbose = parsed.options.verbose || envVerbose;
@@ -91,7 +91,7 @@ const parsed = cli.parse(process.argv, { run: false });
 		}
 
 		// Log startup info in verbose mode
-		logger.verbose("ClaudeKit CLI starting", {
+		logger.verbose("Pankit CLI starting", {
 			version: getPackageVersion(),
 			command: parsed.args[0] || "none",
 			options: parsed.options,

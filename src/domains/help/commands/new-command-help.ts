@@ -9,7 +9,7 @@ import { filterOptionsGroup, folderOptionsGroup } from "./common-options.js";
 
 export const newCommandHelp: CommandHelp = {
 	name: "new",
-	description: "Bootstrap a new ClaudeKit project (with interactive version selection)",
+	description: "Bootstrap a new Pankit project (with interactive version selection)",
 	usage: "ck new [options]",
 	examples: [
 		{
@@ -79,7 +79,7 @@ export const newCommandHelp: CommandHelp = {
 				},
 				{
 					flags: "--prefix",
-					description: "Add /ck: prefix to all slash commands",
+					description: "Add /pk: prefix to all slash commands",
 				},
 			],
 		},

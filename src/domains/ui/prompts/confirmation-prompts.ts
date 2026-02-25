@@ -35,7 +35,7 @@ export async function confirmAction(message: string): Promise<boolean> {
  */
 export async function promptLocalMigration(): Promise<"remove" | "keep" | "cancel"> {
 	const result = await select({
-		message: "Local ClaudeKit installation detected. Local settings take precedence over global.",
+		message: "Local Pankit installation detected. Local settings take precedence over global.",
 		options: [
 			{
 				value: "remove",
@@ -81,7 +81,7 @@ export async function promptSkillsInstallation(): Promise<boolean> {
 
 	// Show detailed info about what will be installed
 	note(
-		`This installs dependencies required by ClaudeKit skills:
+		`This installs dependencies required by Pankit skills:
 
   Python packages (into ${getVenvPath(isWindows)}):
 ${pythonDeps}

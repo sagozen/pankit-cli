@@ -4,7 +4,7 @@
 
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { ProjectsRegistryManager } from "@/domains/claudekit-data/index.js";
+import { ProjectsRegistryManager } from "@/domains/pankit-data/index.js";
 import { logger } from "@/shared/logger.js";
 import { intro, log, outro } from "@/shared/safe-prompts.js";
 import picocolors from "picocolors";

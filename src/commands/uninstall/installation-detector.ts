@@ -1,12 +1,12 @@
 /**
  * Installation Detector
  *
- * Detects ClaudeKit installations (local and global).
+ * Detects Pankit installations (local and global).
  * Handles HOME directory edge case where local === global.
  * Supports fallback detection for legacy installs without metadata.json.
  */
 
-import { getClaudeKitSetup } from "@/services/file-operations/claudekit-scanner.js";
+import { getPankitSetup } from "@/services/file-operations/pankit-scanner.js";
 import { PathResolver } from "@/shared/path-resolver.js";
 import type { ComponentCounts } from "@/types";
 import { pathExists } from "fs-extra";
@@ -22,9 +22,9 @@ export interface Installation {
 }
 
 /**
- * Check if component counts indicate ClaudeKit files exist
+ * Check if component counts indicate Pankit files exist
  */
-function hasClaudeKitComponents(components: ComponentCounts): boolean {
+function hasPankitComponents(components: ComponentCounts): boolean {
 	return (
 		components.agents > 0 ||
 		components.commands > 0 ||
@@ -34,18 +34,18 @@ function hasClaudeKitComponents(components: ComponentCounts): boolean {
 }
 
 /**
- * Detect both local and global ClaudeKit installations
+ * Detect both local and global Pankit installations
  * Deduplicates when at HOME directory (local path === global path)
  *
  * Detection strategy:
  * 1. Primary: metadata.json exists (tracked installation)
- * 2. Fallback: .claude/ has ClaudeKit components (legacy/corrupted install)
+ * 2. Fallback: .claude/ has Pankit components (legacy/corrupted install)
  */
 export async function detectInstallations(): Promise<Installation[]> {
 	const installations: Installation[] = [];
 
 	// Detect both local and global installations
-	const setup = await getClaudeKitSetup(process.cwd());
+	const setup = await getPankitSetup(process.cwd());
 
 	// Check if local and global point to same path (HOME directory edge case)
 	const isLocalSameAsGlobal = PathResolver.isLocalSameAsGlobal();
@@ -54,9 +54,9 @@ export async function detectInstallations(): Promise<Installation[]> {
 	// Skip if local === global to avoid duplicates
 	if (setup.project.path && !isLocalSameAsGlobal) {
 		const hasMetadata = setup.project.metadata !== null;
-		const hasComponents = hasClaudeKitComponents(setup.project.components);
+		const hasComponents = hasPankitComponents(setup.project.components);
 
-		// Detect if: has metadata OR has ClaudeKit components (fallback)
+		// Detect if: has metadata OR has Pankit components (fallback)
 		if (hasMetadata || hasComponents) {
 			installations.push({
 				type: "local",
@@ -71,9 +71,9 @@ export async function detectInstallations(): Promise<Installation[]> {
 	// Add global installation if found
 	if (setup.global.path) {
 		const hasMetadata = setup.global.metadata !== null;
-		const hasComponents = hasClaudeKitComponents(setup.global.components);
+		const hasComponents = hasPankitComponents(setup.global.components);
 
-		// Detect if: has metadata OR has ClaudeKit components (fallback)
+		// Detect if: has metadata OR has Pankit components (fallback)
 		if (hasMetadata || hasComponents) {
 			installations.push({
 				type: "global",

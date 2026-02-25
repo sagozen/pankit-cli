@@ -24,9 +24,9 @@ export function setupTestPaths(): TestPaths {
 	// Create base directories for both local and global modes
 	mkdirSync(testHome, { recursive: true });
 	// Local mode paths
-	mkdirSync(join(testHome, ".claudekit"), { recursive: true });
-	mkdirSync(join(testHome, ".claudekit", "cache"), { recursive: true });
-	mkdirSync(join(testHome, ".claudekit", "cache", "releases"), {
+	mkdirSync(join(testHome, ".pankit"), { recursive: true });
+	mkdirSync(join(testHome, ".pankit", "cache"), { recursive: true });
+	mkdirSync(join(testHome, ".pankit", "cache", "releases"), {
 		recursive: true,
 	});
 	// Global mode paths (simulated)
@@ -48,8 +48,8 @@ export function setupTestPaths(): TestPaths {
 
 	return {
 		testHome,
-		cacheDir: join(testHome, ".claudekit", "cache"),
-		configDir: join(testHome, ".claudekit"),
+		cacheDir: join(testHome, ".pankit", "cache"),
+		configDir: join(testHome, ".pankit"),
 		claudeDir: join(testHome, ".claude"),
 		cleanup,
 	};

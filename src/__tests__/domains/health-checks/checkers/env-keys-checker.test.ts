@@ -3,7 +3,7 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { checkEnvKeys } from "@/domains/health-checks/checkers/env-keys-checker.js";
-import type { ClaudeKitSetup } from "@/types";
+import type { PankitSetup } from "@/types";
 
 describe("checkEnvKeys", () => {
 	let tempDir: string;
@@ -28,7 +28,7 @@ describe("checkEnvKeys", () => {
 	function createSetup(options: {
 		hasGlobal?: boolean;
 		hasProjectMetadata?: boolean;
-	}): ClaudeKitSetup {
+	}): PankitSetup {
 		return {
 			global: {
 				path: options.hasGlobal ? globalDir : null,
@@ -39,7 +39,7 @@ describe("checkEnvKeys", () => {
 				metadata: options.hasProjectMetadata ? { version: "1.0.0", kit: "engineer" } : null,
 				components: { agents: 0, commands: 0, rules: 0, skills: 0 },
 			},
-		} as ClaudeKitSetup;
+		} as PankitSetup;
 	}
 
 	test("returns empty array when no global path and no project metadata", async () => {

@@ -1,6 +1,6 @@
 {
-	"name": "ClaudeKit Control Center",
-	"short_name": "ClaudeKit",
+	"name": "Pankit Control Center",
+	"short_name": "Pankit",
 	"description": "Manage your Claude Code projects, skills, and configurations",
 	"start_url": "/",
 	"display": "standalone",

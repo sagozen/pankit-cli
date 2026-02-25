@@ -1,14 +1,14 @@
-# Project Roadmap: ClaudeKit CLI
+# Project Roadmap: Pankit CLI
 
 **Last Updated**: 2026-01-29
 **Version**: 3.32.0-dev.3 (next stable: 3.32.0)
-**Repository**: https://github.com/mrgoonie/claudekit-cli
+**Repository**: https://github.com/sagozen/pankit-cli
 
 ---
 
 ## Project Overview
 
-ClaudeKit CLI (`ck`) is a command-line tool for bootstrapping and updating ClaudeKit projects from private GitHub releases. Built with Bun and TypeScript, provides fast, secure project setup and maintenance with cross-platform support.
+Pankit CLI (`pk`) is a command-line tool for bootstrapping and updating Pankit projects from private GitHub releases. Built with Bun and TypeScript, provides fast, secure project setup and maintenance with cross-platform support.
 
 **Current Status**: Active Development / Maintenance Phase
 
@@ -51,7 +51,7 @@ ClaudeKit CLI (`ck`) is a command-line tool for bootstrapping and updating Claud
 - `new.ts` → `new/` (5 modules: orchestrator + 3 phase handlers)
 - `uninstall.ts` → `uninstall/` (5 modules: command + handlers)
 - `download-manager.ts` → `download/`, `extraction/`, `utils/` (12 modules)
-- `claudekit-checker.ts` → `checkers/`, `utils/` (14 modules)
+- `pankit-checker.ts` → `checkers/`, `utils/` (14 modules)
 - `github-client.ts` → `client/` (6 modules)
 - `settings-merger.ts` → `merger/` (6 modules)
 - `version-selector.ts` → `selection/` (3 modules)
@@ -68,7 +68,7 @@ ClaudeKit CLI (`ck`) is a command-line tool for bootstrapping and updating Claud
 - ✅ **Init Command** (Renamed from update, deprecation warning)
 - ✅ **Fresh Installation** (--fresh flag for clean reinstall)
 - ✅ **Beta Version Support** (--beta flag for pre-releases)
-- ✅ **Command Prefix** (--prefix flag for /ck: namespace)
+- ✅ **Command Prefix** (--prefix flag for /pk: namespace)
 - ✅ **Optional Packages** (OpenCode, Gemini integration)
 - ✅ **Skills Dependencies** (--install-skills auto-installation)
 - ✅ **Update Notifications** (7-day cached version checks)
@@ -252,7 +252,7 @@ Global Mode (Kit Installation):
 - ✅ Manual installation instructions
 - ✅ Non-interactive mode (CI/CD compatible)
 - ✅ Cross-platform support (Windows, macOS, Linux, WSL)
-- ✅ Displays ClaudeKit setup (global & project)
+- ✅ Displays Pankit setup (global & project)
 - ✅ Reports component counts (agents, commands, rules, skills)
 
 **Platform Support**:
@@ -435,10 +435,10 @@ Global Mode (Kit Installation):
 
 ## Contact & Support
 
-- **Repository**: https://github.com/mrgoonie/claudekit-cli
-- **NPM Package**: https://www.npmjs.com/package/claudekit-cli
+- **Repository**: https://github.com/sagozen/pankit-cli
+- **NPM Package**: https://www.npmjs.com/package/pankit-cli
 - **Issues**: GitHub Issues
-- **Documentation**: https://github.com/mrgoonie/claudekit-cli/tree/main/docs
+- **Documentation**: https://github.com/sagozen/pankit-cli/tree/main/docs
 
 ---
 

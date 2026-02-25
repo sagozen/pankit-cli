@@ -6,7 +6,7 @@ import { FoldersConfigSchema } from "./commands.js";
 import { KitType } from "./kit.js";
 
 // File ownership tracking types
-export type FileOwnership = "ck" | "user" | "ck-modified";
+export type FileOwnership = "ck" | "user" | "pk-modified";
 
 export interface TrackedFile {
 	path: string; // Relative to .claude directory
@@ -21,7 +21,7 @@ export interface TrackedFile {
 export const TrackedFileSchema = z.object({
 	path: z.string(),
 	checksum: z.string().regex(/^[a-f0-9]{64}$/, "Invalid SHA-256 checksum"),
-	ownership: z.enum(["ck", "user", "ck-modified"]),
+	ownership: z.enum(["ck", "user", "pk-modified"]),
 	installedVersion: z.string(),
 	baseChecksum: z
 		.string()
@@ -80,7 +80,7 @@ export const LegacyMetadataSchema = z.object({
 	version: z.string().optional(),
 	installedAt: z.string().optional(),
 	scope: z.enum(["local", "global"]).optional(),
-	// Files/directories installed by ClaudeKit (relative paths)
+	// Files/directories installed by Pankit (relative paths)
 	installedFiles: z.array(z.string()).optional(), // DEPRECATED - keep for backward compat
 	// User config files that should be preserved during uninstall
 	userConfigFiles: z.array(z.string()).optional(), // DEPRECATED
@@ -114,7 +114,7 @@ export const ConfigSchema = z.object({
 });
 export type Config = z.infer<typeof ConfigSchema>;
 
-// ClaudeKit setup types
+// Pankit setup types
 export interface ComponentCounts {
 	agents: number;
 	commands: number;
@@ -122,7 +122,7 @@ export interface ComponentCounts {
 	skills: number;
 }
 
-export interface ClaudeKitMetadata {
+export interface PankitMetadata {
 	version: string;
 	name: string;
 	description: string;
@@ -144,13 +144,13 @@ export interface ClaudeKitMetadata {
 	deletions?: string[];
 }
 
-export interface ClaudeKitSetupInfo {
+export interface PankitSetupInfo {
 	path: string;
-	metadata: ClaudeKitMetadata | null;
+	metadata: PankitMetadata | null;
 	components: ComponentCounts;
 }
 
-export interface ClaudeKitSetup {
-	global: ClaudeKitSetupInfo;
-	project: ClaudeKitSetupInfo;
+export interface PankitSetup {
+	global: PankitSetupInfo;
+	project: PankitSetupInfo;
 }

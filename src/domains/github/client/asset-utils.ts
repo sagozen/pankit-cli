@@ -7,7 +7,7 @@ import type { GitHubRelease } from "@/types";
 /**
  * Get downloadable asset or source code URL from release
  * Priority:
- * 1. "ClaudeKit Engineer Package" or "ClaudeKit Marketing Package" zip file
+ * 1. "Pankit Engineer Package" or "Pankit Marketing Package" zip file
  * 2. Other custom uploaded assets (.tar.gz, .tgz, .zip) excluding "Source code" archives
  * 3. GitHub's automatic tarball URL
  */
@@ -27,16 +27,16 @@ export function getDownloadableAsset(release: GitHubRelease): {
 		});
 	}
 
-	// First priority: Look for official ClaudeKit package assets
+	// First priority: Look for official Pankit package assets
 	const packageAsset = release.assets.find((a) => {
 		const nameLower = a.name.toLowerCase();
 		return (
-			nameLower.includes("claudekit") && nameLower.includes("package") && nameLower.endsWith(".zip")
+			nameLower.includes("pankit") && nameLower.includes("package") && nameLower.endsWith(".zip")
 		);
 	});
 
 	if (packageAsset) {
-		logger.debug(`Selected ClaudeKit package asset: ${packageAsset.name}`);
+		logger.debug(`Selected Pankit package asset: ${packageAsset.name}`);
 		return {
 			type: "asset",
 			url: packageAsset.url, // Use API endpoint for authenticated downloads
@@ -45,7 +45,7 @@ export function getDownloadableAsset(release: GitHubRelease): {
 		};
 	}
 
-	logger.debug("No ClaudeKit package asset found, checking for other custom assets...");
+	logger.debug("No Pankit package asset found, checking for other custom assets...");
 
 	// Second priority: Look for any custom uploaded assets (excluding GitHub's automatic source code archives)
 	const customAsset = release.assets.find(

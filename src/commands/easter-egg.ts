@@ -2,7 +2,7 @@ import { logger } from "@/shared/logger.js";
 import { intro, outro } from "@/shared/safe-prompts.js";
 import pc from "picocolors";
 
-const API_URL = "https://claudekit.cc/api/egg";
+const API_URL = "https://pankit.cc/api/egg";
 
 interface EggResponse {
 	message: string;
@@ -69,7 +69,7 @@ export async function easterEggCommand(): Promise<void> {
 		console.log(`  ${pc.dim("Expires:")}   ${data.expires.split("T")[0]}`);
 		console.log();
 
-		outro("🎄 Happy Holidays from ClaudeKit!");
+		outro("🎄 Happy Holidays from Pankit!");
 	} catch (error) {
 		logger.error(error instanceof Error ? error.message : "Failed to fetch easter egg");
 		console.log(pc.red("\n  Failed to connect to the egg API."));

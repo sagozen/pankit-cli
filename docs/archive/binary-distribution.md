@@ -26,7 +26,7 @@ When you run `npm install -g claudekit-cli`:
 
 1. NPM downloads the package containing all platform-specific binaries
 2. NPM creates a symlink to `bin/ck.js` in your global bin directory
-3. When you run `ck`, the wrapper script (`bin/ck.js`) automatically:
+3. When you run `pk`, the wrapper script (`bin/ck.js`) automatically:
    - Detects your platform and architecture
    - Selects the correct binary (e.g., `ck-darwin-arm64`)
    - Executes it with all your arguments
@@ -99,7 +99,7 @@ If you still see character encoding issues:
 
 2. Check the version:
    ```bash
-   ck --version  # Should show "ck/1.4.0 {platform}-{arch}"
+   pk --version  # Should show "ck/1.4.0 {platform}-{arch}"
    ```
 
 ## Migration from v1.3.x
@@ -114,7 +114,7 @@ npm uninstall -g claudekit-cli
 npm install -g claudekit-cli@latest
 
 # Verify binary installation
-ck --version
+pk --version
 ```
 
 ## Development
@@ -127,7 +127,7 @@ bun run src/index.ts new --dir test-project
 
 # Or compile and test the binary
 bun run compile:binary
-./bin/ck new --dir test-project
+./bin/pk new --dir test-project
 ```
 
 ## Why This Change?

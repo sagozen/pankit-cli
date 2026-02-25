@@ -29,7 +29,7 @@ let cleanupRegistered = false;
  * Get locks directory path
  */
 function getLocksDir(): string {
-	return join(os.homedir(), ".claudekit", "locks");
+	return join(os.homedir(), ".pankit", "locks");
 }
 
 /**
@@ -104,7 +104,7 @@ export async function withProcessLock<T>(lockName: string, fn: () => Promise<T>)
 		const error = e as { code?: string };
 		if (error.code === "ELOCKED") {
 			throw new Error(
-				`Another ClaudeKit process is running.\n\nOperation: ${lockName}\nWait for it to complete or remove lock: ${lockPath}`,
+				`Another Pankit process is running.\n\nOperation: ${lockName}\nWait for it to complete or remove lock: ${lockPath}`,
 			);
 		}
 		throw e;

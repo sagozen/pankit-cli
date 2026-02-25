@@ -57,14 +57,14 @@ describe("PathResolver", () => {
 	});
 
 	describe("getConfigDir", () => {
-		it("should return ~/.claudekit for local mode (default)", () => {
+		it("should return ~/.pankit for local mode (default)", () => {
 			const configDir = PathResolver.getConfigDir(false);
-			expect(configDir).toBe(join(homedir(), ".claudekit"));
+			expect(configDir).toBe(join(homedir(), ".pankit"));
 		});
 
-		it("should return ~/.claudekit when global flag is false", () => {
+		it("should return ~/.pankit when global flag is false", () => {
 			const configDir = PathResolver.getConfigDir(false);
-			expect(configDir).toBe(join(homedir(), ".claudekit"));
+			expect(configDir).toBe(join(homedir(), ".pankit"));
 		});
 
 		if (originalPlatform === "win32") {
@@ -118,7 +118,7 @@ describe("PathResolver", () => {
 	describe("getConfigFile", () => {
 		it("should return config.json in local mode directory", () => {
 			const configFile = PathResolver.getConfigFile(false);
-			expect(configFile).toBe(join(homedir(), ".claudekit", "config.json"));
+			expect(configFile).toBe(join(homedir(), ".pankit", "config.json"));
 		});
 
 		it("should return config.json in global mode directory", () => {
@@ -138,9 +138,9 @@ describe("PathResolver", () => {
 	});
 
 	describe("getCacheDir", () => {
-		it("should return ~/.claudekit/cache for local mode", () => {
+		it("should return ~/.pankit/cache for local mode", () => {
 			const cacheDir = PathResolver.getCacheDir(false);
-			expect(cacheDir).toBe(join(homedir(), ".claudekit", "cache"));
+			expect(cacheDir).toBe(join(homedir(), ".pankit", "cache"));
 		});
 
 		if (originalPlatform === "win32") {
@@ -336,7 +336,7 @@ describe("PathResolver", () => {
 			process.env.CK_TEST_HOME = testHome;
 
 			const configDir = PathResolver.getConfigDir(false);
-			expect(configDir).toBe(join(testHome, ".claudekit"));
+			expect(configDir).toBe(join(testHome, ".pankit"));
 		});
 
 		it("should use test home for getCacheDir when CK_TEST_HOME is set", () => {
@@ -344,7 +344,7 @@ describe("PathResolver", () => {
 			process.env.CK_TEST_HOME = testHome;
 
 			const cacheDir = PathResolver.getCacheDir(false);
-			expect(cacheDir).toBe(join(testHome, ".claudekit", "cache"));
+			expect(cacheDir).toBe(join(testHome, ".pankit", "cache"));
 		});
 
 		it("should use test home for getGlobalKitDir when CK_TEST_HOME is set", () => {
@@ -359,11 +359,11 @@ describe("PathResolver", () => {
 			process.env.CK_TEST_HOME = undefined;
 
 			const configDir = PathResolver.getConfigDir(false);
-			expect(configDir).toContain(".claudekit");
+			expect(configDir).toContain(".pankit");
 			expect(configDir.includes("test-")).toBe(false);
 
 			const cacheDir = PathResolver.getCacheDir(false);
-			expect(cacheDir).toContain(".claudekit");
+			expect(cacheDir).toContain(".pankit");
 			expect(cacheDir.includes("test-")).toBe(false);
 
 			const globalKitDir = PathResolver.getGlobalKitDir();
@@ -379,7 +379,7 @@ describe("PathResolver", () => {
 			const configDirLocal = PathResolver.getConfigDir(false);
 			const configDirGlobal = PathResolver.getConfigDir(true);
 
-			expect(configDirLocal).toBe(join(testHome, ".claudekit"));
+			expect(configDirLocal).toBe(join(testHome, ".pankit"));
 			expect(configDirGlobal).toBe(join(testHome, ".config", "claude"));
 			expect(configDirLocal).not.toBe(configDirGlobal);
 		});
@@ -392,7 +392,7 @@ describe("PathResolver", () => {
 			const cacheDirLocal = PathResolver.getCacheDir(false);
 			const cacheDirGlobal = PathResolver.getCacheDir(true);
 
-			expect(cacheDirLocal).toBe(join(testHome, ".claudekit", "cache"));
+			expect(cacheDirLocal).toBe(join(testHome, ".pankit", "cache"));
 			expect(cacheDirGlobal).toBe(join(testHome, ".cache", "claude"));
 			expect(cacheDirLocal).not.toBe(cacheDirGlobal);
 		});
@@ -467,8 +467,8 @@ describe("PathResolver", () => {
 			// Local and global should be different
 			expect(localConfig).not.toBe(globalConfig);
 
-			// Local should always be ~/.claudekit
-			expect(localConfig).toBe(join(homedir(), ".claudekit"));
+			// Local should always be ~/.pankit
+			expect(localConfig).toBe(join(homedir(), ".pankit"));
 		});
 
 		it("should use consistent cache directories per mode", () => {

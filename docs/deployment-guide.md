@@ -35,7 +35,7 @@ The following secrets must be configured in the GitHub repository settings for s
 
 This project publishes to GitHub Packages using the following configuration:
 
-1. **Package Name**: `@mrgoonie/claudekit-cli` (scoped package)
+1. **Package Name**: `@sagozen/pankit-cli` (scoped package)
 2. **Registry**: `https://npm.pkg.github.com`
 3. **Authentication**: Uses NPM_TOKEN with GitHub Packages registry
 
@@ -43,7 +43,7 @@ This project publishes to GitHub Packages using the following configuration:
 
 The `.npmrc` file should contain:
 ```
-@mrgoonie:registry=https://npm.pkg.github.com
+@sagozen:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${NPM_TOKEN}
 ```
 
@@ -52,7 +52,7 @@ The `.npmrc` file should contain:
 Key settings in `package.json`:
 ```json
 {
-  "name": "@mrgoonie/claudekit-cli",
+  "name": "@sagozen/pankit-cli",
   "publishConfig": {
     "access": "public",
     "registry": "https://npm.pkg.github.com"
@@ -70,13 +70,13 @@ The project supports two release channels:
 - **Trigger**: Push to `main` branch
 - **Version Format**: Semantic versioning (e.g., `1.2.3`)
 - **Assets**: Platform binaries included (macOS, Linux, Windows)
-- **Installation**: `npm install @anthropic-ai/claudekit-cli -g`
+- **Installation**: `npm install @anthropic-ai/pankit-cli -g`
 
 #### Dev Channel (Prerelease)
 - **Trigger**: Push to `dev` branch
 - **Version Format**: `X.Y.Z-dev.N` (e.g., `1.2.3-dev.1`)
 - **Assets**: NPM package only (no binaries)
-- **Installation**: `npm install @anthropic-ai/claudekit-cli@dev -g`
+- **Installation**: `npm install @anthropic-ai/pankit-cli@dev -g`
 - **Use Case**: Testing new features before stable release
 
 ### Automated Release Workflow
@@ -109,7 +109,7 @@ npm publish
 1. **Authentication failures**
    - Ensure NPM_TOKEN has `write:packages` scope
    - Verify .npmrc is correctly configured
-   - Check that package name is scoped (@mrgoonie/)
+   - Check that package name is scoped (@sagozen/)
 
 2. **Build failures**
    - Check system dependencies (libsecret-1-dev for Linux)
@@ -132,15 +132,15 @@ npm publish
 
 If migrating from public npm to GitHub Packages:
 
-1. **Package Name Change**: Update from `claudekit-cli` to `@mrgoonie/claudekit-cli`
+1. **Package Name Change**: Update from `pankit-cli` to `@sagozen/pankit-cli`
 2. **Installation Update**: Users need to run:
    ```bash
-   npm uninstall claudekit-cli
-   npm install @mrgoonie/claudekit-cli -g
+   npm uninstall pankit-cli
+   npm install @sagozen/pankit-cli -g
    ```
 3. **Registry Configuration**: Users may need to configure .npmrc for GitHub Packages:
    ```bash
-   npm config set @mrgoonie:registry https://npm.pkg.github.com
+   npm config set @sagozen:registry https://npm.pkg.github.com
    npm config set //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
    ```
 

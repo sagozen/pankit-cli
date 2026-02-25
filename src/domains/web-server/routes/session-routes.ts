@@ -8,7 +8,7 @@
 
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { ProjectsRegistryManager } from "@/domains/claudekit-data/index.js";
+import { ProjectsRegistryManager } from "@/domains/pankit-data/index.js";
 import { getProjectSessions } from "@/services/claude-data/index.js";
 import { encodePath } from "@/services/claude-data/project-scanner.js";
 import type { Express, Request, Response } from "express";

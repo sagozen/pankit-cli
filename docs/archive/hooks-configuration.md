@@ -1,6 +1,6 @@
 # Claude Code Hooks Configuration
 
-This document explains the hooks configured in `.claude/settings.json` for the ClaudeKit CLI project.
+This document explains the hooks configured in `.claude/settings.json` for the Pankit CLI project.
 
 ## Overview
 
@@ -12,7 +12,7 @@ Claude Code hooks are event-driven scripts that execute at specific points in th
 
 **Location:** `.claude/settings.json` → `hooks.SessionStart`
 
-**Purpose:** Automatically check for ClaudeKit updates when a new session starts.
+**Purpose:** Automatically check for Pankit updates when a new session starts.
 
 **Configuration:**
 ```json
@@ -34,10 +34,10 @@ Claude Code hooks are event-driven scripts that execute at specific points in th
 
 **Behavior:**
 - Runs `node .claude/version-check.js` when Claude Code session starts
-- Compares current ClaudeKit version with latest GitHub release
+- Compares current Pankit version with latest GitHub release
 - Displays notification if update available
 - Caches results for 7 days to minimize API calls
-- Cache location: `~/.claudekit/cache/version-check.json`
+- Cache location: `~/.pankit/cache/version-check.json`
 
 ### 2. PostToolUse Hook: Version Check Explanation
 
@@ -57,7 +57,7 @@ Claude Code hooks are event-driven scripts that execute at specific points in th
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'if echo \"$TOOL_INPUT\" | grep -q \"version-check\"; then echo \"\n📊 Version Check Explanation:\n   - Compares your ClaudeKit version with the latest release\n   - Notifies you if updates are available\n   - Cache is refreshed every 7 days\n   - Cached at: ~/.claudekit/cache/version-check.json\" >&2; fi'",
+            "command": "bash -c 'if echo \"$TOOL_INPUT\" | grep -q \"version-check\"; then echo \"\n📊 Version Check Explanation:\n   - Compares your Pankit version with the latest release\n   - Notifies you if updates are available\n   - Cache is refreshed every 7 days\n   - Cached at: ~/.pankit/cache/version-check.json\" >&2; fi'",
             "continueOnError": true
           }
         ]
@@ -153,12 +153,12 @@ Query an LLM for context-aware decision-making:
 
 1. **Check cache age:** Cache may be fresh (<7 days old)
    ```bash
-   cat ~/.claudekit/cache/version-check.json
+   cat ~/.pankit/cache/version-check.json
    ```
 
 2. **Clear cache to force refresh:**
    ```bash
-   rm ~/.claudekit/cache/version-check.json
+   rm ~/.pankit/cache/version-check.json
    ```
 
 3. **Verify hook configuration:**

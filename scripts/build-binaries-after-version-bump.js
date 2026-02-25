@@ -87,10 +87,10 @@ async function prepare(pluginConfig, context) {
 			// Build binary for current platform (Linux CI)
 			logger.log("Building Linux x64 binary...");
 			try {
-				execSync("bun build src/index.ts --compile --outfile bin/ck-linux-x64", {
+				execSync("bun build src/index.ts --compile --outfile bin/pk-linux-x64", {
 					stdio: "inherit",
 				});
-				execSync("chmod +x bin/ck-linux-x64", { stdio: "inherit" });
+				execSync("chmod +x bin/pk-linux-x64", { stdio: "inherit" });
 			} catch (error) {
 				failedPlatforms.push("linux-x64");
 				logger.error(`Failed to build Linux x64 binary: ${error.message}`);
@@ -98,9 +98,9 @@ async function prepare(pluginConfig, context) {
 
 			// Cross-compile for other platforms
 			const platforms = [
-				{ target: "darwin-arm64", output: "bin/ck-darwin-arm64" },
-				{ target: "darwin-x64", output: "bin/ck-darwin-x64" },
-				{ target: "win32-x64", output: "bin/ck-win32-x64.exe" },
+				{ target: "darwin-arm64", output: "bin/pk-darwin-arm64" },
+				{ target: "darwin-x64", output: "bin/pk-darwin-x64" },
+				{ target: "win32-x64", output: "bin/pk-win32-x64.exe" },
 			];
 
 			for (const platform of platforms) {
@@ -120,10 +120,10 @@ async function prepare(pluginConfig, context) {
 			}
 
 			// Verify the Linux binary shows correct version (CI runner limitation)
-			if (fs.existsSync("bin/ck-linux-x64")) {
+			if (fs.existsSync("bin/pk-linux-x64")) {
 				logger.log("Verifying binary version...");
 				try {
-					const output = execSync("./bin/ck-linux-x64 --version", { encoding: "utf8" });
+					const output = execSync("./bin/pk-linux-x64 --version", { encoding: "utf8" });
 					if (output.includes(version)) {
 						logger.log(`✅ Binary version verification passed: ${version}`);
 					} else {
@@ -144,16 +144,16 @@ async function prepare(pluginConfig, context) {
 		logger.log("Verifying essential files for npm package...");
 		const essentialFiles = [
 			{ path: "dist/index.js", desc: "Node.js fallback bundle" },
-			{ path: "bin/ck.js", desc: "CLI entry point" },
+			{ path: "bin/pk.js", desc: "CLI entry point" },
 		];
 
 		// Add binary checks for non-dev releases (main has pre-built binaries)
 		if (!isDevBranch) {
 			essentialFiles.push(
-				{ path: "bin/ck-linux-x64", desc: "Linux binary" },
-				{ path: "bin/ck-darwin-arm64", desc: "macOS ARM binary" },
-				{ path: "bin/ck-darwin-x64", desc: "macOS x64 binary" },
-				{ path: "bin/ck-win32-x64.exe", desc: "Windows binary" },
+				{ path: "bin/pk-linux-x64", desc: "Linux binary" },
+				{ path: "bin/pk-darwin-arm64", desc: "macOS ARM binary" },
+				{ path: "bin/pk-darwin-x64", desc: "macOS x64 binary" },
+				{ path: "bin/pk-win32-x64.exe", desc: "Windows binary" },
 			);
 		}
 

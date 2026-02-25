@@ -69,10 +69,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 		>
 			{/* Branding */}
 			<div className={`flex items-center ${showText ? "p-6 gap-3" : "p-2 justify-center"}`}>
-				<img src="/images/logo-transparent-32.png" alt="ClaudeKit" className="w-8 h-8 shrink-0" />
+				<img src="/images/logo-transparent-32.png" alt="Pankit" className="w-8 h-8 shrink-0" />
 				{showText && (
 					<div className="overflow-hidden">
-						<h1 className="text-sm font-bold truncate tracking-tight text-dash-text">ClaudeKit</h1>
+						<h1 className="text-sm font-bold truncate tracking-tight text-dash-text">Pankit</h1>
 						<p className="text-[10px] text-dash-text-muted font-medium uppercase tracking-wider">
 							{t("controlCenter")}
 						</p>

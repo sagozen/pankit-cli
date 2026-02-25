@@ -29,7 +29,7 @@ describe("Health Check Types - Zod Schema Validation", () => {
 	describe("CheckGroupSchema", () => {
 		test("accepts valid group values", () => {
 			expect(CheckGroupSchema.parse("system")).toBe("system");
-			expect(CheckGroupSchema.parse("claudekit")).toBe("claudekit");
+			expect(CheckGroupSchema.parse("pankit")).toBe("pankit");
 			expect(CheckGroupSchema.parse("auth")).toBe("auth");
 		});
 

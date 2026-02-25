@@ -8,7 +8,7 @@ import type { CommandHelp } from "../help-types.js";
 
 export const uninstallCommandHelp: CommandHelp = {
 	name: "uninstall",
-	description: "Remove ClaudeKit installations (ownership-aware)",
+	description: "Remove Pankit installations (ownership-aware)",
 	usage: "ck uninstall [options]",
 	examples: [
 		{

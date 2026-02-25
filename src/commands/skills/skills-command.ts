@@ -1,5 +1,5 @@
 /**
- * Skills command - install ClaudeKit skills to other coding agents
+ * Skills command - install Pankit skills to other coding agents
  */
 import * as p from "@clack/prompts";
 import pc from "picocolors";
@@ -77,7 +77,7 @@ async function listSkills(showInstalled: boolean): Promise<void> {
 
 	const sourcePath = getSkillSourcePath();
 	if (!sourcePath) {
-		logger.error("No skills found. Install ClaudeKit Engineer first.");
+		logger.error("No skills found. Install Pankit Engineer first.");
 		process.exit(1);
 	}
 
@@ -279,7 +279,7 @@ export async function skillsCommand(options: SkillCommandOptions): Promise<void>
 		// Check skill source exists
 		const sourcePath = getSkillSourcePath();
 		if (!sourcePath) {
-			p.log.error("No skills found. Install ClaudeKit Engineer first.");
+			p.log.error("No skills found. Install Pankit Engineer first.");
 			p.outro(pc.red("Installation failed"));
 			process.exit(1);
 		}

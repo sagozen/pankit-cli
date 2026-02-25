@@ -73,7 +73,7 @@ export class ReleasesApi {
 	 * IMPORTANT: Do NOT trust GitHub API order - it uses lexicographic sorting
 	 * for same-day releases (e.g., "beta.10" < "beta.4"). Always use semver sorting.
 	 *
-	 * @see https://github.com/mrgoonie/claudekit-cli/issues/256
+	 * @see https://github.com/sagozen/pankit-cli/issues/256
 	 */
 	async getLatestRelease(kit: KitConfig, includePrereleases = false): Promise<GitHubRelease> {
 		return withAuthRetry(async () => {
@@ -113,7 +113,7 @@ export class ReleasesApi {
 				return handleHttpError(error, {
 					kit,
 					operation: "fetch release",
-					verboseFlag: "ck new --verbose",
+					verboseFlag: "pk new --verbose",
 				});
 			}
 		});
@@ -140,14 +140,14 @@ export class ReleasesApi {
 				// Custom 404 message for specific release tag
 				if (error?.status === 404) {
 					throw new GitHubError(
-						`Release '${tag}' not found for ${kit.name}.\n\nPossible causes:\n  • Release version doesn't exist (check: ck versions --kit ${kit.name.toLowerCase()})\n  • You don't have repository access\n\nSolutions:\n  1. List available versions: ck versions --kit ${kit.name.toLowerCase()}\n  2. Check email for GitHub invitation and accept it\n  3. Re-authenticate: gh auth login (select 'Login with a web browser')\n\nNeed help? Run with: ck new --verbose`,
+						`Release '${tag}' not found for ${kit.name}.\n\nPossible causes:\n  • Release version doesn't exist (check: ck versions --kit ${kit.name.toLowerCase()})\n  • You don't have repository access\n\nSolutions:\n  1. List available versions: ck versions --kit ${kit.name.toLowerCase()}\n  2. Check email for GitHub invitation and accept it\n  3. Re-authenticate: gh auth login (select 'Login with a web browser')\n\nNeed help? Run with: pk new --verbose`,
 						404,
 					);
 				}
 				return handleHttpError(error, {
 					kit,
 					operation: "fetch release",
-					verboseFlag: "ck new --verbose",
+					verboseFlag: "pk new --verbose",
 				});
 			}
 		});
@@ -211,7 +211,7 @@ export class ReleasesApi {
 				return handleHttpError(error, {
 					kit,
 					operation: "list releases",
-					verboseFlag: "ck versions --verbose",
+					verboseFlag: "pk versions --verbose",
 				});
 			}
 		});

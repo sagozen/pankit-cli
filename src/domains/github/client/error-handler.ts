@@ -16,7 +16,7 @@ interface ErrorContext {
  * Uses the new error classification system for better error messages
  */
 export async function handleHttpError(error: any, context: ErrorContext): Promise<never> {
-	const { kit, operation, verboseFlag = "ck new --verbose" } = context;
+	const { kit, operation, verboseFlag = "pk new --verbose" } = context;
 
 	// Invalidate auth on 401 errors
 	if (error?.status === 401) {

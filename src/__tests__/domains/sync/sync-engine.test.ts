@@ -128,7 +128,7 @@ describe("SyncEngine", () => {
 			await writeFile(join(upstreamDir, "new.md"), "upstream content");
 
 			const files: TrackedFile[] = [
-				{ path: "new.md", checksum: "abc", ownership: "ck-modified", installedVersion: "1.0.0" },
+				{ path: "new.md", checksum: "abc", ownership: "pk-modified", installedVersion: "1.0.0" },
 			];
 
 			const plan = await SyncEngine.createSyncPlan(files, claudeDir, upstreamDir);
@@ -142,7 +142,7 @@ describe("SyncEngine", () => {
 				{
 					path: "local-only.md",
 					checksum: "abc",
-					ownership: "ck-modified",
+					ownership: "pk-modified",
 					installedVersion: "1.0.0",
 				},
 			];

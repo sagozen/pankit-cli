@@ -2,7 +2,7 @@
  * Handler for `ck projects list` command
  */
 
-import { ProjectsRegistryManager } from "@/domains/claudekit-data/index.js";
+import { ProjectsRegistryManager } from "@/domains/pankit-data/index.js";
 import { logger } from "@/shared/logger.js";
 import picocolors from "picocolors";
 import type { ProjectsListOptions } from "./types.js";

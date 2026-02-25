@@ -176,10 +176,10 @@ export class DoctorUIRenderer {
 		console.log(`│  Summary: ${parts.join("  ")}`);
 		console.log("│");
 		console.log(`│  ${pc.dim("Quick Commands:")}`);
-		console.log(`│  ${pc.dim("  ck init        Install/update ClaudeKit in project")}`);
-		console.log(`│  ${pc.dim("  ck init -g     Install/update ClaudeKit globally")}`);
+		console.log(`│  ${pc.dim("  ck init        Install/update Pankit in project")}`);
+		console.log(`│  ${pc.dim("  ck init -g     Install/update Pankit globally")}`);
 		console.log(`│  ${pc.dim("  ck update      Update the CLI tool")}`);
-		console.log(`│  ${pc.dim("  ck uninstall   Remove ClaudeKit from project/global")}`);
+		console.log(`│  ${pc.dim("  ck uninstall   Remove Pankit from project/global")}`);
 		console.log(`│  ${pc.dim("  ck --help      Show all commands")}`);
 	}
 }

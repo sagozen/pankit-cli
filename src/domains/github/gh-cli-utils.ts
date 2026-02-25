@@ -7,7 +7,7 @@ import { shouldSkipExpensiveOperations as shouldSkipExpensiveChecks } from "@/sh
 import { logger } from "@/shared/logger.js";
 
 /**
- * Minimum supported GitHub CLI version for ClaudeKit
+ * Minimum supported GitHub CLI version for Pankit
  * The `gh auth token -h github.com` flag was stabilized around v2.20.0
  * Older versions may have different flag behavior causing auth failures
  */

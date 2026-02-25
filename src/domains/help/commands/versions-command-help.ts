@@ -8,7 +8,7 @@ import type { CommandHelp } from "../help-types.js";
 
 export const versionsCommandHelp: CommandHelp = {
 	name: "versions",
-	description: "List available versions of ClaudeKit repositories",
+	description: "List available versions of Pankit repositories",
 	usage: "ck versions [options]",
 	examples: [
 		{

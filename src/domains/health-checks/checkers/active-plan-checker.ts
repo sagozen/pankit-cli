@@ -12,7 +12,7 @@ export function checkActivePlan(projectDir: string): CheckResult {
 		return {
 			id: "ck-active-plan",
 			name: "Active Plan",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "None",
@@ -28,7 +28,7 @@ export function checkActivePlan(projectDir: string): CheckResult {
 			return {
 				id: "ck-active-plan",
 				name: "Active Plan",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "warn",
 				message: "Orphaned (target missing)",
@@ -41,7 +41,7 @@ export function checkActivePlan(projectDir: string): CheckResult {
 		return {
 			id: "ck-active-plan",
 			name: "Active Plan",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: targetPath,
@@ -51,7 +51,7 @@ export function checkActivePlan(projectDir: string): CheckResult {
 		return {
 			id: "ck-active-plan",
 			name: "Active Plan",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "warn",
 			message: "Unreadable",

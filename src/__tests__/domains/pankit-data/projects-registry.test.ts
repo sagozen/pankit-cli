@@ -4,7 +4,7 @@ import { existsSync } from "node:fs";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { ProjectsRegistryManager } from "@/domains/claudekit-data/projects-registry.js";
+import { ProjectsRegistryManager } from "@/domains/pankit-data/projects-registry.js";
 
 /**
  * Projects Registry Tests
@@ -14,7 +14,7 @@ import { ProjectsRegistryManager } from "@/domains/claudekit-data/projects-regis
  * by using unique project paths and aliases.
  *
  * For full isolation, run this test file separately:
- * bun test src/__tests__/domains/claudekit-data/projects-registry.test.ts
+ * bun test src/__tests__/domains/pankit-data/projects-registry.test.ts
  */
 
 // Set up shared test environment once
@@ -157,7 +157,7 @@ describe("ProjectsRegistryManager", () => {
 		ProjectsRegistryManager.clearCache();
 
 		// Create corrupted registry file
-		const registryDir = join(TEST_HOME, ".claudekit");
+		const registryDir = join(TEST_HOME, ".pankit");
 		const registryPath = join(registryDir, "projects.json");
 		await mkdir(registryDir, { recursive: true });
 		await writeFile(registryPath, "{ invalid json }}}");
@@ -183,7 +183,7 @@ describe("ProjectsRegistryManager", () => {
 			alias: `lock-${uniqueId}`,
 		});
 
-		const lockPath = join(TEST_HOME, ".claudekit", "projects.json.lock");
+		const lockPath = join(TEST_HOME, ".pankit", "projects.json.lock");
 
 		// Lock should be released after operation
 		expect(existsSync(lockPath)).toBe(false);

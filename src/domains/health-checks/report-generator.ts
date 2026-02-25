@@ -44,7 +44,7 @@ export class ReportGenerator {
 		const sectionDivider = "─".repeat(65);
 
 		lines.push(divider);
-		lines.push("CLAUDEKIT DIAGNOSTIC REPORT");
+		lines.push("PANKIT DIAGNOSTIC REPORT");
 		lines.push(`Generated: ${summary.timestamp}`);
 		lines.push(`CLI Version: ${this.getSystemInfo().cliVersion}`);
 		lines.push(divider);
@@ -195,14 +195,14 @@ export class ReportGenerator {
 		}
 
 		// Create temp file and upload using spawnSync to avoid command injection
-		const tmpFile = join(tmpdir(), `ck-report-${Date.now()}.txt`);
+		const tmpFile = join(tmpdir(), `pk-report-${Date.now()}.txt`);
 		writeFileSync(tmpFile, report);
 
 		try {
 			// Use spawnSync with array args to avoid shell interpolation (command injection safe)
 			const result = spawnSync(
 				"gh",
-				["gist", "create", tmpFile, "--desc", "ClaudeKit Diagnostic Report"],
+				["gist", "create", tmpFile, "--desc", "Pankit Diagnostic Report"],
 				{
 					encoding: "utf-8",
 				},

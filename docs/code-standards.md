@@ -147,14 +147,14 @@ await withProcessLock("lock-name", async () => {
 
 ### Custom Error Classes
 ```typescript
-export class ClaudeKitError extends Error {
+export class PankitError extends Error {
   constructor(message: string, public code?: string, public statusCode?: number) {
     super(message);
-    this.name = "ClaudeKitError";
+    this.name = "PankitError";
   }
 }
 
-export class AuthenticationError extends ClaudeKitError {
+export class AuthenticationError extends PankitError {
   constructor(message: string) {
     super(message, "AUTH_ERROR", 401);
   }

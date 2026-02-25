@@ -5,7 +5,7 @@
  */
 
 import { join } from "node:path";
-import { ProjectsRegistryManager } from "@/domains/claudekit-data/projects-registry.js";
+import { ProjectsRegistryManager } from "@/domains/pankit-data/projects-registry.js";
 import { promptSetupWizardIfNeeded } from "@/domains/installation/setup-wizard.js";
 import type { PromptsManager } from "@/domains/ui/prompts.js";
 import { processPackageInstallations } from "@/services/package-installer/package-installer.js";

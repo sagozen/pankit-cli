@@ -13,7 +13,7 @@ import SystemVersionDropdown from "./system-version-dropdown";
 interface TrackedFile {
 	path: string;
 	checksum: string;
-	ownership: "ck" | "user" | "ck-modified";
+	ownership: "ck" | "user" | "pk-modified";
 }
 
 export interface KitData {

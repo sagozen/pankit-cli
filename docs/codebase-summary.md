@@ -2,7 +2,7 @@
 
 ## Overview
 
-ClaudeKit CLI is a command-line tool for bootstrapping and updating ClaudeKit projects from private GitHub repository releases. Built with Bun and TypeScript, it provides secure, fast project setup and maintenance with comprehensive features for downloading, extracting, and merging project templates.
+Pankit CLI is a command-line tool for bootstrapping and updating Pankit projects from private GitHub repository releases. Built with Bun and TypeScript, it provides secure, fast project setup and maintenance with comprehensive features for downloading, extracting, and merging project templates.
 
 **Version**: 3.32.0-dev.3 (next stable: 3.32.0)
 **Architecture**: Modular domain-driven with facade patterns
@@ -52,7 +52,7 @@ The codebase underwent a major modularization refactor, reducing 24 large files 
 ## Project Structure
 
 ```
-claudekit-cli/
+pankit-cli/
 ├── bin/                          # Binary distribution
 │   └── ck.js                     # Platform detection wrapper
 ├── src/                          # Source code (334 TS files)
@@ -148,7 +148,7 @@ claudekit-cli/
 │   │   │   │   └── version-formatter.ts
 │   │   │   ├── auto-healer.ts
 │   │   │   ├── check-runner.ts
-│   │   │   ├── claudekit-checker.ts  # Facade
+│   │   │   ├── pankit-checker.ts  # Facade
 │   │   │   ├── platform-checker.ts   # Facade
 │   │   │   └── report-generator.ts
 │   │   ├── help/                 # Help system
@@ -323,11 +323,11 @@ Orchestrator + phase handlers: directory-setup, project-creation, post-setup.
 #### skills/ - Skills Management (multi-select, registry, uninstall)
 Renamed from `skill` command. Includes detection, installation, uninstall, and registry tracking of skills across agents.
 
-#### uninstall/ - ClaudeKit Uninstaller
+#### uninstall/ - Pankit Uninstaller
 Detection, analysis, and safe removal with fallback for installations without metadata.json.
 
 #### update-cli.ts - CLI Self-Update with Smart Kit Detection
-Detects installed kits, builds kit-specific init commands (e.g., `ck init --kit engineer --yes --install-skills`), performs parallel version checks with non-blocking fallback.
+Detects installed kits, builds kit-specific init commands (e.g., `pk init --kit engineer --yes --install-skills`), performs parallel version checks with non-blocking fallback.
 
 #### migrate/ + portable/ - Idempotent Reconciliation Pipeline
 3-phase RECONCILE → EXECUTE → REPORT pipeline for safe repeated migrations. Pure reconciler (zero I/O, 8-case decision matrix), Registry v3.0 with SHA-256 checksums, portable manifest for cross-version evolution. Interactive CLI conflict resolution with diff preview. Dashboard UI with plan viewer and conflict resolver. See `docs/reconciliation-architecture.md`.
@@ -338,7 +338,7 @@ Business logic by domain with facade pattern.
 
 **config/** - Config management, merger with conflict resolution
 **github/** - GitHub API client, auth (GitHub CLI only), npm registry
-**health-checks/** - Doctor command: parallel checkers for system, auth, GitHub, ClaudeKit, platform, network
+**health-checks/** - Doctor command: parallel checkers for system, auth, GitHub, Pankit, platform, network
 **installation/** - Download, extract (ZIP/TAR), merge (selective, multi-kit aware), package manager detection
 **skills/** - Detection, customization scanning, migration with backup/rollback
 **ui/** - Interactive prompts (kit/version selection, confirmations), ownership display
@@ -520,7 +520,7 @@ Pure utilities with no domain logic:
 10. Copy files to target
 11. Optional: Install packages (OpenCode, Gemini)
 12. Optional: Install skills dependencies
-13. Optional: Apply command prefix (/ck:)
+13. Optional: Apply command prefix (/pk:)
 14. Success message with next steps
 
 ### Update Project Flow
@@ -605,7 +605,7 @@ Always skipped during updates:
 - Maximum extraction size: 500MB
 - Request timeout: 30 seconds
 - Progress bar chunk size: 1MB
-- Cache TTL: 3600s (configurable via CK_CACHE_TTL)
+- Cache TTL: 3600s (configurable via PK_CACHE_TTL)
 
 ## Build & Distribution
 
@@ -634,7 +634,7 @@ Always skipped during updates:
 - **Init command**: Renamed from update (deprecation warning)
 - **Fresh installation**: --fresh flag for clean reinstall
 - **Beta versions**: --beta flag for pre-release visibility
-- **Command prefix**: --prefix flag for /ck: namespace
+- **Command prefix**: --prefix flag for /pk: namespace
 - **Optional packages**: OpenCode and Gemini integration
 - **Skills dependencies**: --install-skills for auto-setup
 - **Update notifications**: 7-day cached version checks with color-coded display
@@ -643,7 +643,7 @@ Always skipped during updates:
 - **Platform optimizations**: macOS native unzip fallback, adaptive concurrency
 - **Slow extraction warnings**: 30-second threshold notifications
 - **Environment detection**: Platform-aware concurrency tuning (macOS: 10, Windows: 15, Linux: 20)
-- **Smart Kit Detection for `ck update`**: Automatic detection of installed kits; displays kit-specific commands (e.g., `ck init --kit engineer --yes --install-skills`) instead of generic ones
+- **Smart Kit Detection for `pk update`**: Automatic detection of installed kits; displays kit-specific commands (e.g., `pk init --kit engineer --yes --install-skills`) instead of generic ones
 
 ### Multi-Kit Support (Phase 1 - IN PROGRESS)
 - **Selective merge with multi-kit awareness**: Detects and reuses files shared across kits
@@ -697,9 +697,9 @@ Auto-detection and installation of system dependencies (doctor command).
 - Discord Webhooks: Release notifications
 
 ### File System
-- Configuration (local): ~/.claudekit/config.json
+- Configuration (local): ~/.pankit/config.json
 - Configuration (global): Platform-specific (XDG-compliant)
-- Cache: ~/.claudekit/cache or platform-specific
+- Cache: ~/.pankit/cache or platform-specific
 - Global kit installation: ~/.claude/
 - Local project installations: {project}/.claude/
 - Skills manifest: .claude/skills/.skills-manifest.json

@@ -22,7 +22,7 @@ export async function selectKit(
 	const kits = accessibleKits ?? (Object.keys(AVAILABLE_KITS) as KitType[]);
 
 	const kit = await select({
-		message: "Select a ClaudeKit:",
+		message: "Select a Pankit:",
 		options: kits.map((key) => ({
 			value: key,
 			label: AVAILABLE_KITS[key].name,
@@ -53,7 +53,7 @@ export async function selectKits(accessibleKits: KitType[]): Promise<KitType[]> 
 	// The clack/prompts multiselect will show an error and prevent submission
 	// if user tries to submit without selecting any options.
 	const selected = await multiselect({
-		message: "Select ClaudeKit(s) to install:",
+		message: "Select Pankit(s) to install:",
 		options: accessibleKits.map((key) => ({
 			value: key,
 			label: AVAILABLE_KITS[key].name,

@@ -96,14 +96,14 @@ const createCommandWithDeprecatedOption = (): CommandHelp => ({
 const createSimpleRegistry = (): CommandRegistry => ({
 	new: {
 		name: "new",
-		description: "Create a new ClaudeKit project",
+		description: "Create a new Pankit project",
 		usage: "ck new [options]",
 		examples: [],
 		optionGroups: [],
 	},
 	init: {
 		name: "init",
-		description: "Initialize ClaudeKit in current directory",
+		description: "Initialize Pankit in current directory",
 		usage: "ck init",
 		examples: [],
 		optionGroups: [],
@@ -392,22 +392,22 @@ describe("renderGlobalHelp", () => {
 		const stripped = stripColors(output);
 
 		expect(stripped).toContain("new");
-		expect(stripped).toContain("Create a new ClaudeKit project");
+		expect(stripped).toContain("Create a new Pankit project");
 
 		expect(stripped).toContain("init");
-		expect(stripped).toContain("Initialize ClaudeKit in current directory");
+		expect(stripped).toContain("Initialize Pankit in current directory");
 
 		expect(stripped).toContain("doctor");
 		expect(stripped).toContain("Diagnose installation issues");
 	});
 
-	test("includes ClaudeKit CLI header", () => {
+	test("includes Pankit CLI header", () => {
 		const registry = createSimpleRegistry();
 		const output = renderGlobalHelp(registry);
 		const stripped = stripColors(output);
 
-		expect(stripped).toContain("ClaudeKit CLI");
-		expect(stripped).toContain("Bootstrap and manage ClaudeKit projects");
+		expect(stripped).toContain("Pankit CLI");
+		expect(stripped).toContain("Bootstrap and manage Pankit projects");
 	});
 
 	test("includes Commands section", () => {
@@ -521,7 +521,7 @@ describe("renderGlobalHelp", () => {
 
 		// Should still render header and global options
 		expect(output).toBeDefined();
-		expect(stripColors(output)).toContain("ClaudeKit CLI");
+		expect(stripColors(output)).toContain("Pankit CLI");
 		expect(stripColors(output)).toContain("Global Options:");
 	});
 });

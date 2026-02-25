@@ -48,6 +48,6 @@ export function convertFmStrip(item: PortableItem, provider: ProviderType): Conv
  * Build a merged AGENTS.md from multiple converted sections
  */
 export function buildMergedAgentsMd(sections: string[], providerName: string): string {
-	const header = `# Agents\n\n> Ported from Claude Code agents via ClaudeKit CLI (ck agents)\n> Target: ${providerName}\n\n`;
+	const header = `# Agents\n\n> Ported from Claude Code agents via Pankit CLI (ck agents)\n> Target: ${providerName}\n\n`;
 	return header + sections.join("\n---\n\n");
 }

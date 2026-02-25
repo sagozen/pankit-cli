@@ -23,7 +23,7 @@ export async function checkSettingsValid(projectDir: string): Promise<CheckResul
 		return {
 			id: "ck-settings-valid",
 			name: "Settings.json",
-			group: "claudekit",
+			group: "pankit",
 			priority: "extended",
 			status: "info",
 			message: "No settings.json found",
@@ -38,7 +38,7 @@ export async function checkSettingsValid(projectDir: string): Promise<CheckResul
 		return {
 			id: "ck-settings-valid",
 			name: "Settings.json",
-			group: "claudekit",
+			group: "pankit",
 			priority: "extended",
 			status: "pass",
 			message: "Valid JSON",
@@ -79,7 +79,7 @@ export async function checkSettingsValid(projectDir: string): Promise<CheckResul
 		return {
 			id: "ck-settings-valid",
 			name: "Settings.json",
-			group: "claudekit",
+			group: "pankit",
 			priority: "extended",
 			status: "fail",
 			message,

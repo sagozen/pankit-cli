@@ -106,7 +106,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 	it("handles legacy metadata format", async () => {
 		// Legacy single-kit format
 		const metadata = {
-			name: "claudekit-engineer",
+			name: "pankit-engineer",
 			version: "1.15.0",
 			files: [],
 		};

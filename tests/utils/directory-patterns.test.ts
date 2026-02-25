@@ -1,12 +1,12 @@
 import { describe, expect, it } from "bun:test";
 import { join } from "node:path";
-import { getClaudeKitDirectories } from "@/services/file-operations/directory-selector";
+import { getPankitDirectories } from "@/services/file-operations/directory-selector";
 import { PathResolver } from "@/shared/path-resolver";
 
 describe("Directory Selection Patterns", () => {
 	describe("PathResolver Integration", () => {
 		it("should generate correct patterns for local mode", () => {
-			const directories = getClaudeKitDirectories(false);
+			const directories = getPankitDirectories(false);
 
 			// In local mode, patterns should include .claude prefix
 			const expectedPatterns = [
@@ -25,7 +25,7 @@ describe("Directory Selection Patterns", () => {
 		});
 
 		it("should generate correct patterns for global mode", () => {
-			const directories = getClaudeKitDirectories(true);
+			const directories = getPankitDirectories(true);
 
 			// In global mode, patterns should NOT include .claude prefix
 			const expectedPatterns = [
@@ -136,8 +136,8 @@ describe("Directory Selection Patterns", () => {
 
 	describe("Pattern Matching Scenarios", () => {
 		it("should distinguish local vs global patterns correctly", () => {
-			const localDirs = getClaudeKitDirectories(false);
-			const globalDirs = getClaudeKitDirectories(true);
+			const localDirs = getPankitDirectories(false);
+			const globalDirs = getPankitDirectories(true);
 
 			// Ensure patterns are different between local and global modes
 			localDirs.forEach((localDir, index) => {

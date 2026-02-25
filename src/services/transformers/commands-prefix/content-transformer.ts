@@ -2,7 +2,7 @@
  * Content Transformer for Command Prefix
  *
  * Transforms slash command references in file contents when --prefix is applied.
- * Changes `/plan:fast` → `/ck:plan:fast`, `/fix:types` → `/ck:fix:types`, etc.
+ * Changes `/plan:fast` → `/pk:plan:fast`, `/fix:types` → `/pk:fix:types`, etc.
  *
  * This complements prefix-applier.ts which only handles directory restructuring.
  */
@@ -77,7 +77,7 @@ const COMMAND_ROOTS = [
  * - HTML tags: `</code>`, `</test>`
  * - String literals in code: `'/kanban'`, `"/kanban"`
  * - URL paths: `/kanban?dir=`, `/api/kanban`
- * - Already prefixed: `/ck:plan:`
+ * - Already prefixed: `/pk:plan:`
  */
 function buildCommandPatterns(): Array<{ regex: RegExp; replacement: string }> {
 	const patterns: Array<{ regex: RegExp; replacement: string }> = [];

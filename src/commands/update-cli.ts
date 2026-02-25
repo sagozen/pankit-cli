@@ -1,6 +1,6 @@
 /**
  * Update CLI Command
- * Updates the ClaudeKit CLI package to the latest version
+ * Updates the Pankit CLI package to the latest version
  */
 
 import { exec } from "node:child_process";
@@ -9,11 +9,11 @@ import { promisify } from "node:util";
 import { NpmRegistryClient, redactRegistryUrlForLog } from "@/domains/github/npm-registry.js";
 import { PackageManagerDetector } from "@/domains/installation/package-manager-detector.js";
 import { getInstalledKits } from "@/domains/migration/metadata-migration.js";
-import { getClaudeKitSetup } from "@/services/file-operations/claudekit-scanner.js";
-import { CLAUDEKIT_CLI_NPM_PACKAGE_NAME } from "@/shared/claudekit-constants.js";
+import { getPankitSetup } from "@/services/file-operations/pankit-scanner.js";
+import { PANKIT_CLI_NPM_PACKAGE_NAME } from "@/shared/pankit-constants.js";
 import { logger } from "@/shared/logger.js";
 import { confirm, intro, isCancel, log, note, outro, spinner } from "@/shared/safe-prompts.js";
-import { ClaudeKitError } from "@/types";
+import { PankitError } from "@/types";
 import {
 	type KitType,
 	type Metadata,
@@ -72,7 +72,7 @@ function extractCommandStdout(result: ExecAsyncResult): string {
  * CLI Update Error
  * Thrown when CLI update fails
  */
-export class CliUpdateError extends ClaudeKitError {
+export class CliUpdateError extends PankitError {
 	constructor(message: string) {
 		super(message, "CLI_UPDATE_ERROR");
 		this.name = "CliUpdateError";
@@ -103,7 +103,7 @@ export function redactCommandForLog(command: string): string {
  * @internal Exported for testing
  */
 export function buildInitCommand(isGlobal: boolean, kit?: KitType, beta?: boolean): string {
-	const parts = ["ck init"];
+	const parts = ["pk init"];
 	if (isGlobal) parts.push("-g");
 	if (kit) parts.push(`--kit ${kit}`);
 	parts.push("--yes --install-skills");
@@ -179,7 +179,7 @@ export function selectKitForUpdate(params: KitSelectionParams): KitSelectionResu
 		return {
 			isGlobal: true,
 			kit,
-			promptMessage: `Update global ClaudeKit content${kit ? ` (${kit})` : ""}?`,
+			promptMessage: `Update global Pankit content${kit ? ` (${kit})` : ""}?`,
 		};
 	}
 
@@ -189,7 +189,7 @@ export function selectKitForUpdate(params: KitSelectionParams): KitSelectionResu
 		return {
 			isGlobal: false,
 			kit,
-			promptMessage: `Update local project ClaudeKit content${kit ? ` (${kit})` : ""}?`,
+			promptMessage: `Update local project Pankit content${kit ? ` (${kit})` : ""}?`,
 		};
 	}
 
@@ -198,7 +198,7 @@ export function selectKitForUpdate(params: KitSelectionParams): KitSelectionResu
 	return {
 		isGlobal: true,
 		kit,
-		promptMessage: `Update global ClaudeKit content${kit ? ` (${kit})` : ""}?`,
+		promptMessage: `Update global Pankit content${kit ? ` (${kit})` : ""}?`,
 	};
 }
 
@@ -238,7 +238,7 @@ export async function readMetadataFile(claudeDir: string): Promise<Metadata | nu
  */
 export async function promptKitUpdate(beta?: boolean, yes?: boolean): Promise<void> {
 	try {
-		const setup = await getClaudeKitSetup();
+		const setup = await getPankitSetup();
 		const hasLocal = !!setup.project.metadata;
 		const hasGlobal = !!setup.global.metadata;
 
@@ -255,7 +255,7 @@ export async function promptKitUpdate(beta?: boolean, yes?: boolean): Promise<vo
 
 		// If no kits installed, skip prompt
 		if (!selection) {
-			logger.verbose("No ClaudeKit installations detected, skipping kit update prompt");
+			logger.verbose("No Pankit installations detected, skipping kit update prompt");
 			return;
 		}
 
@@ -288,7 +288,7 @@ export async function promptKitUpdate(beta?: boolean, yes?: boolean): Promise<vo
 		// Execute the init command
 		logger.info(`Running: ${initCmd}`);
 		const s = spinner();
-		s.start("Updating ClaudeKit content...");
+		s.start("Updating Pankit content...");
 
 		try {
 			await execAsync(initCmd, {
@@ -317,7 +317,7 @@ export async function promptKitUpdate(beta?: boolean, yes?: boolean): Promise<vo
 }
 
 /**
- * Update CLI command - updates the ClaudeKit CLI package itself
+ * Update CLI command - updates the Pankit CLI package itself
  */
 export async function updateCliCommand(
 	options: UpdateCliOptions,
@@ -325,7 +325,7 @@ export async function updateCliCommand(
 ): Promise<void> {
 	const s = spinner();
 
-	intro("[>] ClaudeKit CLI - Update");
+	intro("[>] Pankit CLI - Update");
 
 	try {
 		const {
@@ -370,14 +370,14 @@ export async function updateCliCommand(
 			// Specific version requested
 			try {
 				const exists = await npmRegistryClient.versionExists(
-					CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
+					PANKIT_CLI_NPM_PACKAGE_NAME,
 					opts.release,
 					registryUrl,
 				);
 				if (!exists) {
 					s.stop("Version not found");
 					throw new CliUpdateError(
-						`Version ${opts.release} does not exist on npm registry. Run 'ck versions' to see available versions.`,
+						`Version ${opts.release} does not exist on npm registry. Run 'pk versions' to see available versions.`,
 					);
 				}
 			} catch (error) {
@@ -399,14 +399,14 @@ export async function updateCliCommand(
 		} else if (opts.dev || opts.beta) {
 			// Dev version requested (--dev or --beta alias)
 			targetVersion = await npmRegistryClient.getDevVersion(
-				CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
+				PANKIT_CLI_NPM_PACKAGE_NAME,
 				registryUrl,
 			);
 			if (!targetVersion) {
 				s.stop("No dev version available");
 				logger.warning("No dev version found. Using latest stable version instead.");
 				targetVersion = await npmRegistryClient.getLatestVersion(
-					CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
+					PANKIT_CLI_NPM_PACKAGE_NAME,
 					registryUrl,
 				);
 			} else {
@@ -415,7 +415,7 @@ export async function updateCliCommand(
 		} else {
 			// Latest stable version
 			targetVersion = await npmRegistryClient.getLatestVersion(
-				CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
+				PANKIT_CLI_NPM_PACKAGE_NAME,
 				registryUrl,
 			);
 			s.stop(`Latest version: ${targetVersion || "unknown"}`);
@@ -424,7 +424,7 @@ export async function updateCliCommand(
 		// Handle failure to fetch version
 		if (!targetVersion) {
 			throw new CliUpdateError(
-				`Failed to fetch version information from npm registry. Check your internet connection and try again. Manual update: ${packageManagerDetector.getUpdateCommand(pm, CLAUDEKIT_CLI_NPM_PACKAGE_NAME, undefined, registryUrl)}`,
+				`Failed to fetch version information from npm registry. Check your internet connection and try again. Manual update: ${packageManagerDetector.getUpdateCommand(pm, PANKIT_CLI_NPM_PACKAGE_NAME, undefined, registryUrl)}`,
 			);
 		}
 
@@ -459,7 +459,7 @@ export async function updateCliCommand(
 		// --check flag: just show info and exit
 		if (opts.check) {
 			note(
-				`CLI update available: ${currentVersion} -> ${targetVersion}\n\nRun 'ck update' to install`,
+				`CLI update available: ${currentVersion} -> ${targetVersion}\n\nRun 'pk update' to install`,
 				"Update Check",
 			);
 			await promptKitUpdateFn(opts.dev || opts.beta, opts.yes);
@@ -482,7 +482,7 @@ export async function updateCliCommand(
 		// Execute update — pass registryUrl to ensure npm install uses the same registry we checked
 		const updateCmd = packageManagerDetector.getUpdateCommand(
 			pm,
-			CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
+			PANKIT_CLI_NPM_PACKAGE_NAME,
 			targetVersion,
 			registryUrl,
 		);
@@ -556,7 +556,7 @@ Run '${redactCommandForLog(updateCmd)}' manually, restart terminal, then check c
 			}
 
 			// Success message
-			outro(`[+] Successfully updated ClaudeKit CLI to ${activeVersion}`);
+			outro(`[+] Successfully updated Pankit CLI to ${activeVersion}`);
 			await promptKitUpdateFn(opts.dev || opts.beta, opts.yes);
 		} catch (error) {
 			if (error instanceof CliUpdateError) {

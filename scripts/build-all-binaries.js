@@ -54,25 +54,25 @@ function main() {
 		{
 			name: "darwin-arm64",
 			target: "bun-darwin-arm64",
-			output: "bin/ck-darwin-arm64",
+			output: "bin/pk-darwin-arm64",
 			ext: "",
 		},
 		{
 			name: "darwin-x64",
 			target: "bun-darwin-x64",
-			output: "bin/ck-darwin-x64",
+			output: "bin/pk-darwin-x64",
 			ext: "",
 		},
 		{
 			name: "linux-x64",
 			target: "bun-linux-x64",
-			output: "bin/ck-linux-x64",
+			output: "bin/pk-linux-x64",
 			ext: "",
 		},
 		{
 			name: "win32-x64",
 			target: "bun-win32-x64",
-			output: "bin/ck-win32-x64.exe",
+			output: "bin/pk-win32-x64.exe",
 			ext: ".exe",
 		},
 	];

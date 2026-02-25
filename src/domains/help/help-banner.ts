@@ -1,14 +1,14 @@
 /**
  * Help Banner Module
  *
- * ASCII art banner for ClaudeKit CLI help output.
+ * ASCII art banner for Pankit CLI help output.
  * Exactly 6 lines as specified.
  */
 
 import { defaultTheme, getVisibleLength } from "./help-colors.js";
 
 /**
- * 6-line ASCII art banner for CK (ClaudeKit CLI)
+ * 6-line ASCII art banner for CK (Pankit CLI)
  * Width: 19 characters per line
  */
 export const BANNER_LINES = [

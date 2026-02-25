@@ -44,7 +44,7 @@ export class OwnershipDisplay {
 				return pc.blue("CK-owned");
 			case "user":
 				return pc.green("User-created");
-			case "ck-modified":
+			case "pk-modified":
 				return pc.yellow("CK-modified");
 			default:
 				return pc.gray("Unknown");
@@ -93,7 +93,7 @@ export class OwnershipDisplay {
 				case "user":
 					summary.userCreated++;
 					break;
-				case "ck-modified":
+				case "pk-modified":
 					summary.ckModified++;
 					break;
 			}

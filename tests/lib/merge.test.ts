@@ -524,37 +524,37 @@ describe("FileMerger", () => {
 				expect(content).toBe("# My Custom CLAUDE.md\nCustom rules");
 			});
 
-			test("should copy .ck.json on first install", async () => {
+			test("should copy .pk.json on first install", async () => {
 				await writeFile(join(testSourceDir, "normal.txt"), "normal");
 				await writeFile(
-					join(testSourceDir, ".ck.json"),
+					join(testSourceDir, ".pk.json"),
 					JSON.stringify({ paths: { docs: "docs", plans: "plans" } }, null, 2),
 				);
 
 				await merger.merge(testSourceDir, testDestDir, true);
 
-				expect(existsSync(join(testDestDir, ".ck.json"))).toBe(true);
+				expect(existsSync(join(testDestDir, ".pk.json"))).toBe(true);
 			});
 
-			test("should preserve existing .ck.json on update (locale settings)", async () => {
-				// Create existing .ck.json with user's locale settings in destination
+			test("should preserve existing .pk.json on update (locale settings)", async () => {
+				// Create existing .pk.json with user's locale settings in destination
 				const existingConfig = {
 					locale: { thinkingLanguage: "vi" },
 					paths: { docs: "my-docs", plans: "my-plans" },
 				};
-				await writeFile(join(testDestDir, ".ck.json"), JSON.stringify(existingConfig, null, 2));
+				await writeFile(join(testDestDir, ".pk.json"), JSON.stringify(existingConfig, null, 2));
 
-				// Create new .ck.json in source (from kit template)
+				// Create new .pk.json in source (from kit template)
 				await writeFile(
-					join(testSourceDir, ".ck.json"),
+					join(testSourceDir, ".pk.json"),
 					JSON.stringify({ paths: { docs: "docs", plans: "plans" } }, null, 2),
 				);
 				await writeFile(join(testSourceDir, "normal.txt"), "normal");
 
 				await merger.merge(testSourceDir, testDestDir, true);
 
-				// Verify .ck.json was NOT overwritten - user's locale preserved
-				const content = await Bun.file(join(testDestDir, ".ck.json")).text();
+				// Verify .pk.json was NOT overwritten - user's locale preserved
+				const content = await Bun.file(join(testDestDir, ".pk.json")).text();
 				const parsed = JSON.parse(content);
 				expect(parsed.locale.thinkingLanguage).toBe("vi");
 				expect(parsed.paths.docs).toBe("my-docs");
@@ -1548,7 +1548,7 @@ describe("FileMerger", () => {
 
 	describe("local mode: monorepo path transformation", () => {
 		test("should transform relative .claude/ paths to $CLAUDE_PROJECT_DIR on Unix (local mode)", async () => {
-			// Create settings.json with relative hook paths (as in claudekit-engineer template)
+			// Create settings.json with relative hook paths (as in pankit-engineer template)
 			const settingsContent = JSON.stringify(
 				{
 					statusLine: {

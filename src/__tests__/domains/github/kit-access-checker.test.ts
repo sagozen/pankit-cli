@@ -40,7 +40,7 @@ describe("kit-access-checker", () => {
 
 		test("returns only engineer when marketing fails", async () => {
 			spyOn(GitHubClient.prototype, "checkAccess").mockImplementation(async (config) => {
-				if (config.repo === "claudekit-marketing") {
+				if (config.repo === "pankit-marketing") {
 					throw new Error("Access denied");
 				}
 				return true;
@@ -56,7 +56,7 @@ describe("kit-access-checker", () => {
 
 		test("returns only marketing when engineer fails", async () => {
 			spyOn(GitHubClient.prototype, "checkAccess").mockImplementation(async (config) => {
-				if (config.repo === "claudekit-engineer") {
+				if (config.repo === "pankit-engineer") {
 					throw new Error("Access denied");
 				}
 				return true;
@@ -107,7 +107,7 @@ describe("kit-access-checker", () => {
 			for (let i = 0; i < 10; i++) {
 				spyOn(GitHubClient.prototype, "checkAccess").mockImplementation(async (config) => {
 					await new Promise((r) => setTimeout(r, Math.random() * 20));
-					if (config.repo === "claudekit-marketing") {
+					if (config.repo === "pankit-marketing") {
 						throw new Error("Access denied");
 					}
 					return true;

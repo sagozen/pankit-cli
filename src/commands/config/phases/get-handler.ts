@@ -1,6 +1,6 @@
 /**
  * Handler for `ck config get <key>` command
- * Uses CkConfigManager for correct .ck.json config resolution
+ * Uses CkConfigManager for correct .pk.json config resolution
  */
 
 import { CkConfigManager } from "@/domains/config/index.js";

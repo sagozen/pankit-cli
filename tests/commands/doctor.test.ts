@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { doctorCommand } from "@/commands/doctor.js";
-import { getClaudeKitSetup } from "@/services/file-operations/claudekit-scanner.js";
+import { getPankitSetup } from "@/services/file-operations/pankit-scanner.js";
 
 describe("Doctor Command", () => {
 	let testDir: string;
@@ -26,8 +26,8 @@ describe("Doctor Command", () => {
 		// Create mock metadata
 		const mockMetadata = {
 			version: "1.0.0",
-			name: "test-claudekit",
-			description: "Test ClaudeKit for unit testing",
+			name: "test-pankit",
+			description: "Test Pankit for unit testing",
 		};
 		await writeFile(
 			join(mockClaudeDir, "metadata.json"),
@@ -64,14 +64,14 @@ describe("Doctor Command", () => {
 		}
 	});
 
-	describe("getClaudeKitSetup", () => {
+	describe("getPankitSetup", () => {
 		test("should detect project setup correctly", async () => {
-			const setup = await getClaudeKitSetup(testDir);
+			const setup = await getPankitSetup(testDir);
 
 			expect(setup.project.path).toBe(mockClaudeDir);
 			expect(setup.project.metadata).not.toBeNull();
 			expect(setup.project.metadata?.version).toBe("1.0.0");
-			expect(setup.project.metadata?.name).toBe("test-claudekit");
+			expect(setup.project.metadata?.name).toBe("test-pankit");
 
 			// Check component counts
 			expect(setup.project.components.agents).toBe(2);
@@ -85,7 +85,7 @@ describe("Doctor Command", () => {
 			await mkdir(emptyDir, { recursive: true });
 
 			try {
-				const setup = await getClaudeKitSetup(emptyDir);
+				const setup = await getPankitSetup(emptyDir);
 
 				expect(setup.project.path).toBe("");
 				expect(setup.project.metadata).toBeNull();
@@ -102,7 +102,7 @@ describe("Doctor Command", () => {
 			// Write corrupted metadata
 			await writeFile(join(mockClaudeDir, "metadata.json"), "{ invalid json", "utf8");
 
-			const setup = await getClaudeKitSetup(testDir);
+			const setup = await getPankitSetup(testDir);
 
 			expect(setup.project.path).toBe(mockClaudeDir);
 			expect(setup.project.metadata).toBeNull();
@@ -242,7 +242,7 @@ describe("Doctor Command", () => {
 			// Add a non-md file
 			await writeFile(join(mockClaudeDir, "agents", "readme.txt"), "Readme", "utf8");
 
-			const setup = await getClaudeKitSetup(testDir);
+			const setup = await getPankitSetup(testDir);
 			// Should still only count .md files
 			expect(setup.project.components.agents).toBe(2);
 		});
@@ -253,7 +253,7 @@ describe("Doctor Command", () => {
 			await mkdir(skill3Dir, { recursive: true });
 			await writeFile(join(skill3Dir, "README.md"), "# Readme", "utf8");
 
-			const setup = await getClaudeKitSetup(testDir);
+			const setup = await getPankitSetup(testDir);
 			// Should only count skills with SKILL.md
 			expect(setup.project.components.skills).toBe(2);
 		});

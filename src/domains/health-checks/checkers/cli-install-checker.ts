@@ -1,5 +1,5 @@
 import { PackageManagerDetector } from "@/domains/installation/package-manager-detector.js";
-import { CLAUDEKIT_CLI_INSTALL_COMMANDS } from "@/shared/claudekit-constants.js";
+import { PANKIT_CLI_INSTALL_COMMANDS } from "@/shared/pankit-constants.js";
 import { logger } from "@/shared/logger.js";
 import type { CheckResult } from "../types.js";
 
@@ -13,7 +13,7 @@ export async function checkCliInstallMethod(): Promise<CheckResult> {
 		return {
 			id: "ck-cli-install-method",
 			name: "CLI Installed Via",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: "Test Mode (skipped)",
@@ -28,13 +28,13 @@ export async function checkCliInstallMethod(): Promise<CheckResult> {
 	return {
 		id: "ck-cli-install-method",
 		name: "CLI Installed Via",
-		group: "claudekit",
+		group: "pankit",
 		priority: "standard",
 		status: pm !== "unknown" ? "pass" : "warn",
 		message: pmVersion ? `${displayName} (v${pmVersion})` : displayName,
 		suggestion:
 			pm === "unknown"
-				? `Install with one of: ${CLAUDEKIT_CLI_INSTALL_COMMANDS.join(" | ")}`
+				? `Install with one of: ${PANKIT_CLI_INSTALL_COMMANDS.join(" | ")}`
 				: undefined,
 		autoFixable: false,
 	};

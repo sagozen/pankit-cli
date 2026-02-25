@@ -1,6 +1,6 @@
 /**
  * Handler for `ck config set <key> <value>` command
- * Uses CkConfigManager for correct .ck.json config resolution
+ * Uses CkConfigManager for correct .pk.json config resolution
  */
 
 import { CkConfigManager } from "@/domains/config/index.js";
@@ -42,8 +42,8 @@ export async function handleSet(
 		const selectedScope = await prompts.select({
 			message: "Where do you want to save this setting?",
 			options: [
-				{ value: "project", label: "Local (project)", hint: ".claude/.ck.json" },
-				{ value: "global", label: "Global (user)", hint: "~/.claude/.ck.json" },
+				{ value: "project", label: "Local (project)", hint: ".claude/.pk.json" },
+				{ value: "global", label: "Global (user)", hint: "~/.claude/.pk.json" },
 			],
 		});
 

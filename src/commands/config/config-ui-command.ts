@@ -28,7 +28,7 @@ export async function configUICommand(options: ConfigUIOptions = {}): Promise<vo
 			}
 		}
 
-		logger.info("Starting ClaudeKit Dashboard...");
+		logger.info("Starting Pankit Dashboard...");
 
 		// Dynamic import to avoid bundling web-server in main CLI
 		const { startServer } = await import("@/domains/web-server/index.js");
@@ -42,7 +42,7 @@ export async function configUICommand(options: ConfigUIOptions = {}): Promise<vo
 		// Pretty print URL
 		const url = `http://localhost:${server.port}`;
 		console.log();
-		console.log(pc.bold("  ClaudeKit Dashboard"));
+		console.log(pc.bold("  Pankit Dashboard"));
 		console.log(pc.dim("  ─────────────────────"));
 		console.log(`  ${pc.green("➜")} Local: ${pc.cyan(url)}`);
 		console.log();

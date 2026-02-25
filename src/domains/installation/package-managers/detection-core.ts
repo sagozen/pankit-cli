@@ -6,7 +6,7 @@ import { existsSync, realpathSync } from "node:fs";
 import { chmod, mkdir, readFile, writeFile } from "node:fs/promises";
 import { platform } from "node:os";
 import { join } from "node:path";
-import { CLAUDEKIT_CLI_NPM_PACKAGE_NAME } from "@/shared/claudekit-constants.js";
+import { PANKIT_CLI_NPM_PACKAGE_NAME } from "@/shared/pankit-constants.js";
 import { logger } from "@/shared/logger.js";
 import { PathResolver } from "@/shared/path-resolver.js";
 import { getPmQueryTimeoutMs } from "./constants.js";
@@ -35,7 +35,7 @@ export function detectFromBinaryPath(): PackageManager {
 	const normalizePath = (pathValue: string): string => pathValue.replace(/\\/g, "/").toLowerCase();
 	const detectFromNormalizedPath = (normalized: string): PackageManager => {
 		// Check for PM-identifying path segments (most specific first)
-		// bun: ~/.bun/install/global/node_modules/... or ~/.bun/bin/ck
+		// bun: ~/.bun/install/global/node_modules/... or ~/.bun/bin/pk
 		if (
 			normalized.includes("/.bun/install/") ||
 			normalized.includes("/bun/install/global/") ||
@@ -78,7 +78,7 @@ export function detectFromBinaryPath(): PackageManager {
 
 		// Last-resort fallback: path clearly points to this package under node_modules.
 		// If no PM-specific marker matched above, treat it as npm-compatible.
-		if (normalized.includes("/node_modules/claudekit-cli/")) {
+		if (normalized.includes("/node_modules/pankit-cli/")) {
 			return "npm";
 		}
 
@@ -266,7 +266,7 @@ export async function findOwningPm(): Promise<PackageManager | null> {
 	const queries: PmQuery[] = [getBunQuery(), getNpmQuery(), getPnpmQuery(), getYarnQuery()];
 
 	logger.verbose("PackageManagerDetector: Querying all PMs in parallel");
-	logger.debug(`Querying package managers for ${CLAUDEKIT_CLI_NPM_PACKAGE_NAME} ownership...`);
+	logger.debug(`Querying package managers for ${PANKIT_CLI_NPM_PACKAGE_NAME} ownership...`);
 
 	// Run all queries in parallel
 	const results = await Promise.allSettled(
@@ -278,7 +278,7 @@ export async function findOwningPm(): Promise<PackageManager | null> {
 				});
 				if (checkFn(stdout)) {
 					logger.verbose(`PackageManagerDetector: Found via ${pm}`);
-					logger.debug(`Found ${CLAUDEKIT_CLI_NPM_PACKAGE_NAME} installed via ${pm}`);
+					logger.debug(`Found ${PANKIT_CLI_NPM_PACKAGE_NAME} installed via ${pm}`);
 					return pm;
 				}
 				logger.verbose(`PackageManagerDetector: Not found via ${pm}`);
@@ -305,13 +305,13 @@ export async function findOwningPm(): Promise<PackageManager | null> {
 
 	if (detectedPms.length > 1) {
 		logger.warning(
-			`Ambiguous package manager ownership for ${CLAUDEKIT_CLI_NPM_PACKAGE_NAME}: ${detectedPms.join(", ")}. Falling back to default detection.`,
+			`Ambiguous package manager ownership for ${PANKIT_CLI_NPM_PACKAGE_NAME}: ${detectedPms.join(", ")}. Falling back to default detection.`,
 		);
 		return null;
 	}
 
 	logger.debug(
-		`Could not determine which package manager installed ${CLAUDEKIT_CLI_NPM_PACKAGE_NAME}`,
+		`Could not determine which package manager installed ${PANKIT_CLI_NPM_PACKAGE_NAME}`,
 	);
 	return null;
 }

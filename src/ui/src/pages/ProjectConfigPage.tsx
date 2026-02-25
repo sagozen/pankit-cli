@@ -1,6 +1,6 @@
 /**
  * Project config editor page - 3-column layout: Form | JSON | Help
- * Edits project/.claude/.ck.json with bidirectional sync between form and JSON
+ * Edits project/.claude/.pk.json with bidirectional sync between form and JSON
  */
 import type React from "react";
 import { useCallback, useMemo, useState } from "react";
@@ -17,7 +17,7 @@ import { useConfigEditor } from "../hooks/use-config-editor";
 import { usePanelSizes } from "../hooks/use-panel-sizes-for-resizable-columns";
 import { useI18n } from "../i18n";
 import { fetchProjects } from "../services/api";
-import { fetchCkConfigSchema, fetchCkConfigScope, saveCkConfig } from "../services/ck-config-api";
+import { fetchCkConfigSchema, fetchCkConfigScope, saveCkConfig } from "../services/pk-config-api";
 import { getNestedValue } from "../utils/config-editor-utils";
 
 const ProjectConfigPage: React.FC = () => {
@@ -30,7 +30,7 @@ const ProjectConfigPage: React.FC = () => {
 
 	// Resizable 3-column panels: Form (35%) | JSON (40%) | Help (25%)
 	const { sizes, isDragging, startDrag } = usePanelSizes({
-		storageKey: "claudekit-project-config-panels",
+		storageKey: "pankit-project-config-panels",
 		defaultSizes: [35, 40, 25],
 		minSizes: [20, 25, 15],
 	});
@@ -177,7 +177,7 @@ const ProjectConfigPage: React.FC = () => {
 		<div className="animate-in fade-in duration-300 w-full h-full flex flex-col transition-colors">
 			<ConfigEditorHeader
 				title={t("projectConfig")}
-				filePath={projectPath ? `${projectPath}/.claude/.ck.json` : ".claude/.ck.json"}
+				filePath={projectPath ? `${projectPath}/.claude/.pk.json` : ".claude/.pk.json"}
 				onBack={() => navigate(`/project/${projectId}`)}
 				onSave={editor.handleSave}
 				onReset={editor.handleReset}

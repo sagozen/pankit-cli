@@ -2,7 +2,7 @@
 
 ## Overview
 
-ClaudeKit CLI uses **modular domain-driven architecture** with facade patterns. Separates concerns into CLI infrastructure, commands with phase handlers, domain-specific business logic, cross-domain services, and pure utilities. Designed for extensibility, security, and cross-platform compatibility.
+Pankit CLI uses **modular domain-driven architecture** with facade patterns. Separates concerns into CLI infrastructure, commands with phase handlers, domain-specific business logic, cross-domain services, and pure utilities. Designed for extensibility, security, and cross-platform compatibility.
 
 **Version**: 3.32.0-dev.3 | **Modules**: 122 focused (target: <100 LOC each) | **Commands**: 7
 
@@ -73,7 +73,7 @@ Commands maintain context object threaded through phases. Enables shared state, 
 ### skills/ - Skills Management
 Multi-select installation, registry tracking, uninstall per agent.
 
-### uninstall/ - ClaudeKit Uninstaller
+### uninstall/ - Pankit Uninstaller
 Detection with fallback (no metadata.json), safe removal.
 
 ### update-cli.ts - CLI Self-Update
@@ -81,7 +81,7 @@ Detects installed kits, builds kit-specific commands, parallel version checks.
 
 ### migrate - Idempotent Reconciliation Pipeline
 
-`ck migrate` follows a 3-phase model designed for safe repeated execution:
+`pk migrate` follows a 3-phase model designed for safe repeated execution:
 
 1. **RECONCILE** — Pure function (`reconciler.ts`), zero I/O. Takes source items + registry + target states + manifest → produces `ReconcilePlan` with actions. 8-case decision matrix: install, update, skip, conflict, delete (+ rename/path-migration from manifest).
 2. **EXECUTE** — Applies plan actions. Interactive conflict resolution (`conflict-resolver.ts`) with diff preview. Updates Registry v3.0 with new checksums.
@@ -106,7 +106,7 @@ Config generator, manager, validator. Settings merger with conflict resolution a
 Octokit wrapper for releases and auth (GitHub CLI only). Asset selection: official package > custom assets > fallback tarball.
 
 ### health-checks/ - Doctor Command System
-Parallel checkers for system (Node, npm, Python, git, gh), auth (token scopes, rate limit), GitHub API, ClaudeKit (installs, versions, skills), platform, network. Includes auto-healer for common issues.
+Parallel checkers for system (Node, npm, Python, git, gh), auth (token scopes, rate limit), GitHub API, Pankit (installs, versions, skills), platform, network. Includes auto-healer for common issues.
 
 ### installation/ - Download, Extract, Merge
 File downloader with streaming. ZIP/TAR extraction with security validation (path traversal, archive bombs, 500MB limit). Selective merger with multi-kit awareness: detects shared files, prevents overwriting newer versions.
@@ -132,7 +132,7 @@ Manifest reader/writer with multi-kit support. Manifest tracker for file ownersh
 Dependency installer (Node, Python, system). Gemini MCP linker for AI tooling.
 
 ### transformers/ - Path Transformations
-Command prefix applier (/ck: namespace). Folder path transformer for directory renaming.
+Command prefix applier (/pk: namespace). Folder path transformer for directory renaming.
 
 ## Shared Layer (Pure Utilities)
 
@@ -208,7 +208,7 @@ Tracks shared files, enables cross-kit file checking via `setMultiKitContext()`.
 - Maximum extraction: 500MB
 - Request timeout: 30 seconds
 - Progress bar chunk: 1MB
-- Cache TTL: 3600s (configurable via CK_CACHE_TTL)
+- Cache TTL: 3600s (configurable via PK_CACHE_TTL)
 
 ## Data Flows
 
@@ -242,7 +242,7 @@ Structured error classes with status codes. User-friendly messages. Stack traces
 - npm Registry: Package distribution
 
 ### File System
-- **Local config**: ~/.claudekit/config.json
+- **Local config**: ~/.pankit/config.json
 - **Global config**: XDG-compliant (~/.config/claude/config.json)
 - **Global kits**: ~/.claude/
 - **Skills manifest**: .claude/skills/.skills-manifest.json

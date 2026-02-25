@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "=== ClaudeKit Config E2E Test ==="
+echo "=== Pankit Config E2E Test ==="
 
 cd "$(dirname "$0")/.."
 

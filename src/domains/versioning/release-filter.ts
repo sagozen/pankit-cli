@@ -241,7 +241,7 @@ export class ReleaseFilter {
 	 * IMPORTANT: Do NOT trust GitHub API order - it uses lexicographic sorting
 	 * for same-day releases (e.g., "beta.10" < "beta.4"). Always sort by semver.
 	 *
-	 * @see https://github.com/mrgoonie/claudekit-cli/issues/256
+	 * @see https://github.com/sagozen/pankit-cli/issues/256
 	 */
 	static getLatestStable(releases: GitHubRelease[]): GitHubRelease | null {
 		const stableReleases = releases
@@ -257,7 +257,7 @@ export class ReleaseFilter {
 	 * IMPORTANT: Do NOT trust GitHub API order - it uses lexicographic sorting
 	 * for same-day releases (e.g., "beta.10" < "beta.4"). Always sort by semver.
 	 *
-	 * @see https://github.com/mrgoonie/claudekit-cli/issues/256
+	 * @see https://github.com/sagozen/pankit-cli/issues/256
 	 */
 	static getLatestPrerelease(releases: GitHubRelease[]): GitHubRelease | null {
 		const prereleases = releases

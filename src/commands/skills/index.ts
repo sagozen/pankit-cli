@@ -1,7 +1,7 @@
 /**
  * Skills command module
  *
- * Install ClaudeKit skills to other coding agents (Cursor, Codex, Goose, etc.)
+ * Install Pankit skills to other coding agents (Cursor, Codex, Goose, etc.)
  */
 
 export { skillsCommand } from "./skills-command.js";

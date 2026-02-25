@@ -8,7 +8,7 @@ import type { CommandHelp } from "../help-types.js";
 
 export const updateCommandHelp: CommandHelp = {
 	name: "update",
-	description: "Update ClaudeKit CLI tool only (not kit content)",
+	description: "Update Pankit CLI tool only (not kit content)",
 	usage: "ck update [options]",
 	examples: [
 		{
@@ -51,7 +51,7 @@ export const updateCommandHelp: CommandHelp = {
 			options: [
 				{
 					flags: "--kit <kit>",
-					description: "This option is no longer supported with 'ck update'",
+					description: "This option is no longer supported with 'pk update'",
 					deprecated: {
 						message: "Use 'ck init --kit <kit>' to update kit installations",
 						alternative: "ck init --kit <kit>",
@@ -59,7 +59,7 @@ export const updateCommandHelp: CommandHelp = {
 				},
 				{
 					flags: "-g, --global",
-					description: "This option is no longer supported with 'ck update'",
+					description: "This option is no longer supported with 'pk update'",
 					deprecated: {
 						message: "Use 'ck init --global' to update global kit",
 						alternative: "ck init --global",
@@ -72,7 +72,7 @@ export const updateCommandHelp: CommandHelp = {
 		{
 			title: "Note",
 			content:
-				"'ck update' updates the CLI tool only. To update kit content (skills, commands, rules), use 'ck init' for local or 'ck init -g' for global. Use --yes to skip all prompts (both CLI and kit content update) for non-interactive/CI usage.",
+				"'pk update' updates the CLI tool only. To update kit content (skills, commands, rules), use 'pk init' for local or 'ck init -g' for global. Use --yes to skip all prompts (both CLI and kit content update) for non-interactive/CI usage.",
 		},
 	],
 };

@@ -65,7 +65,7 @@ export async function projectCreation(
 		kitPath: validOptions.kitPath,
 	});
 
-	// Apply /ck: prefix if requested
+	// Apply /pk: prefix if requested
 	if (CommandsPrefix.shouldApplyPrefix(validOptions)) {
 		await CommandsPrefix.applyPrefix(extractDir);
 	}
@@ -97,7 +97,7 @@ export async function projectCreation(
 			docs: foldersConfig.docs,
 			plans: foldersConfig.plans,
 		});
-		logger.debug("Saved folder configuration to .claude/.ck.json");
+		logger.debug("Saved folder configuration to .claude/.pk.json");
 	}
 
 	output.section("Installing");

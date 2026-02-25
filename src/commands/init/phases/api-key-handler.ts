@@ -1,6 +1,6 @@
 /**
  * API key setup phase
- * Prompts for ClaudeKit API key during init flow
+ * Prompts for Pankit API key during init flow
  */
 
 import {
@@ -13,10 +13,10 @@ import { logger } from "@/shared/logger.js";
 import type { InitContext } from "../types.js";
 
 const MAX_ATTEMPTS = 3;
-const DASHBOARD_URL = "https://claudekit.cc/api-keys";
+const DASHBOARD_URL = "https://pankit.cc/api-keys";
 
 /**
- * Handle ClaudeKit API key setup
+ * Handle Pankit API key setup
  */
 export async function handleApiKeySetup(ctx: InitContext): Promise<InitContext> {
 	if (ctx.cancelled || !ctx.claudeDir) {
@@ -28,14 +28,14 @@ export async function handleApiKeySetup(ctx: InitContext): Promise<InitContext> 
 
 	if (existingKey) {
 		const maskedKey = `${existingKey.slice(0, 15)}...`;
-		logger.info(`Existing ClaudeKit API key found: ${maskedKey}`);
+		logger.info(`Existing Pankit API key found: ${maskedKey}`);
 
 		if (ctx.isNonInteractive) {
 			logger.info("Using existing API key (non-interactive mode)");
 			return { ...ctx, apiKeyConfigured: true };
 		}
 
-		const keepExisting = await ctx.prompts.confirm("Keep existing ClaudeKit API key?");
+		const keepExisting = await ctx.prompts.confirm("Keep existing Pankit API key?");
 
 		if (keepExisting) {
 			return { ...ctx, apiKeyConfigured: true };
@@ -44,8 +44,8 @@ export async function handleApiKeySetup(ctx: InitContext): Promise<InitContext> 
 
 	// Show setup info
 	ctx.prompts.note(
-		`API keys enable access to ClaudeKit services (VidCap, ReviewWeb, etc.)\nGet your API key at: ${DASHBOARD_URL}`,
-		"ClaudeKit API Key Setup",
+		`API keys enable access to Pankit services (VidCap, ReviewWeb, etc.)\nGet your API key at: ${DASHBOARD_URL}`,
+		"Pankit API Key Setup",
 	);
 
 	// Skip in non-interactive mode
@@ -55,7 +55,7 @@ export async function handleApiKeySetup(ctx: InitContext): Promise<InitContext> 
 	}
 
 	// Prompt to set up
-	const setupApiKey = await ctx.prompts.confirm("Would you like to set up a ClaudeKit API key?");
+	const setupApiKey = await ctx.prompts.confirm("Would you like to set up a Pankit API key?");
 
 	if (!setupApiKey) {
 		logger.info("Skipping API key setup. You can add it later in .claude/.env");
@@ -69,7 +69,7 @@ export async function handleApiKeySetup(ctx: InitContext): Promise<InitContext> 
 	while (!apiKey && attempts < MAX_ATTEMPTS) {
 		attempts++;
 
-		const inputKey = await ctx.prompts.text("Enter your ClaudeKit API key:", "ck_live_...");
+		const inputKey = await ctx.prompts.text("Enter your Pankit API key:", "ck_live_...");
 
 		if (!inputKey?.trim()) {
 			logger.warning("API key is required (or skip setup)");

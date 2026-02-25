@@ -1,6 +1,6 @@
 /**
  * Global config editor page - unified 3-column layout: Form | JSON | Help
- * Edits ~/.claude/.ck.json with bidirectional sync between form and JSON
+ * Edits ~/.claude/.pk.json with bidirectional sync between form and JSON
  */
 import type React from "react";
 import { useCallback, useMemo, useState } from "react";
@@ -19,7 +19,7 @@ import { useConfigEditor } from "../hooks/use-config-editor";
 import { usePanelSizes } from "../hooks/use-panel-sizes-for-resizable-columns";
 import { useI18n } from "../i18n";
 import { fetchGlobalMetadata } from "../services/api";
-import { fetchCkConfig, fetchCkConfigSchema, saveCkConfig } from "../services/ck-config-api";
+import { fetchCkConfig, fetchCkConfigSchema, saveCkConfig } from "../services/pk-config-api";
 
 const GlobalConfigPage: React.FC = () => {
 	const { t } = useI18n();
@@ -31,7 +31,7 @@ const GlobalConfigPage: React.FC = () => {
 
 	// Resizable 3-column panels: Form (35%) | JSON (40%) | Help (25%)
 	const { sizes, isDragging, startDrag } = usePanelSizes({
-		storageKey: "claudekit-global-config-panels",
+		storageKey: "pankit-global-config-panels",
 		defaultSizes: [35, 40, 25],
 		minSizes: [20, 25, 15],
 	});
@@ -42,7 +42,7 @@ const GlobalConfigPage: React.FC = () => {
 		isDragging: isSystemDragging,
 		startDrag: startSystemDrag,
 	} = usePanelSizes({
-		storageKey: "claudekit-global-system-panels",
+		storageKey: "pankit-global-system-panels",
 		defaultSizes: [70, 30],
 		minSizes: [45, 20],
 	});
@@ -322,7 +322,7 @@ const GlobalConfigPage: React.FC = () => {
 		<div className="animate-in fade-in duration-300 w-full h-full flex flex-col transition-colors">
 			<ConfigEditorHeader
 				title={t("globalConfig")}
-				filePath="~/.claude/.ck.json"
+				filePath="~/.claude/.pk.json"
 				onBack={() => navigate(-1)}
 				onSave={editor.handleSave}
 				onReset={editor.handleReset}
@@ -397,7 +397,7 @@ const GlobalConfigPage: React.FC = () => {
 							syntaxError={editor.syntaxError}
 							onChange={editor.handleJsonChange}
 							onCursorLineChange={editor.setCursorLine}
-							headerPath="~/.claude/.ck.json"
+							headerPath="~/.claude/.pk.json"
 							headerActions={configJsonHeaderActions}
 						/>
 

@@ -210,7 +210,7 @@ describe("update-cli", () => {
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(true);
 				expect(result?.kit).toBeUndefined();
-				expect(result?.promptMessage).toBe("Update global ClaudeKit content?");
+				expect(result?.promptMessage).toBe("Update global Pankit content?");
 			});
 		});
 
@@ -244,7 +244,7 @@ describe("update-cli", () => {
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(false);
 				expect(result?.kit).toBeUndefined();
-				expect(result?.promptMessage).toBe("Update local project ClaudeKit content?");
+				expect(result?.promptMessage).toBe("Update local project Pankit content?");
 			});
 		});
 
@@ -305,7 +305,7 @@ describe("update-cli", () => {
 					globalKits: ["engineer"],
 				};
 				const result = selectKitForUpdate(params);
-				expect(result?.promptMessage).toBe("Update global ClaudeKit content (engineer)?");
+				expect(result?.promptMessage).toBe("Update global Pankit content (engineer)?");
 			});
 
 			it("excludes parentheses when kit is undefined", () => {
@@ -316,7 +316,7 @@ describe("update-cli", () => {
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
-				expect(result?.promptMessage).toBe("Update global ClaudeKit content?");
+				expect(result?.promptMessage).toBe("Update global Pankit content?");
 			});
 
 			it("shows 'local project' for local-only installation", () => {
@@ -327,7 +327,7 @@ describe("update-cli", () => {
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
-				expect(result?.promptMessage).toBe("Update local project ClaudeKit content (engineer)?");
+				expect(result?.promptMessage).toBe("Update local project Pankit content (engineer)?");
 			});
 		});
 
@@ -640,7 +640,7 @@ describe("update-cli", () => {
 			);
 
 			expect(source).toContain(
-				"packageManagerDetector.getUpdateCommand(pm, CLAUDEKIT_CLI_NPM_PACKAGE_NAME, undefined, registryUrl)",
+				"packageManagerDetector.getUpdateCommand(pm, PANKIT_CLI_NPM_PACKAGE_NAME, undefined, registryUrl)",
 			);
 		});
 
@@ -664,7 +664,7 @@ describe("update-cli", () => {
 	describe("redactCommandForLog", () => {
 		it("redacts registry credentials in --registry argument", () => {
 			const command =
-				"npm install -g claudekit-cli@1.2.3 --registry https://user:pass@registry.example.com/npm";
+				"npm install -g pankit-cli@1.2.3 --registry https://user:pass@registry.example.com/npm";
 			const redacted = redactCommandForLog(command);
 
 			expect(redacted).not.toContain("user:pass");
@@ -673,7 +673,7 @@ describe("update-cli", () => {
 
 		it("supports --registry=<url> argument style", () => {
 			const command =
-				"npm install -g claudekit-cli@1.2.3 --registry=https://user:pass@registry.example.com/npm";
+				"npm install -g pankit-cli@1.2.3 --registry=https://user:pass@registry.example.com/npm";
 			const redacted = redactCommandForLog(command);
 
 			expect(redacted).not.toContain("user:pass");

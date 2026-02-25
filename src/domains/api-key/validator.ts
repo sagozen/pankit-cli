@@ -1,8 +1,8 @@
 /**
- * API key validation against ClaudeKit API
+ * API key validation against Pankit API
  */
 
-const API_BASE_URL = "https://claudekit.cc/api";
+const API_BASE_URL = "https://pankit.cc/api";
 const VALIDATION_TIMEOUT = 10000; // 10 seconds
 
 export interface ValidationResult {
@@ -13,7 +13,7 @@ export interface ValidationResult {
 }
 
 /**
- * Validate an API key against the ClaudeKit API
+ * Validate an API key against the Pankit API
  */
 export async function validateApiKey(apiKey: string): Promise<ValidationResult> {
 	try {

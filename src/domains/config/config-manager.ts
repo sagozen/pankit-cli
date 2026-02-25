@@ -14,7 +14,7 @@ import {
 } from "@/types";
 
 // Project-level config file name
-const PROJECT_CONFIG_FILE = ".ck.json";
+const PROJECT_CONFIG_FILE = ".pk.json";
 
 export class ConfigManager {
 	private static config: Config | null = null;
@@ -131,13 +131,13 @@ export class ConfigManager {
 	}
 
 	/**
-	 * Load project-level config from .claude/.ck.json (local) or .ck.json (global).
+	 * Load project-level config from .claude/.pk.json (local) or .pk.json (global).
 	 * Returns null if no project config exists.
 	 *
 	 * @param projectDir - The project directory. In global mode, this should be ~/.claude.
 	 *                     In local mode, this is the project root directory.
-	 * @param global - If true, load from projectDir/.ck.json (treats projectDir as ~/.claude).
-	 *                 If false, load from projectDir/.claude/.ck.json (default).
+	 * @param global - If true, load from projectDir/.pk.json (treats projectDir as ~/.claude).
+	 *                 If false, load from projectDir/.claude/.pk.json (default).
 	 * @returns The folder configuration or null if not found
 	 */
 	static async loadProjectConfig(
@@ -164,14 +164,14 @@ export class ConfigManager {
 	}
 
 	/**
-	 * Save project-level config to .claude/.ck.json (local) or .ck.json (global).
+	 * Save project-level config to .claude/.pk.json (local) or .pk.json (global).
 	 * Uses selective merge to preserve existing user settings while updating paths.
 	 *
 	 * @param projectDir - The project directory. In global mode, this should be ~/.claude.
 	 *                     In local mode, this is the project root directory.
 	 * @param folders - Folder configuration to save (docs and plans directory names)
-	 * @param global - If true, save to projectDir/.ck.json (treats projectDir as ~/.claude).
-	 *                 If false, save to projectDir/.claude/.ck.json (default).
+	 * @param global - If true, save to projectDir/.pk.json (treats projectDir as ~/.claude).
+	 *                 If false, save to projectDir/.claude/.pk.json (default).
 	 */
 	static async saveProjectConfig(
 		projectDir: string,
@@ -229,12 +229,12 @@ export class ConfigManager {
 	/**
 	 * Resolve folder configuration from multiple sources (priority order):
 	 * 1. CLI flags (--docs-dir, --plans-dir)
-	 * 2. Project config (.claude/.ck.json or ~/.claude/.ck.json in global mode)
-	 * 3. Global config (~/.claudekit/config.json folders section)
+	 * 2. Project config (.claude/.pk.json or ~/.claude/.pk.json in global mode)
+	 * 3. Global config (~/.pankit/config.json folders section)
 	 * 4. Defaults (docs, plans)
 	 * @param projectDir - The project directory
 	 * @param cliOptions - CLI options for docs and plans directories
-	 * @param global - If true, load project config from projectDir/.ck.json (for global mode)
+	 * @param global - If true, load project config from projectDir/.pk.json (for global mode)
 	 */
 	static async resolveFoldersConfig(
 		projectDir: string,
@@ -244,7 +244,7 @@ export class ConfigManager {
 		// Start with defaults
 		const result: Required<FoldersConfig> = { ...DEFAULT_FOLDERS };
 
-		// Layer 3: Global config from ~/.claudekit/config.json
+		// Layer 3: Global config from ~/.pankit/config.json
 		const globalConfig = await ConfigManager.load();
 		if (globalConfig.folders?.docs) result.docs = globalConfig.folders.docs;
 		if (globalConfig.folders?.plans) result.plans = globalConfig.folders.plans;
@@ -266,8 +266,8 @@ export class ConfigManager {
 	 *
 	 * @param projectDir - The project directory. In global mode, this should be ~/.claude.
 	 *                     In local mode, this is the project root directory.
-	 * @param global - If true, check projectDir/.ck.json (treats projectDir as ~/.claude).
-	 *                 If false, check projectDir/.claude/.ck.json (default).
+	 * @param global - If true, check projectDir/.pk.json (treats projectDir as ~/.claude).
+	 *                 If false, check projectDir/.claude/.pk.json (default).
 	 * @returns true if the config file exists
 	 */
 	static projectConfigExists(projectDir: string, global = false): boolean {
@@ -276,9 +276,9 @@ export class ConfigManager {
 	}
 
 	/**
-	 * Migrate .ck.json from nested location to correct location in global mode.
-	 * This fixes the bug where .ck.json was incorrectly created at ~/.claude/.claude/.ck.json
-	 * instead of ~/.claude/.ck.json
+	 * Migrate .pk.json from nested location to correct location in global mode.
+	 * This fixes the bug where .pk.json was incorrectly created at ~/.claude/.claude/.pk.json
+	 * instead of ~/.claude/.pk.json
 	 *
 	 * @param globalDir - The global kit directory (typically ~/.claude)
 	 * @returns true if migration was performed, false otherwise
@@ -296,7 +296,7 @@ export class ConfigManager {
 		// If incorrect nested config exists, migrate it
 		if (existsSync(incorrectPath)) {
 			try {
-				logger.info("Migrating .ck.json from nested location to correct location...");
+				logger.info("Migrating .pk.json from nested location to correct location...");
 				await rename(incorrectPath, correctPath);
 				logger.success(`Migrated ${PROJECT_CONFIG_FILE} to ${correctPath}`);
 

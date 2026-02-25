@@ -8,11 +8,11 @@ import type { CommandHelp } from "../help-types.js";
 
 export const doctorCommandHelp: CommandHelp = {
 	name: "doctor",
-	description: "Comprehensive health check for ClaudeKit",
+	description: "Comprehensive health check for Pankit",
 	usage: "ck doctor [options]",
 	examples: [
 		{
-			command: "ck doctor",
+			command: "pk doctor",
 			description: "Run full health check interactively",
 		},
 		{

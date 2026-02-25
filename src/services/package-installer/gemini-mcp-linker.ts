@@ -95,7 +95,7 @@ export async function processGeminiMcpLinking(
 			logger.info("MCP servers will auto-sync with your Claude config.");
 		} else if (result.method === "merge") {
 			logger.success("Gemini MCP config updated (merged mcpServers, preserved your settings)");
-			logger.info("Note: Run 'ck init' again to sync MCP config changes.");
+			logger.info("Note: Run 'pk init' again to sync MCP config changes.");
 		} else {
 			logger.info("Gemini MCP config already configured.");
 		}

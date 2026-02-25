@@ -3,7 +3,7 @@
  * Ensures GitHub API is never called when using offline methods
  *
  * Regression tests for GitHub Issue #298:
- * https://github.com/mrgoonie/claudekit-cli/issues/298
+ * https://github.com/sagozen/pankit-cli/issues/298
  */
 import { describe, expect, it, mock } from "bun:test";
 import type { KitType } from "@/types";
@@ -239,12 +239,12 @@ describe("selection-handler offline modes", () => {
 	describe("regression test: Issue #298 exact scenario", () => {
 		it("handles exact user scenario from Issue #298", () => {
 			// Exact reproduction from GitHub issue:
-			// ck init -g --prefix -y --kit engineer --kit-path /root/.claudekit/.git/claudekit-engineer
+			// ck init -g --prefix -y --kit engineer --kit-path /root/.pankit/.git/pankit-engineer
 			const ctx = createOfflineContext({
 				global: true,
 				yes: true,
 				kit: "engineer",
-				kitPath: "/root/.claudekit/.git/claudekit-engineer",
+				kitPath: "/root/.pankit/.git/pankit-engineer",
 			});
 
 			const isOfflineMode = !!(ctx.options.kitPath || ctx.options.archive);
@@ -272,7 +272,7 @@ describe("selection-handler offline modes", () => {
 		it("handles Docker/CI scenario without any auth", () => {
 			// Docker container scenario: no gh CLI, no GITHUB_TOKEN, no SSH keys
 			const ctx = createOfflineContext({
-				kitPath: "/opt/claudekit-engineer",
+				kitPath: "/opt/pankit-engineer",
 				yes: true,
 				kit: "engineer",
 				global: true,

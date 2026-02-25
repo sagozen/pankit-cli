@@ -2,13 +2,13 @@
 
 ## Project Identity
 
-**Project Name**: ClaudeKit CLI
+**Project Name**: Pankit CLI
 
 **Version**: 3.32.0-dev.3 (next stable: 3.32.0)
 
-**Repository**: https://github.com/mrgoonie/claudekit-cli
+**Repository**: https://github.com/sagozen/pankit-cli
 
-**NPM Package**: https://www.npmjs.com/package/claudekit-cli
+**NPM Package**: https://www.npmjs.com/package/pankit-cli
 
 **License**: MIT
 
@@ -18,20 +18,20 @@
 
 ## Core Mission
 
-**This CLI is the front door to ClaudeKit.** Two imperatives:
+**This CLI is the front door to Pankit.** Two imperatives:
 
-1. **Educate** — Users understand what ClaudeKit is, what each kit offers, why it matters
+1. **Educate** — Users understand what Pankit is, what each kit offers, why it matters
 2. **Install** — Zero friction from discovery to working setup
 
 Design: Show features not marketing copy. Guide users, not gatekeep. Succeed with working config + clear next steps.
 
 ## Executive Summary
 
-ClaudeKit CLI (`ck`) is a command-line tool designed to streamline the bootstrapping and updating of ClaudeKit projects from private GitHub repository releases. Built with Bun and TypeScript, it provides developers with a fast, secure, and user-friendly way to create and maintain projects based on premium ClaudeKit starter kits.
+Pankit CLI (`pk`) is a command-line tool designed to streamline the bootstrapping and updating of Pankit projects from private GitHub repository releases. Built with Bun and TypeScript, it provides developers with a fast, secure, and user-friendly way to create and maintain projects based on premium Pankit starter kits.
 
 ### Problem Statement
 
-Developers purchasing ClaudeKit starter kits need an efficient way to:
+Developers purchasing Pankit starter kits need an efficient way to:
 - Bootstrap new projects from private GitHub releases
 - Update existing projects with new versions while preserving customizations
 - Manage authentication securely across multiple platforms
@@ -40,7 +40,7 @@ Developers purchasing ClaudeKit starter kits need an efficient way to:
 
 ### Solution
 
-ClaudeKit CLI provides a comprehensive solution with:
+Pankit CLI provides a comprehensive solution with:
 - Multi-tier authentication fallback system
 - Smart file merging with conflict detection
 - Protected file patterns to preserve user customizations
@@ -52,8 +52,8 @@ ClaudeKit CLI provides a comprehensive solution with:
 ## Target Users
 
 ### Primary Users
-1. **Professional Developers**: Purchasing ClaudeKit kits for production projects
-2. **Engineering Teams**: Using ClaudeKit for collaborative development
+1. **Professional Developers**: Purchasing Pankit kits for production projects
+2. **Engineering Teams**: Using Pankit for collaborative development
 3. **Solo Developers**: Building projects with Claude Code assistance
 4. **CI/CD Engineers**: Automating project setup in pipelines
 
@@ -76,7 +76,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 
 ## Core Features
 
-### 1. Project Initialization (`ck new`)
+### 1. Project Initialization (`pk new`)
 
 **3-Phase Orchestrator:**
 - Directory setup (validation, conflict detection)
@@ -106,7 +106,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 - Progress bars display correctly
 - Next steps are shown after successful creation
 
-### 2. Project Updates (`ck init`)
+### 2. Project Updates (`pk init`)
 
 **8-Phase Orchestrator:**
 1. Options resolution (validate & normalize)
@@ -145,7 +145,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 - Skills migration preserves all customizations
 - Manifest generated after successful migration
 
-### 3. Version Management (`ck versions`)
+### 3. Version Management (`pk versions`)
 
 #### Functional Requirements
 - List all available releases for kits
@@ -200,7 +200,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 - Support for TAR.GZ and ZIP archives
 - Authenticated GitHub API requests
 - Asset priority selection:
-  1. Official ClaudeKit packages
+  1. Official Pankit packages
   2. Custom uploaded assets
   3. GitHub automatic tarballs
 - Automatic fallback on download failure
@@ -273,7 +273,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 - New manifest written after successful migration
 - Non-interactive mode works in CI/CD environments
 
-### 8. Interactive Setup Wizard (`ck init` post-install)
+### 8. Interactive Setup Wizard (`pk init` post-install)
 
 #### Functional Requirements
 - Prompt for essential config values after initialization
@@ -297,19 +297,19 @@ ClaudeKit CLI provides a comprehensive solution with:
 - Local mode shows inherited global values
 - `--skip-setup` flag works correctly
 
-### 9. Onboarding & Kit Selection (`ck setup`)
+### 9. Onboarding & Kit Selection (`pk setup`)
 
-**New `ck setup` command for user education & guided installation**
+**New `pk setup` command for user education & guided installation**
 
 #### Functional Requirements
-- `ck setup` command launches interactive onboarding flow
+- `pk setup` command launches interactive onboarding flow
 - Kit comparison: Side-by-side feature matrix (Engineer vs Marketing)
 - Kit features preview: Visual feature cards and descriptions
 - Guided install wizard: Step-by-step kit selection → installation
 - Feature preview: Show concrete capabilities before committing
 - Success screen: Congratulations + clear next steps + quick actions
 - User journeys:
-  1. **Newcomer**: "What is ClaudeKit?" → onboarding → kit comparison → guided install
+  1. **Newcomer**: "What is Pankit?" → onboarding → kit comparison → guided install
   2. **Evaluator**: "Engineer or Marketing?" → side-by-side features → try before commit
   3. **Adopter**: "Set up my project" → install wizard → config → success
   4. **Power user**: Project switcher → health dashboard → quick actions
@@ -328,7 +328,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 - Performance: No impact on core CLI operations
 
 #### Acceptance Criteria
-- `ck setup` launches onboarding flow
+- `pk setup` launches onboarding flow
 - Kit comparison displays side-by-side
 - Install wizard guides user to selection
 - Features preview shows concrete capabilities
@@ -460,7 +460,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 
 ### Phase 4: Multi-Kit & Dashboard (Completed)
 - ✅ Marketing kit support (v1.0.0 released)
-- ✅ Web dashboard with React UI (`ck config ui`)
+- ✅ Web dashboard with React UI (`pk config ui`)
 - ✅ Projects registry (centralized project management)
 - ✅ Configuration management UI
 - ✅ Multi-kit metadata tracking
@@ -469,7 +469,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 - 📋 Template customization
 
 ### Phase 5: User Onboarding & Education (Planned)
-- 📋 `ck setup` command (interactive onboarding)
+- 📋 `pk setup` command (interactive onboarding)
 - 📋 Kit comparison data & features
 - 📋 Dashboard `/onboarding` route
 - 📋 Install wizard UI component
@@ -558,7 +558,7 @@ ClaudeKit CLI provides a comprehensive solution with:
 
 ### Constraints
 - Requires GitHub token with repo scope
-- Requires purchased ClaudeKit kit
+- Requires purchased Pankit kit
 - Internet connection required
 - Minimum 100MB free disk space
 
@@ -572,26 +572,26 @@ ClaudeKit CLI provides a comprehensive solution with:
 
 ### Appendix A: Command Reference
 
-#### ck new
+#### pk new
 ```bash
-ck new [--dir <directory>] [--kit <kit>] [--version <version>] [--force] [--exclude <pattern>] [--verbose]
+pk new [--dir <directory>] [--kit <kit>] [--version <version>] [--force] [--exclude <pattern>] [--verbose]
 ```
 
-#### ck update (init)
+#### pk update (init)
 ```bash
-ck init [--dir <directory>] [--kit <kit>] [--version <version>] [--exclude <pattern>] [--global] [--verbose]
+pk init [--dir <directory>] [--kit <kit>] [--version <version>] [--exclude <pattern>] [--global] [--verbose]
 ```
 
-#### ck versions
+#### pk versions
 ```bash
-ck versions [--kit <kit>] [--limit <number>] [--all] [--verbose]
+pk versions [--kit <kit>] [--limit <number>] [--all] [--verbose]
 ```
 
-#### ck doctor
+#### pk doctor
 ```bash
-ck doctor                    # Interactive mode with auto-installation
-CI=true ck doctor           # Non-interactive mode (CI/CD safe)
-NON_INTERACTIVE=1 ck doctor # Non-interactive mode alternative
+pk doctor                    # Interactive mode with auto-installation
+CI=true pk doctor           # Non-interactive mode (CI/CD safe)
+NON_INTERACTIVE=1 pk doctor # Non-interactive mode alternative
 ```
 
 **Features:**
@@ -599,7 +599,7 @@ NON_INTERACTIVE=1 ck doctor # Non-interactive mode alternative
 - Auto-detects OS and package managers
 - Offers interactive installation with confirmation
 - Shows manual instructions as fallback
-- Displays ClaudeKit setup (global and project)
+- Displays Pankit setup (global and project)
 - Reports component counts (agents, commands, rules, skills)
 - CI/CD safe (no prompts in non-interactive mode)
 
@@ -635,8 +635,8 @@ dist/**, build/**
 
 ### Appendix D: Available Kits
 
-1. **engineer**: ClaudeKit Engineer - Engineering toolkit for building with Claude (v1.0.0+)
-2. **marketing**: ClaudeKit Marketing - Content automation toolkit (v1.0.0 - AVAILABLE)
+1. **engineer**: Pankit Engineer - Engineering toolkit for building with Claude (v1.0.0+)
+2. **marketing**: Pankit Marketing - Content automation toolkit (v1.0.0 - AVAILABLE)
 
 ### Appendix E: Error Codes
 
@@ -660,7 +660,7 @@ dist/**, build/**
 - Init command (renamed from update with deprecation warning)
 - Fresh installation mode (--fresh flag)
 - Beta version support (--beta flag)
-- Command prefix support (--prefix flag for /ck: namespace)
+- Command prefix support (--prefix flag for /pk: namespace)
 - Optional package installation (OpenCode, Gemini)
 - Skills dependencies auto-installation (--install-skills)
 - Update notifications with 7-day caching
@@ -685,12 +685,12 @@ dist/**, build/**
 
 ## Contact & Resources
 
-**Repository**: https://github.com/mrgoonie/claudekit-cli
+**Repository**: https://github.com/sagozen/pankit-cli
 
-**Issues**: https://github.com/mrgoonie/claudekit-cli/issues
+**Issues**: https://github.com/sagozen/pankit-cli/issues
 
-**NPM**: https://www.npmjs.com/package/claudekit-cli
+**NPM**: https://www.npmjs.com/package/pankit-cli
 
-**Website**: https://claudekit.cc
+**Website**: https://pankit.cc
 
-**Author**: ClaudeKit Team
+**Author**: Pankit Team

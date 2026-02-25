@@ -80,7 +80,7 @@ describe("OwnershipChecker", () => {
 			expect(result.actualChecksum).toBe(checksum);
 		});
 
-		test("returns 'ck-modified' when checksum differs", async () => {
+		test("returns 'pk-modified' when checksum differs", async () => {
 			const testFile = join(tempDir, "test.txt");
 			await writeFile(testFile, "original");
 			const originalChecksum = await OwnershipChecker.calculateChecksum(testFile);
@@ -102,7 +102,7 @@ describe("OwnershipChecker", () => {
 
 			const result = await OwnershipChecker.checkOwnership(testFile, metadata, tempDir);
 
-			expect(result.ownership).toBe("ck-modified");
+			expect(result.ownership).toBe("pk-modified");
 			expect(result.expectedChecksum).toBe(originalChecksum);
 			expect(result.actualChecksum).not.toBe(originalChecksum);
 		});

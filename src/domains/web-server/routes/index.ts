@@ -4,7 +4,7 @@
 
 import type { Express } from "express";
 import { registerActionRoutes } from "./action-routes.js";
-import { registerCkConfigRoutes } from "./ck-config-routes.js";
+import { registerCkConfigRoutes } from "./pk-config-routes.js";
 import { registerHealthRoutes } from "./health-routes.js";
 import { registerMigrationRoutes } from "./migration-routes.js";
 import { registerProjectRoutes } from "./project-routes.js";

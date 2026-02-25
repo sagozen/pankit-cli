@@ -2,7 +2,7 @@ import { describe, expect, it } from "bun:test";
 import {
 	type DirectoryItem,
 	filterItemsByPatterns,
-	getClaudeKitDirectories,
+	getPankitDirectories,
 	scanDirectoryTree,
 } from "@/services/file-operations/directory-selector.js";
 
@@ -29,9 +29,9 @@ describe("Directory Selector", () => {
 		});
 	});
 
-	describe("getClaudeKitDirectories", () => {
-		it("should return default ClaudeKit directories", () => {
-			const directories = getClaudeKitDirectories();
+	describe("getPankitDirectories", () => {
+		it("should return default Pankit directories", () => {
+			const directories = getPankitDirectories();
 
 			expect(Array.isArray(directories)).toBe(true);
 			expect(directories.length).toBeGreaterThan(0);

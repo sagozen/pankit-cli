@@ -1,14 +1,14 @@
 import { existsSync } from "node:fs";
 import { readdir } from "node:fs/promises";
 import { join } from "node:path";
-import type { ClaudeKitSetup } from "@/types";
+import type { PankitSetup } from "@/types";
 import type { CheckResult } from "../types.js";
 
 /**
  * Check if project configuration is complete (not just CLAUDE.md)
  */
 export async function checkProjectConfigCompleteness(
-	setup: ClaudeKitSetup,
+	setup: PankitSetup,
 	projectDir: string,
 ): Promise<CheckResult> {
 	// Only check if we're in a project directory
@@ -16,7 +16,7 @@ export async function checkProjectConfigCompleteness(
 		return {
 			id: "ck-project-config-complete",
 			name: "Project Config Completeness",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "Not in a project directory",
@@ -54,12 +54,12 @@ export async function checkProjectConfigCompleteness(
 		return {
 			id: "ck-project-config-complete",
 			name: "Project Config Completeness",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: "Incomplete configuration",
 			details: "Only CLAUDE.md found - missing agents, commands, rules, skills",
-			suggestion: "Run 'ck init' to install complete ClaudeKit in project",
+			suggestion: "Run 'pk init' to install complete Pankit in project",
 			autoFixable: false,
 		};
 	}
@@ -68,12 +68,12 @@ export async function checkProjectConfigCompleteness(
 		return {
 			id: "ck-project-config-complete",
 			name: "Project Config Completeness",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "warn",
 			message: `Missing ${missingDirs.length} directories`,
 			details: `Missing: ${missingDirs.join(", ")}`,
-			suggestion: "Run 'ck init' to update project configuration",
+			suggestion: "Run 'pk init' to update project configuration",
 			autoFixable: false,
 		};
 	}
@@ -81,7 +81,7 @@ export async function checkProjectConfigCompleteness(
 	return {
 		id: "ck-project-config-complete",
 		name: "Project Config Completeness",
-		group: "claudekit",
+		group: "pankit",
 		priority: "standard",
 		status: "pass",
 		message: "Complete configuration",

@@ -154,7 +154,7 @@ describe("selection-handler multi-kit flow", () => {
 
 		it("skips confirmation when metadata has no kits field", async () => {
 			const existingMetadata: Metadata = {
-				name: "ClaudeKit",
+				name: "Pankit",
 				version: "v1.0.0",
 			};
 

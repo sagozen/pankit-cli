@@ -10,7 +10,7 @@ import {
 } from "../config-discovery.js";
 
 describe("config-discovery", () => {
-	const testDir = join(tmpdir(), "claudekit-config-discovery-test");
+	const testDir = join(tmpdir(), "pankit-config-discovery-test");
 
 	beforeAll(() => {
 		mkdirSync(testDir, { recursive: true });

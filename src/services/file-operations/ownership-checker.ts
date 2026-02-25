@@ -23,7 +23,7 @@ export interface OwnershipCheckResult {
  *
  * Implements pip RECORD pattern for file tracking:
  * - Files in metadata with matching checksum → "ck" (CK-owned, pristine)
- * - Files in metadata with different checksum → "ck-modified" (user modified)
+ * - Files in metadata with different checksum → "pk-modified" (user modified)
  * - Files not in metadata → "user" (user-created)
  */
 export class OwnershipChecker {
@@ -58,7 +58,7 @@ export class OwnershipChecker {
 	 * - File doesn't exist → user ownership, exists: false
 	 * - No metadata or empty files array → user (legacy install)
 	 * - File in metadata with matching checksum → ck
-	 * - File in metadata with different checksum → ck-modified
+	 * - File in metadata with different checksum → pk-modified
 	 * - File not in metadata → user
 	 *
 	 * @param filePath Absolute path to file
@@ -111,7 +111,7 @@ export class OwnershipChecker {
 		}
 		return {
 			path: filePath,
-			ownership: "ck-modified",
+			ownership: "pk-modified",
 			expectedChecksum: tracked.checksum,
 			actualChecksum,
 			exists: true,

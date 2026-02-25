@@ -6,7 +6,7 @@ import { spawn, spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, resolve, sep } from "node:path";
-import { ProjectsRegistryManager } from "@/domains/claudekit-data/index.js";
+import { ProjectsRegistryManager } from "@/domains/pankit-data/index.js";
 import { ConfigManager } from "@/domains/config/config-manager.js";
 import { isMacOS, isWindows } from "@/shared/environment.js";
 import { logger } from "@/shared/logger.js";

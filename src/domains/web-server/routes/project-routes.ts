@@ -6,7 +6,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { basename, join, resolve } from "node:path";
-import { ProjectsRegistryManager, scanClaudeProjects } from "@/domains/claudekit-data/index.js";
+import { ProjectsRegistryManager, scanClaudeProjects } from "@/domains/pankit-data/index.js";
 import { CkConfigManager } from "@/domains/config/index.js";
 import {
 	countHooks,
@@ -409,7 +409,7 @@ async function buildProjectInfoFromRegistry(
  * Used as fallback when registry is empty or for special IDs
  */
 async function detectAndBuildProjectInfo(path: string, id: string): Promise<ProjectInfo | null> {
-	// Check for ClaudeKit markers
+	// Check for Pankit markers
 	const claudeDir = id === "global" ? path : join(path, ".claude");
 	const metadataPath = join(claudeDir, "metadata.json");
 

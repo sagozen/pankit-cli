@@ -6,7 +6,7 @@
  * Analyzes development workflow performance by examining codebase metrics.
  * Provides recommendations for improving code quality and workflow efficiency.
  *
- * @author ClaudeKit CLI
+ * @author Pankit CLI
  * @version 1.0.0
  */
 

@@ -2,22 +2,22 @@
 
 ## Overview
 
-ClaudeKit CLI v1.17+ supports multiple kits (engineer, marketing) in a single installation. This document explains the automatic migration process, user experience, and rollback strategies.
+Pankit CLI v1.17+ supports multiple kits (engineer, marketing) in a single installation. This document explains the automatic migration process, user experience, and rollback strategies.
 
 ## Auto-Migration Process
 
 ### When Migration Occurs
 
 Migration happens automatically during:
-- `ck init` - When installing a kit into an existing installation
-- `ck new` - When creating a new project (fresh multi-kit format)
+- `pk init` - When installing a kit into an existing installation
+- `pk new` - When creating a new project (fresh multi-kit format)
 
 ### What Gets Migrated
 
 Legacy single-kit metadata:
 ```json
 {
-  "name": "ClaudeKit Engineer",
+  "name": "Pankit Engineer",
   "version": "v1.16.0",
   "installedAt": "2024-01-01T00:00:00.000Z",
   "scope": "local",
@@ -36,7 +36,7 @@ Becomes multi-kit format:
     }
   },
   "scope": "local",
-  "name": "ClaudeKit Engineer",
+  "name": "Pankit Engineer",
   "version": "v1.16.0",
   "installedAt": "2024-01-01T00:00:00.000Z",
   "files": [...]
@@ -62,20 +62,20 @@ File locking prevents race conditions when multiple processes install kits simul
 
 ```bash
 # Install engineer kit
-ck init --kit engineer
+pk init --kit engineer
 
 # Install marketing kit (preserves engineer)
-ck init --kit marketing
+pk init --kit marketing
 ```
 
 ### Uninstalling Specific Kit
 
 ```bash
 # Remove only marketing kit (preserves engineer)
-ck uninstall --kit marketing
+pk uninstall --kit marketing
 
 # Remove all kits
-ck uninstall
+pk uninstall
 ```
 
 ### Shared File Handling
@@ -125,7 +125,7 @@ If installation hangs or fails with lock errors:
 ### Kit Not Found During Uninstall
 
 `Kit "marketing" is not installed`
-- Use `ck versions` to see installed kits
+- Use `pk versions` to see installed kits
 - Check both local and global installations
 
 ## Technical Details

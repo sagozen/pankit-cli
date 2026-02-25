@@ -1,12 +1,12 @@
 import { existsSync, statSync } from "node:fs";
 import { join } from "node:path";
-import type { ClaudeKitSetup } from "@/types";
+import type { PankitSetup } from "@/types";
 import type { CheckResult } from "../types.js";
 
 /**
  * Check CLAUDE.md existence and health (global + project)
  */
-export function checkClaudeMd(setup: ClaudeKitSetup, projectDir: string): CheckResult[] {
+export function checkClaudeMd(setup: PankitSetup, projectDir: string): CheckResult[] {
 	const results: CheckResult[] = [];
 
 	// Global CLAUDE.md
@@ -30,7 +30,7 @@ export function checkClaudeMdFile(path: string, name: string, id: string): Check
 		return {
 			id,
 			name,
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "warn",
 			message: "Missing",
@@ -47,7 +47,7 @@ export function checkClaudeMdFile(path: string, name: string, id: string): Check
 			return {
 				id,
 				name,
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "warn",
 				message: "Empty (0 bytes)",
@@ -60,7 +60,7 @@ export function checkClaudeMdFile(path: string, name: string, id: string): Check
 		return {
 			id,
 			name,
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: `Found (${sizeKB}KB)`,
@@ -71,7 +71,7 @@ export function checkClaudeMdFile(path: string, name: string, id: string): Check
 		return {
 			id,
 			name,
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "warn",
 			message: "Unreadable",

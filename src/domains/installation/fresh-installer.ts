@@ -9,9 +9,9 @@ import type { KitType, Metadata, TrackedFile } from "@/types";
 import { pathExists, readFile, writeFile } from "fs-extra";
 
 /**
- * ClaudeKit-managed subdirectories (fallback when no metadata)
+ * Pankit-managed subdirectories (fallback when no metadata)
  */
-const CLAUDEKIT_SUBDIRECTORIES = ["commands", "agents", "skills", "rules", "hooks"];
+const PANKIT_SUBDIRECTORIES = ["commands", "agents", "skills", "rules", "hooks"];
 
 /**
  * Result of fresh installation analysis
@@ -69,7 +69,7 @@ export async function analyzeFreshInstallation(claudeDir: string): Promise<Fresh
 			case "ck":
 				ckFiles.push(file);
 				break;
-			case "ck-modified":
+			case "pk-modified":
 				ckModifiedFiles.push(file);
 				break;
 			case "user":
@@ -197,7 +197,7 @@ async function updateMetadataAfterFresh(claudeDir: string, removedFiles: string[
 		logger.warning(
 			`Failed to parse metadata.json: ${parseError instanceof Error ? parseError.message : String(parseError)}`,
 		);
-		logger.info("Recommendation: Run 'ck init' to rebuild metadata");
+		logger.info("Recommendation: Run 'pk init' to rebuild metadata");
 		return;
 	}
 
@@ -226,18 +226,18 @@ async function updateMetadataAfterFresh(claudeDir: string, removedFiles: string[
 		logger.warning(
 			`Failed to write metadata.json: ${writeError instanceof Error ? writeError.message : String(writeError)}`,
 		);
-		logger.info("Recommendation: Check file permissions and run 'ck init' to rebuild metadata");
+		logger.info("Recommendation: Check file permissions and run 'pk init' to rebuild metadata");
 	}
 }
 
 /**
- * Fallback: Remove entire ClaudeKit subdirectories (legacy behavior)
+ * Fallback: Remove entire Pankit subdirectories (legacy behavior)
  */
 async function removeSubdirectoriesFallback(claudeDir: string): Promise<FreshInstallResult> {
 	const removedFiles: string[] = [];
 	let removedDirCount = 0;
 
-	for (const subdir of CLAUDEKIT_SUBDIRECTORIES) {
+	for (const subdir of PANKIT_SUBDIRECTORIES) {
 		const subdirPath = join(claudeDir, subdir);
 		if (await pathExists(subdirPath)) {
 			rmSync(subdirPath, { recursive: true, force: true });
@@ -296,7 +296,7 @@ export async function handleFreshInstallation(
 	}
 
 	// Start removal
-	const spinner = createSpinner("Removing ClaudeKit files...").start();
+	const spinner = createSpinner("Removing Pankit files...").start();
 
 	try {
 		let result: FreshInstallResult;
@@ -306,7 +306,7 @@ export async function handleFreshInstallation(
 			(analysis.ckFiles.length > 0 || analysis.ckModifiedFiles.length > 0)
 		) {
 			// Smart removal: ownership-aware
-			// For now, include ck-modified files in removal (they'll be reinstalled)
+			// For now, include pk-modified files in removal (they'll be reinstalled)
 			result = await removeFilesByOwnership(claudeDir, analysis, true);
 
 			spinner.succeed(
@@ -316,7 +316,7 @@ export async function handleFreshInstallation(
 			// Fallback: remove entire directories (no metadata to guide us)
 			result = await removeSubdirectoriesFallback(claudeDir);
 
-			spinner.succeed(`Removed ${result.removedCount} ClaudeKit directories`);
+			spinner.succeed(`Removed ${result.removedCount} Pankit directories`);
 		}
 
 		// Log details in verbose mode
@@ -328,7 +328,7 @@ export async function handleFreshInstallation(
 
 		return true;
 	} catch (error) {
-		spinner.fail("Failed to remove ClaudeKit files");
+		spinner.fail("Failed to remove Pankit files");
 		throw new Error(
 			`Failed to remove files: ${error instanceof Error ? error.message : "Unknown error"}`,
 		);

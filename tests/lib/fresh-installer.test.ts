@@ -19,7 +19,7 @@ describe("Fresh Installer", () => {
 		claudeDir = join(testDir, ".claude");
 		await mkdir(claudeDir, { recursive: true });
 
-		// Create ClaudeKit-managed subdirectories (should be removed)
+		// Create Pankit-managed subdirectories (should be removed)
 		await mkdir(join(claudeDir, "commands"), { recursive: true });
 		await writeFile(join(claudeDir, "commands", "test.md"), "command");
 		await mkdir(join(claudeDir, "agents"), { recursive: true });
@@ -91,7 +91,7 @@ describe("Fresh Installer", () => {
 							{
 								path: "hooks/modified.sh",
 								checksum: CHECKSUM_4,
-								ownership: "ck-modified",
+								ownership: "pk-modified",
 								installedVersion: "1.0.0",
 							},
 						],
@@ -161,7 +161,7 @@ describe("Fresh Installer", () => {
 			// .claude directory should still exist
 			expect(existsSync(claudeDir)).toBe(true);
 
-			// ClaudeKit subdirectories should be removed (fallback behavior)
+			// Pankit subdirectories should be removed (fallback behavior)
 			expect(existsSync(join(claudeDir, "commands"))).toBe(false);
 			expect(existsSync(join(claudeDir, "agents"))).toBe(false);
 			expect(existsSync(join(claudeDir, "skills"))).toBe(false);
@@ -206,7 +206,7 @@ describe("Fresh Installer", () => {
 							{
 								path: "hooks/test.sh",
 								checksum: CHECKSUM_4,
-								ownership: "ck-modified",
+								ownership: "pk-modified",
 								installedVersion: "1.0.0",
 							},
 						],
@@ -516,7 +516,7 @@ describe("Fresh Installer", () => {
 			const result = await handleFreshInstallation(pathWithSlashes, prompts);
 
 			expect(result).toBe(true);
-			// .claude directory should exist but ClaudeKit subdirectories should be removed
+			// .claude directory should exist but Pankit subdirectories should be removed
 			expect(existsSync(claudeDir)).toBe(true);
 			expect(existsSync(join(claudeDir, "commands"))).toBe(false);
 			expect(existsSync(join(claudeDir, ".env"))).toBe(true);

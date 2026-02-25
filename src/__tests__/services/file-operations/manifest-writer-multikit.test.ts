@@ -28,7 +28,7 @@ describe("ManifestWriter multi-kit", () => {
 		it("creates multi-kit structure for fresh install", async () => {
 			const writer = new ManifestWriter();
 
-			await writer.writeManifest(testDir, "ClaudeKit Engineer", "v1.2.3", "local", "engineer");
+			await writer.writeManifest(testDir, "Pankit Engineer", "v1.2.3", "local", "engineer");
 
 			const content = await readFile(join(testDir, "metadata.json"), "utf-8");
 			const metadata = JSON.parse(content) as Metadata;
@@ -37,7 +37,7 @@ describe("ManifestWriter multi-kit", () => {
 			expect(metadata.kits?.engineer?.version).toBe("v1.2.3");
 			expect(metadata.scope).toBe("local");
 			// Legacy fields preserved for backward compat
-			expect(metadata.name).toBe("ClaudeKit Engineer");
+			expect(metadata.name).toBe("Pankit Engineer");
 			expect(metadata.version).toBe("v1.2.3");
 		});
 
@@ -57,7 +57,7 @@ describe("ManifestWriter multi-kit", () => {
 
 			// Add marketing kit
 			const writer = new ManifestWriter();
-			await writer.writeManifest(testDir, "ClaudeKit Marketing", "v0.1.0", "local", "marketing");
+			await writer.writeManifest(testDir, "Pankit Marketing", "v0.1.0", "local", "marketing");
 
 			const content = await readFile(join(testDir, "metadata.json"), "utf-8");
 			const metadata = JSON.parse(content) as Metadata;
@@ -81,7 +81,7 @@ describe("ManifestWriter multi-kit", () => {
 
 			// Update engineer kit
 			const writer = new ManifestWriter();
-			await writer.writeManifest(testDir, "ClaudeKit Engineer", "v2.0.0", "local", "engineer");
+			await writer.writeManifest(testDir, "Pankit Engineer", "v2.0.0", "local", "engineer");
 
 			const content = await readFile(join(testDir, "metadata.json"), "utf-8");
 			const metadata = JSON.parse(content) as Metadata;
@@ -92,7 +92,7 @@ describe("ManifestWriter multi-kit", () => {
 		it("migrates legacy format before writing", async () => {
 			// Pre-create legacy metadata
 			const legacy: Metadata = {
-				name: "ClaudeKit Engineer",
+				name: "Pankit Engineer",
 				version: "v1.0.0",
 				installedAt: "2024-01-01T00:00:00.000Z",
 				scope: "global",
@@ -102,7 +102,7 @@ describe("ManifestWriter multi-kit", () => {
 
 			// Write marketing kit (should trigger migration)
 			const writer = new ManifestWriter();
-			await writer.writeManifest(testDir, "ClaudeKit Marketing", "v0.1.0", "global", "marketing");
+			await writer.writeManifest(testDir, "Pankit Marketing", "v0.1.0", "global", "marketing");
 
 			const content = await readFile(join(testDir, "metadata.json"), "utf-8");
 			const metadata = JSON.parse(content) as Metadata;
@@ -112,14 +112,14 @@ describe("ManifestWriter multi-kit", () => {
 			expect(metadata.kits?.marketing?.version).toBe("v0.1.0");
 			// DEPRECATED: Legacy fields preserved from first kit, not overwritten
 			// Use kits object for version display instead
-			expect(metadata.name).toBe("ClaudeKit Engineer");
+			expect(metadata.name).toBe("Pankit Engineer");
 		});
 
 		it("infers kit type from name if not provided", async () => {
 			const writer = new ManifestWriter();
 
 			// Marketing kit should be inferred from name
-			await writer.writeManifest(testDir, "ClaudeKit Marketing", "v0.1.0", "local");
+			await writer.writeManifest(testDir, "Pankit Marketing", "v0.1.0", "local");
 
 			const content = await readFile(join(testDir, "metadata.json"), "utf-8");
 			const metadata = JSON.parse(content) as Metadata;
@@ -348,7 +348,7 @@ describe("ManifestWriter multi-kit", () => {
 			const marketingFile: TrackedFile = {
 				path: "shared/utility.md",
 				checksum: sharedChecksum,
-				ownership: "ck-modified", // Different ownership status
+				ownership: "pk-modified", // Different ownership status
 				installedVersion: "v1.0.0",
 			};
 
@@ -384,7 +384,7 @@ describe("ManifestWriter multi-kit", () => {
 			};
 
 			const legacy: Metadata = {
-				name: "ClaudeKit Engineer",
+				name: "Pankit Engineer",
 				version: "v1.0.0",
 				files: [file],
 			};

@@ -209,7 +209,7 @@ export function mergeMcp(
 					// New server that user never had - add it
 					merged.servers[serverName] = serverConfig;
 					result.newlyInstalledServers.push(serverName);
-					logger.debug(`Added ClaudeKit MCP server: ${serverName}`);
+					logger.debug(`Added Pankit MCP server: ${serverName}`);
 				}
 			}
 		}
@@ -251,9 +251,9 @@ export function mergeMcp(
 }
 
 /**
- * Deep merge ClaudeKit settings into existing user settings
+ * Deep merge Pankit settings into existing user settings
  *
- * @param source - ClaudeKit template settings (new)
+ * @param source - Pankit template settings (new)
  * @param destination - User's existing settings (current)
  * @param options - Merge options including installed settings for respecting deletions
  * @returns Merged settings with stats

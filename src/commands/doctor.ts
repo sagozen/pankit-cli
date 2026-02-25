@@ -35,7 +35,7 @@ export async function doctorCommand(options: DoctorOptions = {}): Promise<void> 
 
 	// Don't show intro in JSON/report mode
 	if (!json && !report) {
-		intro("ClaudeKit Health Check");
+		intro("Pankit Health Check");
 	}
 
 	// Create and configure runner

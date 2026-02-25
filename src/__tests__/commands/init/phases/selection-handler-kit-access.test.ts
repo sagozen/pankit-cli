@@ -191,18 +191,18 @@ describe("selection-handler kit access logic", () => {
 
 	describe("error messages", () => {
 		it("generates correct error for no access", () => {
-			const errorMessage = "No ClaudeKit access found.";
-			const helpMessage = "Purchase at https://claudekit.cc";
+			const errorMessage = "No Pankit access found.";
+			const helpMessage = "Purchase at https://pankit.cc";
 
-			expect(errorMessage).toBe("No ClaudeKit access found.");
-			expect(helpMessage).toContain("claudekit.cc");
+			expect(errorMessage).toBe("No Pankit access found.");
+			expect(helpMessage).toContain("pankit.cc");
 		});
 
 		it("generates correct error for specific kit access denied", () => {
 			const kitType: KitType = "marketing";
 			const errorMessage = `No access to ${AVAILABLE_KITS[kitType].name}`;
 
-			expect(errorMessage).toBe("No access to ClaudeKit Marketing");
+			expect(errorMessage).toBe("No access to Pankit Marketing");
 		});
 	});
 
@@ -271,7 +271,7 @@ describe("selection-handler kit access logic", () => {
 			const selectedKits: KitType[] = ["engineer", "marketing"];
 			const message = `Selected ${selectedKits.length} kits: ${selectedKits.map((k) => AVAILABLE_KITS[k].name).join(", ")}`;
 
-			expect(message).toBe("Selected 2 kits: ClaudeKit Engineer, ClaudeKit Marketing");
+			expect(message).toBe("Selected 2 kits: Pankit Engineer, Pankit Marketing");
 		});
 
 		it("throws error when no kits selected from multi-select", () => {

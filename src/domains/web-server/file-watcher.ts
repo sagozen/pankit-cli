@@ -48,18 +48,18 @@ export class FileWatcher {
 		const paths: string[] = [];
 
 		// Global config
-		const globalDir = join(homedir(), ".claudekit");
+		const globalDir = join(homedir(), ".pankit");
 		paths.push(join(globalDir, "config.json"));
 
 		// Global kit config
 		const globalKitDir = join(homedir(), ".claude");
-		paths.push(join(globalKitDir, ".ck.json"));
+		paths.push(join(globalKitDir, ".pk.json"));
 		paths.push(join(globalKitDir, "settings.json"));
 		paths.push(join(globalKitDir, "settings.local.json"));
 
 		// Local project config
 		const cwd = process.cwd();
-		paths.push(join(cwd, ".claude", ".ck.json"));
+		paths.push(join(cwd, ".claude", ".pk.json"));
 		paths.push(join(cwd, ".claude", "settings.json"));
 		paths.push(join(cwd, ".claude", "settings.local.json"));
 
@@ -117,14 +117,14 @@ export class FileWatcher {
 	private isConfigFile(path: string): boolean {
 		return (
 			path.endsWith("config.json") ||
-			path.endsWith(".ck.json") ||
+			path.endsWith(".pk.json") ||
 			path.endsWith("settings.json") ||
 			path.endsWith("settings.local.json")
 		);
 	}
 
 	private getConfigScope(path: string): "global" | "local" {
-		const globalDir = join(homedir(), ".claudekit");
+		const globalDir = join(homedir(), ".pankit");
 		const globalKitDir = join(homedir(), ".claude");
 		return path.startsWith(globalDir) || path.startsWith(globalKitDir) ? "global" : "local";
 	}

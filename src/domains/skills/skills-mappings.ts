@@ -1,6 +1,6 @@
 /**
  * Skills migration mappings from old (flat) to new (categorized) structure
- * Based on claudekit-web → claudekit-engineer migration
+ * Based on pankit-web → pankit-engineer migration
  */
 
 export interface SkillCategoryMapping {

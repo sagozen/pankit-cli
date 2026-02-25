@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`ck migrate` now runs as a deterministic 3-phase pipeline:
+`pk migrate` now runs as a deterministic 3-phase pipeline:
 
 1. `RECONCILE`: pure planning (no writes)
 2. `EXECUTE`: apply plan with conflict policies

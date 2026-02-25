@@ -40,14 +40,14 @@ export class GitCloneManager {
 
 	constructor() {
 		// Use system temp with proper cross-platform fallbacks
-		// Priority: TMPDIR → TEMP → TMP → HOME/.claudekit/tmp → USERPROFILE/.claudekit/tmp → os.tmpdir()
+		// Priority: TMPDIR → TEMP → TMP → HOME/.pankit/tmp → USERPROFILE/.pankit/tmp → os.tmpdir()
 		const homeDir = process.env.HOME || process.env.USERPROFILE;
 		this.tempBaseDir =
 			process.env.TMPDIR ||
 			process.env.TEMP ||
 			process.env.TMP ||
-			(homeDir ? path.join(homeDir, ".claudekit", "tmp") : null) ||
-			path.join(os.tmpdir(), ".claudekit", "tmp");
+			(homeDir ? path.join(homeDir, ".pankit", "tmp") : null) ||
+			path.join(os.tmpdir(), ".pankit", "tmp");
 	}
 
 	/**
@@ -84,7 +84,7 @@ Check disk space and directory permissions.`,
 		}
 
 		// Create unique temp directory for this clone
-		const tempDir = await fs.promises.mkdtemp(path.join(this.tempBaseDir, `ck-git-${kit.repo}-`));
+		const tempDir = await fs.promises.mkdtemp(path.join(this.tempBaseDir, `pk-git-${kit.repo}-`));
 
 		// Build clone URL
 		const url = preferSsh

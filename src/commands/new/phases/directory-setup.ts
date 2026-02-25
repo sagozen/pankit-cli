@@ -34,8 +34,8 @@ export async function directorySetup(
 		accessibleKits = await detectAccessibleKits();
 
 		if (accessibleKits.length === 0) {
-			logger.error("No ClaudeKit access found.");
-			logger.info("Purchase at https://claudekit.cc");
+			logger.error("No Pankit access found.");
+			logger.info("Purchase at https://pankit.cc");
 			return null;
 		}
 	}
@@ -71,7 +71,7 @@ export async function directorySetup(
 			kit = validKits[0];
 			if (accessibleKits && !accessibleKits.includes(kit)) {
 				logger.error(`No access to ${AVAILABLE_KITS[kit].name}`);
-				logger.info("Purchase at https://claudekit.cc");
+				logger.info("Purchase at https://pankit.cc");
 				return null;
 			}
 		} else {
@@ -84,7 +84,7 @@ export async function directorySetup(
 			kit = kitOption;
 			if (accessibleKits && !accessibleKits.includes(kit)) {
 				logger.error(`No access to ${AVAILABLE_KITS[kit].name}`);
-				logger.info("Purchase at https://claudekit.cc");
+				logger.info("Purchase at https://pankit.cc");
 				return null;
 			}
 		}
@@ -133,7 +133,7 @@ export async function directorySetup(
 		if (!isNonInteractive) {
 			const choice = await prompts.selectScope();
 			if (choice === "cancel" || choice === "different") {
-				logger.info("Please run 'ck new' from or specify a different directory.");
+				logger.info("Please run 'pk new' from or specify a different directory.");
 				return null;
 			}
 			// choice === "global": user confirmed, continue

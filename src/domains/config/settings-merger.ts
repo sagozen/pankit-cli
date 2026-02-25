@@ -33,9 +33,9 @@ import type { MergeOptions, MergeResult, SettingsJson } from "./merger/types.js"
  */
 export class SettingsMerger {
 	/**
-	 * Deep merge ClaudeKit settings into existing user settings
+	 * Deep merge Pankit settings into existing user settings
 	 *
-	 * @param source - ClaudeKit template settings (new)
+	 * @param source - Pankit template settings (new)
 	 * @param destination - User's existing settings (current)
 	 * @param options - Optional merge options (installed settings for respecting deletions)
 	 * @returns Merged settings with stats

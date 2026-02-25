@@ -136,7 +136,7 @@ describe("help-commands", () => {
 		test("has correct structure", () => {
 			const help = HELP_REGISTRY.update;
 			expect(help.name).toBe("update");
-			expect(help.description).toContain("Update ClaudeKit CLI");
+			expect(help.description).toContain("Update Pankit CLI");
 			expect(help.usage).toBe("ck update [options]");
 			expect(help.examples).toHaveLength(2);
 		});

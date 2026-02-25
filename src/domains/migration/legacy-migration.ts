@@ -223,7 +223,7 @@ export class LegacyMigration {
 
 		// Calculate checksums in parallel for modified and user files
 		const filesToChecksum = [
-			...preview.ckModified.map((p) => ({ relativePath: p, ownership: "ck-modified" as const })),
+			...preview.ckModified.map((p) => ({ relativePath: p, ownership: "pk-modified" as const })),
 			...preview.userCreated.map((p) => ({ relativePath: p, ownership: "user" as const })),
 		];
 

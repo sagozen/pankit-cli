@@ -74,7 +74,7 @@ function dedupeDestinationEntries(entries: (HookConfig | HookEntry)[]): {
  * Merge hook entries for a specific event
  * Deduplicates by command string and merges hooks with matching matchers
  *
- * Execution order: User hooks execute FIRST, then ClaudeKit hooks.
+ * Execution order: User hooks execute FIRST, then Pankit hooks.
  * This is intentional - user customizations take priority and can
  * modify behavior before CK hooks run (e.g., environment setup).
  *

@@ -55,7 +55,7 @@ describe("cleanupCommandsDirectory - kit-aware", () => {
 						installedAt: new Date().toISOString(),
 						files: [
 							{
-								path: "commands/ck/plan.md",
+								path: "commands/pk/plan.md",
 								checksum: await calculateChecksum(planPath),
 								ownership: "ck",
 								installedVersion: "1.0.0",
@@ -121,13 +121,13 @@ describe("cleanupCommandsDirectory - kit-aware", () => {
 						installedAt: new Date().toISOString(),
 						files: [
 							{
-								path: "commands/ck/plan.md",
+								path: "commands/pk/plan.md",
 								checksum: await calculateChecksum(planPath),
 								ownership: "ck",
 								installedVersion: "1.0.0",
 							},
 							{
-								path: "commands/ck/fix.md",
+								path: "commands/pk/fix.md",
 								checksum: await calculateChecksum(fixPath),
 								ownership: "ck",
 								installedVersion: "1.0.0",
@@ -194,7 +194,7 @@ describe("cleanupCommandsDirectory - kit-aware", () => {
 						installedAt: new Date().toISOString(),
 						files: [
 							{
-								path: "commands/ck/plan.md",
+								path: "commands/pk/plan.md",
 								checksum: await calculateChecksum(planPath),
 								ownership: "ck",
 								installedVersion: "1.0.0",
@@ -234,7 +234,7 @@ describe("cleanupCommandsDirectory - kit-aware", () => {
 
 			const planPath = join(commandsDir, "plan.md");
 			const metadata: Metadata = {
-				name: "ClaudeKit Engineer",
+				name: "Pankit Engineer",
 				version: "1.0.0",
 				installedAt: new Date().toISOString(),
 				files: [

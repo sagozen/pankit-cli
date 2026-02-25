@@ -81,7 +81,7 @@ export const translations = {
 		discard: "Discard",
 		saveChanges: "Save Changes",
 		mergedView: "Merged View",
-		localConfig: "Local (.ck.json)",
+		localConfig: "Local (.pk.json)",
 		globalConfig: "Global",
 		syntaxValid: "Syntax Valid",
 		configurationHelp: "Configuration Help",
@@ -95,7 +95,7 @@ export const translations = {
 		knowledgeBase: "Knowledge Base",
 		clickToSeeHelp:
 			"Click on any configuration field to see detailed documentation and usage examples.",
-		extractedFrom: "Extracted from ClaudeKit v2.x Specification",
+		extractedFrom: "Extracted from Pankit v2.x Specification",
 		resetToDefault: "Reset",
 		saving: "Saving...",
 		saved: "Saved",
@@ -132,7 +132,7 @@ export const translations = {
 		filesModifiedFromDefaults: "files modified from kit defaults",
 
 		// System dashboard
-		cliCard: "ClaudeKit CLI",
+		cliCard: "Pankit CLI",
 		checkForUpdates: "Check for Updates",
 		checking: "Checking...",
 		upToDate: "Up to date",
@@ -191,7 +191,7 @@ export const translations = {
 
 		// AddProjectModal.tsx
 		addProjectTitle: "Add Project",
-		addProjectDescription: "Add a new ClaudeKit project to the control center",
+		addProjectDescription: "Add a new Pankit project to the control center",
 		projectPath: "Project Path",
 		pathPlaceholder: "/path/to/project",
 		alias: "Alias",
@@ -218,11 +218,11 @@ export const translations = {
 		viewGlobalConfig: "This field inherits from global config. View",
 
 		// Onboarding.tsx - Kit comparison
-		onboardingTitle: "Welcome to ClaudeKit",
+		onboardingTitle: "Welcome to Pankit",
 		onboardingSubtitle: "Choose your kit and get started in minutes",
-		kitEngineerName: "ClaudeKit Engineer",
+		kitEngineerName: "Pankit Engineer",
 		kitEngineerTagline: "AI-powered coding with skills, hooks, and multi-agent workflows",
-		kitMarketingName: "ClaudeKit Marketing",
+		kitMarketingName: "Pankit Marketing",
 		kitMarketingTagline: "Content automation: campaigns, social media, analytics",
 
 		// Kit features
@@ -255,7 +255,7 @@ export const translations = {
 
 		// KitConfigPage.tsx
 		kitConfig: "Kit Config",
-		kitConfigSubtitle: "Configure ClaudeKit Engineer settings",
+		kitConfigSubtitle: "Configure Pankit Engineer settings",
 		scopeGlobal: "Global",
 		scopeProject: "Project",
 
@@ -335,7 +335,7 @@ export const translations = {
 
 		// Skills page
 		skillsPageTitle: "Skills Management",
-		skillsPageDesc: "Install ClaudeKit skills to your coding agents",
+		skillsPageDesc: "Install Pankit skills to your coding agents",
 		availableSkills: "Available Skills",
 		installedSkills: "Installed Skills",
 		noSkillsFound: "No skills found",
@@ -616,7 +616,7 @@ export const translations = {
 		discard: "Hủy bỏ",
 		saveChanges: "Lưu thay đổi",
 		mergedView: "Chế độ gộp",
-		localConfig: "Cục bộ (.ck.json)",
+		localConfig: "Cục bộ (.pk.json)",
 		globalConfig: "Toàn cục",
 		syntaxValid: "Cú pháp hợp lệ",
 		configurationHelp: "Hướng dẫn cấu hình",
@@ -630,7 +630,7 @@ export const translations = {
 		knowledgeBase: "Cơ sở kiến thức",
 		clickToSeeHelp:
 			"Nhấp vào bất kỳ trường cấu hình nào để xem tài liệu chi tiết và ví dụ sử dụng.",
-		extractedFrom: "Trích xuất từ ClaudeKit v2.x Specification",
+		extractedFrom: "Trích xuất từ Pankit v2.x Specification",
 		resetToDefault: "Đặt lại",
 		saving: "Đang lưu...",
 		saved: "Đã lưu",
@@ -667,7 +667,7 @@ export const translations = {
 		filesModifiedFromDefaults: "tệp đã sửa so với mặc định",
 
 		// System dashboard
-		cliCard: "ClaudeKit CLI",
+		cliCard: "Pankit CLI",
 		checkForUpdates: "Kiểm tra cập nhật",
 		checking: "Đang kiểm tra...",
 		upToDate: "Đã cập nhật",
@@ -726,7 +726,7 @@ export const translations = {
 
 		// AddProjectModal.tsx
 		addProjectTitle: "Thêm dự án",
-		addProjectDescription: "Thêm dự án ClaudeKit mới vào trung tâm điều khiển",
+		addProjectDescription: "Thêm dự án Pankit mới vào trung tâm điều khiển",
 		projectPath: "Đường dẫn dự án",
 		pathPlaceholder: "/đường/dẫn/dự/án",
 		alias: "Bí danh",
@@ -753,11 +753,11 @@ export const translations = {
 		viewGlobalConfig: "Trường này kế thừa từ cấu hình toàn cục. Xem",
 
 		// Onboarding.tsx - Kit comparison
-		onboardingTitle: "Chào mừng đến ClaudeKit",
+		onboardingTitle: "Chào mừng đến Pankit",
 		onboardingSubtitle: "Chọn kit của bạn và bắt đầu trong vài phút",
-		kitEngineerName: "ClaudeKit Engineer",
+		kitEngineerName: "Pankit Engineer",
 		kitEngineerTagline: "Lập trình AI với skills, hooks và multi-agent",
-		kitMarketingName: "ClaudeKit Marketing",
+		kitMarketingName: "Pankit Marketing",
 		kitMarketingTagline: "Tự động hóa nội dung: chiến dịch, mạng xã hội, phân tích",
 
 		// Kit features
@@ -790,7 +790,7 @@ export const translations = {
 
 		// KitConfigPage.tsx
 		kitConfig: "Cấu hình Kit",
-		kitConfigSubtitle: "Cấu hình ClaudeKit Engineer",
+		kitConfigSubtitle: "Cấu hình Pankit Engineer",
 		scopeGlobal: "Toàn cục",
 		scopeProject: "Dự án",
 
@@ -870,7 +870,7 @@ export const translations = {
 
 		// Skills page
 		skillsPageTitle: "Quản lý Kỹ năng",
-		skillsPageDesc: "Cài đặt kỹ năng ClaudeKit cho các agent lập trình",
+		skillsPageDesc: "Cài đặt kỹ năng Pankit cho các agent lập trình",
 		availableSkills: "Kỹ năng có sẵn",
 		installedSkills: "Kỹ năng đã cài",
 		noSkillsFound: "Không tìm thấy kỹ năng",

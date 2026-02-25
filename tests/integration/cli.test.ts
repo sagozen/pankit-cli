@@ -9,10 +9,10 @@ import { fileURLToPath } from "node:url";
  * Integration tests for CLI commands.
  *
  * These tests are expensive (network + CLI subprocesses), so they are opt-in.
- * Run with CK_RUN_CLI_INTEGRATION=1.
+ * Run with PK_RUN_CLI_INTEGRATION=1.
  */
 const isCI = process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
-const runCliIntegration = /^(1|true)$/i.test(process.env.CK_RUN_CLI_INTEGRATION ?? "");
+const runCliIntegration = /^(1|true)$/i.test(process.env.PK_RUN_CLI_INTEGRATION ?? "");
 const shouldRunIntegration = !isCI && runCliIntegration;
 const integrationDescribe = shouldRunIntegration ? describe : describe.skip;
 
@@ -286,10 +286,10 @@ integrationDescribe("CLI Integration Tests", () => {
 			}
 		});
 
-		test("should show kit version when in ClaudeKit project", async () => {
+		test("should show kit version when in Pankit project", async () => {
 			const projectDir = join(testDir, "test-version-in-project");
 
-			// Create a ClaudeKit project
+			// Create a Pankit project
 			execSync(
 				`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
 				{

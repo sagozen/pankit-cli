@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 /**
- * Skill discovery - finds available skills from ClaudeKit source
+ * Skill discovery - finds available skills from Pankit source
  */
 import { readFile, readdir, stat } from "node:fs/promises";
 import { homedir } from "node:os";
@@ -19,9 +19,9 @@ const SKIP_DIRS = ["node_modules", ".git", "dist", "build", ".venv", "__pycache_
  * Priority: bundled with engineer package > global ~/.claude/skills
  */
 export function getSkillSourcePath(): string | null {
-	// Check for bundled skills in claudekit-engineer (future)
+	// Check for bundled skills in pankit-engineer (future)
 	const bundledPaths = [
-		join(process.cwd(), "node_modules/claudekit-engineer/skills"),
+		join(process.cwd(), "node_modules/pankit-engineer/skills"),
 		join(process.cwd(), ".claude/skills"),
 	];
 

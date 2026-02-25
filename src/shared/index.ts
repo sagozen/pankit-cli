@@ -11,14 +11,14 @@ export {
 	shouldSkipExpensiveOperations,
 } from "./environment.js";
 export {
-	CLAUDEKIT_CLI_GLOBAL_INSTALL_COMMAND,
-	CLAUDEKIT_CLI_INSTALL_COMMANDS,
-	CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
-	CLAUDEKIT_CLI_NPM_PACKAGE_URL,
+	PANKIT_CLI_GLOBAL_INSTALL_COMMAND,
+	PANKIT_CLI_INSTALL_COMMANDS,
+	PANKIT_CLI_NPM_PACKAGE_NAME,
+	PANKIT_CLI_NPM_PACKAGE_URL,
 	getCliUserAgent,
 	getCliVersion,
 	DEFAULT_NETWORK_TIMEOUT_MS,
-} from "./claudekit-constants.js";
+} from "./pankit-constants.js";
 export {
 	supportsUnicode,
 	getStatusSymbols,

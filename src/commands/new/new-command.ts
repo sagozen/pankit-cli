@@ -1,7 +1,7 @@
 /**
  * New Command
  *
- * Main orchestrator for the new command (bootstrap new ClaudeKit project).
+ * Main orchestrator for the new command (bootstrap new Pankit project).
  */
 
 import { PromptsManager } from "@/domains/ui/prompts.js";
@@ -27,7 +27,7 @@ function createNewContext(options: NewCommandOptions, prompts: PromptsManager): 
 export async function newCommand(options: NewCommandOptions): Promise<void> {
 	const prompts = new PromptsManager();
 
-	prompts.intro("🚀 ClaudeKit - Create New Project");
+	prompts.intro("🚀 Pankit - Create New Project");
 
 	try {
 		// Create context with validated options
@@ -74,7 +74,7 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
 
 		// Show update hint for future reference
 		log.info(
-			`${picocolors.dim("Tip:")} To update later: ${picocolors.cyan("ck update")} (CLI) + ${picocolors.cyan("ck init")} (kit content)`,
+			`${picocolors.dim("Tip:")} To update later: ${picocolors.cyan("pk update")} (CLI) + ${picocolors.cyan("pk init")} (kit content)`,
 		);
 	} catch (error) {
 		logger.error(error instanceof Error ? error.message : "Unknown error occurred");

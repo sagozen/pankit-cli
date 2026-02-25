@@ -1,7 +1,7 @@
-# Test Writing Style Guide for ClaudeKit CLI
+# Test Writing Style Guide for Pankit CLI
 
 ## Overview
-This guide documents the established patterns and conventions for writing tests in the ClaudeKit CLI codebase. Following these patterns ensures consistency and maintainability across the test suite.
+This guide documents the established patterns and conventions for writing tests in the Pankit CLI codebase. Following these patterns ensures consistency and maintainability across the test suite.
 
 ## Testing Framework
 - **Framework**: Bun test (`bun:test`)
@@ -421,7 +421,7 @@ test("returns update available when newer version exists", async () => {
 		Promise.resolve({
 			ok: true,
 			json: () => Promise.resolve({
-				name: "claudekit-cli",
+				name: "pankit-cli",
 				"dist-tags": { latest: "2.0.0" }
 			})
 		})

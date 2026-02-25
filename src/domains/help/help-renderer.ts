@@ -194,8 +194,8 @@ export function renderGlobalHelp(
 
 	const lines = [
 		renderBanner(options),
-		theme.heading("ClaudeKit CLI"),
-		theme.description("Bootstrap and manage ClaudeKit projects"),
+		theme.heading("Pankit CLI"),
+		theme.description("Bootstrap and manage Pankit projects"),
 		"",
 		theme.heading("Commands:"),
 	];

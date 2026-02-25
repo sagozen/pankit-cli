@@ -51,7 +51,7 @@ export class AuthManager {
 		if (!AuthManager.isGhCliInstalled()) {
 			throw new AuthenticationError(
 				"No GitHub authentication found.\n\n" +
-					"ClaudeKit supports multiple authentication methods:\n\n" +
+					"Pankit supports multiple authentication methods:\n\n" +
 					"Option 1: Set environment variable (recommended for CI/CD)\n" +
 					"  export GITHUB_TOKEN=ghp_xxxxxxxxxxxx\n" +
 					"  Create token at: github.com/settings/tokens\n" +

@@ -1,6 +1,6 @@
 /**
  * Version Selector Facade
- * Interactive version selection for ClaudeKit releases.
+ * Interactive version selection for Pankit releases.
  */
 import { GitHubClient } from "@/domains/github/github-client.js";
 import { logger } from "@/shared/logger.js";

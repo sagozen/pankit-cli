@@ -208,7 +208,7 @@ describe("help-types", () => {
 	test("GlobalHelp type usage", () => {
 		const globalHelp: GlobalHelp = {
 			name: "ck",
-			description: "ClaudeKit CLI",
+			description: "Pankit CLI",
 			version: "1.0.0",
 			usage: "ck [command] [options]",
 			commands: [],

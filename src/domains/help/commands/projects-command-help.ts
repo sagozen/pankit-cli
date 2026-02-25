@@ -8,7 +8,7 @@ import type { CommandHelp } from "../help-types.js";
 
 export const projectsCommandHelp: CommandHelp = {
 	name: "projects",
-	description: "Manage local ClaudeKit project registry entries",
+	description: "Manage local Pankit project registry entries",
 	usage: "ck projects <subcommand> [options]",
 	examples: [
 		{

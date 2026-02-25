@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 /**
  * Tests for portable registry v3.0 migration (Phase 1)
- * Note: These tests use the real ~/.claudekit/ directory
+ * Note: These tests use the real ~/.pankit/ directory
  */
 import { existsSync } from "node:fs";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -13,8 +13,8 @@ import {
 	writePortableRegistry,
 } from "../portable-registry.js";
 
-const REGISTRY_PATH = join(homedir(), ".claudekit", "portable-registry.json");
-const MIGRATION_LOCK_PATH = join(homedir(), ".claudekit", ".migration.lock");
+const REGISTRY_PATH = join(homedir(), ".pankit", "portable-registry.json");
+const MIGRATION_LOCK_PATH = join(homedir(), ".pankit", ".migration.lock");
 let backupContent: string | null = null;
 let backupMigrationLockContent: string | null = null;
 let hadMigrationLock = false;
@@ -43,7 +43,7 @@ afterEach(async () => {
 	}
 
 	if (hadMigrationLock) {
-		await mkdir(join(homedir(), ".claudekit"), { recursive: true });
+		await mkdir(join(homedir(), ".pankit"), { recursive: true });
 		await writeFile(MIGRATION_LOCK_PATH, backupMigrationLockContent ?? "", "utf-8");
 	} else if (existsSync(MIGRATION_LOCK_PATH)) {
 		await rm(MIGRATION_LOCK_PATH, { force: true });
@@ -151,7 +151,7 @@ describe("v2.0 to v3.0 migration", () => {
 	});
 
 	test("reads target file for targetChecksum during migration", async () => {
-		const targetPath = join(homedir(), ".claudekit", "test-target-file.md");
+		const targetPath = join(homedir(), ".pankit", "test-target-file.md");
 		const targetContent = "# Test Agent\n\nContent here";
 		await writeFile(targetPath, targetContent, "utf-8");
 
@@ -195,7 +195,7 @@ describe("v2.0 to v3.0 migration", () => {
 					global: true,
 					path: "/usr/local/commands/my-command.md",
 					installedAt: "2024-02-14T12:00:00Z",
-					sourcePath: "/claudekit/commands/my-command.md",
+					sourcePath: "/pankit/commands/my-command.md",
 					cliVersion: "1.5.0",
 				},
 			],
@@ -211,7 +211,7 @@ describe("v2.0 to v3.0 migration", () => {
 		expect(inst.global).toBe(true);
 		expect(inst.path).toBe("/usr/local/commands/my-command.md");
 		expect(inst.installedAt).toBe("2024-02-14T12:00:00Z");
-		expect(inst.sourcePath).toBe("/claudekit/commands/my-command.md");
+		expect(inst.sourcePath).toBe("/pankit/commands/my-command.md");
 		expect(inst.cliVersion).toBe("1.5.0");
 	});
 

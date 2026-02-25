@@ -1,7 +1,7 @@
 /**
  * Portable registry — unified tracking of installed agents, commands, and skills
  * Extends skill-registry.json to portable-registry.json with backward compatibility.
- * Central registry at ~/.claudekit/portable-registry.json
+ * Central registry at ~/.pankit/portable-registry.json
  */
 import { existsSync } from "node:fs";
 import { mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
@@ -15,10 +15,10 @@ import { UNKNOWN_CHECKSUM, normalizeChecksum } from "./reconcile-types.js";
 import type { PortableType, ProviderType } from "./types.js";
 
 const home = homedir();
-const REGISTRY_PATH = join(home, ".claudekit", "portable-registry.json");
-const REGISTRY_LOCK_PATH = join(home, ".claudekit", "portable-registry.lock");
-const LEGACY_REGISTRY_PATH = join(home, ".claudekit", "skill-registry.json");
-const MIGRATION_LOCK_PATH = join(home, ".claudekit", ".migration.lock");
+const REGISTRY_PATH = join(home, ".pankit", "portable-registry.json");
+const REGISTRY_LOCK_PATH = join(home, ".pankit", "portable-registry.lock");
+const LEGACY_REGISTRY_PATH = join(home, ".pankit", "skill-registry.json");
+const MIGRATION_LOCK_PATH = join(home, ".pankit", ".migration.lock");
 
 // Schema for v2.0 registry entries (with .passthrough() for forward compat)
 const PortableInstallationSchema = z

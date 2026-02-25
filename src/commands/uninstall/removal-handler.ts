@@ -1,7 +1,7 @@
 /**
  * Removal Handler
  *
- * Handles the actual removal of ClaudeKit installations.
+ * Handles the actual removal of Pankit installations.
  * Supports both tracked (metadata.json) and legacy (no metadata) installs.
  */
 
@@ -95,7 +95,7 @@ export async function removeInstallations(
 		const kitLabel = options.kit ? ` ${options.kit} kit` : "";
 		const legacyLabel = !installation.hasMetadata ? " (legacy)" : "";
 		const spinner = createSpinner(
-			`Removing ${installation.type}${kitLabel}${legacyLabel} ClaudeKit files...`,
+			`Removing ${installation.type}${kitLabel}${legacyLabel} Pankit files...`,
 		).start();
 
 		try {

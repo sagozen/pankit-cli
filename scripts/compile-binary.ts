@@ -16,7 +16,7 @@ import { Glob } from "bun";
 
 // Parse CLI args
 const args = process.argv.slice(2);
-let outfile = "ck";
+let outfile = "pk";
 let target: string | undefined;
 
 for (let i = 0; i < args.length; i++) {

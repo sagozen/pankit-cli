@@ -10,7 +10,7 @@ import { GitHubClient } from "@/domains/github/github-client.js";
 import { detectAccessibleKits } from "@/domains/github/kit-access-checker.js";
 import { runPreflightChecks } from "@/domains/github/preflight-checker.js";
 import { handleFreshInstallation } from "@/domains/installation/fresh-installer.js";
-import { readClaudeKitMetadata } from "@/services/file-operations/claudekit-scanner.js";
+import { readPankitMetadata } from "@/services/file-operations/pankit-scanner.js";
 import { readManifest } from "@/services/file-operations/manifest/manifest-reader.js";
 import { logger } from "@/shared/logger.js";
 import { PathResolver } from "@/shared/path-resolver.js";
@@ -82,8 +82,8 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 
 		if (accessibleKits.length === 0) {
 			// Pre-flight passed but no access = real access issue (not a gh CLI problem)
-			logger.error("No ClaudeKit repository access found.");
-			logger.info("Check email for GitHub invitation, or purchase at https://claudekit.cc");
+			logger.error("No Pankit repository access found.");
+			logger.info("Check email for GitHub invitation, or purchase at https://pankit.cc");
 			logger.info("");
 			logger.info("Full diagnostics: ck doctor");
 			return { ...ctx, cancelled: true };
@@ -145,7 +145,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 					logger.error(
 						`No access to: ${noAccessKits.map((k) => AVAILABLE_KITS[k].name).join(", ")}`,
 					);
-					logger.info("Purchase at https://claudekit.cc");
+					logger.info("Purchase at https://pankit.cc");
 					return { ...ctx, cancelled: true };
 				}
 			}
@@ -167,7 +167,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 			// Validate explicit --kit flag has access
 			if (accessibleKits && !accessibleKits.includes(kitType)) {
 				logger.error(`No access to ${AVAILABLE_KITS[kitType].name}`);
-				logger.info("Purchase at https://claudekit.cc");
+				logger.info("Purchase at https://pankit.cc");
 				return { ...ctx, cancelled: true };
 			}
 		}
@@ -239,7 +239,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 	// HOME directory detection: warn if installing to HOME without --global flag
 	// Installing to HOME's .claude/ is effectively a global installation
 	if (!ctx.options.global && PathResolver.isLocalSameAsGlobal(resolvedDir)) {
-		logger.warning("You're at HOME directory. Installing here modifies your GLOBAL ClaudeKit.");
+		logger.warning("You're at HOME directory. Installing here modifies your GLOBAL Pankit.");
 
 		if (!ctx.isNonInteractive) {
 			// Interactive mode: offer choices
@@ -254,7 +254,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 			// "different" choice would require re-prompting for directory, but for simplicity
 			// we just cancel and ask them to run from a different directory
 			if (choice === "different") {
-				logger.info("Please run 'ck init' from a project directory instead.");
+				logger.info("Please run 'pk init' from a project directory instead.");
 				return { ...ctx, cancelled: true };
 			}
 		} else {
@@ -272,7 +272,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 			logger.info(`Created global directory: ${resolvedDir}`);
 		} else {
 			logger.error(`Directory does not exist: ${resolvedDir}`);
-			logger.info('Use "ck new" to create a new project');
+			logger.info('Use "pk new" to create a new project');
 			return { ...ctx, cancelled: true };
 		}
 	}
@@ -364,7 +364,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 			const metadataPath = ctx.options.global
 				? join(PathResolver.getGlobalKitDir(), "metadata.json")
 				: join(resolvedDir, ".claude", "metadata.json");
-			const metadata = await readClaudeKitMetadata(metadataPath);
+			const metadata = await readPankitMetadata(metadataPath);
 			currentVersion = metadata?.version || null;
 			if (currentVersion) {
 				logger.debug(`Current installed version: ${currentVersion}`);

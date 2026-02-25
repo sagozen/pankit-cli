@@ -6,7 +6,7 @@
 interface TrackedFile {
 	path: string;
 	checksum: string;
-	ownership: "ck" | "user" | "ck-modified";
+	ownership: "ck" | "user" | "pk-modified";
 	baseChecksum?: string;
 }
 
@@ -22,7 +22,7 @@ export function getOwnershipCounts(files: TrackedFile[]): {
 	for (const f of files) {
 		if (f.ownership === "ck") ck++;
 		else if (f.ownership === "user") user++;
-		else if (f.ownership === "ck-modified") modified++;
+		else if (f.ownership === "pk-modified") modified++;
 	}
 	return { ck, user, modified };
 }

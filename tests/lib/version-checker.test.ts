@@ -180,7 +180,7 @@ describe("VersionChecker", () => {
 			currentVersion: "v1.0.0",
 			latestVersion: "v1.1.0",
 			updateAvailable: true,
-			releaseUrl: "https://github.com/claudekit/claudekit-engineer/releases/tag/v1.1.0",
+			releaseUrl: "https://github.com/pankit/pankit-engineer/releases/tag/v1.1.0",
 		};
 
 		// Just verify it doesn't throw
@@ -192,7 +192,7 @@ describe("VersionChecker", () => {
 			currentVersion: "v1.0.0",
 			latestVersion: "v1.0.0",
 			updateAvailable: false,
-			releaseUrl: "https://github.com/claudekit/claudekit-engineer/releases/tag/v1.0.0",
+			releaseUrl: "https://github.com/pankit/pankit-engineer/releases/tag/v1.0.0",
 		};
 
 		// Just verify it doesn't throw and doesn't log
@@ -272,7 +272,7 @@ describe("CliVersionChecker", () => {
 				ok: true,
 				json: () =>
 					Promise.resolve({
-						name: "claudekit-cli",
+						name: "pankit-cli",
 						"dist-tags": { latest: "2.0.0" },
 						versions: {},
 						time: {},
@@ -300,7 +300,7 @@ describe("CliVersionChecker", () => {
 				ok: true,
 				json: () =>
 					Promise.resolve({
-						name: "claudekit-cli",
+						name: "pankit-cli",
 						"dist-tags": { latest: "1.0.0" },
 						versions: {},
 						time: {},
@@ -343,7 +343,7 @@ describe("CliVersionChecker", () => {
 				ok: true,
 				json: () =>
 					Promise.resolve({
-						name: "claudekit-cli",
+						name: "pankit-cli",
 						"dist-tags": { latest: "2.0.0" },
 						versions: {},
 						time: {},
@@ -361,7 +361,7 @@ describe("CliVersionChecker", () => {
 			currentVersion: "1.0.0",
 			latestVersion: "2.0.0",
 			updateAvailable: true,
-			releaseUrl: "https://www.npmjs.com/package/claudekit-cli",
+			releaseUrl: "https://www.npmjs.com/package/pankit-cli",
 		};
 
 		// Just verify it doesn't throw
@@ -373,7 +373,7 @@ describe("CliVersionChecker", () => {
 			currentVersion: "1.0.0",
 			latestVersion: "1.0.0",
 			updateAvailable: false,
-			releaseUrl: "https://www.npmjs.com/package/claudekit-cli",
+			releaseUrl: "https://www.npmjs.com/package/pankit-cli",
 		};
 
 		// Just verify it doesn't throw
@@ -393,7 +393,7 @@ describe("CliVersionChecker", () => {
 				ok: true,
 				json: () =>
 					Promise.resolve({
-						name: "claudekit-cli",
+						name: "pankit-cli",
 						"dist-tags": { latest: "3.31.0" },
 						versions: {},
 						time: {},
@@ -419,7 +419,7 @@ describe("CliVersionChecker", () => {
 				ok: true,
 				json: () =>
 					Promise.resolve({
-						name: "claudekit-cli",
+						name: "pankit-cli",
 						"dist-tags": { latest: "3.32.0" },
 						versions: {},
 						time: {},

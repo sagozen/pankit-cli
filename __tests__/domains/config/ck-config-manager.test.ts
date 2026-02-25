@@ -4,13 +4,13 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { CkConfigManager } from "../../../src/domains/config/ck-config-manager.js";
+import { CkConfigManager } from "../../../src/domains/config/pk-config-manager.js";
 import {
 	CK_HOOK_NAMES,
 	type CkConfig,
 	CkConfigSchema,
 	DEFAULT_CK_CONFIG,
-} from "../../../src/types/ck-config.js";
+} from "../../../src/types/pk-config.js";
 
 describe("CkConfigManager", () => {
 	let tempDir: string;
@@ -24,11 +24,11 @@ describe("CkConfigManager", () => {
 	});
 
 	describe("projectConfigExists", () => {
-		it("should detect project config at dir/.claude/.ck.json (isGlobal=false)", async () => {
-			// Create project structure: projectDir/.claude/.ck.json
+		it("should detect project config at dir/.claude/.pk.json (isGlobal=false)", async () => {
+			// Create project structure: projectDir/.claude/.pk.json
 			const projectDir = join(tempDir, "myproject");
 			const claudeDir = join(projectDir, ".claude");
-			const configPath = join(claudeDir, ".ck.json");
+			const configPath = join(claudeDir, ".pk.json");
 
 			await mkdir(claudeDir, { recursive: true });
 			await writeFile(configPath, JSON.stringify({}));
@@ -37,9 +37,9 @@ describe("CkConfigManager", () => {
 			expect(exists).toBe(true);
 		});
 
-		it("should detect global config at dir/.ck.json (isGlobal=true)", async () => {
-			// Create global structure: ~/.ck.json
-			const globalPath = join(tempDir, ".ck.json");
+		it("should detect global config at dir/.pk.json (isGlobal=true)", async () => {
+			// Create global structure: ~/.pk.json
+			const globalPath = join(tempDir, ".pk.json");
 			await writeFile(globalPath, JSON.stringify({}));
 
 			const exists = CkConfigManager.projectConfigExists(tempDir, true);
@@ -62,7 +62,7 @@ describe("CkConfigManager", () => {
 			// Create project structure
 			const projectDir = join(tempDir, "myproject");
 			const claudeDir = join(projectDir, ".claude");
-			const configPath = join(claudeDir, ".ck.json");
+			const configPath = join(claudeDir, ".pk.json");
 
 			await mkdir(claudeDir, { recursive: true });
 			await writeFile(configPath, JSON.stringify({}));
@@ -75,7 +75,7 @@ describe("CkConfigManager", () => {
 		it("should handle nested project directories", async () => {
 			const projectDir = join(tempDir, "a", "b", "c", "myproject");
 			const claudeDir = join(projectDir, ".claude");
-			const configPath = join(claudeDir, ".ck.json");
+			const configPath = join(claudeDir, ".pk.json");
 
 			await mkdir(claudeDir, { recursive: true });
 			await writeFile(configPath, JSON.stringify({}));
@@ -225,7 +225,7 @@ describe("CkConfigManager", () => {
 		it("should load global config path correctly", () => {
 			const globalPath = CkConfigManager.getGlobalConfigPath();
 			expect(globalPath).toContain(".claude");
-			expect(globalPath).toContain(".ck.json");
+			expect(globalPath).toContain(".pk.json");
 			expect(globalPath).toContain(homedir());
 		});
 
@@ -233,7 +233,7 @@ describe("CkConfigManager", () => {
 			const projectDir = join(tmpdir(), "myproject");
 			const projectPath = CkConfigManager.getProjectConfigPath(projectDir);
 			expect(projectPath).toContain(".claude");
-			expect(projectPath).toContain(".ck.json");
+			expect(projectPath).toContain(".pk.json");
 			expect(projectPath).toContain("myproject");
 		});
 
@@ -264,7 +264,7 @@ describe("CkConfigManager", () => {
 
 			expect(CkConfigManager.configExists("project", projectDir)).toBe(false);
 
-			const configPath = join(claudeDir, ".ck.json");
+			const configPath = join(claudeDir, ".pk.json");
 			await writeFile(configPath, JSON.stringify({}));
 
 			expect(CkConfigManager.configExists("project", projectDir)).toBe(true);
@@ -336,13 +336,13 @@ describe("CkConfigManager", () => {
 
 		it("should distinguish between global and project config correctly", async () => {
 			// Create both global and project configs
-			const globalPath = join(tempDir, ".ck.json");
+			const globalPath = join(tempDir, ".pk.json");
 			await writeFile(globalPath, JSON.stringify({ codingLevel: 0 }));
 
 			const projectDir = join(tempDir, "project");
 			const claudeDir = join(projectDir, ".claude");
 			await mkdir(claudeDir, { recursive: true });
-			const projectPath = join(claudeDir, ".ck.json");
+			const projectPath = join(claudeDir, ".pk.json");
 			await writeFile(projectPath, JSON.stringify({ codingLevel: 1 }));
 
 			// Check global

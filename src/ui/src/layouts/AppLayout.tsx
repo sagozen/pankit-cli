@@ -30,7 +30,7 @@ const AppLayout: React.FC = () => {
 
 	const [theme, setTheme] = useState<"light" | "dark">(() => {
 		if (typeof window !== "undefined") {
-			const saved = localStorage.getItem("claudekit-theme");
+			const saved = localStorage.getItem("pankit-theme");
 			return (saved as "light" | "dark") || "dark";
 		}
 		return "dark";
@@ -45,7 +45,7 @@ const AppLayout: React.FC = () => {
 		startDrag: startSidebarDrag,
 		setSize: setSidebarWidth,
 	} = useResizable({
-		storageKey: "claudekit-sidebar-width",
+		storageKey: "pankit-sidebar-width",
 		defaultSize: 288,
 		minSize: 56,
 		maxSize: 400,
@@ -82,7 +82,7 @@ const AppLayout: React.FC = () => {
 			root.classList.remove("dark");
 			root.setAttribute("data-theme", "light");
 		}
-		localStorage.setItem("claudekit-theme", theme);
+		localStorage.setItem("pankit-theme", theme);
 	}, [theme]);
 
 	const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));

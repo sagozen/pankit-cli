@@ -18,7 +18,7 @@ const ReleaseCacheEntrySchema = z.object({
 
 export class ReleaseCache {
 	private static readonly CACHE_DIR = "releases";
-	private static readonly CACHE_TTL_SECONDS = Number(process.env.CK_CACHE_TTL) || 3600; // 1 hour (configurable via CK_CACHE_TTL env var)
+	private static readonly CACHE_TTL_SECONDS = Number(process.env.PK_CACHE_TTL) || 3600; // 1 hour (configurable via PK_CACHE_TTL env var)
 	private readonly cacheDir: string;
 
 	constructor() {
@@ -34,7 +34,7 @@ export class ReleaseCache {
 	 * @example
 	 * ```typescript
 	 * const cache = new ReleaseCache();
-	 * const releases = await cache.get('claudekit-engineer-latest-false');
+	 * const releases = await cache.get('pankit-engineer-latest-false');
 	 * if (releases) {
 	 *   console.log(`Found ${releases.length} cached releases`);
 	 * }
@@ -84,7 +84,7 @@ export class ReleaseCache {
 	 * @example
 	 * ```typescript
 	 * const cache = new ReleaseCache();
-	 * await cache.set('claudekit-engineer-latest-false', releases);
+	 * await cache.set('pankit-engineer-latest-false', releases);
 	 * console.log('Releases cached successfully');
 	 * ```
 	 */
@@ -118,7 +118,7 @@ export class ReleaseCache {
 	 * ```typescript
 	 * const cache = new ReleaseCache();
 	 * // Clear specific kit cache
-	 * await cache.clear('claudekit-engineer-latest-false');
+	 * await cache.clear('pankit-engineer-latest-false');
 	 * // Clear all caches
 	 * await cache.clear();
 	 * ```

@@ -4,7 +4,7 @@ import os from "node:os";
 import { join } from "node:path";
 import { withProcessLock } from "@/shared/process-lock";
 
-const LOCKS_DIR = join(os.homedir(), ".claudekit", "locks");
+const LOCKS_DIR = join(os.homedir(), ".pankit", "locks");
 
 describe("withProcessLock", () => {
 	beforeEach(async () => {
@@ -54,7 +54,7 @@ describe("withProcessLock", () => {
 
 		// Try concurrent access
 		await expect(withProcessLock("test-4", async () => "fast")).rejects.toThrow(
-			/Another ClaudeKit process is running/,
+			/Another Pankit process is running/,
 		);
 
 		await p1; // Wait for slow to complete

@@ -23,7 +23,7 @@ function formatInstalledKits(metadata: Metadata): string | null {
 	if (!metadata.kits || Object.keys(metadata.kits).length === 0) {
 		// Fallback to legacy root fields
 		if (metadata.version) {
-			const kitName = metadata.name || "ClaudeKit";
+			const kitName = metadata.name || "Pankit";
 			return `${metadata.version} (${kitName})`;
 		}
 		return null;
@@ -124,7 +124,7 @@ export async function displayVersion(): Promise<void> {
 
 	// Show message if no kits found
 	if (!foundAnyKit) {
-		console.log("No ClaudeKit installation found");
+		console.log("No Pankit installation found");
 		console.log("\nTo get started: ck new (local project) or ck init -g (global)");
 	}
 

@@ -1,8 +1,8 @@
-# ClaudeKit Dashboard UI
+# Pankit Dashboard UI
 
 ## 🎯 Core Mission
 
-**The Dashboard is ClaudeKit's visual home.** Where the CLI is fast and focused, the Dashboard is rich and educational. It's where users:
+**The Dashboard is Pankit's visual home.** Where the CLI is fast and focused, the Dashboard is rich and educational. It's where users:
 
 1. **Discover** — See all available kits, compare features, understand the ecosystem
 2. **Install** — One-click guided installation with real-time progress
@@ -13,7 +13,7 @@
 
 | User | Journey | Dashboard Role |
 |------|---------|----------------|
-| **Newcomer** | "What is ClaudeKit?" | Onboarding → Kit comparison → Guided install |
+| **Newcomer** | "What is Pankit?" | Onboarding → Kit comparison → Guided install |
 | **Evaluator** | "Engineer or Marketing?" | Side-by-side features → Try before commit |
 | **Adopter** | "Set up my project" | Install wizard → Config editor → Success |
 | **Power user** | "Manage my stack" | Project switcher → Health dashboard → Quick actions |

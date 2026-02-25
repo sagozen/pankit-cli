@@ -24,15 +24,15 @@ export type KitConfig = z.infer<typeof KitConfigSchema>;
 // Available kits
 export const AVAILABLE_KITS: Record<KitType, KitConfig> = {
 	engineer: {
-		name: "ClaudeKit Engineer",
-		repo: "claudekit-engineer",
-		owner: "claudekit",
+		name: "Pankit Engineer",
+		repo: "pankit-engineer",
+		owner: "pankit",
 		description: "Engineering toolkit for building with Claude",
 	},
 	marketing: {
-		name: "ClaudeKit Marketing",
-		repo: "claudekit-marketing",
-		owner: "claudekit",
+		name: "Pankit Marketing",
+		repo: "pankit-marketing",
+		owner: "pankit",
 		description: "Content automation: campaigns, social media, analytics workflows",
 	},
 };
@@ -70,7 +70,7 @@ export const USER_CONFIG_PATTERNS = [
 	".repomixignore",
 	".mcp.json",
 	".ckignore",
-	".ck.json",
+	".pk.json",
 	"CLAUDE.md",
 ];
 

@@ -111,7 +111,7 @@ export const DEPENDENCIES: Record<DependencyName, DependencyConfig> = {
 		versionFlag: "--version",
 		versionRegex: /Python (\d+\.\d+\.\d+)/,
 		minVersion: "3.8.0",
-		required: true, // Required for ClaudeKit skills
+		required: true, // Required for Pankit skills
 	},
 	pip: {
 		name: "pip",
@@ -127,7 +127,7 @@ export const DEPENDENCIES: Record<DependencyName, DependencyConfig> = {
 		versionFlag: "--version",
 		versionRegex: /v?(\d+\.\d+\.\d+)/,
 		minVersion: "16.0.0",
-		required: true, // Required for ClaudeKit skills
+		required: true, // Required for Pankit skills
 	},
 };
 

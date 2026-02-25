@@ -41,7 +41,7 @@ describe("DownloadManager", () => {
 
 			expect(tempDir).toBeDefined();
 			expect(typeof tempDir).toBe("string");
-			expect(tempDir).toContain("claudekit-");
+			expect(tempDir).toContain("pankit-");
 			expect(existsSync(tempDir)).toBe(true);
 
 			// Cleanup

@@ -1,6 +1,6 @@
 # Security Analysis: Command Injection Vulnerabilities in package-installer.ts
 
-**File:** `/Users/duynguyen/www/claudekit/claudekit-cli/src/utils/package-installer.ts`
+**File:** `/Users/duynguyen/www/pankit/pankit-cli/src/utils/package-installer.ts`
 **Issue:** Using `execAsync()` with string interpolation creates command injection vulnerabilities
 **Risk Level:** Medium (mitigated by regex validation but violates defense-in-depth)
 

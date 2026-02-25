@@ -80,10 +80,10 @@ export default {
 				: {
 						// Main releases: include platform binaries
 						assets: [
-							{ path: "bin/ck-darwin-arm64", label: "ck-darwin-arm64" },
-							{ path: "bin/ck-darwin-x64", label: "ck-darwin-x64" },
-							{ path: "bin/ck-linux-x64", label: "ck-linux-x64" },
-							{ path: "bin/ck-win32-x64.exe", label: "ck-win32-x64.exe" },
+							{ path: "bin/pk-darwin-arm64", label: "pk-darwin-arm64" },
+							{ path: "bin/pk-darwin-x64", label: "pk-darwin-x64" },
+							{ path: "bin/pk-linux-x64", label: "pk-linux-x64" },
+							{ path: "bin/pk-win32-x64.exe", label: "pk-win32-x64.exe" },
 						],
 					},
 		],

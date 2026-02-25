@@ -68,7 +68,7 @@ export function displayConfigUpdateNotification(
 	const versionText = `${pc.dim(displayCurrent)} ${pc.white("→")} ${pc.green(pc.bold(displayLatest))}`;
 	const versionLen = displayCurrent.length + 3 + displayLatest.length;
 
-	const updateCmd = isGlobal ? "ck init -g --sync" : "ck init --sync";
+	const updateCmd = isGlobal ? "pk init -g --sync" : "pk init --sync";
 	const commandText = `Run: ${pc.cyan(pc.bold(updateCmd))}`;
 	const commandLen = `Run: ${updateCmd}`.length;
 

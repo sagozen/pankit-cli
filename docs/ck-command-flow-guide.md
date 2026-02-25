@@ -1,14 +1,14 @@
-# ClaudeKit CLI (`ck`) Command Flow Guide
+# Pankit CLI (`pk`) Command Flow Guide
 
 ## Overview
 
-ClaudeKit CLI (`ck`) is the primary user interface for bootstrapping and managing ClaudeKit projects. It uses the **cac framework** for command parsing and follows a **phase-based execution model** for all major operations.
+Pankit CLI (`pk`) is the primary user interface for bootstrapping and managing Pankit projects. It uses the **cac framework** for command parsing and follows a **phase-based execution model** for all major operations.
 
 ### Available Commands
 
 | Command | Purpose | Key Flags |
 |---------|---------|-----------|
-| `new` | Bootstrap new ClaudeKit project | `--kit`, `--yes`, `--force` |
+| `new` | Bootstrap new Pankit project | `--kit`, `--yes`, `--force` |
 | `init` | Initialize/update existing project | `--fresh`, `--beta`, `--yes` |
 | `skills` | Install/uninstall skills | Multi-select installation, registry |
 | `doctor` | Health check of setup | `--fix`, `--json`, `--full` |
@@ -52,11 +52,11 @@ flowchart TD
 
 ---
 
-## 2. `ck new` Command Flow
+## 2. `pk new` Command Flow
 
 ```mermaid
 flowchart TD
-    A["User: ck new [options]"] --> B["Validate Options<br/>Zod Schema"]
+    A["User: pk new [options]"] --> B["Validate Options<br/>Zod Schema"]
     B --> C{"Mutual<br/>Exclusivity<br/>OK?"}
     C -->|No| D["Show Error Message"]
     D --> E["Exit 1"]
@@ -89,7 +89,7 @@ flowchart TD
     Y --> Z["Exit 0"]
 ```
 
-### `ck new` Phases
+### `pk new` Phases
 
 **Phase 1: Directory Setup** (`handleDirectorySetup`)
 - Validate/create target directory
@@ -111,11 +111,11 @@ flowchart TD
 
 ---
 
-## 3. `ck init` Command Flow
+## 3. `pk init` Command Flow
 
 ```mermaid
 flowchart TD
-    A["User: ck init [options]"] --> B["Validate Options<br/>Zod Schema"]
+    A["User: pk init [options]"] --> B["Validate Options<br/>Zod Schema"]
     B --> C["Check Directory<br/>Exists"]
     C --> D{"Project<br/>Valid?"}
     D -->|No| E["Show Error"]
@@ -145,7 +145,7 @@ flowchart TD
     X --> Y["Exit 0"]
 ```
 
-### `ck init` Features
+### `pk init` Features
 
 - Handles merge conflicts interactively via `--sync`
 - Ownership protection prevents overwriting user files
@@ -156,11 +156,11 @@ flowchart TD
 
 ---
 
-## 4. `ck doctor` Command Flow
+## 4. `pk doctor` Command Flow
 
 ```mermaid
 flowchart TD
-    A["User: ck doctor [options]"] --> B["Create CheckRunner"]
+    A["User: pk doctor [options]"] --> B["Create CheckRunner"]
     B --> C["Register Checkers"]
     C --> D["System Checker"]
     C --> E["GitHub Checker"]
@@ -192,7 +192,7 @@ flowchart TD
     Q -->|Done| O
 ```
 
-### `ck doctor` Checkers
+### `pk doctor` Checkers
 
 **Installation Checks**
 - Global/project install detection
@@ -316,7 +316,7 @@ flowchart TD
 
 ## 7. Ownership Tracking System
 
-ClaudeKit uses file ownership tracking to protect user-modified files and prevent unintended overwrites during installations and updates. This system implements the Python packaging standards (pip RECORD pattern) adapted for ClaudeKit's multi-kit environment.
+Pankit uses file ownership tracking to protect user-modified files and prevent unintended overwrites during installations and updates. This system implements the Python packaging standards (pip RECORD pattern) adapted for Pankit's multi-kit environment.
 
 ### TrackedFile Interface
 
@@ -326,14 +326,14 @@ Every file in the `.claude` directory is tracked with ownership metadata:
 interface TrackedFile {
   path: string;                    // Relative path from .claude (e.g., "rules/development-rules.md")
   checksum: string;                // SHA-256 hash of file content (hex format, 64 chars)
-  ownership: FileOwnership;        // "ck" | "user" | "ck-modified"
-  installedVersion: string;        // ClaudeKit version that installed it
+  ownership: FileOwnership;        // "ck" | "user" | "pk-modified"
+  installedVersion: string;        // Pankit version that installed it
   baseChecksum?: string;           // Original checksum at install (for sync detection)
   sourceTimestamp?: string;        // Git commit timestamp from kit repo (ISO 8601)
   installedAt?: string;            // When file was installed locally (ISO 8601)
 }
 
-type FileOwnership = "ck" | "user" | "ck-modified";
+type FileOwnership = "ck" | "user" | "pk-modified";
 ```
 
 ### metadata.json Structure
@@ -356,7 +356,7 @@ The `.claude/metadata.json` file tracks all installed files with multi-kit suppo
         {
           "path": "rules/development-rules.md",
           "checksum": "fed789abc456...",
-          "ownership": "ck-modified",
+          "ownership": "pk-modified",
           "installedVersion": "0.5.0",
           "baseChecksum": "fed789abc457..."
         }
@@ -389,7 +389,7 @@ flowchart TD
     I -->|Yes| K["Calculate<br/>File Checksum"]
     K --> L{"Checksum<br/>Match?"}
     L -->|Yes| M["ownership: ck<br/>Pristine CK file"]
-    L -->|No| N["ownership: ck-modified<br/>User edited CK file"]
+    L -->|No| N["ownership: pk-modified<br/>User edited CK file"]
     D --> O["Result"]
     H --> O
     J --> O
@@ -398,15 +398,15 @@ flowchart TD
 ```
 
 **Ownership Classes:**
-- **`"ck"`** - ClaudeKit-owned file, unchanged since install (pristine)
-- **`"ck-modified"`** - ClaudeKit-owned file, user has modified
-- **`"user"`** - User-created file, not from ClaudeKit
+- **`"ck"`** - Pankit-owned file, unchanged since install (pristine)
+- **`"pk-modified"`** - Pankit-owned file, user has modified
+- **`"user"`** - User-created file, not from Pankit
 
 ---
 
 ## 8. File Merge & Migration Flow
 
-When installing or updating ClaudeKit, the system must merge new files with existing installations while preserving user modifications. This section covers legacy migration and modern merge logic.
+When installing or updating Pankit, the system must merge new files with existing installations while preserving user modifications. This section covers legacy migration and modern merge logic.
 
 ### Legacy Installation Detection
 
@@ -457,13 +457,13 @@ async calculateChecksum(filePath: string): Promise<string> {
 }
 ```
 
-**Important for Global Installs:** When generating the release manifest (`bun scripts/generate-release-manifest.ts`), checksums are calculated AFTER applying path transformation. This ensures manifest checksums match files after `ck init -g` transforms `.claude/` paths to `$HOME/.claude/`.
+**Important for Global Installs:** When generating the release manifest (`bun scripts/generate-release-manifest.ts`), checksums are calculated AFTER applying path transformation. This ensures manifest checksums match files after `pk init -g` transforms `.claude/` paths to `$HOME/.claude/`.
 
 ### Migration Execution
 
 ```mermaid
 flowchart TD
-    A["ck new/init"] --> B["Load Release Manifest"]
+    A["pk new/init"] --> B["Load Release Manifest"]
     B --> C["Run Legacy Detection"]
     C --> D{"Legacy<br/>Install?"}
     D -->|No| E["Skip Migration"]
@@ -483,7 +483,7 @@ flowchart TD
 
 ## 9. Release Manifest Generation
 
-The release manifest (`release-manifest.json`) is the source of truth for file ownership verification. It tracks all ClaudeKit-owned files with checksums computed AFTER path transformation.
+The release manifest (`release-manifest.json`) is the source of truth for file ownership verification. It tracks all Pankit-owned files with checksums computed AFTER path transformation.
 
 ### Purpose
 
@@ -561,13 +561,13 @@ CLAUDE.md, claude.md
 
 ## 10. Global Path Transformation
 
-When installing ClaudeKit globally (with `-g` flag), file paths must be transformed from relative `.claude/` references to platform-appropriate home directory paths. This enables kit files to work correctly regardless of installation scope.
+When installing Pankit globally (with `-g` flag), file paths must be transformed from relative `.claude/` references to platform-appropriate home directory paths. This enables kit files to work correctly regardless of installation scope.
 
 ### Transformation Trigger
 
 ```mermaid
 flowchart TD
-    A["User: ck new/init -g<br/>Global Install"] --> B["Extract Kit Archive"]
+    A["User: pk new/init -g<br/>Global Install"] --> B["Extract Kit Archive"]
     B --> C["Check Installation Scope"]
     C --> D{"Global<br/>Install?"}
     D -->|Yes| E["Transform Paths"]
@@ -689,7 +689,7 @@ After transformation, stats are reported:
 - Fetch releases from GitHub API
 - Stream-based downloads with progress tracking
 - Automatic retry logic
-- Temp directory fallback (OS tmp → `~/.claudekit/tmp`)
+- Temp directory fallback (OS tmp → `~/.pankit/tmp`)
 
 **Extractors**
 - `TarExtractor` - Handle .tar.gz files
@@ -765,7 +765,7 @@ After transformation, stats are reported:
 
 **OwnershipChecker**
 - Calculate SHA-256 checksums via streaming (memory efficient)
-- Determine file ownership: ck, ck-modified, or user
+- Determine file ownership: ck, pk-modified, or user
 - Batch check with concurrency limiting for EMFILE prevention
 - Support multi-kit metadata format
 - Located in: `src/services/file-operations/ownership-checker.ts`

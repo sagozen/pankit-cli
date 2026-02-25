@@ -1,7 +1,7 @@
 /**
  * InstalledSettingsTracker
  *
- * Manages tracking of CK-installed settings in .ck.json to respect user deletions.
+ * Manages tracking of CK-installed settings in .pk.json to respect user deletions.
  * When user removes a hook/server, subsequent init won't re-add it.
  */
 import { existsSync } from "node:fs";
@@ -10,7 +10,7 @@ import { dirname, join } from "node:path";
 import { logger, normalizeCommand } from "@/shared";
 import type { InstalledSettings } from "@/types";
 
-const CK_JSON_FILE = ".ck.json";
+const CK_JSON_FILE = ".pk.json";
 
 interface CkJsonData {
 	kits?: Record<string, { installedSettings?: InstalledSettings; [key: string]: unknown }>;
@@ -29,19 +29,19 @@ export class InstalledSettingsTracker {
 	}
 
 	/**
-	 * Get path to .ck.json based on scope
+	 * Get path to .pk.json based on scope
 	 */
 	private getCkJsonPath(): string {
 		if (this.isGlobal) {
-			// Global: ~/.claude/.ck.json
+			// Global: ~/.claude/.pk.json
 			return join(this.projectDir, CK_JSON_FILE);
 		}
-		// Local: ./.claude/.ck.json
+		// Local: ./.claude/.pk.json
 		return join(this.projectDir, ".claude", CK_JSON_FILE);
 	}
 
 	/**
-	 * Load installed settings from .ck.json
+	 * Load installed settings from .pk.json
 	 */
 	async loadInstalledSettings(): Promise<InstalledSettings> {
 		const ckJsonPath = this.getCkJsonPath();
@@ -71,7 +71,7 @@ export class InstalledSettingsTracker {
 	}
 
 	/**
-	 * Save installed settings to .ck.json
+	 * Save installed settings to .pk.json
 	 */
 	async saveInstalledSettings(settings: InstalledSettings): Promise<void> {
 		const ckJsonPath = this.getCkJsonPath();

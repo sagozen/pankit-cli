@@ -26,7 +26,7 @@ export type { BatchTrackOptions, BatchTrackResult, FileTrackInfo, UninstallManif
 
 /**
  * ManifestWriter handles reading and writing installation manifests to metadata.json
- * This tracks exactly what files ClaudeKit installed for accurate uninstall
+ * This tracks exactly what files Pankit installed for accurate uninstall
  */
 export class ManifestWriter {
 	private tracker = new ManifestTracker();

@@ -2,7 +2,7 @@
  * Folder Path Transformer - Facade Module
  *
  * Transforms default folder names (docs/, plans/) to custom names during
- * ClaudeKit installation. Handles both directory renaming and path reference
+ * Pankit installation. Handles both directory renaming and path reference
  * updates in markdown and config files.
  *
  * This file re-exports all public APIs from the modular implementation.

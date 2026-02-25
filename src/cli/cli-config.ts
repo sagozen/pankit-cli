@@ -10,7 +10,7 @@ import { cac } from "cac";
  * Create and configure the CLI instance
  */
 export function createCliInstance() {
-	const cli = cac("ck");
+	const cli = cac("pk");
 
 	// Global options
 	cli.option("--verbose", "Enable verbose logging for debugging");

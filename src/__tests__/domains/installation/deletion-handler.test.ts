@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { handleDeletions } from "@/domains/installation/deletion-handler.js";
-import type { ClaudeKitMetadata, Metadata } from "@/types";
+import type { PankitMetadata, Metadata } from "@/types";
 
 describe("deletion-handler", () => {
 	let testDir: string;
@@ -45,7 +45,7 @@ describe("deletion-handler", () => {
 			};
 			writeFileSync(join(testDir, "metadata.json"), JSON.stringify(metadata));
 
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -72,7 +72,7 @@ describe("deletion-handler", () => {
 							{
 								path: "commands/modified.md",
 								checksum: "b".repeat(64),
-								ownership: "ck-modified",
+								ownership: "pk-modified",
 								installedVersion: "1.0.0",
 							},
 						],
@@ -81,7 +81,7 @@ describe("deletion-handler", () => {
 			};
 			writeFileSync(join(testDir, "metadata.json"), JSON.stringify(metadata));
 
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -117,7 +117,7 @@ describe("deletion-handler", () => {
 			};
 			writeFileSync(join(testDir, "metadata.json"), JSON.stringify(metadata));
 
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -131,7 +131,7 @@ describe("deletion-handler", () => {
 		});
 
 		test("prevents path traversal", async () => {
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -149,7 +149,7 @@ describe("deletion-handler", () => {
 			writeFileSync(join(testDir, "commands", "old", "file.md"), "content");
 			writeFileSync(join(testDir, "commands", "old", "nested", "deep.md"), "content");
 
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -163,7 +163,7 @@ describe("deletion-handler", () => {
 		});
 
 		test("handles empty deletions array", async () => {
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -178,7 +178,7 @@ describe("deletion-handler", () => {
 		});
 
 		test("handles missing deletions field", async () => {
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -190,7 +190,7 @@ describe("deletion-handler", () => {
 		});
 
 		test("handles non-existent paths gracefully", async () => {
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -233,7 +233,7 @@ describe("deletion-handler", () => {
 			};
 			writeFileSync(join(testDir, "metadata.json"), JSON.stringify(metadata));
 
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -257,7 +257,7 @@ describe("deletion-handler", () => {
 			mkdirSync(join(testDir, "commands", "nested"), { recursive: true });
 			writeFileSync(join(testDir, "commands", "nested", "file.md"), "content");
 
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",
@@ -289,7 +289,7 @@ describe("deletion-handler", () => {
 			};
 			writeFileSync(join(testDir, "metadata.json"), JSON.stringify(metadata));
 
-			const sourceMetadata: ClaudeKitMetadata = {
+			const sourceMetadata: PankitMetadata = {
 				version: "2.0.0",
 				name: "test",
 				description: "test",

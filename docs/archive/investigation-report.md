@@ -50,7 +50,7 @@ git diff eaf48e2 59913e3 -- src/lib/merge.ts shows:
 ```
 
 Impact:
-- ck new won't copy .gitignore, .repomixignore, CLAUDE.md
+- pk new won't copy .gitignore, .repomixignore, CLAUDE.md
 - Users missing critical template files on first install
 - Regression from working code
 

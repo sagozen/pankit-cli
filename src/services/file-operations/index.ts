@@ -8,15 +8,15 @@ export {
 	scanDirectoryTree,
 	filterItemsByPatterns,
 	flattenSelectedItems,
-	getClaudeKitDirectories,
+	getPankitDirectories,
 	createDefaultSelection,
 	type DirectoryItem,
 	type SelectionState,
 } from "./directory-selector.js";
 export {
-	scanClaudeKitDirectory,
-	readClaudeKitMetadata,
-	getClaudeKitSetup,
-	type ClaudeKitMetadata,
-} from "./claudekit-scanner.js";
+	scanPankitDirectory,
+	readPankitMetadata,
+	getPankitSetup,
+	type PankitMetadata,
+} from "./pankit-scanner.js";
 export { OwnershipChecker, type OwnershipCheckResult } from "./ownership-checker.js";

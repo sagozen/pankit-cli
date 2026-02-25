@@ -1,7 +1,7 @@
 /**
  * Prefix Applier
  *
- * Handles applying /ck: prefix to slash commands by:
+ * Handles applying /pk: prefix to slash commands by:
  * 1. Reorganizing the commands directory structure
  * 2. Transforming command references in file contents
  */
@@ -16,8 +16,8 @@ import { validatePath } from "./prefix-utils.js";
 /**
  * Apply prefix reorganization to commands directory
  *
- * Moves all files from .claude/commands/ to .claude/commands/ck/
- * This enables slash commands to have /ck: prefix (e.g., /ck:plan)
+ * Moves all files from .claude/commands/ to .claude/commands/pk/
+ * This enables slash commands to have /pk: prefix (e.g., /pk:plan)
  *
  * @param extractDir - Temporary extraction directory containing .claude folder
  *                     Must be absolute path, no path traversal allowed
@@ -47,7 +47,7 @@ export async function applyPrefix(extractDir: string): Promise<void> {
 		return;
 	}
 
-	logger.info("Applying /ck: prefix to slash commands...");
+	logger.info("Applying /pk: prefix to slash commands...");
 
 	const backupDir = join(extractDir, ".commands-backup");
 	const tempDir = join(extractDir, ".commands-prefix-temp");
@@ -65,7 +65,7 @@ export async function applyPrefix(extractDir: string): Promise<void> {
 			const ckDir = join(commandsDir, "ck");
 			const ckStat = await stat(ckDir);
 			if (ckStat.isDirectory()) {
-				logger.verbose("Commands already have /ck: prefix, skipping");
+				logger.verbose("Commands already have /pk: prefix, skipping");
 				return;
 			}
 		}
@@ -121,7 +121,7 @@ export async function applyPrefix(extractDir: string): Promise<void> {
 		// Cleanup backup after successful operation
 		await remove(backupDir);
 
-		logger.success("Successfully reorganized commands to /ck: prefix");
+		logger.success("Successfully reorganized commands to /pk: prefix");
 
 		// Transform command references in file contents
 		const claudeDir = join(extractDir, ".claude");
@@ -156,7 +156,7 @@ export async function applyPrefix(extractDir: string): Promise<void> {
 			});
 		}
 
-		logger.error("Failed to apply /ck: prefix to commands");
+		logger.error("Failed to apply /pk: prefix to commands");
 		throw error;
 	} finally {
 		// Always cleanup backup and temp directories

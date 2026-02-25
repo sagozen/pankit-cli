@@ -3,7 +3,7 @@ import { existsSync, mkdirSync } from "node:fs";
 import { readdir, unlink, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import type { ClaudeKitSetup } from "@/types";
+import type { PankitSetup } from "@/types";
 import { type TestPaths, setupTestPaths } from "../../helpers/test-paths.js";
 
 /**
@@ -11,11 +11,11 @@ import { type TestPaths, setupTestPaths } from "../../helpers/test-paths.js";
  * After modularization, the checker functions are standalone functions
  * imported from src/domains/health-checks/checkers/.
  */
-describe("ClaudeKitChecker - Enhanced Checks", () => {
+describe("PankitChecker - Enhanced Checks", () => {
 	let testPaths: TestPaths;
 	let mockProjectDir: string;
 	let loggerSpy: any = {};
-	let mockSetup: ClaudeKitSetup;
+	let mockSetup: PankitSetup;
 
 	beforeEach(async () => {
 		// Setup isolated test paths
@@ -37,9 +37,9 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 			global: {
 				path: testPaths.claudeDir,
 				metadata: {
-					name: "ClaudeKit",
+					name: "Pankit",
 					version: "1.0.0",
-					description: "ClaudeKit CLI tool",
+					description: "Pankit CLI tool",
 				},
 				components: {
 					agents: 0,
@@ -50,7 +50,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 			},
 			project: {
 				path: join(mockProjectDir, ".claude"),
-				metadata: null, // Not a ClaudeKit project initially
+				metadata: null, // Not a Pankit project initially
 				components: {
 					agents: 0,
 					commands: 0,
@@ -63,10 +63,10 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 		// PathResolver will automatically use testPaths.claudeDir when CK_TEST_HOME is set
 		// No need to mock it since it has built-in test support
 
-		// Mock getClaudeKitSetup
+		// Mock getPankitSetup
 		spyOn(
-			await import("../../../src/services/file-operations/claudekit-scanner.js"),
-			"getClaudeKitSetup",
+			await import("../../../src/services/file-operations/pankit-scanner.js"),
+			"getPankitSetup",
 		).mockResolvedValue(mockSetup);
 	});
 
@@ -88,7 +88,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 			const metadataPath = join(testPaths.claudeDir, "metadata.json");
 			await writeFile(
 				metadataPath,
-				JSON.stringify({ name: "ClaudeKit", version: "1.0.0", description: "ClaudeKit CLI tool" }),
+				JSON.stringify({ name: "Pankit", version: "1.0.0", description: "Pankit CLI tool" }),
 			);
 
 			const { checkGlobalDirReadable } = await import(
@@ -98,7 +98,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 
 			expect(result.id).toBe("ck-global-dir-readable");
 			expect(result.name).toBe("Global Dir Readable");
-			expect(result.group).toBe("claudekit");
+			expect(result.group).toBe("pankit");
 			expect(result.priority).toBe("standard");
 			expect(result.status).toBe("pass");
 			expect(result.message).toBe("Read access OK");
@@ -165,7 +165,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 
 			expect(result.id).toBe("ck-global-dir-writable");
 			expect(result.name).toBe("Global Dir Writable");
-			expect(result.group).toBe("claudekit");
+			expect(result.group).toBe("pankit");
 			expect(result.priority).toBe("standard");
 			expect(result.status).toBe("pass");
 			expect(result.message).toBe("Write access OK");
@@ -219,7 +219,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 
 			expect(result.id).toBe("ck-hooks-exist");
 			expect(result.name).toBe("Hooks Directory");
-			expect(result.group).toBe("claudekit");
+			expect(result.group).toBe("pankit");
 			expect(result.priority).toBe("standard");
 			expect(result.status).toBe("info");
 			expect(result.message).toBe("No hooks directory");
@@ -347,7 +347,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 
 			expect(result.id).toBe("ck-settings-valid");
 			expect(result.name).toBe("Settings.json");
-			expect(result.group).toBe("claudekit");
+			expect(result.group).toBe("pankit");
 			expect(result.priority).toBe("extended");
 			expect(result.status).toBe("pass");
 			expect(result.message).toBe("Valid JSON");
@@ -464,7 +464,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 
 			expect(result.id).toBe("ck-path-refs-valid");
 			expect(result.name).toBe("Path References");
-			expect(result.group).toBe("claudekit");
+			expect(result.group).toBe("pankit");
 			expect(result.priority).toBe("extended");
 			expect(result.status).toBe("info");
 			expect(result.message).toBe("No CLAUDE.md found");
@@ -626,7 +626,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 
 			expect(result.id).toBe("ck-project-config-complete");
 			expect(result.name).toBe("Project Config Completeness");
-			expect(result.group).toBe("claudekit");
+			expect(result.group).toBe("pankit");
 			expect(result.priority).toBe("standard");
 			expect(result.status).toBe("info");
 			expect(result.message).toBe("Not in a project directory");
@@ -690,7 +690,7 @@ describe("ClaudeKitChecker - Enhanced Checks", () => {
 			expect(result.status).toBe("fail");
 			expect(result.message).toBe("Incomplete configuration");
 			expect(result.details).toBe("Only CLAUDE.md found - missing agents, commands, rules, skills");
-			expect(result.suggestion).toBe("Run 'ck init' to install complete ClaudeKit in project");
+			expect(result.suggestion).toBe("Run 'ck init' to install complete Pankit in project");
 		});
 
 		test("fails when all required directories are missing", async () => {

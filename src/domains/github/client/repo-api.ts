@@ -26,14 +26,14 @@ export class RepoApi {
 			// Custom 404 with additional account verification hint
 			if (error?.status === 404) {
 				throw new GitHubError(
-					`Cannot access ${kit.name} repository.\n\nPossible causes:\n  • You haven't accepted the GitHub repository invitation\n  • You're not added as a collaborator yet\n  • You're logged into a different GitHub account\n\nSolutions:\n  1. Check email for GitHub invitation and accept it\n  2. Re-authenticate: gh auth login (select 'Login with a web browser')\n  3. Verify you're using the correct GitHub account\n  4. Wait 2-5 minutes after accepting invitation for permissions to sync\n\nNeed help? Run with: ck new --verbose`,
+					`Cannot access ${kit.name} repository.\n\nPossible causes:\n  • You haven't accepted the GitHub repository invitation\n  • You're not added as a collaborator yet\n  • You're logged into a different GitHub account\n\nSolutions:\n  1. Check email for GitHub invitation and accept it\n  2. Re-authenticate: gh auth login (select 'Login with a web browser')\n  3. Verify you're using the correct GitHub account\n  4. Wait 2-5 minutes after accepting invitation for permissions to sync\n\nNeed help? Run with: pk new --verbose`,
 					404,
 				);
 			}
 			return handleHttpError(error, {
 				kit,
 				operation: "check repository access",
-				verboseFlag: "ck new --verbose",
+				verboseFlag: "pk new --verbose",
 			});
 		}
 	}

@@ -4,9 +4,9 @@
  */
 import { NpmRegistryClient } from "@/domains/github/npm-registry.js";
 import {
-	CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
-	CLAUDEKIT_CLI_NPM_PACKAGE_URL,
-} from "@/shared/claudekit-constants.js";
+	PANKIT_CLI_NPM_PACKAGE_NAME,
+	PANKIT_CLI_NPM_PACKAGE_URL,
+} from "@/shared/pankit-constants.js";
 import { logger } from "@/shared/logger.js";
 import { compareVersions } from "compare-versions";
 import {
@@ -31,7 +31,7 @@ export class CliVersionChecker {
 
 		try {
 			const latestVersion = await NpmRegistryClient.getLatestVersion(
-				CLAUDEKIT_CLI_NPM_PACKAGE_NAME,
+				PANKIT_CLI_NPM_PACKAGE_NAME,
 			);
 
 			if (!latestVersion) {
@@ -61,7 +61,7 @@ export class CliVersionChecker {
 				currentVersion: current,
 				latestVersion: latest,
 				updateAvailable,
-				releaseUrl: CLAUDEKIT_CLI_NPM_PACKAGE_URL,
+				releaseUrl: PANKIT_CLI_NPM_PACKAGE_URL,
 			};
 		} catch (error) {
 			logger.debug(`CLI version check failed: ${error}`);

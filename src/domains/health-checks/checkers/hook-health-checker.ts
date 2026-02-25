@@ -3,7 +3,7 @@ import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { readdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { CLAUDEKIT_CLI_NPM_PACKAGE_NAME } from "@/shared/claudekit-constants.js";
+import { PANKIT_CLI_NPM_PACKAGE_NAME } from "@/shared/pankit-constants.js";
 import { logger } from "@/shared/logger.js";
 import { PathResolver } from "@/shared/path-resolver.js";
 import type { CheckResult } from "../types.js";
@@ -42,7 +42,7 @@ export async function checkHookSyntax(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "hook-syntax",
 			name: "Hook Syntax",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "info",
 			message: "No hooks directory",
@@ -58,7 +58,7 @@ export async function checkHookSyntax(projectDir: string): Promise<CheckResult> 
 			return {
 				id: "hook-syntax",
 				name: "Hook Syntax",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "info",
 				message: "No .cjs hooks found",
@@ -84,7 +84,7 @@ export async function checkHookSyntax(projectDir: string): Promise<CheckResult> 
 			return {
 				id: "hook-syntax",
 				name: "Hook Syntax",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "fail",
 				message: `${errors.length} hook(s) with syntax errors`,
@@ -96,7 +96,7 @@ export async function checkHookSyntax(projectDir: string): Promise<CheckResult> 
 					description: "Reinstall hooks via ck init",
 					execute: async () => ({
 						success: false,
-						message: "Manual fix required: run 'ck init'",
+						message: "Manual fix required: run 'pk init'",
 					}),
 				},
 			};
@@ -105,7 +105,7 @@ export async function checkHookSyntax(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "hook-syntax",
 			name: "Hook Syntax",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "pass",
 			message: `${cjsFiles.length} hook(s) valid`,
@@ -116,7 +116,7 @@ export async function checkHookSyntax(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "hook-syntax",
 			name: "Hook Syntax",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "fail",
 			message: "Failed to check hook syntax",
@@ -136,7 +136,7 @@ export async function checkHookDeps(projectDir: string): Promise<CheckResult> {
 		return {
 			id: "hook-deps",
 			name: "Hook Dependencies",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "info",
 			message: "No hooks directory",
@@ -152,7 +152,7 @@ export async function checkHookDeps(projectDir: string): Promise<CheckResult> {
 			return {
 				id: "hook-deps",
 				name: "Hook Dependencies",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "info",
 				message: "No .cjs hooks found",
@@ -200,7 +200,7 @@ export async function checkHookDeps(projectDir: string): Promise<CheckResult> {
 			return {
 				id: "hook-deps",
 				name: "Hook Dependencies",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "fail",
 				message: `${missingDeps.length} missing dependency(ies)`,
@@ -212,7 +212,7 @@ export async function checkHookDeps(projectDir: string): Promise<CheckResult> {
 					description: "Reinstall hooks via ck init",
 					execute: async () => ({
 						success: false,
-						message: "Manual fix required: run 'ck init'",
+						message: "Manual fix required: run 'pk init'",
 					}),
 				},
 			};
@@ -221,7 +221,7 @@ export async function checkHookDeps(projectDir: string): Promise<CheckResult> {
 		return {
 			id: "hook-deps",
 			name: "Hook Dependencies",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "pass",
 			message: "All dependencies resolved",
@@ -232,7 +232,7 @@ export async function checkHookDeps(projectDir: string): Promise<CheckResult> {
 		return {
 			id: "hook-deps",
 			name: "Hook Dependencies",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "fail",
 			message: "Failed to check dependencies",
@@ -293,7 +293,7 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 		return {
 			id: "hook-runtime",
 			name: "Hook Runtime",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "No hooks directory",
@@ -309,7 +309,7 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 			return {
 				id: "hook-runtime",
 				name: "Hook Runtime",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "info",
 				message: "No .cjs hooks found",
@@ -348,7 +348,7 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 			return {
 				id: "hook-runtime",
 				name: "Hook Runtime",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "fail",
 				message: `${failures.length} hook(s) failed dry-run`,
@@ -360,7 +360,7 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 					description: "Reinstall hooks via ck init",
 					execute: async () => ({
 						success: false,
-						message: "Manual fix required: run 'ck init'",
+						message: "Manual fix required: run 'pk init'",
 					}),
 				},
 			};
@@ -369,7 +369,7 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 		return {
 			id: "hook-runtime",
 			name: "Hook Runtime",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: `${cjsFiles.length} hook(s) passed dry-run`,
@@ -380,7 +380,7 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 		return {
 			id: "hook-runtime",
 			name: "Hook Runtime",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: "Failed to check hook runtime",
@@ -394,8 +394,8 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
  * Check hook configuration validity
  */
 export async function checkHookConfig(projectDir: string): Promise<CheckResult> {
-	const projectConfigPath = join(projectDir, ".claude", ".ck.json");
-	const globalConfigPath = join(PathResolver.getGlobalKitDir(), ".ck.json");
+	const projectConfigPath = join(projectDir, ".claude", ".pk.json");
+	const globalConfigPath = join(PathResolver.getGlobalKitDir(), ".pk.json");
 
 	// Prefer project config, fallback to global
 	const configPath = existsSync(projectConfigPath)
@@ -408,10 +408,10 @@ export async function checkHookConfig(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "hook-config",
 			name: "Hook Config",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
-			message: "No .ck.json config",
+			message: "No .pk.json config",
 			autoFixable: false,
 		};
 	}
@@ -421,7 +421,7 @@ export async function checkHookConfig(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "hook-config",
 			name: "Hook Config",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "No hooks directory",
@@ -437,7 +437,7 @@ export async function checkHookConfig(projectDir: string): Promise<CheckResult> 
 			return {
 				id: "hook-config",
 				name: "Hook Config",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "pass",
 				message: "No hooks configured",
@@ -470,16 +470,16 @@ export async function checkHookConfig(projectDir: string): Promise<CheckResult> 
 			return {
 				id: "hook-config",
 				name: "Hook Config",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "warn",
 				message: `${orphanedEntries.length} orphaned config entry(ies)`,
 				details: orphanedEntries.join(", "),
-				suggestion: "Remove orphaned entries from .ck.json",
+				suggestion: "Remove orphaned entries from .pk.json",
 				autoFixable: true,
 				fix: {
 					id: "fix-hook-config",
-					description: "Remove orphaned entries from .ck.json",
+					description: "Remove orphaned entries from .pk.json",
 					execute: async () => {
 						try {
 							for (const entry of orphanedEntries) {
@@ -494,7 +494,7 @@ export async function checkHookConfig(projectDir: string): Promise<CheckResult> 
 						} catch (err) {
 							return {
 								success: false,
-								message: `Failed to update .ck.json: ${err}`,
+								message: `Failed to update .pk.json: ${err}`,
 							};
 						}
 					},
@@ -505,7 +505,7 @@ export async function checkHookConfig(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "hook-config",
 			name: "Hook Config",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: "All config entries valid",
@@ -516,7 +516,7 @@ export async function checkHookConfig(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "hook-config",
 			name: "Hook Config",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: "Failed to validate config",
@@ -536,7 +536,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 		return {
 			id: "hook-logs",
 			name: "Hook Crash Logs",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "info",
 			message: "No hooks directory",
@@ -550,7 +550,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 		return {
 			id: "hook-logs",
 			name: "Hook Crash Logs",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: "No crash logs",
@@ -565,7 +565,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 			return {
 				id: "hook-logs",
 				name: "Hook Crash Logs",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "warn",
 				message: `Log file too large (${Math.round(logStats.size / 1024 / 1024)}MB)`,
@@ -613,7 +613,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 			return {
 				id: "hook-logs",
 				name: "Hook Crash Logs",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "pass",
 				message: "No crashes in last 24h",
@@ -626,7 +626,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 			return {
 				id: "hook-logs",
 				name: "Hook Crash Logs",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "warn",
 				message: `${crashes.length} crash(es) in last 24h`,
@@ -671,7 +671,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 		return {
 			id: "hook-logs",
 			name: "Hook Crash Logs",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: `${crashes.length} crashes in last 24h`,
@@ -686,7 +686,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 						writeFileSync(logPath, "", "utf-8");
 						return {
 							success: true,
-							message: "Cleared crash log. Run 'ck init' to reinstall hooks.",
+							message: "Cleared crash log. Run 'pk init' to reinstall hooks.",
 						};
 					} catch (err) {
 						return {
@@ -702,7 +702,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 		return {
 			id: "hook-logs",
 			name: "Hook Crash Logs",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: "Failed to check crash logs",
@@ -732,7 +732,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 			return {
 				id: "cli-version",
 				name: "CLI Version",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "warn",
 				message: "Cannot determine installed version",
@@ -741,7 +741,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 		}
 
 		// Get latest version from npm
-		const npmResult = spawnSync("npm", ["view", CLAUDEKIT_CLI_NPM_PACKAGE_NAME, "version"], {
+		const npmResult = spawnSync("npm", ["view", PANKIT_CLI_NPM_PACKAGE_NAME, "version"], {
 			timeout: HOOK_CHECK_TIMEOUT_MS,
 			encoding: "utf-8",
 		});
@@ -750,7 +750,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 			return {
 				id: "cli-version",
 				name: "CLI Version",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "warn",
 				message: `v${installedVersion} (unable to check for updates)`,
@@ -769,7 +769,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 			return {
 				id: "cli-version",
 				name: "CLI Version",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "fail",
 				message: `v${installedVersion} (latest: v${latestVersion})`,
@@ -781,7 +781,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 					description: "Update CLI to latest version",
 					execute: async () => ({
 						success: false,
-						message: "Manual fix required: run 'ck update'",
+						message: "Manual fix required: run 'pk update'",
 					}),
 				},
 			};
@@ -792,7 +792,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 			return {
 				id: "cli-version",
 				name: "CLI Version",
-				group: "claudekit",
+				group: "pankit",
 				priority: "critical",
 				status: "warn",
 				message: `v${installedVersion} (latest: v${latestVersion})`,
@@ -804,7 +804,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 					description: "Update CLI to latest version",
 					execute: async () => ({
 						success: false,
-						message: "Manual fix required: run 'ck update'",
+						message: "Manual fix required: run 'pk update'",
 					}),
 				},
 			};
@@ -813,7 +813,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 		return {
 			id: "cli-version",
 			name: "CLI Version",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "pass",
 			message: `v${installedVersion} (up to date)`,
@@ -824,7 +824,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 		return {
 			id: "cli-version",
 			name: "CLI Version",
-			group: "claudekit",
+			group: "pankit",
 			priority: "critical",
 			status: "warn",
 			message: "Failed to check version",
@@ -855,7 +855,7 @@ export async function checkPythonVenv(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "python-venv",
 			name: "Python Venv",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "warn",
 			message: "Virtual environment not found",
@@ -882,7 +882,7 @@ export async function checkPythonVenv(projectDir: string): Promise<CheckResult> 
 			return {
 				id: "python-venv",
 				name: "Python Venv",
-				group: "claudekit",
+				group: "pankit",
 				priority: "standard",
 				status: "fail",
 				message: "Python venv exists but broken",
@@ -904,7 +904,7 @@ export async function checkPythonVenv(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "python-venv",
 			name: "Python Venv",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "pass",
 			message: version,
@@ -915,7 +915,7 @@ export async function checkPythonVenv(projectDir: string): Promise<CheckResult> 
 		return {
 			id: "python-venv",
 			name: "Python Venv",
-			group: "claudekit",
+			group: "pankit",
 			priority: "standard",
 			status: "fail",
 			message: "Failed to check venv",

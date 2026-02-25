@@ -93,7 +93,7 @@ export async function resolveOptions(ctx: InitContext): Promise<InitContext> {
 	if (validOptions.fresh && validOptions.sync) {
 		throw new Error(
 			"--fresh and --sync are mutually exclusive.\n\n" +
-				"--fresh: Removes all ClaudeKit files and reinstalls from scratch\n" +
+				"--fresh: Removes all Pankit files and reinstalls from scratch\n" +
 				"--sync: Updates to match the version in metadata.json\n\n" +
 				"Choose one approach.",
 		);

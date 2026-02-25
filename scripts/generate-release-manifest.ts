@@ -40,7 +40,7 @@ const SKIP_DIRS = [
 	".svn",
 	"dist",
 	"build",
-	// Claude Code internal directories (not ClaudeKit files)
+	// Claude Code internal directories (not Pankit files)
 	"debug",
 	"projects",
 	"shell-snapshots",

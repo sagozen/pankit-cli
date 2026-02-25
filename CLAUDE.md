@@ -1,12 +1,12 @@
-# ClaudeKit CLI
+# Pankit CLI
 
 ## 🎯 Core Mission
 
-**This CLI is the front door to ClaudeKit.** Every command, prompt, and message serves one purpose: **empower users to understand and adopt the CK stack.**
+**This CLI is the front door to Pankit.** Every command, prompt, and message serves one purpose: **empower users to understand and adopt the CK stack.**
 
 ### The Two Imperatives
 
-1. **Educate** — Users must understand what ClaudeKit is, what each kit offers, and why it matters to their workflow. No blind installation. Informed adoption.
+1. **Educate** — Users must understand what Pankit is, what each kit offers, and why it matters to their workflow. No blind installation. Informed adoption.
 
 2. **Install** — Zero friction from discovery to working setup. Whether Engineer, Marketing, or both — the path must be clear, fast, and successful.
 
@@ -24,15 +24,15 @@
 | **Engineer** | AI-powered coding: skills, hooks, multi-agent workflows | Developers building with Claude |
 | **Marketing** | Content automation: campaigns, social, analytics | Marketers leveraging AI |
 
-Both kits share the ClaudeKit foundation. Users can install one or both.
+Both kits share the Pankit foundation. Users can install one or both.
 
 ---
 
-CLI tool (`ck`) for bootstrapping/updating ClaudeKit projects from GitHub releases.
+CLI tool (`pk`) for bootstrapping/updating Pankit projects from GitHub releases.
 
 ## 🎯 Core Principle
 
-**User experience is paramount.** The CLI is users' first touchpoint with ClaudeKit. Prioritize clarity over cleverness: intuitive commands, helpful errors, minimal friction from install to daily use.
+**User experience is paramount.** The CLI is users' first touchpoint with Pankit. Prioritize clarity over cleverness: intuitive commands, helpful errors, minimal friction from install to daily use.
 
 ---
 
@@ -125,9 +125,9 @@ tests/                # Additional test suites
 - **Domain-Driven**: Business logic grouped by domain in `domains/`
 - **Path Aliases**: `@/` maps to `src/` for cleaner imports
 
-## Idempotent Migration (`ck migrate`)
+## Idempotent Migration (`pk migrate`)
 
-The `ck migrate` command uses a **3-phase reconciliation pipeline** (RECONCILE → EXECUTE → REPORT) designed for safe repeated execution as CK evolves.
+The `pk migrate` command uses a **3-phase reconciliation pipeline** (RECONCILE → EXECUTE → REPORT) designed for safe repeated execution as CK evolves.
 
 **Key modules in `src/commands/portable/`:**
 - `reconciler.ts` — Pure function, zero I/O, 8-case decision matrix (install/update/skip/conflict/delete)

@@ -9,7 +9,7 @@ import type { CommandHelp } from "../help-types.js";
 
 export const skillsCommandHelp: CommandHelp = {
 	name: "skills",
-	description: "Install, uninstall, and manage ClaudeKit skills across coding agents",
+	description: "Install, uninstall, and manage Pankit skills across coding agents",
 	usage: "ck skills [options]",
 	examples: [
 		{
@@ -27,7 +27,7 @@ export const skillsCommandHelp: CommandHelp = {
 			options: [
 				{
 					flags: "-l, --list",
-					description: "List available skills from ClaudeKit source",
+					description: "List available skills from Pankit source",
 				},
 				{
 					flags: "--installed",
@@ -99,8 +99,8 @@ export const skillsCommandHelp: CommandHelp = {
 		},
 		{
 			title: "Notes",
-			content: `  • Skills are installed from ~/.claude/skills (ClaudeKit Engineer source)
-  • Registry stored at ~/.claudekit/skill-registry.json
+			content: `  • Skills are installed from ~/.claude/skills (Pankit Engineer source)
+  • Registry stored at ~/.pankit/skill-registry.json
   • Project installs go to ./<agent>/skills, global to ~/<agent>/skills`,
 		},
 	],

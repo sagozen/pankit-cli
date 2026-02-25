@@ -1,6 +1,6 @@
 /**
- * CkConfigManager - Full .ck.json config management with source tracking
- * Handles global (~/.claude/.ck.json) and project (.claude/.ck.json) configs
+ * CkConfigManager - Full .pk.json config management with source tracking
+ * Handles global (~/.claude/.pk.json) and project (.claude/.pk.json) configs
  */
 
 import { existsSync } from "node:fs";
@@ -16,7 +16,7 @@ import {
 	DEFAULT_CK_CONFIG,
 } from "@/types";
 
-const CK_CONFIG_FILE = ".ck.json";
+const CK_CONFIG_FILE = ".pk.json";
 
 /**
  * Get nested value from object using dot-notation path
@@ -120,7 +120,7 @@ export class CkConfigManager {
 	}
 
 	/**
-	 * Get the global config file path (~/.claude/.ck.json)
+	 * Get the global config file path (~/.claude/.pk.json)
 	 */
 	static getGlobalConfigPath(): string {
 		return join(CkConfigManager.getGlobalConfigDir(), CK_CONFIG_FILE);
@@ -134,7 +134,7 @@ export class CkConfigManager {
 	}
 
 	/**
-	 * Get the project config file path (projectDir/.claude/.ck.json)
+	 * Get the project config file path (projectDir/.claude/.pk.json)
 	 */
 	static getProjectConfigPath(projectDir: string): string {
 		return join(CkConfigManager.getProjectConfigDir(projectDir), CK_CONFIG_FILE);
@@ -307,14 +307,14 @@ export class CkConfigManager {
 	}
 
 	/**
-	 * Check if project-level .ck.json exists
+	 * Check if project-level .pk.json exists
 	 * @param dir - Project directory (or ~/.claude for global)
-	 * @param isGlobal - If true, check dir/.ck.json (global config);
-	 *                   if false or undefined (default), check dir/.claude/.ck.json (project config)
+	 * @param isGlobal - If true, check dir/.pk.json (global config);
+	 *                   if false or undefined (default), check dir/.claude/.pk.json (project config)
 	 * @returns true if config file exists
 	 */
 	static projectConfigExists(dir: string, isGlobal?: boolean): boolean {
-		const configPath = isGlobal ? join(dir, ".ck.json") : CkConfigManager.getProjectConfigPath(dir);
+		const configPath = isGlobal ? join(dir, ".pk.json") : CkConfigManager.getProjectConfigPath(dir);
 		return existsSync(configPath);
 	}
 

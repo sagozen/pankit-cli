@@ -79,12 +79,12 @@ export async function processFileOwnership(
 		return true; // Can delete
 	}
 
-	if (ownershipResult.ownership === "ck-modified") {
+	if (ownershipResult.ownership === "pk-modified") {
 		// Modified file - check forceOverwrite
 		if (forceOverwrite) {
 			accumulator.results.push({
 				path: relativePath,
-				ownership: "ck-modified",
+				ownership: "pk-modified",
 				action: "delete",
 				reason: "force overwrite",
 			});
@@ -99,7 +99,7 @@ export async function processFileOwnership(
 
 		accumulator.results.push({
 			path: relativePath,
-			ownership: "ck-modified",
+			ownership: "pk-modified",
 			action: "preserve",
 			reason: "modified by user",
 		});

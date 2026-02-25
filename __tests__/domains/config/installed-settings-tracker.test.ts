@@ -159,7 +159,7 @@ describe("InstalledSettingsTracker", () => {
 
 			await tracker.saveInstalledSettings(settings);
 
-			// Should save to testDir/.ck.json (not testDir/.claude/.ck.json)
+			// Should save to testDir/.pk.json (not testDir/.claude/.pk.json)
 			const newTracker = new InstalledSettingsTracker(testDir, true);
 			const loaded = await newTracker.loadInstalledSettings();
 			expect(loaded.hooks).toContain("test-hook");

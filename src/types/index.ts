@@ -62,9 +62,9 @@ export {
 	ConfigSchema,
 	type Config,
 	type ComponentCounts,
-	type ClaudeKitMetadata,
-	type ClaudeKitSetupInfo,
-	type ClaudeKitSetup,
+	type PankitMetadata,
+	type PankitSetupInfo,
+	type PankitSetup,
 } from "./metadata.js";
 
 // Skills types
@@ -83,7 +83,7 @@ export {
 
 // Error types
 export {
-	ClaudeKitError,
+	PankitError,
 	AuthenticationError,
 	GitHubError,
 	DownloadError,
@@ -103,7 +103,7 @@ export type {
 	InstallResult,
 } from "./common.js";
 
-// ClaudeKit data types
+// Pankit data types
 export {
 	RegisteredProjectSchema,
 	type RegisteredProject,
@@ -112,9 +112,9 @@ export {
 	ProjectsRegistrySchema,
 	type ProjectsRegistry,
 	DEFAULT_PROJECTS_REGISTRY,
-} from "./claudekit-data.js";
+} from "./pankit-data.js";
 
-// CkConfig types (.ck.json schema)
+// CkConfig types (.pk.json schema)
 export {
 	// Enums and primitives
 	PlanValidationModeSchema,
@@ -168,4 +168,4 @@ export {
 	DEFAULT_CK_CONFIG,
 	CK_HOOK_NAMES,
 	type CkHookName,
-} from "./ck-config.js";
+} from "./pk-config.js";

@@ -1,6 +1,6 @@
 /**
  * Setup command orchestrator
- * Guides users through ClaudeKit setup: preflight checks, environment config, optional packages, and kit installation
+ * Guides users through Pankit setup: preflight checks, environment config, optional packages, and kit installation
  */
 
 import { PathResolver } from "@/shared/path-resolver.js";
@@ -33,7 +33,7 @@ function createContext(options: SetupOptions): SetupContext {
  * Runs all phases in sequence
  */
 export async function setupCommand(options: SetupOptions): Promise<void> {
-	clack.intro("ClaudeKit Setup Wizard");
+	clack.intro("Pankit Setup Wizard");
 
 	// Create context
 	let ctx = createContext(options);
@@ -67,7 +67,7 @@ export async function setupCommand(options: SetupOptions): Promise<void> {
 	}
 
 	// Success message
-	clack.outro("Setup complete! ClaudeKit is ready to use.");
+	clack.outro("Setup complete! Pankit is ready to use.");
 
 	if (ctx.packagesInstalled.length > 0) {
 		clack.log.success(`Installed packages: ${ctx.packagesInstalled.join(", ")}`);

@@ -4,7 +4,7 @@ import type { GitHubRelease } from "@/types";
 
 describe("GitHubClient - Asset Download Priority", () => {
 	describe("getDownloadableAsset", () => {
-		test("should prioritize ClaudeKit Engineer Package zip file", () => {
+		test("should prioritize Pankit Engineer Package zip file", () => {
 			const release: GitHubRelease = {
 				id: 1,
 				tag_name: "v1.0.0",
@@ -24,9 +24,9 @@ describe("GitHubClient - Asset Download Priority", () => {
 					},
 					{
 						id: 2,
-						name: "ClaudeKit-Engineer-Package.zip",
+						name: "Pankit-Engineer-Package.zip",
 						url: "https://api.github.com/repos/test/repo/releases/assets/2",
-						browser_download_url: "https://github.com/test/claudekit-package.zip",
+						browser_download_url: "https://github.com/test/pankit-package.zip",
 						size: 2048,
 						content_type: "application/zip",
 					},
@@ -36,12 +36,12 @@ describe("GitHubClient - Asset Download Priority", () => {
 			const result = GitHubClient.getDownloadableAsset(release);
 
 			expect(result.type).toBe("asset");
-			expect(result.name).toBe("ClaudeKit-Engineer-Package.zip");
+			expect(result.name).toBe("Pankit-Engineer-Package.zip");
 			expect(result.url).toBe("https://api.github.com/repos/test/repo/releases/assets/2");
 			expect(result.size).toBe(2048);
 		});
 
-		test("should prioritize ClaudeKit Marketing Package zip file", () => {
+		test("should prioritize Pankit Marketing Package zip file", () => {
 			const release: GitHubRelease = {
 				id: 1,
 				tag_name: "v1.0.0",
@@ -61,7 +61,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 					},
 					{
 						id: 2,
-						name: "ClaudeKit-Marketing-Package.zip",
+						name: "Pankit-Marketing-Package.zip",
 						url: "https://api.github.com/repos/test/repo/releases/assets/2",
 						browser_download_url: "https://github.com/test/marketing-package.zip",
 						size: 2048,
@@ -73,11 +73,11 @@ describe("GitHubClient - Asset Download Priority", () => {
 			const result = GitHubClient.getDownloadableAsset(release);
 
 			expect(result.type).toBe("asset");
-			expect(result.name).toBe("ClaudeKit-Marketing-Package.zip");
+			expect(result.name).toBe("Pankit-Marketing-Package.zip");
 			expect(result.url).toBe("https://api.github.com/repos/test/repo/releases/assets/2");
 		});
 
-		test("should match ClaudeKit package case-insensitively", () => {
+		test("should match Pankit package case-insensitively", () => {
 			const release: GitHubRelease = {
 				id: 1,
 				tag_name: "v1.0.0",
@@ -89,7 +89,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 				assets: [
 					{
 						id: 1,
-						name: "claudekit-engineer-package.zip",
+						name: "pankit-engineer-package.zip",
 						url: "https://api.github.com/repos/test/repo/releases/assets/1",
 						browser_download_url: "https://github.com/test/package.zip",
 						size: 2048,
@@ -101,10 +101,10 @@ describe("GitHubClient - Asset Download Priority", () => {
 			const result = GitHubClient.getDownloadableAsset(release);
 
 			expect(result.type).toBe("asset");
-			expect(result.name).toBe("claudekit-engineer-package.zip");
+			expect(result.name).toBe("pankit-engineer-package.zip");
 		});
 
-		test("should fallback to other zip files if no ClaudeKit package found", () => {
+		test("should fallback to other zip files if no Pankit package found", () => {
 			const release: GitHubRelease = {
 				id: 1,
 				tag_name: "v1.0.0",
@@ -240,7 +240,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 			expect(result.url).toBe("https://api.github.com/repos/test/repo/tarball/v1.0.0");
 		});
 
-		test("should prioritize ClaudeKit package over other archives", () => {
+		test("should prioritize Pankit package over other archives", () => {
 			const release: GitHubRelease = {
 				id: 1,
 				tag_name: "v1.0.0",
@@ -268,7 +268,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 					},
 					{
 						id: 3,
-						name: "ClaudeKit-Engineer-Package.zip",
+						name: "Pankit-Engineer-Package.zip",
 						url: "https://api.github.com/repos/test/repo/releases/assets/3",
 						browser_download_url: "https://github.com/test/package.zip",
 						size: 2000,
@@ -279,9 +279,9 @@ describe("GitHubClient - Asset Download Priority", () => {
 
 			const result = GitHubClient.getDownloadableAsset(release);
 
-			// Should pick the ClaudeKit package even though it's listed last
+			// Should pick the Pankit package even though it's listed last
 			expect(result.type).toBe("asset");
-			expect(result.name).toBe("ClaudeKit-Engineer-Package.zip");
+			expect(result.name).toBe("Pankit-Engineer-Package.zip");
 			expect(result.size).toBe(2000);
 		});
 
@@ -297,7 +297,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 				assets: [
 					{
 						id: 1,
-						name: "claudekit_marketing_package.zip",
+						name: "pankit_marketing_package.zip",
 						url: "https://api.github.com/repos/test/repo/releases/assets/1",
 						browser_download_url: "https://github.com/test/package.zip",
 						size: 2000,
@@ -309,7 +309,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 			const result = GitHubClient.getDownloadableAsset(release);
 
 			expect(result.type).toBe("asset");
-			expect(result.name).toBe("claudekit_marketing_package.zip");
+			expect(result.name).toBe("pankit_marketing_package.zip");
 		});
 
 		test("should handle assets with spaces in name", () => {
@@ -332,7 +332,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 					},
 					{
 						id: 2,
-						name: "ClaudeKit Engineer Package.zip",
+						name: "Pankit Engineer Package.zip",
 						url: "https://api.github.com/repos/test/repo/releases/assets/2",
 						browser_download_url: "https://github.com/test/package.zip",
 						size: 3334963,
@@ -344,7 +344,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 			const result = GitHubClient.getDownloadableAsset(release);
 
 			expect(result.type).toBe("asset");
-			expect(result.name).toBe("ClaudeKit Engineer Package.zip");
+			expect(result.name).toBe("Pankit Engineer Package.zip");
 			expect(result.size).toBe(3334963);
 		});
 
@@ -384,7 +384,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 			expect(result.url).toBe("https://api.github.com/repos/test/repo/tarball/v1.0.0");
 		});
 
-		test("should prioritize ClaudeKit package over source code archives", () => {
+		test("should prioritize Pankit package over source code archives", () => {
 			const release: GitHubRelease = {
 				id: 1,
 				tag_name: "v1.4.0",
@@ -404,7 +404,7 @@ describe("GitHubClient - Asset Download Priority", () => {
 					},
 					{
 						id: 2,
-						name: "ClaudeKit Engineer Package.zip",
+						name: "Pankit Engineer Package.zip",
 						url: "https://api.github.com/repos/test/repo/releases/assets/2",
 						browser_download_url: "https://github.com/test/package.zip",
 						size: 3334963,
@@ -423,9 +423,9 @@ describe("GitHubClient - Asset Download Priority", () => {
 
 			const result = GitHubClient.getDownloadableAsset(release);
 
-			// Should pick the ClaudeKit package and ignore source code archives
+			// Should pick the Pankit package and ignore source code archives
 			expect(result.type).toBe("asset");
-			expect(result.name).toBe("ClaudeKit Engineer Package.zip");
+			expect(result.name).toBe("Pankit Engineer Package.zip");
 			expect(result.size).toBe(3334963);
 		});
 	});

@@ -2,7 +2,7 @@
  * Handler for `ck projects remove [alias]` command
  */
 
-import { ProjectsRegistryManager } from "@/domains/claudekit-data/index.js";
+import { ProjectsRegistryManager } from "@/domains/pankit-data/index.js";
 import { logger } from "@/shared/logger.js";
 import { confirm, intro, isCancel, log, outro, select } from "@/shared/safe-prompts.js";
 import picocolors from "picocolors";

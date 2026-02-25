@@ -213,7 +213,7 @@ export class SyncEngine {
 				continue;
 			}
 
-			// For ck-modified or files without baseChecksum, check if user modified
+			// For pk-modified or files without baseChecksum, check if user modified
 			const currentChecksum = await OwnershipChecker.calculateChecksum(localPath);
 
 			// Use baseChecksum if available, otherwise fall back to checksum (migration)

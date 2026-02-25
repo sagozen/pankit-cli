@@ -1,8 +1,8 @@
 {
 	"$schema": "https://json-schema.org/draft-07/schema#",
-	"$id": "https://claudekit.cc/schemas/ck-config.schema.json",
-	"title": "ClaudeKit Configuration",
-	"description": "Configuration schema for ClaudeKit Engineer .ck.json files",
+	"$id": "https://pankit.cc/schemas/ck-config.schema.json",
+	"title": "Pankit Configuration",
+	"description": "Configuration schema for Pankit Engineer .pk.json files",
 	"type": "object",
 	"properties": {
 		"$schema": {

@@ -142,12 +142,12 @@ describe("sync-handler integration", () => {
 			const files = [
 				{ path: "a.md", ownership: "user" },
 				{ path: "b.md", ownership: "ck" },
-				{ path: "c.md", ownership: "ck-modified" },
+				{ path: "c.md", ownership: "pk-modified" },
 			];
 
 			const userOwned = files.filter((f) => f.ownership === "user");
 			const ckOwned = files.filter((f) => f.ownership === "ck");
-			const ckModified = files.filter((f) => f.ownership === "ck-modified");
+			const ckModified = files.filter((f) => f.ownership === "pk-modified");
 
 			expect(userOwned).toHaveLength(1);
 			expect(ckOwned).toHaveLength(1);
@@ -273,7 +273,7 @@ describe("sync-handler integration", () => {
 		});
 
 		it("validates file object has required fields", () => {
-			const file = { path: "test.md", checksum: "abc123", ownership: "ck-modified" };
+			const file = { path: "test.md", checksum: "abc123", ownership: "pk-modified" };
 			expect(file).toHaveProperty("path");
 			expect(file).toHaveProperty("checksum");
 			expect(file).toHaveProperty("ownership");

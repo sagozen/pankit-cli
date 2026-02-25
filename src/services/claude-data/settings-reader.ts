@@ -17,7 +17,7 @@ export interface ClaudeSettings {
 
 const claudeDir = join(homedir(), ".claude");
 const settingsFilename = "settings.json";
-const settingsBackupDir = join(claudeDir, ".ck-backups", "settings");
+const settingsBackupDir = join(claudeDir, ".pk-backups", "settings");
 
 export function getSettingsPath(): string {
 	return join(claudeDir, settingsFilename);

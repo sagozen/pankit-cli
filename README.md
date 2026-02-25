@@ -1,18 +1,18 @@
-# ClaudeKit Config UI
+# Pankit Config UI
 
-Command-line tool and web dashboard for managing ClaudeKit projects.
+Command-line tool and web dashboard for managing Pankit projects.
 
-**Version**: 1.17.0
+**Version**: 1.0.0
 
 ## Overview
 
-ClaudeKit Config UI (`ck`) provides both CLI and web dashboard for managing ClaudeKit projects. Built with Bun, TypeScript, and React, enables fast, secure project setup and comprehensive configuration management.
+Pankit Config UI (`pk`) provides both CLI and web dashboard for managing Pankit projects. Built with Bun, TypeScript, and React, enables fast, secure project setup and comprehensive configuration management.
 
 **Key Features:**
 - **CLI Commands (14)**: new, init, config, projects, setup, skills, agents, commands, migrate, doctor, versions, update, uninstall, easter-egg
-- **Web Dashboard**: Interactive React UI via `ck config ui` for configuration and project management
-- **Projects Registry**: Centralized registry at `~/.claudekit/projects.json` with file locking
-- **Skill Installation**: Install ClaudeKit skills to other coding agents (Cursor, Codex, etc.)
+- **Web Dashboard**: Interactive React UI via `pk config ui` for configuration and project management
+- **Projects Registry**: Centralized registry at `~/.pankit/projects.json` with file locking
+- **Skill Installation**: Install Pankit skills to other coding agents (Cursor, Codex, etc.)
 - **Multi-tier Authentication**: gh CLI → env vars → keychain → prompt fallback
 - **Smart Merging**: Conflict detection with user customization preservation
 - **Skills Migration**: Auto-detects and migrates skills structure changes
@@ -28,16 +28,16 @@ Comprehensive documentation in `/docs`:
 - **[Codebase Summary](./docs/codebase-summary.md)** - Overview, structure, key components
 - **[Project Overview & PDR](./docs/project-overview-pdr.md)** - Requirements, features, roadmap
 - **[System Architecture](./docs/system-architecture.md)** - Architecture diagrams, data flow
-- **[Reconciliation Architecture](./docs/reconciliation-architecture.md)** - `ck migrate` RECONCILE → EXECUTE → REPORT design
+- **[Reconciliation Architecture](./docs/reconciliation-architecture.md)** - `pk migrate` RECONCILE → EXECUTE → REPORT design
 - **[Code Standards](./docs/code-standards.md)** - Coding conventions, best practices
 - **[Project Roadmap](./docs/project-roadmap.md)** - Release timeline, feature status
 - **[Deployment Guide](./docs/deployment-guide.md)** - Release procedures
 
 ## Prerequisites
 
-Before using ClaudeKit CLI, you need to:
+Before using Pankit CLI, you need to:
 
-1. **Purchase a ClaudeKit Starter Kit** from [ClaudeKit.cc](https://claudekit.cc)
+1. **Purchase a Pankit Starter Kit** from [Pankit.cc](https://pankit.cc)
 2. **Get Repository Access**: After purchase, you'll receive access to the private GitHub repository containing your kit
 3. **Create a GitHub Personal Access Token** (PAT) with `repo` scope to download releases
 
@@ -45,36 +45,36 @@ Without a purchased kit and repository access, the CLI will not be able to downl
 
 ## Installation
 
-The ClaudeKit CLI is published on npm at [npmjs.com/package/claudekit-cli](https://www.npmjs.com/package/claudekit-cli).
+The Pankit CLI is published on npm at [npmjs.com/package/pankit-cli](https://www.npmjs.com/package/pankit-cli).
 
 ### Using npm (Recommended)
 
 ```bash
-npm install -g claudekit-cli
+npm install -g pankit-cli
 ```
 
 ### Using Bun
 
 ```bash
-bun add -g claudekit-cli
+bun add -g pankit-cli
 ```
 
 ### Using Yarn
 
 ```bash
-yarn global add claudekit-cli
+yarn global add pankit-cli
 ```
 
 ### Using pnpm
 
 ```bash
-pnpm add -g claudekit-cli
+pnpm add -g pankit-cli
 ```
 
 After installation, verify it's working:
 
 ```bash
-ck --version
+pk --version
 ```
 
 ## Usage
@@ -83,51 +83,51 @@ ck --version
 
 ```bash
 # Top-level command discovery
-ck --help
+pk --help
 
 # Open config dashboard immediately
-ck config
+pk config
 
 # Command-level help (recommended)
-ck config --help
-ck skills --help
-ck agents --help
-ck commands --help
-ck migrate --help
+pk config --help
+pk skills --help
+pk agents --help
+pk commands --help
+pk migrate --help
 ```
 
 ### Create New Project
 
 ```bash
 # Interactive mode
-ck new
+pk new
 
 # With options
-ck new --dir my-project --kit engineer
+pk new --dir my-project --kit engineer
 
 # Show beta versions
-ck new --beta
+pk new --beta
 
 # With exclude patterns
-ck new --exclude "*.log" --exclude "temp/**"
+pk new --exclude "*.log" --exclude "temp/**"
 
 # Optional packages (OpenCode, Gemini)
-ck new --opencode --gemini
+pk new --opencode --gemini
 
 # Install skills dependencies (Python, Node packages, system tools)
-ck new --install-skills
+pk new --install-skills
 
-# Command prefix (/ck: namespace to avoid conflicts)
-ck new --prefix
+# Command prefix (/pk: namespace to avoid conflicts)
+pk new --prefix
 
 # Offline installation (from local archive or directory)
-ck new --archive ~/downloads/engineer-v1.16.0.zip
-ck new --kit-path ~/extracted-kit/
+pk new --archive ~/downloads/engineer-v1.16.0.zip
+pk new --kit-path ~/extracted-kit/
 ```
 
 **Flags:**
 - `--install-skills`: Auto-install Python packages, system tools (FFmpeg, ImageMagick), Node.js packages
-- `--prefix`: Move commands to /ck: namespace (/plan → /ck:plan)
+- `--prefix`: Move commands to /pk: namespace (/plan → /pk:plan)
 - `--beta`: Show pre-release versions in selection
 - `--opencode/--gemini`: Install optional packages
 - `--archive <path>`: Use local archive (zip/tar.gz) instead of downloading
@@ -139,30 +139,30 @@ ck new --kit-path ~/extracted-kit/
 
 ```bash
 # Interactive mode
-ck init
+pk init
 
 # Non-interactive mode with sensible defaults
-ck init --yes
-ck init -y
+pk init --yes
+pk init -y
 
 # Combine with other flags
-ck init -g --kit engineer -y
+pk init -g --kit engineer -y
 
 # With options
-ck init --kit engineer --beta
+pk init --kit engineer --beta
 
 # Global mode (platform-specific paths)
-ck init --global
+pk init --global
 
 # Fresh installation (⚠️ DESTRUCTIVE - removes ALL customizations)
-ck init --fresh
+pk init --fresh
 
 # With exclude patterns and prefix
-ck init --exclude "*.local" --prefix
+pk init --exclude "*.local" --prefix
 
 # Offline installation (from local archive or directory)
-ck init --archive ~/downloads/engineer-v1.16.0.zip
-ck init --kit-path ~/extracted-kit/
+pk init --archive ~/downloads/engineer-v1.16.0.zip
+pk init --kit-path ~/extracted-kit/
 ```
 
 **Flags:**
@@ -170,7 +170,7 @@ ck init --kit-path ~/extracted-kit/
 - `--global/-g`: Use platform-specific config (macOS/Linux: ~/.claude, Windows: %USERPROFILE%\.claude)
 - `--fresh`: Clean reinstall, removes .claude directory (requires "yes" confirmation)
 - `--beta`: Show pre-release versions
-- `--prefix`: Apply /ck: namespace to commands
+- `--prefix`: Apply /pk: namespace to commands
 - `--archive <path>`: Use local archive (zip/tar.gz) instead of downloading
 - `--kit-path <path>`: Use local kit directory instead of downloading
 
@@ -178,7 +178,7 @@ ck init --kit-path ~/extracted-kit/
 
 | Prompt | Default |
 |--------|---------|
-| Select ClaudeKit | engineer (first option) |
+| Select Pankit | engineer (first option) |
 | Target directory | Current directory (`.`) |
 | Version selection | Latest stable release |
 | Google Gemini setup | Skip |
@@ -186,24 +186,24 @@ ck init --kit-path ~/extracted-kit/
 
 ### Update CLI
 
-Keep the ClaudeKit CLI up to date:
+Keep the Pankit CLI up to date:
 
 ```bash
 # Check for CLI updates
-ck update --check
+pk update --check
 
 # Update to latest version
-ck update
+pk update
 
 # Update to specific version
-ck update --version 1.17.0
+pk update --version 1.17.0
 
 # Update to beta / skip confirmation
-ck update --beta
-ck update --yes
+pk update --beta
+pk update --yes
 ```
 
-The CLI notifies you when updates are available via `ck --version`.
+The CLI notifies you when updates are available via `pk --version`.
 
 **Skills Migration:**
 - Auto-detects structure changes (flat → categorized)
@@ -215,48 +215,48 @@ The CLI notifies you when updates are available via `ck --version`.
 
 ```bash
 # Show all available versions for all kits
-ck versions
+pk versions
 
 # Filter by specific kit
-ck versions --kit engineer
-ck versions --kit marketing
+pk versions --kit engineer
+pk versions --kit marketing
 
 # Show more versions (default: 30)
-ck versions --limit 50
+pk versions --limit 50
 
 # Include prereleases and drafts
-ck versions --all
+pk versions --all
 ```
 
 ### Diagnostics & Doctor
 
 ```bash
 # Full health check (default)
-ck doctor
+pk doctor
 
 # Verbose mode with execution timing and command details
-ck doctor --verbose
+pk doctor --verbose
 
 # Generate shareable diagnostic report (prompts for gist upload)
-ck doctor --report
+pk doctor --report
 
 # Auto-fix all fixable issues
-ck doctor --fix
+pk doctor --fix
 
 # CI mode: no prompts, exit 1 on failures
-ck doctor --check-only
+pk doctor --check-only
 
 # Machine-readable JSON output
-ck doctor --json
+pk doctor --json
 
 # Combine flags
-ck doctor --verbose --check-only --json
-ck doctor --verbose --fix
+pk doctor --verbose --check-only --json
+pk doctor --verbose --fix
 ```
 
 **Health Checks:**
 - **System**: Node.js, npm, Python, pip, Claude CLI, git, gh CLI
-- **ClaudeKit**: Global/project installation, versions, skills
+- **Pankit**: Global/project installation, versions, skills
 - **Auth**: GitHub CLI authentication, repository access
 - **Project**: package.json, node_modules, lock files
 - **Modules**: Dynamic skill dependency resolution
@@ -267,69 +267,69 @@ ck doctor --verbose --fix
 | Missing dependencies | Install via package manager |
 | Missing gh auth | Run `gh auth login` |
 | Corrupted node_modules | Reinstall dependencies |
-| Missing global install | Run `ck init --global` |
+| Missing global install | Run `pk init --global` |
 | Missing skill deps | Install in skill directory |
 
 **Exit Codes:**
 - `0`: All checks pass or issues fixed
 - `1`: Failures detected (only with `--check-only`)
 
-> **Note:** `ck diagnose` is deprecated. Use `ck doctor` instead.
+> **Note:** `pk diagnose` is deprecated. Use `pk doctor` instead.
 
 ### Uninstall
 
-Remove ClaudeKit installations from your system:
+Remove Pankit installations from your system:
 
 ```bash
-ck uninstall              # Interactive mode - prompts for scope and confirmation
-ck uninstall --local      # Uninstall only local installation (current project)
-ck uninstall --global     # Uninstall only global installation (~/.claude/)
-ck uninstall -l -y        # Local only, skip confirmation
-ck uninstall -g -y        # Global only, skip confirmation
-ck uninstall --yes        # Non-interactive - skip confirmation (for scripts)
+pk uninstall              # Interactive mode - prompts for scope and confirmation
+pk uninstall --local      # Uninstall only local installation (current project)
+pk uninstall --global     # Uninstall only global installation (~/.claude/)
+pk uninstall -l -y        # Local only, skip confirmation
+pk uninstall -g -y        # Global only, skip confirmation
+pk uninstall --yes        # Non-interactive - skip confirmation (for scripts)
 ```
 
 **Scope Selection:**
 - When both local and global installations exist, you'll be prompted to choose:
   - **Local only**: Remove from current project (`.claude/`)
   - **Global only**: Remove from user directory (`~/.claude/`)
-  - **Both**: Remove all ClaudeKit installations
+  - **Both**: Remove all Pankit installations
 - Use `--local` or `--global` flags to skip the prompt
 
 **What it does:**
 - Detects local `.claude` directory in current project
-- Detects global `~/.claude` ClaudeKit installation
+- Detects global `~/.claude` Pankit installation
 - Shows paths before deletion
 - Requires confirmation (unless `--yes` flag)
-- Removes ClaudeKit subdirectories (`commands/`, `agents/`, `skills/`, `workflows/`, `hooks/`, `metadata.json`)
+- Removes Pankit subdirectories (`commands/`, `agents/`, `skills/`, `workflows/`, `hooks/`, `metadata.json`)
 - **Preserves user configs** like `settings.json`, `settings.local.json`, and `CLAUDE.md`
 
-**Note:** Only removes valid ClaudeKit installations (with metadata.json). Regular `.claude` directories from Claude Desktop are not affected.
+**Note:** Only removes valid Pankit installations (with metadata.json). Regular `.claude` directories from Claude Desktop are not affected.
 
 ### Other Commands
 
 ```bash
 # Show CLI version (shows local + global kit versions)
-ck --version
+pk --version
 
 # Show help
-ck --help
-ck -h
+pk --help
+pk -h
 
 # Command-specific help
-ck new --help
-ck init --help
-ck config --help
-ck skills --help
-ck versions --help
+pk new --help
+pk init --help
+pk config --help
+pk skills --help
+pk versions --help
 ```
 
 ### Debugging
 
 ```bash
-ck new --verbose              # Enable verbose logging
-ck new --verbose --log-file debug.log  # Save to file
-CLAUDEKIT_VERBOSE=1 ck new   # Via environment variable
+pk new --verbose              # Enable verbose logging
+pk new --verbose --log-file debug.log  # Save to file
+PANKIT_VERBOSE=1 pk new   # Via environment variable
 ```
 
 ### Cache Configuration
@@ -338,23 +338,23 @@ Release data is cached locally to improve performance. You can configure the cac
 
 ```bash
 # Set custom cache TTL (in seconds, default: 3600 = 1 hour)
-CK_CACHE_TTL=7200 ck versions    # Cache for 2 hours
-CK_CACHE_TTL=0 ck versions       # Disable caching (always fetch fresh)
+PK_CACHE_TTL=7200 pk versions    # Cache for 2 hours
+PK_CACHE_TTL=0 pk versions       # Disable caching (always fetch fresh)
 
 # Permanent configuration (add to ~/.bashrc or ~/.zshrc)
-export CK_CACHE_TTL=1800         # 30 minutes
+export PK_CACHE_TTL=1800         # 30 minutes
 ```
 
-**Cache Location:** `~/.claudekit/cache/releases/`
+**Cache Location:** `~/.pankit/cache/releases/`
 
 ### Update Notifications
 
-The `ck --version` command checks for newer versions of your installed ClaudeKit and displays a notification if an update is available. The check is cached for 7 days to minimize API calls.
+The `pk --version` command checks for newer versions of your installed Pankit and displays a notification if an update is available. The check is cached for 7 days to minimize API calls.
 
 **Disable Update Notifications:**
 ```bash
 # Set environment variable to disable
-NO_UPDATE_NOTIFIER=1 ck --version
+NO_UPDATE_NOTIFIER=1 pk --version
 
 # Windows (permanent)
 [System.Environment]::SetEnvironmentVariable("NO_UPDATE_NOTIFIER", "1", [System.EnvironmentVariableTarget]::User)
@@ -363,7 +363,7 @@ NO_UPDATE_NOTIFIER=1 ck --version
 export NO_UPDATE_NOTIFIER=1
 ```
 
-**Cache Location:** `~/.claudekit/cache/version-check.json` (Windows: `%USERPROFILE%\.claudekit\cache\`)
+**Cache Location:** `~/.pankit/cache/version-check.json` (Windows: `%USERPROFILE%\.pankit\cache\`)
 
 ## Authentication
 
@@ -379,7 +379,7 @@ The CLI requires GitHub authentication to download releases from private reposit
 │       ↓ (if not available)                       │
 │  2. Environment Variables (GITHUB_TOKEN)        │
 │       ↓ (if not set)                             │
-│  3. Config File (~/.claudekit/config.json)      │
+│  3. Config File (~/.pankit/config.json)      │
 │       ↓ (if not found)                           │
 │  4. OS Keychain (secure storage)                │
 │       ↓ (if not stored)                          │
@@ -423,38 +423,38 @@ Run the doctor command to diagnose issues:
 
 ```bash
 # Interactive diagnostics
-ck doctor
+pk doctor
 
 # Generate report for support
-ck doctor --report
+pk doctor --report
 
 # CI/automation
-ck doctor --check-only --json
+pk doctor --check-only --json
 
 # Verbose logging
-ck new --verbose
-ck init --verbose
+pk new --verbose
+pk init --verbose
 ```
 
 **Common Issues:**
-- **"Access denied"**: Run `ck doctor` to check auth, use `--fix` to auto-repair
-- **"Authentication failed"**: Run `ck doctor --fix` to re-authenticate, or manually run `gh auth login` (select 'Login with a web browser')
+- **"Access denied"**: Run `pk doctor` to check auth, use `--fix` to auto-repair
+- **"Authentication failed"**: Run `pk doctor --fix` to re-authenticate, or manually run `gh auth login` (select 'Login with a web browser')
 - **"GitHub CLI not authenticated"**: Run `gh auth login` and select 'Login with a web browser' (NOT 'Paste token')
-- **Module errors**: Run `ck doctor --fix` to reinstall skill dependencies
-- **Need help**: Run `ck doctor --report` and share the gist URL
+- **Module errors**: Run `pk doctor --fix` to reinstall skill dependencies
+- **Need help**: Run `pk doctor --report` and share the gist URL
 
 ## Available Kits
 
-ClaudeKit offers premium starter kits available for purchase at [ClaudeKit.cc](https://claudekit.cc):
+Pankit offers premium starter kits available for purchase at [Pankit.cc](https://pankit.cc):
 
-- **engineer**: ClaudeKit Engineer - Engineering toolkit for building with Claude (v1.0.0+)
-- **marketing**: ClaudeKit Marketing - Content automation toolkit (v1.0.0 available)
+- **engineer**: Pankit Engineer - Engineering toolkit for building with Claude (v1.0.0+)
+- **marketing**: Pankit Marketing - Content automation toolkit (v1.0.0 available)
 
 Each kit provides a comprehensive project template with best practices, tooling, and workflows optimized for Claude Code development.
 
 ## Configuration
 
-Configuration is stored in `~/.claudekit/config.json`:
+Configuration is stored in `~/.pankit/config.json`:
 
 ```json
 {
@@ -482,8 +482,8 @@ The following file patterns are protected and will not be overwritten during upd
 Use `--exclude` flag with glob patterns to skip files:
 
 ```bash
-ck new --exclude "*.log" --exclude "temp/**"
-ck update --exclude "node_modules/**" --exclude "dist/**"
+pk new --exclude "*.log" --exclude "temp/**"
+pk update --exclude "node_modules/**" --exclude "dist/**"
 ```
 
 **Patterns:** `*` (any chars), `**` (recursive), `?` (single char), `[abc]`, `{a,b}`
@@ -555,7 +555,7 @@ bun run test:integration
 ## FAQ
 
 **Q: Do I need GitHub CLI?**
-A: Yes, GitHub CLI is required. ClaudeKit uses it exclusively for authentication with private repositories.
+A: Yes, GitHub CLI is required. Pankit uses it exclusively for authentication with private repositories.
 
 **Q: How do I authenticate?**
 A: Run `gh auth login`, select 'Login with a web browser', complete OAuth in browser. Do NOT use 'Paste an authentication token'.

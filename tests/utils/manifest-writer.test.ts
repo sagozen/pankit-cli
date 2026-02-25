@@ -174,7 +174,7 @@ describe("ManifestWriter", () => {
 			expect(metadata.userConfigFiles).toContain(".repomixignore");
 			expect(metadata.userConfigFiles).toContain(".mcp.json");
 			expect(metadata.userConfigFiles).toContain(".ckignore");
-			expect(metadata.userConfigFiles).toContain(".ck.json");
+			expect(metadata.userConfigFiles).toContain(".pk.json");
 			expect(metadata.userConfigFiles).toContain("CLAUDE.md");
 		});
 

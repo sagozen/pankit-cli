@@ -1017,7 +1017,7 @@ describe("uninstall command integration", () => {
 		});
 
 		test("should handle .claude with only user config files", async () => {
-			// Only user config files, no ClaudeKit components
+			// Only user config files, no Pankit components
 			await writeFile(join(testLocalClaudeDir, ".gitignore"), "*.log");
 			await writeFile(join(testLocalClaudeDir, ".mcp.json"), "{}");
 			await writeFile(join(testLocalClaudeDir, "CLAUDE.md"), "# User config");
@@ -1071,7 +1071,7 @@ describe("uninstall command integration", () => {
 	});
 
 	describe("detection fallback logic robustness", () => {
-		test("should detect installation when hasClaudeKitComponents but no metadata", async () => {
+		test("should detect installation when hasPankitComponents but no metadata", async () => {
 			// This tests the specific fallback logic in detectInstallations
 			await mkdir(join(testLocalClaudeDir, "agents"), { recursive: true });
 			await mkdir(join(testLocalClaudeDir, "commands"), { recursive: true });

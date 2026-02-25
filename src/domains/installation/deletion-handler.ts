@@ -8,7 +8,7 @@ import { dirname, join, relative, resolve, sep } from "node:path";
 import { readManifest } from "@/services/file-operations/manifest/manifest-reader.js";
 import { logger } from "@/shared/logger.js";
 import { PathResolver } from "@/shared/path-resolver.js";
-import type { ClaudeKitMetadata, KitType, Metadata, TrackedFile } from "@/types";
+import type { PankitMetadata, KitType, Metadata, TrackedFile } from "@/types";
 import { pathExists, readFile, writeFile } from "fs-extra";
 import picomatch from "picomatch";
 
@@ -48,7 +48,7 @@ function findFileInMetadata(metadata: Metadata | null, path: string): TrackedFil
 
 /**
  * Check if a path should be deleted based on ownership.
- * Returns true if path can be deleted (ck, ck-modified, or not tracked).
+ * Returns true if path can be deleted (ck, pk-modified, or not tracked).
  * Returns false only if ownership is "user".
  */
 function shouldDeletePath(path: string, metadata: Metadata | null): boolean {
@@ -252,7 +252,7 @@ async function updateMetadataAfterDeletion(
  * @returns Deletion result with lists of deleted, preserved, and errored paths
  */
 export async function handleDeletions(
-	sourceMetadata: ClaudeKitMetadata,
+	sourceMetadata: PankitMetadata,
 	claudeDir: string,
 ): Promise<DeletionResult> {
 	const deletionPatterns = sourceMetadata.deletions || [];

@@ -2,7 +2,7 @@
  * Global Path Transformer
  *
  * Transforms hardcoded `.claude/` paths in file contents to use platform-appropriate
- * home directory paths when installing globally. This allows the claudekit-engineer
+ * home directory paths when installing globally. This allows the pankit-engineer
  * template to remain project-scope friendly while the CLI handles the transformation
  * at install time.
  *

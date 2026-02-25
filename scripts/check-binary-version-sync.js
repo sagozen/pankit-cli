@@ -56,10 +56,10 @@ function main() {
 	console.log(`🔍 Checking binary versions against package.json version: ${packageVersion}`);
 
 	const binaries = [
-		"bin/ck-darwin-arm64",
-		"bin/ck-darwin-x64",
-		"bin/ck-linux-x64",
-		"bin/ck-win32-x64.exe",
+		"bin/pk-darwin-arm64",
+		"bin/pk-darwin-x64",
+		"bin/pk-linux-x64",
+		"bin/pk-win32-x64.exe",
 	];
 
 	let allSynced = true;
@@ -90,10 +90,10 @@ function main() {
 		errors.forEach((error) => console.log(`   - ${error}`));
 		console.log("\n💡 To fix this, run:");
 		console.log("   npm run compile:binary");
-		console.log("   bun build src/index.ts --compile --outfile bin/ck-darwin-arm64");
-		console.log("   bun build src/index.ts --compile --outfile bin/ck-darwin-x64");
-		console.log("   bun build src/index.ts --compile --outfile bin/ck-linux-x64");
-		console.log("   bun build src/index.ts --compile --outfile bin/ck-win32-x64.exe");
+		console.log("   bun build src/index.ts --compile --outfile bin/pk-darwin-arm64");
+		console.log("   bun build src/index.ts --compile --outfile bin/pk-darwin-x64");
+		console.log("   bun build src/index.ts --compile --outfile bin/pk-linux-x64");
+		console.log("   bun build src/index.ts --compile --outfile bin/pk-win32-x64.exe");
 		process.exit(1);
 	}
 

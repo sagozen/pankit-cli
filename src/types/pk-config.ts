@@ -1,6 +1,6 @@
 /**
- * TypeScript types for .ck.json configuration
- * Generated from ck-config.schema.json
+ * TypeScript types for .pk.json configuration
+ * Generated from pk-config.schema.json
  */
 
 import { z } from "zod";
@@ -168,9 +168,9 @@ export const CkAssertionSchema = z.object({
 });
 export type CkAssertion = z.infer<typeof CkAssertionSchema>;
 
-// SYNC POINT: When adding/removing hooks in claudekit-engineer settings.json,
+// SYNC POINT: When adding/removing hooks in pankit-engineer settings.json,
 // update ALL of: CkHooksConfigSchema, DEFAULT_CK_CONFIG.hooks, CK_HOOK_NAMES,
-// and src/schemas/ck-config.schema.json + GlobalConfigPage.tsx sections
+// and src/schemas/pk-config.schema.json + GlobalConfigPage.tsx sections
 export const CkHooksConfigSchema = z.object({
 	"session-init": z.boolean().optional(),
 	"subagent-init": z.boolean().optional(),

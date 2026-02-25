@@ -39,7 +39,7 @@ export async function validateExtraction(extractDir: string): Promise<void> {
 		// Warn if critical paths are missing but don't fail validation
 		if (missingPaths.length > 0) {
 			logger.warning(
-				`Some expected paths are missing: ${missingPaths.join(", ")}. This may not be a ClaudeKit project.`,
+				`Some expected paths are missing: ${missingPaths.join(", ")}. This may not be a Pankit project.`,
 			);
 		}
 

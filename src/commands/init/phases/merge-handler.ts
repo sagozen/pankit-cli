@@ -17,7 +17,7 @@ import {
 import { CommandsPrefix } from "@/services/transformers/commands-prefix.js";
 import { logger } from "@/shared/logger.js";
 import { output } from "@/shared/output-manager.js";
-import type { ClaudeKitMetadata } from "@/types";
+import type { PankitMetadata } from "@/types";
 import { pathExists, readFile } from "fs-extra";
 import type { InitContext } from "../types.js";
 
@@ -168,7 +168,7 @@ export async function handleMerge(ctx: InitContext): Promise<InitContext> {
 			: join(sourceDir, ".claude", "metadata.json");
 		if (await pathExists(sourceMetadataPath)) {
 			const metadataContent = await readFile(sourceMetadataPath, "utf-8");
-			const sourceMetadata: ClaudeKitMetadata = JSON.parse(metadataContent);
+			const sourceMetadata: PankitMetadata = JSON.parse(metadataContent);
 
 			if (sourceMetadata.deletions && sourceMetadata.deletions.length > 0) {
 				const deletionResult = await handleDeletions(sourceMetadata, ctx.claudeDir);

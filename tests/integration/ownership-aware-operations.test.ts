@@ -178,7 +178,7 @@ describe("Ownership-Aware Operations", () => {
 				scope: "local",
 				files: [
 					{
-						path: "commands/ck/plan.md",
+						path: "commands/pk/plan.md",
 						checksum: nestedChecksum,
 						ownership: "ck",
 						installedVersion: "1.0.0",

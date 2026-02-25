@@ -46,7 +46,7 @@ async function filterGitClone(cloneDir: string): Promise<{ extractDir: string; t
 		if ((error as NodeJS.ErrnoException).code === "ENOENT") {
 			throw new Error(
 				"Repository does not contain a .claude directory.\n\n" +
-					"This kit may not be a ClaudeKit project, or the release may be malformed.",
+					"This kit may not be a Pankit project, or the release may be malformed.",
 			);
 		}
 		throw error;
@@ -285,13 +285,13 @@ async function useLocalKitPath(kitPath: string): Promise<DownloadExtractResult> 
 		const stat = await fs.promises.stat(claudeDir);
 		if (!stat.isDirectory()) {
 			logger.warning(
-				`Warning: ${claudeDir} exists but is not a directory.\nThis may not be a valid ClaudeKit installation.`,
+				`Warning: ${claudeDir} exists but is not a directory.\nThis may not be a valid Pankit installation.`,
 			);
 		}
 	} catch (error: unknown) {
 		if ((error as NodeJS.ErrnoException).code === "ENOENT") {
 			logger.warning(
-				`Warning: No .claude directory found in ${absolutePath}\nThis may not be a valid ClaudeKit installation. Proceeding anyway...`,
+				`Warning: No .claude directory found in ${absolutePath}\nThis may not be a valid Pankit installation. Proceeding anyway...`,
 			);
 		}
 	}

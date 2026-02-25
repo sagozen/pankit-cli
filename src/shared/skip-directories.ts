@@ -4,7 +4,7 @@
  * These directories are excluded to avoid:
  * - Permission issues (venvs, node_modules)
  * - Unnecessary scans (build artifacts, version control)
- * - Claude Code internal directories (not ClaudeKit files)
+ * - Claude Code internal directories (not Pankit files)
  */
 
 /**
@@ -24,7 +24,7 @@ export const BUILD_ARTIFACT_DIRS: readonly string[] = [
 
 /**
  * Claude Code internal directories to skip
- * These are managed by Claude Code itself, not ClaudeKit
+ * These are managed by Claude Code itself, not Pankit
  */
 export const CLAUDE_CODE_INTERNAL_DIRS: readonly string[] = [
 	"debug",
@@ -49,6 +49,6 @@ export const SKIP_DIRS_ALL: readonly string[] = [
 
 /**
  * Only Claude Code internal directories to skip
- * Use this for ClaudeKit-specific scanning (e.g., counting components)
+ * Use this for Pankit-specific scanning (e.g., counting components)
  */
 export const SKIP_DIRS_CLAUDE_INTERNAL = CLAUDE_CODE_INTERNAL_DIRS;

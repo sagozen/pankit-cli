@@ -1,21 +1,21 @@
 {
-	"name": "claudekit-cli",
-	"version": "3.35.0",
-	"description": "CLI tool for bootstrapping and updating ClaudeKit projects",
+	"name": "pankit-cli",
+	"version": "1.0.0",
+	"description": "CLI tool for bootstrapping and updating Pankit projects",
 	"type": "module",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mrgoonie/claudekit-cli.git"
+		"url": "git+https://github.com/sagozen/pankit-cli.git"
 	},
 	"publishConfig": {
 		"access": "public",
 		"registry": "https://registry.npmjs.org"
 	},
 	"bin": {
-		"ck": "bin/ck.js"
+		"pk": "bin/pk.js"
 	},
 	"files": [
-		"bin/ck.js",
+		"bin/pk.js",
 		"dist/index.js",
 		"dist/ui/"
 	],
@@ -26,12 +26,12 @@
 		"ui:dev": "cd src/ui && bun run dev",
 		"build": "bun build src/index.ts --outdir dist --target node --external @octokit/rest",
 		"compile": "bun run ui:build && bun run scripts/compile-binary.ts",
-		"compile:binary": "bun run ui:build && bun run scripts/compile-binary.ts --outfile bin/ck && cp bin/ck /usr/local/bin/ck && echo '✅ Installed globally: /usr/local/bin/ck'",
+		"compile:binary": "bun run ui:build && bun run scripts/compile-binary.ts --outfile bin/pk && cp bin/pk /usr/local/bin/pk && echo '✅ Installed globally: /usr/local/bin/pk'",
 		"compile:binaries": "node scripts/build-all-binaries.js",
 		"check-version-sync": "node scripts/check-binary-version-sync.js",
 		"build:platform-binaries": "bun run scripts/build-platform-binaries.js",
 		"test": "bun test",
-		"test:integration": "CK_RUN_CLI_INTEGRATION=1 bun test tests/integration/cli.test.ts",
+		"test:integration": "PK_RUN_CLI_INTEGRATION=1 bun test tests/integration/cli.test.ts",
 		"test:watch": "bun test --watch",
 		"test:quick": "./scripts/dev-quick-start.sh test",
 		"lint": "biome check .",
@@ -46,12 +46,12 @@
 	},
 	"keywords": [
 		"cli",
-		"claudekit",
+		"pankit",
 		"boilerplate",
 		"bootstrap",
 		"template"
 	],
-	"author": "ClaudeKit",
+	"author": "Pankit",
 	"license": "MIT",
 	"engines": {
 		"bun": ">=1.3.2",

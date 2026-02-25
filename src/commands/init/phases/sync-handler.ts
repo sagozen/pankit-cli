@@ -17,7 +17,7 @@ import type { SyncPlan } from "@/domains/sync/types.js";
 import { readKitManifest } from "@/services/file-operations/manifest/manifest-reader.js";
 import { logger } from "@/shared/logger.js";
 import { PathResolver } from "@/shared/path-resolver.js";
-import type { ClaudeKitMetadata, TrackedFile } from "@/types";
+import type { PankitMetadata, TrackedFile } from "@/types";
 import { pathExists } from "fs-extra";
 import pc from "picocolors";
 import type { InitContext, SyncContext } from "../types.js";
@@ -43,7 +43,7 @@ export async function handleSync(ctx: InitContext): Promise<InitContext> {
 	// Check if .claude directory exists
 	if (!(await pathExists(claudeDir))) {
 		logger.error("Cannot sync: no .claude directory found");
-		ctx.prompts.note("Run 'ck init' without --sync to install first.", "No Installation Found");
+		ctx.prompts.note("Run 'pk init' without --sync to install first.", "No Installation Found");
 		return { ...ctx, cancelled: true };
 	}
 
@@ -52,7 +52,7 @@ export async function handleSync(ctx: InitContext): Promise<InitContext> {
 	if (!(await pathExists(metadataPath))) {
 		logger.error("Cannot sync: no metadata.json found");
 		ctx.prompts.note(
-			"Your installation may be from an older version.\nRun 'ck init' to update.",
+			"Your installation may be from an older version.\nRun 'pk init' to update.",
 			"Legacy Installation",
 		);
 		return { ...ctx, cancelled: true };
@@ -108,7 +108,7 @@ export async function handleSync(ctx: InitContext): Promise<InitContext> {
 	if (trackedFiles.length === 0) {
 		logger.warning("No tracked files found in metadata");
 		ctx.prompts.note(
-			"Your installation may be from an older version without file tracking.\nRun 'ck init' to update.",
+			"Your installation may be from an older version without file tracking.\nRun 'pk init' to update.",
 			"Legacy Installation",
 		);
 		return { ...ctx, cancelled: true };
@@ -284,7 +284,7 @@ export async function executeSyncMerge(ctx: InitContext): Promise<InitContext> {
 			const sourceMetadataPath = join(upstreamDir, "metadata.json");
 			if (await pathExists(sourceMetadataPath)) {
 				const content = await readFile(sourceMetadataPath, "utf-8");
-				const sourceMetadata = JSON.parse(content) as ClaudeKitMetadata;
+				const sourceMetadata = JSON.parse(content) as PankitMetadata;
 				deletions = sourceMetadata.deletions || [];
 			}
 		} catch (error) {
@@ -487,7 +487,7 @@ export async function executeSyncMerge(ctx: InitContext): Promise<InitContext> {
 					.map((f) => `  • ${f.path}`)
 					.join(
 						"\n",
-					)}${plan.needsReview.length > 5 ? `\n  ... and ${plan.needsReview.length - 5} more` : ""}\n\nOptions:\n  1. Run 'ck init --sync' without --yes for interactive merge\n  2. Use --force-overwrite to accept all upstream changes\n  3. Manually resolve conflicts before syncing`,
+					)}${plan.needsReview.length > 5 ? `\n  ... and ${plan.needsReview.length - 5} more` : ""}\n\nOptions:\n  1. Run 'pk init --sync' without --yes for interactive merge\n  2. Use --force-overwrite to accept all upstream changes\n  3. Manually resolve conflicts before syncing`,
 				"Sync Blocked",
 			);
 			return { ...ctx, cancelled: true };
