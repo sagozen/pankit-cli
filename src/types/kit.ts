@@ -23,13 +23,13 @@ export type KitConfig = z.infer<typeof KitConfigSchema>;
 
 // Available kits
 export const AVAILABLE_KITS: Record<KitType, KitConfig> = {
-	engineer: {
+	community: {
 		name: "Pankit Community",
 		repo: "pankit-community",
 		owner: "sagozen",
 		description: "Community toolkit for agentic workflows with Claude",
 	},
-	marketing: {
+	pro: {
 		name: "Pankit Pro",
 		repo: "pankit-pro",
 		owner: "sagozen",
