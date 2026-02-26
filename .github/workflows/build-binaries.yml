@@ -21,23 +21,23 @@ jobs:
           - os: macos-latest
             platform: darwin
             arch: arm64
-            binary: ck-darwin-arm64
+            binary: pk-darwin-arm64
           - os: macos-latest  # Intel macOS
             platform: darwin
             arch: x64
-            binary: ck-darwin-x64
+            binary: pk-darwin-x64
 
           # Linux build
           - os: ubuntu-latest
             platform: linux
             arch: x64
-            binary: ck-linux-x64
+            binary: pk-linux-x64
 
           # Windows build
           - os: windows-latest
             platform: win32
             arch: x64
-            binary: ck-win32-x64.exe
+            binary: pk-win32-x64.exe
 
     steps:
       - name: Checkout repository

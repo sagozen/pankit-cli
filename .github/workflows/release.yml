@@ -89,19 +89,19 @@ jobs:
       - name: Copy binaries to bin directory
         run: |
           # Copy binaries without silent failures
-          cp artifacts/binary-darwin-arm64/ck-darwin-arm64 bin/
-          cp artifacts/binary-darwin-x64/ck-darwin-x64 bin/
-          cp artifacts/binary-linux-x64/ck-linux-x64 bin/
-          cp artifacts/binary-win32-x64/ck-win32-x64.exe bin/
+          cp artifacts/binary-darwin-arm64/pk-darwin-arm64 bin/
+          cp artifacts/binary-darwin-x64/pk-darwin-x64 bin/
+          cp artifacts/binary-linux-x64/pk-linux-x64 bin/
+          cp artifacts/binary-win32-x64/pk-win32-x64.exe bin/
 
           # Set executable permissions
-          chmod +x bin/ck-darwin-* bin/ck-linux-* bin/ck.js
+          chmod +x bin/pk-darwin-* bin/pk-linux-* bin/pk.js
 
           # Verify critical binaries exist
-          test -f bin/ck-linux-x64 || (echo "❌ Linux binary missing" && exit 1)
-          test -f bin/ck-darwin-arm64 || (echo "❌ macOS ARM binary missing" && exit 1)
-          test -f bin/ck-darwin-x64 || (echo "❌ macOS x64 binary missing" && exit 1)
-          test -f bin/ck-win32-x64.exe || (echo "❌ Windows binary missing" && exit 1)
+          test -f bin/pk-linux-x64 || (echo "❌ Linux binary missing" && exit 1)
+          test -f bin/pk-darwin-arm64 || (echo "❌ macOS ARM binary missing" && exit 1)
+          test -f bin/pk-darwin-x64 || (echo "❌ macOS x64 binary missing" && exit 1)
+          test -f bin/pk-win32-x64.exe || (echo "❌ Windows binary missing" && exit 1)
 
           echo "✅ All critical binaries verified"
           ls -lh bin/

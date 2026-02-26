@@ -1,5 +1,5 @@
 /**
- * Tests for bin/ck.js wrapper script
+ * Tests for bin/pk.js wrapper script
  * Tests the platform detection, binary lookup, and Node.js fallback logic
  */
 
@@ -15,10 +15,10 @@ const binDir = join(projectRoot, "bin");
 // CI environment detection
 const isCI = process.env.CI === "true" || process.env.GITHUB_ACTIONS === "true";
 
-describe("bin/ck.js wrapper", () => {
+describe("bin/pk.js wrapper", () => {
 	describe("file structure", () => {
 		test("wrapper script exists", () => {
-			const wrapperPath = join(binDir, "ck.js");
+			const wrapperPath = join(binDir, "pk.js");
 			expect(existsSync(wrapperPath)).toBe(true);
 		});
 
@@ -31,18 +31,18 @@ describe("bin/ck.js wrapper", () => {
 
 	describe("getBinaryPath logic", () => {
 		const binaryMap: Record<string, string> = {
-			"darwin-arm64": "ck-darwin-arm64",
-			"darwin-x64": "ck-darwin-x64",
-			"linux-x64": "ck-linux-x64",
-			"win32-x64": "ck-win32-x64.exe",
+			"darwin-arm64": "pk-darwin-arm64",
+			"darwin-x64": "pk-darwin-x64",
+			"linux-x64": "pk-linux-x64",
+			"win32-x64": "pk-win32-x64.exe",
 		};
 
 		test("maps platform-arch to correct binary name", () => {
 			// Verify the expected mappings
-			expect(binaryMap["darwin-arm64"]).toBe("ck-darwin-arm64");
-			expect(binaryMap["darwin-x64"]).toBe("ck-darwin-x64");
-			expect(binaryMap["linux-x64"]).toBe("ck-linux-x64");
-			expect(binaryMap["win32-x64"]).toBe("ck-win32-x64.exe");
+			expect(binaryMap["darwin-arm64"]).toBe("pk-darwin-arm64");
+			expect(binaryMap["darwin-x64"]).toBe("pk-darwin-x64");
+			expect(binaryMap["linux-x64"]).toBe("pk-linux-x64");
+			expect(binaryMap["win32-x64"]).toBe("pk-win32-x64.exe");
 		});
 
 		test("unsupported platforms return null", () => {
@@ -69,7 +69,7 @@ describe("bin/ck.js wrapper", () => {
 
 	describe("fallback conditions", () => {
 		test("fallback triggers when binary does not exist", () => {
-			const nonExistentBinary = join(binDir, "ck-nonexistent-platform");
+			const nonExistentBinary = join(binDir, "pk-nonexistent-platform");
 			expect(existsSync(nonExistentBinary)).toBe(false);
 		});
 
@@ -78,7 +78,7 @@ describe("bin/ck.js wrapper", () => {
 			const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf-8"));
 			// Using explicit paths to exclude platform binaries from npm package
 			expect(packageJson.files).toContain("dist/index.js");
-			expect(packageJson.files).toContain("bin/ck.js");
+			expect(packageJson.files).toContain("bin/pk.js");
 		});
 	});
 

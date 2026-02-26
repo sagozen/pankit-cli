@@ -4,12 +4,12 @@
 import { z } from "zod";
 
 // Kit types
-export const KitType = z.enum(["engineer", "marketing"]);
+export const KitType = z.enum(["community", "pro"]);
 export type KitType = z.infer<typeof KitType>;
 
 // Runtime validation helper - validates string is valid KitType before unsafe casts
 export function isValidKitType(value: string): value is KitType {
-	return value === "engineer" || value === "marketing";
+	return value === "community" || value === "pro";
 }
 
 // Kit configuration
@@ -24,16 +24,16 @@ export type KitConfig = z.infer<typeof KitConfigSchema>;
 // Available kits
 export const AVAILABLE_KITS: Record<KitType, KitConfig> = {
 	engineer: {
-		name: "Pankit Engineer",
-		repo: "pankit-engineer",
-		owner: "pankit",
-		description: "Engineering toolkit for building with Claude",
+		name: "Pankit Community",
+		repo: "pankit-community",
+		owner: "sagozen",
+		description: "Community toolkit for agentic workflows with Claude",
 	},
 	marketing: {
-		name: "Pankit Marketing",
-		repo: "pankit-marketing",
-		owner: "pankit",
-		description: "Content automation: campaigns, social media, analytics workflows",
+		name: "Pankit Pro",
+		repo: "pankit-pro",
+		owner: "sagozen",
+		description: "Professional toolkit for agentic workflows with Claude",
 	},
 };
 

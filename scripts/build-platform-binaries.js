@@ -57,7 +57,7 @@ if (!platform) {
 }
 
 const sourceBinary = join(rootDir, "pk");
-const targetBinary = join(binDir, `ck-${platformName}${platform.ext}`);
+const targetBinary = join(binDir, `pk-${platformName}${platform.ext}`);
 
 console.log(`📋 Copying ${sourceBinary} -> ${targetBinary}`);
 copyFileSync(sourceBinary, targetBinary);
