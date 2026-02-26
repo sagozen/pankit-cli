@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const versionsCommandHelp: CommandHelp = {
 	name: "versions",
 	description: "List available versions of Pankit repositories",
-	usage: "ck versions [options]",
+	usage: "pk versions [options]",
 	examples: [
 		{
-			command: "ck versions --kit engineer --limit 10",
+			command: "pk versions --kit engineer --limit 10",
 			description: "Show latest 10 versions of engineer kit",
 		},
 		{
-			command: "ck versions --all",
+			command: "pk versions --all",
 			description: "Show all releases including prereleases",
 		},
 	],

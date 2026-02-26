@@ -216,16 +216,16 @@ export function renderGlobalHelp(
 	lines.push("");
 	lines.push(theme.heading("Quick Start:"));
 	lines.push(
-		`  ${padEnd(theme.example("ck config"), 24)}${theme.description("Open the config dashboard")}`,
+		`  ${padEnd(theme.example("pk config"), 24)}${theme.description("Open the config dashboard")}`,
 	);
 	lines.push(
-		`  ${padEnd(theme.example("ck config --help"), 24)}${theme.description("See config actions and dashboard flags")}`,
+		`  ${padEnd(theme.example("pk config --help"), 24)}${theme.description("See config actions and dashboard flags")}`,
 	);
 	lines.push(
-		`  ${padEnd(theme.example("ck skills --help"), 24)}${theme.description("Discover skill installation workflows")}`,
+		`  ${padEnd(theme.example("pk skills --help"), 24)}${theme.description("Discover skill installation workflows")}`,
 	);
 	lines.push(
-		`  ${padEnd(theme.example("ck migrate --help"), 24)}${theme.description("Migrate agents/commands/skills across providers")}`,
+		`  ${padEnd(theme.example("pk migrate --help"), 24)}${theme.description("Migrate agents/commands/skills across providers")}`,
 	);
 
 	lines.push("");
@@ -256,7 +256,7 @@ export function renderGlobalHelp(
 	lines.push("");
 	lines.push(
 		theme.muted(
-			"Run 'ck <command> --help' for details. Start with 'ck skills --help' and 'ck config --help'.",
+			"Run 'pk <command> --help' for details. Start with 'pk skills --help' and 'pk config --help'.",
 		),
 	);
 

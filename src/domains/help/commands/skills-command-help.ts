@@ -10,14 +10,14 @@ import type { CommandHelp } from "../help-types.js";
 export const skillsCommandHelp: CommandHelp = {
 	name: "skills",
 	description: "Install, uninstall, and manage Pankit skills across coding agents",
-	usage: "ck skills [options]",
+	usage: "pk skills [options]",
 	examples: [
 		{
-			command: "ck skills --name frontend-design --agent claude-code -g",
+			command: "pk skills --name frontend-design --agent claude-code -g",
 			description: "Install skill to Claude Code globally",
 		},
 		{
-			command: "ck skills --list --installed",
+			command: "pk skills --list --installed",
 			description: "Show all installed skills with their locations",
 		},
 	],

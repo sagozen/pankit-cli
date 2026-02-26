@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const updateCommandHelp: CommandHelp = {
 	name: "update",
 	description: "Update Pankit CLI tool only (not kit content)",
-	usage: "ck update [options]",
+	usage: "pk update [options]",
 	examples: [
 		{
-			command: "ck update --check",
+			command: "pk update --check",
 			description: "Check for CLI updates without installing",
 		},
 		{
-			command: "ck update --beta --yes",
+			command: "pk update --beta --yes",
 			description: "Update to latest beta version without confirmation",
 		},
 	],
@@ -53,16 +53,16 @@ export const updateCommandHelp: CommandHelp = {
 					flags: "--kit <kit>",
 					description: "This option is no longer supported with 'pk update'",
 					deprecated: {
-						message: "Use 'ck init --kit <kit>' to update kit installations",
-						alternative: "ck init --kit <kit>",
+						message: "Use 'pk init --kit <kit>' to update kit installations",
+						alternative: "pk init --kit <kit>",
 					},
 				},
 				{
 					flags: "-g, --global",
 					description: "This option is no longer supported with 'pk update'",
 					deprecated: {
-						message: "Use 'ck init --global' to update global kit",
-						alternative: "ck init --global",
+						message: "Use 'pk init --global' to update global kit",
+						alternative: "pk init --global",
 					},
 				},
 			],
@@ -72,7 +72,7 @@ export const updateCommandHelp: CommandHelp = {
 		{
 			title: "Note",
 			content:
-				"'pk update' updates the CLI tool only. To update kit content (skills, commands, rules), use 'pk init' for local or 'ck init -g' for global. Use --yes to skip all prompts (both CLI and kit content update) for non-interactive/CI usage.",
+				"'pk update' updates the CLI tool only. To update kit content (skills, commands, rules), use 'pk init' for local or 'pk init -g' for global. Use --yes to skip all prompts (both CLI and kit content update) for non-interactive/CI usage.",
 		},
 	],
 };

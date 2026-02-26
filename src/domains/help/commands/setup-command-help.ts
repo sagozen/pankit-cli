@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const setupCommandHelp: CommandHelp = {
 	name: "setup",
 	description: "Run guided setup for API keys and optional packages",
-	usage: "ck setup [options]",
+	usage: "pk setup [options]",
 	examples: [
 		{
-			command: "ck setup",
+			command: "pk setup",
 			description: "Run setup wizard in current project",
 		},
 		{
-			command: "ck setup --global --skip-packages",
+			command: "pk setup --global --skip-packages",
 			description: "Configure global setup without package installation",
 		},
 	],

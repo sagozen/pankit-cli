@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const uninstallCommandHelp: CommandHelp = {
 	name: "uninstall",
 	description: "Remove Pankit installations (ownership-aware)",
-	usage: "ck uninstall [options]",
+	usage: "pk uninstall [options]",
 	examples: [
 		{
-			command: "ck uninstall --local --yes",
+			command: "pk uninstall --local --yes",
 			description: "Remove local installation without confirmation",
 		},
 		{
-			command: "ck uninstall --dry-run",
+			command: "pk uninstall --dry-run",
 			description: "Preview what would be removed without deleting",
 		},
 	],

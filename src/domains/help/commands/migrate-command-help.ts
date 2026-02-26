@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const migrateCommandHelp: CommandHelp = {
 	name: "migrate",
 	description: "Migrate agents, commands, skills, config, and rules to other providers",
-	usage: "ck migrate [options]",
+	usage: "pk migrate [options]",
 	examples: [
 		{
-			command: "ck migrate --agent codex --agent opencode",
+			command: "pk migrate --agent codex --agent opencode",
 			description: "Migrate all supported content to selected providers",
 		},
 		{
-			command: "ck migrate --config --source ./CLAUDE.md",
+			command: "pk migrate --config --source ./CLAUDE.md",
 			description: "Migrate only config from a specific source file",
 		},
 	],

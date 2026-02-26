@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const agentsCommandHelp: CommandHelp = {
 	name: "agents",
 	description: "Install, uninstall, and manage Claude Code agents across providers",
-	usage: "ck agents [options]",
+	usage: "pk agents [options]",
 	examples: [
 		{
-			command: "ck agents --name maintainer --agent codex",
+			command: "pk agents --name maintainer --agent codex",
 			description: "Install one agent to Codex",
 		},
 		{
-			command: "ck agents --list --installed",
+			command: "pk agents --list --installed",
 			description: "Show installed agents and locations",
 		},
 	],

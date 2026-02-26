@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const commandsCommandHelp: CommandHelp = {
 	name: "commands",
 	description: "Install, uninstall, and manage Claude commands across providers",
-	usage: "ck commands [options]",
+	usage: "pk commands [options]",
 	examples: [
 		{
-			command: "ck commands --name plan --agent codex",
+			command: "pk commands --name plan --agent codex",
 			description: "Install one slash command to Codex",
 		},
 		{
-			command: "ck commands --list",
+			command: "pk commands --list",
 			description: "List available commands from source",
 		},
 	],

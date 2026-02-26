@@ -10,14 +10,14 @@ import { folderOptionsGroup } from "./common-options.js";
 export const initCommandHelp: CommandHelp = {
 	name: "init",
 	description: "Initialize or update Pankit project (with interactive version selection)",
-	usage: "ck init [options]",
+	usage: "pk init [options]",
 	examples: [
 		{
-			command: "ck init --kit engineer",
+			command: "pk init --kit engineer",
 			description: "Update local project with latest engineer kit",
 		},
 		{
-			command: "ck init --use-git --release v2.1.0 -y",
+			command: "pk init --use-git --release v2.1.0 -y",
 			description: "Non-interactive with git clone (no GitHub API needed)",
 		},
 	],

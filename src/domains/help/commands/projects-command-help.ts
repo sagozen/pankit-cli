@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const projectsCommandHelp: CommandHelp = {
 	name: "projects",
 	description: "Manage local Pankit project registry entries",
-	usage: "ck projects <subcommand> [options]",
+	usage: "pk projects <subcommand> [options]",
 	examples: [
 		{
-			command: "ck projects list --pinned",
+			command: "pk projects list --pinned",
 			description: "Show only pinned projects",
 		},
 		{
-			command: "ck projects add . --alias engine --pinned",
+			command: "pk projects add . --alias engine --pinned",
 			description: "Add current directory with an alias and pin it",
 		},
 	],

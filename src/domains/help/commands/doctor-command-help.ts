@@ -9,18 +9,18 @@ import type { CommandHelp } from "../help-types.js";
 export const doctorCommandHelp: CommandHelp = {
 	name: "doctor",
 	description: "Comprehensive health check for Pankit",
-	usage: "ck doctor [options]",
+	usage: "pk doctor [options]",
 	examples: [
 		{
 			command: "pk doctor",
 			description: "Run full health check interactively",
 		},
 		{
-			command: "ck doctor --fix",
+			command: "pk doctor --fix",
 			description: "Auto-fix all fixable issues",
 		},
 		{
-			command: "ck doctor --check-only",
+			command: "pk doctor --check-only",
 			description: "CI mode: exit 1 on failures, no prompts",
 		},
 	],

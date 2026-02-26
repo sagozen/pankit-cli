@@ -9,14 +9,14 @@ import type { CommandHelp } from "../help-types.js";
 export const configCommandHelp: CommandHelp = {
 	name: "config",
 	description: "Manage Pankit configuration and launch the config dashboard",
-	usage: "ck config [action] [key] [value] [options]",
+	usage: "pk config [action] [key] [value] [options]",
 	examples: [
 		{
-			command: "ck config",
-			description: "Launch the web dashboard (same as 'ck config ui')",
+			command: "pk config",
+			description: "Launch the web dashboard (same as 'pk config ui')",
 		},
 		{
-			command: "ck config set defaults.kit engineer",
+			command: "pk config set defaults.kit engineer",
 			description: "Set a config value from the CLI",
 		},
 	],
@@ -86,7 +86,7 @@ export const configCommandHelp: CommandHelp = {
 		{
 			title: "Notes",
 			content:
-				"Run 'ck config --help' to see both CLI actions and dashboard flags. Running bare 'ck config' opens the dashboard directly.",
+				"Run 'pk config --help' to see both CLI actions and dashboard flags. Running bare 'pk config' opens the dashboard directly.",
 		},
 	],
 };

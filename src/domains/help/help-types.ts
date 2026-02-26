@@ -48,7 +48,7 @@ export interface OptionGroup {
  * Limited to 2 per command for conciseness
  */
 export interface HelpExample {
-	/** Example command (e.g., "ck new --kit engineer") */
+	/** Example command (e.g., "pk new --kit engineer") */
 	command: string;
 	/** Brief explanation of what this example does */
 	description: string;
@@ -74,7 +74,7 @@ export interface CommandHelp {
 	name: string;
 	/** Brief command description (shown in command list) */
 	description: string;
-	/** Usage syntax (e.g., "ck new [options]") */
+	/** Usage syntax (e.g., "pk new [options]") */
 	usage: string;
 	/** Usage examples (max 2 recommended) */
 	examples: HelpExample[];
@@ -166,7 +166,7 @@ export type CommandRegistry = Record<string, CommandHelp>;
 export type HelpFormatter = (help: CommandHelp, context: HelpRenderContext) => string;
 
 /**
- * Global help data (shown with `ck --help`)
+ * Global help data (shown with `pk --help`)
  */
 export interface GlobalHelp {
 	/** CLI name */
