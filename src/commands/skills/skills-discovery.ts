@@ -16,12 +16,12 @@ const SKIP_DIRS = ["node_modules", ".git", "dist", "build", ".venv", "__pycache_
 
 /**
  * Get the skill source directory
- * Priority: bundled with engineer package > global ~/.claude/skills
+ * Priority: bundled with community package > global ~/.claude/skills
  */
 export function getSkillSourcePath(): string | null {
-	// Check for bundled skills in pankit-engineer (future)
+	// Check for bundled skills in pankit-community (future)
 	const bundledPaths = [
-		join(process.cwd(), "node_modules/pankit-engineer/skills"),
+		join(process.cwd(), "node_modules/pankit-community/skills"),
 		join(process.cwd(), ".claude/skills"),
 	];
 

@@ -13,8 +13,8 @@ export const initCommandHelp: CommandHelp = {
 	usage: "pk init [options]",
 	examples: [
 		{
-			command: "pk init --kit engineer",
-			description: "Update local project with latest engineer kit",
+			command: "pk init --kit community",
+			description: "Update local project with latest community kit",
 		},
 		{
 			command: "pk init --use-git --release v2.1.0 -y",
@@ -28,7 +28,7 @@ export const initCommandHelp: CommandHelp = {
 				{
 					flags: "-y, --yes",
 					description:
-						"Non-interactive mode with sensible defaults (kit: engineer, dir: ., version: latest)",
+						"Non-interactive mode with sensible defaults (kit: community, dir: ., version: latest)",
 				},
 				{
 					flags: "--use-git",
@@ -50,7 +50,7 @@ export const initCommandHelp: CommandHelp = {
 				},
 				{
 					flags: "--kit <kit>",
-					description: "Kit to use (engineer, marketing)",
+					description: "Kit to use (community, pro)",
 				},
 				{
 					flags: "-r, --release <version>",

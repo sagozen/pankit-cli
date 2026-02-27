@@ -2,7 +2,7 @@
 
 ## Overview
 
-Pankit CLI v1.17+ supports multiple kits (engineer, marketing) in a single installation. This document explains the automatic migration process, user experience, and rollback strategies.
+Pankit CLI v1.17+ supports multiple kits (community, pro) in a single installation. This document explains the automatic migration process, user experience, and rollback strategies.
 
 ## Auto-Migration Process
 
@@ -17,7 +17,7 @@ Migration happens automatically during:
 Legacy single-kit metadata:
 ```json
 {
-  "name": "Pankit Engineer",
+  "name": "Pankit Community",
   "version": "v1.16.0",
   "installedAt": "2024-01-01T00:00:00.000Z",
   "scope": "local",
@@ -29,14 +29,14 @@ Becomes multi-kit format:
 ```json
 {
   "kits": {
-    "engineer": {
+    "community": {
       "version": "v1.16.0",
       "installedAt": "2024-01-01T00:00:00.000Z",
       "files": [...]
     }
   },
   "scope": "local",
-  "name": "Pankit Engineer",
+  "name": "Pankit Community",
   "version": "v1.16.0",
   "installedAt": "2024-01-01T00:00:00.000Z",
   "files": [...]
@@ -61,18 +61,18 @@ File locking prevents race conditions when multiple processes install kits simul
 ### Installing Multiple Kits
 
 ```bash
-# Install engineer kit
-pk init --kit engineer
+# Install community kit
+pk init --kit community
 
-# Install marketing kit (preserves engineer)
-pk init --kit marketing
+# Install pro kit (preserves community)
+pk init --kit pro
 ```
 
 ### Uninstalling Specific Kit
 
 ```bash
-# Remove only marketing kit (preserves engineer)
-pk uninstall --kit marketing
+# Remove only pro kit (preserves community)
+pk uninstall --kit pro
 
 # Remove all kits
 pk uninstall
@@ -124,7 +124,7 @@ If installation hangs or fails with lock errors:
 
 ### Kit Not Found During Uninstall
 
-`Kit "marketing" is not installed`
+`Kit "pro" is not installed`
 - Use `pk versions` to see installed kits
 - Check both local and global installations
 

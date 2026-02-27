@@ -48,7 +48,7 @@ export interface OptionGroup {
  * Limited to 2 per command for conciseness
  */
 export interface HelpExample {
-	/** Example command (e.g., "pk new --kit engineer") */
+	/** Example command (e.g., "pk new --kit community") */
 	command: string;
 	/** Brief explanation of what this example does */
 	description: string;

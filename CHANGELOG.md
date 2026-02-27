@@ -5,8 +5,8 @@
 ### 🚀 Features
 
 - Initial release of Pankit CLI (`pk`)
-- Engineer kit: AI-powered coding with skills, hooks, and multi-agent workflows
-- Marketing kit: content automation, campaigns, social, and analytics
+- Community kit: AI-powered coding with skills, hooks, and multi-agent workflows
+- Pro kit: Advanced AI-powered coding with premium resources, training, and support (Features: All Community features + Private Support Group, Private Course, Latest Tips, Job Opportunities)
 - Interactive install wizard with guided kit selection
 - Web dashboard (`pk config ui`) for visual configuration management
 - Projects registry at `~/.pankit/projects.json` with file locking

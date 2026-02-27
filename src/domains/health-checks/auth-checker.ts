@@ -27,7 +27,7 @@ export class AuthChecker implements Checker {
 	readonly group = "auth" as const;
 	private kits: KitType[];
 
-	constructor(kits: KitType[] = ["engineer"]) {
+	constructor(kits: KitType[] = ["community"]) {
 		this.kits = kits;
 	}
 

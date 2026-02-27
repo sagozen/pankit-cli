@@ -17,11 +17,11 @@ const SuccessScreen: React.FC<SuccessScreenProps> = ({ kit, onGetStarted }) => {
 	const navigate = useNavigate();
 
 	const kitName =
-		kit === KitType.ENGINEER
-			? "kitEngineerName"
-			: kit === KitType.MARKETING
-				? "kitMarketingName"
-				: "kitEngineerName";
+		kit === KitType.COMMUNITY
+			? "kitCommunityName"
+			: kit === KitType.PRO
+				? "kitProName"
+				: "kitCommunityName";
 
 	return (
 		<div className="text-center py-12 space-y-6" data-testid="success-screen">

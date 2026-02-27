@@ -16,7 +16,7 @@ export const configCommandHelp: CommandHelp = {
 			description: "Launch the web dashboard (same as 'pk config ui')",
 		},
 		{
-			command: "pk config set defaults.kit engineer",
+			command: "pk config set defaults.kit community",
 			description: "Set a config value from the CLI",
 		},
 	],

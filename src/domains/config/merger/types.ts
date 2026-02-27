@@ -7,7 +7,7 @@ export interface HookEntry {
 	matcher?: string;
 	timeout?: number;
 	/**
-	 * Kit that added this hook (e.g., "engineer", "marketing")
+	 * Kit that added this hook (e.g., "community", "pro")
 	 * Used internally for merge tracking and kit-scoped uninstall
 	 */
 	_origin?: string;

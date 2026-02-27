@@ -11,16 +11,16 @@ import {
 } from "@/commands/update-cli.js";
 
 describe("update-cli windows integration behavior", () => {
-	it("throws mismatch error with Windows `where ck` guidance when active version remains old", async () => {
+	it("throws mismatch error with Windows `where pk` guidance when active version remains old", async () => {
 		const execAsyncFn = mock(
 			async (command: string): Promise<{ stdout: string; stderr: string }> => {
 				if (command.startsWith("npm install -g pankit-cli@")) {
 					return { stdout: "", stderr: "" };
 				}
 
-				if (command === "ck --version") {
+				if (command === "pk --version") {
 					return {
-						stdout: "CLI Version: 3.34.0\nGlobal Kit Version: engineer@v2.12.0",
+						stdout: "CLI Version: 3.34.0\nGlobal Kit Version: community@v2.12.0",
 						stderr: "",
 					};
 				}
@@ -29,7 +29,7 @@ describe("update-cli windows integration behavior", () => {
 			},
 		);
 
-		const promptKitUpdateFn = mock(async () => {});
+		const promptKitUpdateFn = mock(async () => { });
 
 		const deps: UpdateCliCommandDeps = {
 			currentVersion: "3.34.0",
@@ -70,14 +70,14 @@ describe("update-cli windows integration behavior", () => {
 		const message = thrown instanceof Error ? thrown.message : String(thrown);
 		expect(message).toContain("Update did not activate the requested version.");
 		expect(message).toContain("Expected: 3.34.5");
-		expect(message).toContain("Active ck: 3.34.0");
-		expect(message).toContain("Windows: where ck");
+		expect(message).toContain("Active pk: 3.34.0");
+		expect(message).toContain("Windows: where pk");
 
 		expect(execAsyncFn).toHaveBeenCalledWith(
 			"npm install -g pankit-cli@3.34.5",
 			expect.any(Object),
 		);
-		expect(execAsyncFn).toHaveBeenCalledWith("ck --version", expect.any(Object));
+		expect(execAsyncFn).toHaveBeenCalledWith("pk --version", expect.any(Object));
 		expect(promptKitUpdateFn).not.toHaveBeenCalled();
 	});
 });

@@ -3,14 +3,14 @@
  * Uses translation keys for all user-facing strings
  */
 
-export type KitType = "engineer" | "marketing";
+export type KitType = "community" | "pro";
 
 export interface KitFeature {
 	id: string;
 	name: string; // Translation key: e.g., "featureAgents"
 	description: string; // Translation key
-	engineer: boolean;
-	marketing: boolean;
+	community: boolean;
+	pro: boolean;
 }
 
 export interface KitComparison {
@@ -23,63 +23,78 @@ export interface KitComparison {
 
 export const KIT_FEATURES: KitFeature[] = [
 	{
-		id: "agents",
-		name: "featureAgents",
-		description: "featureAgentsDesc",
-		engineer: true,
-		marketing: true,
+		id: "communitySupport",
+		name: "featureCommunitySupport",
+		description: "featureCommunitySupportDesc",
+		community: true,
+		pro: true,
 	},
 	{
-		id: "hooks",
-		name: "featureHooks",
-		description: "featureHooksDesc",
-		engineer: true,
-		marketing: true,
+		id: "fullSkills",
+		name: "featureFullSkills",
+		description: "featureFullSkillsDesc",
+		community: true,
+		pro: true,
 	},
 	{
-		id: "skills",
-		name: "featureSkills",
-		description: "featureSkillsDesc",
-		engineer: true,
-		marketing: true,
+		id: "powerfulCapabilities",
+		name: "featurePowerfulCapabilities",
+		description: "featurePowerfulCapabilitiesDesc",
+		community: true,
+		pro: true,
 	},
 	{
-		id: "multiagent",
-		name: "featureMultiAgent",
-		description: "featureMultiAgentDesc",
-		engineer: true,
-		marketing: false,
+		id: "privateSupportGroup",
+		name: "featurePrivateSupportGroup",
+		description: "featurePrivateSupportGroupDesc",
+		community: false,
+		pro: true,
 	},
 	{
-		id: "content",
-		name: "featureContent",
-		description: "featureContentDesc",
-		engineer: false,
-		marketing: true,
+		id: "privateCourse",
+		name: "featurePrivateCourse",
+		description: "featurePrivateCourseDesc",
+		community: false,
+		pro: true,
 	},
 	{
-		id: "social",
-		name: "featureSocial",
-		description: "featureSocialDesc",
-		engineer: false,
-		marketing: true,
+		id: "latestTips",
+		name: "featureLatestTips",
+		description: "featureLatestTipsDesc",
+		community: false,
+		pro: true,
+	},
+	{
+		id: "jobs",
+		name: "featureJobs",
+		description: "featureJobsDesc",
+		community: false,
+		pro: true,
 	},
 ];
 
 export const KIT_COMPARISONS: Record<KitType, KitComparison> = {
-	engineer: {
-		id: "engineer",
-		name: "kitEngineerName",
-		tagline: "kitEngineerTagline",
+	community: {
+		id: "community",
+		name: "kitCommunityName",
+		tagline: "kitCommunityTagline",
 		primaryColor: "text-blue-500",
-		features: ["agents", "hooks", "skills", "multiagent"],
+		features: ["communitySupport", "fullSkills", "powerfulCapabilities"],
 	},
-	marketing: {
-		id: "marketing",
-		name: "kitMarketingName",
-		tagline: "kitMarketingTagline",
+	pro: {
+		id: "pro",
+		name: "kitProName",
+		tagline: "kitProTagline",
 		primaryColor: "text-purple-500",
-		features: ["agents", "hooks", "skills", "content", "social"],
+		features: [
+			"communitySupport",
+			"fullSkills",
+			"powerfulCapabilities",
+			"privateSupportGroup",
+			"privateCourse",
+			"latestTips",
+			"jobs",
+		],
 	},
 };
 

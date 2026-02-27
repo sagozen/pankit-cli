@@ -65,7 +65,7 @@ function transformApiProject(p: ApiProject): Project {
 		name: p.name,
 		path: p.path,
 		health: p.health as HealthStatus,
-		kitType: (p.kitType || "engineer") as KitType,
+		kitType: (p.kitType || "community") as KitType,
 		model: p.model,
 		activeHooks: p.activeHooks,
 		mcpServers: p.mcpServers,
@@ -232,11 +232,11 @@ export async function fetchSettingsFile(): Promise<ApiSettingsFile> {
 		legacy.settings && typeof legacy.settings === "object"
 			? legacy.settings
 			: {
-					model: legacy.model,
-					permissions: legacy.permissions,
-					hookCount: legacy.hookCount,
-					mcpServerCount: legacy.mcpServerCount,
-				};
+				model: legacy.model,
+				permissions: legacy.permissions,
+				hookCount: legacy.hookCount,
+				mcpServerCount: legacy.mcpServerCount,
+			};
 
 	return {
 		path: legacy.settingsPath ?? "~/.claude/settings.json",

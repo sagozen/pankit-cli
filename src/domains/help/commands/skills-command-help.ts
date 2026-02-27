@@ -99,7 +99,7 @@ export const skillsCommandHelp: CommandHelp = {
 		},
 		{
 			title: "Notes",
-			content: `  • Skills are installed from ~/.claude/skills (Pankit Engineer source)
+			content: `  • Skills are installed from ~/.claude/skills (Pankit Community source)
   • Registry stored at ~/.pankit/skill-registry.json
   • Project installs go to ./<agent>/skills, global to ~/<agent>/skills`,
 		},

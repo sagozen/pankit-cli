@@ -14,5 +14,5 @@ export interface SetupContext {
 	cancelled: boolean;
 	envConfigured: boolean;
 	packagesInstalled: string[];
-	selectedKit?: "engineer" | "marketing";
+	selectedKit?: "community" | "pro";
 }

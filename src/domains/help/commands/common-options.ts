@@ -19,7 +19,7 @@ export const projectOptionsGroup: OptionGroup = {
 		},
 		{
 			flags: "--kit <kit>",
-			description: "Kit to use (engineer, marketing)",
+			description: "Kit to use (community, pro)",
 		},
 		{
 			flags: "-r, --release <version>",

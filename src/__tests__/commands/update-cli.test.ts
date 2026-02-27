@@ -20,36 +20,36 @@ describe("update-cli", () => {
 	describe("buildInitCommand", () => {
 		it("builds local command with no kit (generic)", () => {
 			const result = buildInitCommand(false);
-			expect(result).toBe("ck init --yes --install-skills");
+			expect(result).toBe("pk init --yes --install-skills");
 		});
 
 		it("builds global command with no kit (generic)", () => {
 			const result = buildInitCommand(true);
-			expect(result).toBe("ck init -g --yes --install-skills");
+			expect(result).toBe("pk init -g --yes --install-skills");
 		});
 
-		it("builds local command with engineer kit", () => {
-			const result = buildInitCommand(false, "engineer");
-			expect(result).toBe("ck init --kit engineer --yes --install-skills");
+		it("builds local command with community kit", () => {
+			const result = buildInitCommand(false, "community");
+			expect(result).toBe("pk init --kit community --yes --install-skills");
 		});
 
-		it("builds local command with marketing kit", () => {
-			const result = buildInitCommand(false, "marketing");
-			expect(result).toBe("ck init --kit marketing --yes --install-skills");
+		it("builds local command with pro kit", () => {
+			const result = buildInitCommand(false, "pro");
+			expect(result).toBe("pk init --kit pro --yes --install-skills");
 		});
 
-		it("builds global command with engineer kit", () => {
-			const result = buildInitCommand(true, "engineer");
-			expect(result).toBe("ck init -g --kit engineer --yes --install-skills");
+		it("builds global command with community kit", () => {
+			const result = buildInitCommand(true, "community");
+			expect(result).toBe("pk init -g --kit community --yes --install-skills");
 		});
 
-		it("builds global command with marketing kit", () => {
-			const result = buildInitCommand(true, "marketing");
-			expect(result).toBe("ck init -g --kit marketing --yes --install-skills");
+		it("builds global command with pro kit", () => {
+			const result = buildInitCommand(true, "pro");
+			expect(result).toBe("pk init -g --kit pro --yes --install-skills");
 		});
 
 		it("places -g flag before --kit flag", () => {
-			const result = buildInitCommand(true, "engineer");
+			const result = buildInitCommand(true, "community");
 			const gIndex = result.indexOf("-g");
 			const kitIndex = result.indexOf("--kit");
 			expect(gIndex).toBeLessThan(kitIndex);
@@ -59,8 +59,8 @@ describe("update-cli", () => {
 			const cases = [
 				buildInitCommand(false),
 				buildInitCommand(true),
-				buildInitCommand(false, "engineer"),
-				buildInitCommand(true, "marketing"),
+				buildInitCommand(false, "community"),
+				buildInitCommand(true, "pro"),
 			];
 
 			for (const cmd of cases) {
@@ -71,22 +71,22 @@ describe("update-cli", () => {
 
 		it("includes --beta flag when beta is true", () => {
 			const result = buildInitCommand(false, undefined, true);
-			expect(result).toBe("ck init --yes --install-skills --beta");
+			expect(result).toBe("pk init --yes --install-skills --beta");
 		});
 
 		it("includes --beta flag with kit and global", () => {
-			const result = buildInitCommand(true, "engineer", true);
-			expect(result).toBe("ck init -g --kit engineer --yes --install-skills --beta");
+			const result = buildInitCommand(true, "community", true);
+			expect(result).toBe("pk init -g --kit community --yes --install-skills --beta");
 		});
 
 		it("does not include --beta flag when beta is false", () => {
-			const result = buildInitCommand(false, "engineer", false);
-			expect(result).toBe("ck init --kit engineer --yes --install-skills");
+			const result = buildInitCommand(false, "community", false);
+			expect(result).toBe("pk init --kit community --yes --install-skills");
 		});
 
 		it("does not include --beta flag when beta is undefined", () => {
-			const result = buildInitCommand(false, "engineer");
-			expect(result).toBe("ck init --kit engineer --yes --install-skills");
+			const result = buildInitCommand(false, "community");
+			expect(result).toBe("pk init --kit community --yes --install-skills");
 		});
 	});
 
@@ -94,7 +94,7 @@ describe("update-cli", () => {
 		let tempDir: string;
 
 		beforeEach(async () => {
-			tempDir = await mkdtemp(join(tmpdir(), "ck-test-"));
+			tempDir = await mkdtemp(join(tmpdir(), "pk-test-"));
 		});
 
 		afterEach(async () => {
@@ -110,14 +110,14 @@ describe("update-cli", () => {
 			const metadata = {
 				version: "1.0.0",
 				kits: {
-					engineer: { version: "2.0.0", installedAt: "2025-01-01T00:00:00Z" },
+					community: { version: "2.0.0", installedAt: "2025-01-01T00:00:00Z" },
 				},
 			};
 			await writeFile(join(tempDir, "metadata.json"), JSON.stringify(metadata));
 
 			const result = await readMetadataFile(tempDir);
 			expect(result?.version).toBe("1.0.0");
-			expect(result?.kits?.engineer?.version).toBe("2.0.0");
+			expect(result?.kits?.community?.version).toBe("2.0.0");
 		});
 
 		it("returns null for invalid JSON", async () => {
@@ -138,15 +138,15 @@ describe("update-cli", () => {
 			const metadata = {
 				version: "1.5.0",
 				kits: {
-					engineer: { version: "2.0.0", installedAt: "2025-01-01T00:00:00Z" },
-					marketing: { version: "1.0.0", installedAt: "2025-01-01T00:00:00Z" },
+					community: { version: "2.0.0", installedAt: "2025-01-01T00:00:00Z" },
+					pro: { version: "1.0.0", installedAt: "2025-01-01T00:00:00Z" },
 				},
 			};
 			await writeFile(join(tempDir, "metadata.json"), JSON.stringify(metadata));
 
 			const result = await readMetadataFile(tempDir);
-			expect(result?.kits?.engineer?.version).toBe("2.0.0");
-			expect(result?.kits?.marketing?.version).toBe("1.0.0");
+			expect(result?.kits?.community?.version).toBe("2.0.0");
+			expect(result?.kits?.pro?.version).toBe("1.0.0");
 		});
 	});
 
@@ -176,27 +176,27 @@ describe("update-cli", () => {
 					hasLocal: false,
 					hasGlobal: true,
 					localKits: [],
-					globalKits: ["engineer"],
+					globalKits: ["community"],
 				};
 				const result = selectKitForUpdate(params);
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(true);
-				expect(result?.kit).toBe("engineer");
+				expect(result?.kit).toBe("community");
 				expect(result?.promptMessage).toContain("global");
-				expect(result?.promptMessage).toContain("engineer");
+				expect(result?.promptMessage).toContain("community");
 			});
 
 			it("falls back to localKits when globalKits is empty but hasGlobal is true", () => {
 				const params: KitSelectionParams = {
 					hasLocal: false,
 					hasGlobal: true,
-					localKits: ["marketing"],
+					localKits: ["pro"],
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(true);
-				expect(result?.kit).toBe("marketing");
+				expect(result?.kit).toBe("pro");
 			});
 
 			it("returns undefined kit when both globalKits and localKits are empty", () => {
@@ -222,15 +222,15 @@ describe("update-cli", () => {
 				const params: KitSelectionParams = {
 					hasLocal: true,
 					hasGlobal: false,
-					localKits: ["engineer"],
+					localKits: ["community"],
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(false);
-				expect(result?.kit).toBe("engineer");
+				expect(result?.kit).toBe("community");
 				expect(result?.promptMessage).toContain("local");
-				expect(result?.promptMessage).toContain("engineer");
+				expect(result?.promptMessage).toContain("community");
 			});
 
 			it("returns undefined kit when both localKits and globalKits are empty", () => {
@@ -256,13 +256,13 @@ describe("update-cli", () => {
 				const params: KitSelectionParams = {
 					hasLocal: true,
 					hasGlobal: true,
-					localKits: ["marketing"],
-					globalKits: ["engineer"],
+					localKits: ["pro"],
+					globalKits: ["community"],
 				};
 				const result = selectKitForUpdate(params);
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(true);
-				expect(result?.kit).toBe("engineer");
+				expect(result?.kit).toBe("community");
 				expect(result?.promptMessage).toContain("global");
 			});
 
@@ -270,13 +270,13 @@ describe("update-cli", () => {
 				const params: KitSelectionParams = {
 					hasLocal: true,
 					hasGlobal: true,
-					localKits: ["marketing"],
+					localKits: ["pro"],
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(true);
-				expect(result?.kit).toBe("marketing");
+				expect(result?.kit).toBe("pro");
 			});
 
 			it("returns undefined kit when both arrays are empty but flags are true", () => {
@@ -302,10 +302,10 @@ describe("update-cli", () => {
 					hasLocal: false,
 					hasGlobal: true,
 					localKits: [],
-					globalKits: ["engineer"],
+					globalKits: ["community"],
 				};
 				const result = selectKitForUpdate(params);
-				expect(result?.promptMessage).toBe("Update global Pankit content (engineer)?");
+				expect(result?.promptMessage).toBe("Update global Pankit content (community)?");
 			});
 
 			it("excludes parentheses when kit is undefined", () => {
@@ -323,11 +323,11 @@ describe("update-cli", () => {
 				const params: KitSelectionParams = {
 					hasLocal: true,
 					hasGlobal: false,
-					localKits: ["engineer"],
+					localKits: ["community"],
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
-				expect(result?.promptMessage).toBe("Update local project Pankit content (engineer)?");
+				expect(result?.promptMessage).toBe("Update local project Pankit content (community)?");
 			});
 		});
 
@@ -339,13 +339,13 @@ describe("update-cli", () => {
 				const params: KitSelectionParams = {
 					hasLocal: false,
 					hasGlobal: false,
-					localKits: ["engineer"],
+					localKits: ["community"],
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(false);
-				expect(result?.kit).toBe("engineer");
+				expect(result?.kit).toBe("community");
 			});
 
 			it("detects hasGlobalKit from globalKits array even when hasGlobal is false", () => {
@@ -353,23 +353,23 @@ describe("update-cli", () => {
 					hasLocal: false,
 					hasGlobal: false,
 					localKits: [],
-					globalKits: ["engineer"],
+					globalKits: ["community"],
 				};
 				const result = selectKitForUpdate(params);
 				expect(result).not.toBeNull();
 				expect(result?.isGlobal).toBe(true);
-				expect(result?.kit).toBe("engineer");
+				expect(result?.kit).toBe("community");
 			});
 
 			it("selects first kit when multiple kits in array", () => {
 				const params: KitSelectionParams = {
 					hasLocal: true,
 					hasGlobal: false,
-					localKits: ["engineer", "marketing"],
+					localKits: ["community", "pro"],
 					globalKits: [],
 				};
 				const result = selectKitForUpdate(params);
-				expect(result?.kit).toBe("engineer");
+				expect(result?.kit).toBe("community");
 			});
 		});
 	});
@@ -683,7 +683,7 @@ describe("update-cli", () => {
 
 	describe("parseCliVersionFromOutput", () => {
 		it("extracts CLI version from standard output", () => {
-			const output = "CLI Version: 3.34.5\nGlobal Kit Version: engineer@v2.10.0";
+			const output = "CLI Version: 3.34.5\nGlobal Kit Version: community@v2.10.0";
 			expect(parseCliVersionFromOutput(output)).toBe("3.34.5");
 		});
 

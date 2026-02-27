@@ -48,7 +48,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 	it("returns false when kits have no version", async () => {
 		const metadata = {
 			kits: {
-				engineer: { files: [] }, // No version
+				community: { files: [] }, // No version
 			},
 		};
 		await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
@@ -60,7 +60,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 		// Set up multi-kit metadata
 		const metadata = {
 			kits: {
-				engineer: { version: "1.16.0", files: [] },
+				community: { version: "1.16.0", files: [] },
 			},
 		};
 		await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
@@ -70,7 +70,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 			lastCheck: Date.now(),
 			latestVersion: "1.16.0",
 		};
-		await writeFile(join(cacheDir, "engineer-config-update-cache.json"), JSON.stringify(cache));
+		await writeFile(join(cacheDir, "community-config-update-cache.json"), JSON.stringify(cache));
 
 		const result = await maybeShowConfigUpdateNotification(claudeDir, false);
 		expect(result).toBe(false);
@@ -80,7 +80,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 		// Set up multi-kit metadata with older version
 		const metadata = {
 			kits: {
-				engineer: { version: "1.15.0", files: [] },
+				community: { version: "1.15.0", files: [] },
 			},
 		};
 		await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
@@ -90,7 +90,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 			lastCheck: Date.now(),
 			latestVersion: "1.16.0",
 		};
-		await writeFile(join(cacheDir, "engineer-config-update-cache.json"), JSON.stringify(cache));
+		await writeFile(join(cacheDir, "community-config-update-cache.json"), JSON.stringify(cache));
 
 		// Spy on console.log to verify notification shown
 		const consoleSpy = spyOn(console, "log").mockImplementation(() => {});
@@ -106,7 +106,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 	it("handles legacy metadata format", async () => {
 		// Legacy single-kit format
 		const metadata = {
-			name: "pankit-engineer",
+			name: "pankit-community",
 			version: "1.15.0",
 			files: [],
 		};
@@ -117,7 +117,7 @@ describe("maybeShowConfigUpdateNotification", () => {
 			lastCheck: Date.now(),
 			latestVersion: "1.16.0",
 		};
-		await writeFile(join(cacheDir, "engineer-config-update-cache.json"), JSON.stringify(cache));
+		await writeFile(join(cacheDir, "community-config-update-cache.json"), JSON.stringify(cache));
 
 		const consoleSpy = spyOn(console, "log").mockImplementation(() => {});
 
@@ -132,16 +132,16 @@ describe("maybeShowConfigUpdateNotification", () => {
 		// Multi-kit with both needing updates
 		const metadata = {
 			kits: {
-				engineer: { version: "1.15.0", files: [] },
-				marketing: { version: "1.15.0", files: [] },
+				community: { version: "1.15.0", files: [] },
+				pro: { version: "1.15.0", files: [] },
 			},
 		};
 		await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
 
 		// Set up caches for both (uses mocked cacheDir)
 		const cache = { lastCheck: Date.now(), latestVersion: "1.16.0" };
-		await writeFile(join(cacheDir, "engineer-config-update-cache.json"), JSON.stringify(cache));
-		await writeFile(join(cacheDir, "marketing-config-update-cache.json"), JSON.stringify(cache));
+		await writeFile(join(cacheDir, "community-config-update-cache.json"), JSON.stringify(cache));
+		await writeFile(join(cacheDir, "pro-config-update-cache.json"), JSON.stringify(cache));
 
 		let notificationCount = 0;
 		const consoleSpy = spyOn(console, "log").mockImplementation((msg) => {
@@ -172,14 +172,14 @@ describe("maybeShowConfigUpdateNotification", () => {
 	it("works with global flag", async () => {
 		const metadata = {
 			kits: {
-				engineer: { version: "1.15.0", files: [] },
+				community: { version: "1.15.0", files: [] },
 			},
 		};
 		await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
 
 		// Set up cache with update available (uses mocked cacheDir)
 		const cache = { lastCheck: Date.now(), latestVersion: "1.16.0" };
-		await writeFile(join(cacheDir, "engineer-config-update-cache.json"), JSON.stringify(cache));
+		await writeFile(join(cacheDir, "community-config-update-cache.json"), JSON.stringify(cache));
 
 		const consoleSpy = spyOn(console, "log").mockImplementation(() => {});
 

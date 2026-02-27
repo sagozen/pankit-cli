@@ -13,8 +13,8 @@ export const newCommandHelp: CommandHelp = {
 	usage: "pk new [options]",
 	examples: [
 		{
-			command: "pk new --kit engineer --dir ./my-project",
-			description: "Create engineer kit project in specific directory",
+			command: "pk new --kit community --dir ./my-project",
+			description: "Create community kit project in specific directory",
 		},
 		{
 			command: "pk new -y --use-git --release v2.1.0",
@@ -45,7 +45,7 @@ export const newCommandHelp: CommandHelp = {
 				},
 				{
 					flags: "--kit <kit>",
-					description: "Kit to use (engineer, marketing)",
+					description: "Kit to use (community, pro)",
 				},
 				{
 					flags: "-r, --release <version>",

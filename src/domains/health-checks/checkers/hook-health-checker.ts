@@ -89,11 +89,11 @@ export async function checkHookSyntax(projectDir: string): Promise<CheckResult> 
 				status: "fail",
 				message: `${errors.length} hook(s) with syntax errors`,
 				details: errors.join("\n"),
-				suggestion: "Run: ck init",
+				suggestion: "Run: pk init",
 				autoFixable: true,
 				fix: {
 					id: "fix-hook-syntax",
-					description: "Reinstall hooks via ck init",
+					description: "Reinstall hooks via pk init",
 					execute: async () => ({
 						success: false,
 						message: "Manual fix required: run 'pk init'",
@@ -205,11 +205,11 @@ export async function checkHookDeps(projectDir: string): Promise<CheckResult> {
 				status: "fail",
 				message: `${missingDeps.length} missing dependency(ies)`,
 				details: missingDeps.join("\n"),
-				suggestion: "Run: ck init",
+				suggestion: "Run: pk init",
 				autoFixable: true,
 				fix: {
 					id: "fix-hook-deps",
-					description: "Reinstall hooks via ck init",
+					description: "Reinstall hooks via pk init",
 					execute: async () => ({
 						success: false,
 						message: "Manual fix required: run 'pk init'",
@@ -319,7 +319,7 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 
 		const syntheticPayload = JSON.stringify({
 			tool_name: "Read",
-			tool_input: { file_path: join(tmpdir(), "ck-doctor-test.txt") },
+			tool_input: { file_path: join(tmpdir(), "pk-doctor-test.txt") },
 		});
 
 		const failures: string[] = [];
@@ -353,11 +353,11 @@ export async function checkHookRuntime(projectDir: string): Promise<CheckResult>
 				status: "fail",
 				message: `${failures.length} hook(s) failed dry-run`,
 				details: failures.join("\n"),
-				suggestion: "Run: ck init",
+				suggestion: "Run: pk init",
 				autoFixable: true,
 				fix: {
 					id: "fix-hook-runtime",
-					description: "Reinstall hooks via ck init",
+					description: "Reinstall hooks via pk init",
 					execute: async () => ({
 						success: false,
 						message: "Manual fix required: run 'pk init'",
@@ -569,7 +569,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 				priority: "standard",
 				status: "warn",
 				message: `Log file too large (${Math.round(logStats.size / 1024 / 1024)}MB)`,
-				suggestion: "Delete .claude/hooks/.logs/hook-log.jsonl and run: ck init",
+				suggestion: "Delete .claude/hooks/.logs/hook-log.jsonl and run: pk init",
 				autoFixable: true,
 				fix: {
 					id: "fix-hook-logs",
@@ -631,7 +631,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 				status: "warn",
 				message: `${crashes.length} crash(es) in last 24h`,
 				details: hookList,
-				suggestion: "Run: ck init",
+				suggestion: "Run: pk init",
 				autoFixable: true,
 				fix: {
 					id: "fix-hook-logs",
@@ -676,7 +676,7 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
 			status: "fail",
 			message: `${crashes.length} crashes in last 24h`,
 			details: `Most frequent: ${topCrashers}`,
-			suggestion: "Run: ck init",
+			suggestion: "Run: pk init",
 			autoFixable: true,
 			fix: {
 				id: "fix-hook-logs",
@@ -717,8 +717,8 @@ export async function checkHookLogs(projectDir: string): Promise<CheckResult> {
  */
 export async function checkCliVersion(): Promise<CheckResult> {
 	try {
-		// Try to get installed version from ck -V command
-		const versionResult = spawnSync("ck", ["-V"], {
+		// Try to get installed version from pk -V command
+		const versionResult = spawnSync("pk", ["-V"], {
 			timeout: HOOK_CHECK_TIMEOUT_MS,
 			encoding: "utf-8",
 		});
@@ -774,7 +774,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 				status: "fail",
 				message: `v${installedVersion} (latest: v${latestVersion})`,
 				details: "Major version behind",
-				suggestion: "Run: ck update",
+				suggestion: "Run: pk update",
 				autoFixable: true,
 				fix: {
 					id: "fix-cli-version",
@@ -797,7 +797,7 @@ export async function checkCliVersion(): Promise<CheckResult> {
 				status: "warn",
 				message: `v${installedVersion} (latest: v${latestVersion})`,
 				details: "Minor version behind",
-				suggestion: "Run: ck update",
+				suggestion: "Run: pk update",
 				autoFixable: true,
 				fix: {
 					id: "fix-cli-version",

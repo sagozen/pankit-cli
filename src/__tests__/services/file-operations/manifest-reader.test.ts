@@ -30,7 +30,7 @@ describe("findFileInInstalledKits", () => {
 	it("returns exists=false when file not in any kit", async () => {
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -50,11 +50,11 @@ describe("findFileInInstalledKits", () => {
 		expect(result.exists).toBe(false);
 	});
 
-	it("finds file in engineer kit", async () => {
+	it("finds file in community kit", async () => {
 		const checksum = "abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abc1";
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -72,14 +72,14 @@ describe("findFileInInstalledKits", () => {
 
 		const result = await findFileInInstalledKits(claudeDir, "skills/foo.md");
 		expect(result.exists).toBe(true);
-		expect(result.ownerKit).toBe("engineer");
+		expect(result.ownerKit).toBe("community");
 		expect(result.checksum).toBe(checksum);
 	});
 
 	it("excludes kit being installed", async () => {
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -95,7 +95,7 @@ describe("findFileInInstalledKits", () => {
 		};
 		await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
 
-		const result = await findFileInInstalledKits(claudeDir, "skills/foo.md", "engineer");
+		const result = await findFileInInstalledKits(claudeDir, "skills/foo.md", "community");
 		expect(result.exists).toBe(false); // Excluded
 	});
 
@@ -103,7 +103,7 @@ describe("findFileInInstalledKits", () => {
 		const checksum = "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2";
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -115,7 +115,7 @@ describe("findFileInInstalledKits", () => {
 						},
 					],
 				},
-				marketing: {
+				pro: {
 					version: "2.0.0",
 					installedAt: "2025-01-02T00:00:00Z",
 					files: [],
@@ -124,16 +124,16 @@ describe("findFileInInstalledKits", () => {
 		};
 		await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
 
-		const result = await findFileInInstalledKits(claudeDir, "skills/shared.md", "marketing");
+		const result = await findFileInInstalledKits(claudeDir, "skills/shared.md", "pro");
 		expect(result.exists).toBe(true);
-		expect(result.ownerKit).toBe("engineer");
+		expect(result.ownerKit).toBe("community");
 	});
 
 	it("returns version from kit metadata", async () => {
 		const checksum = "b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3";
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "2.5.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [

@@ -29,7 +29,7 @@ describe("deletion-handler", () => {
 
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -65,7 +65,7 @@ describe("deletion-handler", () => {
 
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -101,7 +101,7 @@ describe("deletion-handler", () => {
 
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -211,7 +211,7 @@ describe("deletion-handler", () => {
 
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -247,7 +247,7 @@ describe("deletion-handler", () => {
 			const updatedMetadata: Metadata = JSON.parse(await updatedContent);
 
 			// old.md should be removed from metadata
-			const files = updatedMetadata.kits?.engineer?.files || [];
+			const files = updatedMetadata.kits?.community?.files || [];
 			expect(files.find((f) => f.path === "commands/old.md")).toBeUndefined();
 			// keep.md should still be there
 			expect(files.find((f) => f.path === "commands/keep.md")).toBeDefined();
@@ -280,7 +280,7 @@ describe("deletion-handler", () => {
 			// Empty metadata (no files tracked)
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [],

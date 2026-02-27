@@ -774,11 +774,11 @@ describe("SelectiveMerger - Multi-Kit", () => {
 	});
 
 	test("returns shared-identical when file matches other kit with same checksum", async () => {
-		// Setup: engineer kit has skills/shared.md with a specific checksum
+		// Setup: community kit has skills/shared.md with a specific checksum
 		const checksum = "a".repeat(64);
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -799,24 +799,24 @@ describe("SelectiveMerger - Multi-Kit", () => {
 		await mkdir(join(claudeDir, "skills"), { recursive: true });
 		await writeFile(filePath, "shared content");
 
-		// Marketing kit trying to install same file
+		// Pro kit trying to install same file
 		const manifest = createManifest([{ path: "skills/shared.md", checksum, size: 14 }]);
 		const merger = new SelectiveMerger(manifest);
-		merger.setMultiKitContext(claudeDir, "marketing");
+		merger.setMultiKitContext(claudeDir, "pro");
 
 		const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 		expect(result.changed).toBe(false);
 		expect(result.reason).toBe("shared-identical");
-		expect(result.sharedWithKit).toBe("engineer");
+		expect(result.sharedWithKit).toBe("community");
 	});
 
 	test("returns shared-older when incoming version is older than installed", async () => {
-		// Engineer has v2.0.0, marketing incoming is v1.0.0
+		// Community has v2.0.0, pro incoming is v1.0.0
 		const checksum1 = "a".repeat(64);
 		const checksum2 = "b".repeat(64);
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "2.0.0", // Newer
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -834,15 +834,15 @@ describe("SelectiveMerger - Multi-Kit", () => {
 
 		const filePath = join(claudeDir, "skills", "shared.md");
 		await mkdir(join(claudeDir, "skills"), { recursive: true });
-		await writeFile(filePath, "newer content from engineer");
+		await writeFile(filePath, "newer content from community");
 
-		// Marketing v1.0.0 trying to install different checksum
+		// Pro v1.0.0 trying to install different checksum
 		const manifest = createManifest(
 			[{ path: "skills/shared.md", checksum: checksum2, size: 20 }],
 			"1.0.0", // Older
 		);
 		const merger = new SelectiveMerger(manifest);
-		merger.setMultiKitContext(claudeDir, "marketing");
+		merger.setMultiKitContext(claudeDir, "pro");
 
 		const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 		expect(result.changed).toBe(false);
@@ -850,12 +850,12 @@ describe("SelectiveMerger - Multi-Kit", () => {
 	});
 
 	test("allows update when incoming version is newer than installed", async () => {
-		// Engineer has v1.0.0, marketing incoming is v2.0.0
+		// Community has v1.0.0, pro incoming is v2.0.0
 		const checksum1 = "a".repeat(64);
 		const checksum2 = "b".repeat(64);
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0", // Older
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -873,15 +873,15 @@ describe("SelectiveMerger - Multi-Kit", () => {
 
 		const filePath = join(claudeDir, "skills", "shared.md");
 		await mkdir(join(claudeDir, "skills"), { recursive: true });
-		await writeFile(filePath, "old content from engineer");
+		await writeFile(filePath, "old content from community");
 
-		// Marketing v2.0.0 trying to install different checksum (newer version)
+		// Pro v2.0.0 trying to install different checksum (newer version)
 		const manifest = createManifest(
 			[{ path: "skills/shared.md", checksum: checksum2, size: 25 }],
 			"2.0.0", // Newer
 		);
 		const merger = new SelectiveMerger(manifest);
-		merger.setMultiKitContext(claudeDir, "marketing");
+		merger.setMultiKitContext(claudeDir, "pro");
 
 		const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 		// Should proceed to normal comparison (size/checksum) and allow update
@@ -902,7 +902,7 @@ describe("SelectiveMerger - Multi-Kit", () => {
 		// Set up metadata (this should be ignored since we don't set multi-kit context)
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -946,7 +946,7 @@ describe("SelectiveMerger - Multi-Kit", () => {
 
 		const manifest = createManifest([{ path: "skills/file.md", checksum, size: 7 }]);
 		const merger = new SelectiveMerger(manifest);
-		merger.setMultiKitContext(claudeDir, "marketing");
+		merger.setMultiKitContext(claudeDir, "pro");
 
 		// Should fall back to normal comparison
 		const result = await merger.shouldCopyFile(filePath, "skills/file.md");

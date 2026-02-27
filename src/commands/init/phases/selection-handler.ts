@@ -94,7 +94,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 	let kitType: KitType | undefined;
 	let pendingKits: KitType[] | undefined;
 
-	// Parse --kit option: supports "all", "engineer,marketing", or single kit
+	// Parse --kit option: supports "all", "community,pro", or single kit
 	const kitOption = ctx.options.kit || config.defaults?.kit;
 	if (kitOption) {
 		const allKitTypes: KitType[] = Object.keys(AVAILABLE_KITS) as KitType[];
@@ -114,7 +114,7 @@ export async function handleSelection(ctx: InitContext): Promise<InitContext> {
 				`Installing all accessible kits: ${kitsToInstall.map((k) => AVAILABLE_KITS[k].name).join(", ")}`,
 			);
 		} else if (kitOption.includes(",")) {
-			// Comma-separated: --kit engineer,marketing
+			// Comma-separated: --kit community,pro
 			const rawKits = kitOption.split(",").map((k) => k.trim());
 			// Deduplicate and validate each kit
 			const seen = new Set<string>();

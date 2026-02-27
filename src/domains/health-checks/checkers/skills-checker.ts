@@ -73,7 +73,7 @@ export function checkComponentCounts(setup: PankitSetup): CheckResult {
 			totalComponents > 0
 				? `${totalAgents} agents, ${totalCommands} commands, ${totalRules} rules, ${totalSkills} skills`
 				: "No components found",
-		suggestion: totalComponents === 0 ? "Install Pankit: ck new --kit engineer" : undefined,
+		suggestion: totalComponents === 0 ? "Install Pankit: ck new --kit community" : undefined,
 		autoFixable: false,
 	};
 }

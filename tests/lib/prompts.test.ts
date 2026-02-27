@@ -57,10 +57,10 @@ describe("PromptsManager", () => {
 
 	describe("kit configuration", () => {
 		test("AVAILABLE_KITS should be properly structured", () => {
-			expect(AVAILABLE_KITS.engineer).toBeDefined();
-			expect(AVAILABLE_KITS.marketing).toBeDefined();
-			expect(AVAILABLE_KITS.engineer.name).toBe("Pankit Engineer");
-			expect(AVAILABLE_KITS.marketing.name).toBe("Pankit Marketing");
+			expect(AVAILABLE_KITS.community).toBeDefined();
+			expect(AVAILABLE_KITS.pro).toBeDefined();
+			expect(AVAILABLE_KITS.community.name).toBe("Pankit Community");
+			expect(AVAILABLE_KITS.pro.name).toBe("Pankit Pro");
 		});
 	});
 

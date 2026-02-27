@@ -67,8 +67,8 @@ const CACHE_FILENAME = "config-update-cache.json";
  * Users must fork the CLI if they need different upstream repos.
  */
 const KIT_REPOS: Record<string, { owner: string; repo: string }> = {
-	engineer: { owner: "pankit", repo: "pankit-engineer" },
-	marketing: { owner: "pankit", repo: "pankit-marketing" },
+	community: { owner: "pankit", repo: "pankit-community" },
+	pro: { owner: "pankit", repo: "pankit-pro" },
 };
 
 /**

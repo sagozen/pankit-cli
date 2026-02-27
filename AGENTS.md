@@ -8,21 +8,21 @@
 
 1. **Educate** — Users must understand what Pankit is, what each kit offers, and why it matters to their workflow. No blind installation. Informed adoption.
 
-2. **Install** — Zero friction from discovery to working setup. Whether Engineer, Marketing, or both — the path must be clear, fast, and successful.
+2. **Install** — Zero friction from discovery to working setup. Whether Community, Pro, or both — the path must be clear, fast, and successful.
 
 ### Design Philosophy
 
-- **Show, don't tell** — Feature previews over marketing copy
+- **Show, don't tell** — Feature previews over pro copy
 - **Guide, don't gatekeep** — Sensible defaults, optional depth
 - **Succeed, don't abandon** — Every install ends with working config + clear next steps
 - **Respect time** — Fast paths for experts, guided paths for newcomers
 
 ### The Kits
 
-| Kit | Purpose | Audience |
-|-----|---------|----------|
-| **Engineer** | AI-powered coding: skills, hooks, multi-agent workflows | Developers building with Claude |
-| **Marketing** | Content automation: campaigns, social, analytics | Marketers leveraging AI |
+| Kit | Description | Features |
+|-----|-------------|----------|
+| **Community** | AI-powered coding with skills, hooks, and multi-agent workflows | |
+| **Pro** | Advanced AI-powered coding with premium resources, training, and support | All Community features + Private Support Group, Private Course, Latest Tips, Job Opportunities |
 
 Both kits share the Pankit foundation. Users can install one or both.
 
@@ -56,7 +56,7 @@ bun run typecheck && bun run lint:fix && bun test && bun run build && bun run ui
 ```bash
 # Development
 bun install                    # Install deps
-bun run dev new --kit engineer # Run locally
+bun run dev new --kit community # Run locally
 bun test                       # Run tests
 bun run lint:fix               # Auto-fix lint
 bun run typecheck              # Type check

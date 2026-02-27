@@ -72,8 +72,8 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			const checksum1 = "a".repeat(64);
 			const checksum2 = "b".repeat(64);
 
-			// Engineer has file from 2025-01-01
-			await createMetadata("engineer", [
+			// Community has file from 2025-01-01
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: checksum1,
@@ -86,7 +86,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			await mkdir(join(claudeDir, "skills"), { recursive: true });
 			await writeFile(filePath, "old content");
 
-			// Marketing incoming from 2025-06-15 (newer)
+			// Pro incoming from 2025-06-15 (newer)
 			const manifest = createManifest([
 				{
 					path: "skills/shared.md",
@@ -97,7 +97,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			]);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -106,15 +106,15 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			expect(result.conflictInfo).toBeDefined();
 			expect(result.conflictInfo?.winner).toBe("incoming");
 			expect(result.conflictInfo?.reason).toBe("newer");
-			expect(result.conflictInfo?.incomingKit).toBe("marketing");
-			expect(result.conflictInfo?.existingKit).toBe("engineer");
+			expect(result.conflictInfo?.incomingKit).toBe("pro");
+			expect(result.conflictInfo?.existingKit).toBe("community");
 		});
 
 		test("includes correct timestamps in conflictInfo", async () => {
 			const incomingTs = "2025-12-01T10:00:00+00:00";
 			const existingTs = "2025-06-01T10:00:00+00:00";
 
-			await createMetadata("engineer", [
+			await createMetadata("community", [
 				{
 					path: "agents/shared.md",
 					checksum: "a".repeat(64),
@@ -136,7 +136,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			]);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "agents/shared.md");
 
@@ -150,8 +150,8 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			const checksum1 = "a".repeat(64);
 			const checksum2 = "b".repeat(64);
 
-			// Engineer has file from 2025-12-01 (newer)
-			await createMetadata("engineer", [
+			// Community has file from 2025-12-01 (newer)
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: checksum1,
@@ -161,9 +161,9 @@ describe("Timestamp-Based Conflict Resolution", () => {
 
 			const filePath = join(claudeDir, "skills", "shared.md");
 			await mkdir(join(claudeDir, "skills"), { recursive: true });
-			await writeFile(filePath, "newer content from engineer");
+			await writeFile(filePath, "newer content from community");
 
-			// Marketing incoming from 2025-01-15 (older)
+			// Pro incoming from 2025-01-15 (older)
 			const manifest = createManifest([
 				{
 					path: "skills/shared.md",
@@ -174,7 +174,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			]);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -190,7 +190,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 		test("keeps existing when timestamps are identical", async () => {
 			const sameTimestamp = "2025-06-15T12:00:00Z";
 
-			await createMetadata("engineer", [
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -212,7 +212,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			]);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -225,8 +225,8 @@ describe("Timestamp-Based Conflict Resolution", () => {
 
 	describe("Version Fallback (no timestamps)", () => {
 		test("uses version comparison when incoming has no timestamp", async () => {
-			// Engineer has v1.0.0
-			await createMetadata("engineer", [
+			// Community has v1.0.0
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -239,7 +239,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			await mkdir(join(claudeDir, "skills"), { recursive: true });
 			await writeFile(filePath, "content");
 
-			// Marketing v2.0.0 (newer version, no lastModified)
+			// Pro v2.0.0 (newer version, no lastModified)
 			const manifest = createManifest(
 				[
 					{
@@ -253,7 +253,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -263,8 +263,8 @@ describe("Timestamp-Based Conflict Resolution", () => {
 		});
 
 		test("keeps existing when incoming version is older (no timestamps)", async () => {
-			// Engineer has v2.0.0
-			await createMetadata("engineer", [
+			// Community has v2.0.0
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -276,7 +276,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			await mkdir(join(claudeDir, "skills"), { recursive: true });
 			await writeFile(filePath, "content");
 
-			// Marketing v1.0.0 (older version)
+			// Pro v1.0.0 (older version)
 			const manifest = createManifest(
 				[
 					{
@@ -289,7 +289,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -299,8 +299,8 @@ describe("Timestamp-Based Conflict Resolution", () => {
 		});
 
 		test("uses version comparison when existing has no timestamp", async () => {
-			// Engineer v1.0.0, no sourceTimestamp
-			await createMetadata("engineer", [
+			// Community v1.0.0, no sourceTimestamp
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -312,7 +312,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			await mkdir(join(claudeDir, "skills"), { recursive: true });
 			await writeFile(filePath, "content");
 
-			// Marketing v2.0.0 with timestamp
+			// Pro v2.0.0 with timestamp
 			const manifest = createManifest(
 				[
 					{
@@ -326,7 +326,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -337,7 +337,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 
 	describe("Invalid Timestamp Handling", () => {
 		test("falls back to version when incoming timestamp is invalid", async () => {
-			await createMetadata("engineer", [
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -364,7 +364,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -373,7 +373,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 		});
 
 		test("falls back to version when existing timestamp is invalid", async () => {
-			await createMetadata("engineer", [
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -399,7 +399,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -412,7 +412,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 		test("correctly compares timestamps with different timezones", async () => {
 			// These are the same instant in time
 			// 2025-06-15T12:00:00Z = 2025-06-15T14:00:00+02:00
-			await createMetadata("engineer", [
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -434,7 +434,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			]);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -443,7 +443,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 		});
 
 		test("newer timezone-offset timestamp wins", async () => {
-			await createMetadata("engineer", [
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -465,7 +465,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			]);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -480,7 +480,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			// Old metadata without sourceTimestamp
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: "2025-01-01T00:00:00Z",
 						files: [
@@ -515,7 +515,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -524,7 +524,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 		});
 
 		test("works with manifest without lastModified", async () => {
-			await createMetadata("engineer", [
+			await createMetadata("community", [
 				{
 					path: "skills/shared.md",
 					checksum: "a".repeat(64),
@@ -551,7 +551,7 @@ describe("Timestamp-Based Conflict Resolution", () => {
 			);
 
 			const merger = new SelectiveMerger(manifest);
-			merger.setMultiKitContext(claudeDir, "marketing");
+			merger.setMultiKitContext(claudeDir, "pro");
 
 			const result = await merger.shouldCopyFile(filePath, "skills/shared.md");
 
@@ -581,7 +581,7 @@ describe("ConflictInfo Aggregation", () => {
 	test("conflictInfo contains all required fields", async () => {
 		const metadata = {
 			kits: {
-				engineer: {
+				community: {
 					version: "1.0.0",
 					installedAt: "2025-01-01T00:00:00Z",
 					files: [
@@ -616,15 +616,15 @@ describe("ConflictInfo Aggregation", () => {
 		};
 
 		const merger = new SelectiveMerger(manifest);
-		merger.setMultiKitContext(claudeDir, "marketing");
+		merger.setMultiKitContext(claudeDir, "pro");
 
 		const result = await merger.shouldCopyFile(filePath, "skills/test.md");
 		const info = result.conflictInfo as FileConflictInfo;
 
 		expect(info).toBeDefined();
 		expect(info.relativePath).toBe("skills/test.md");
-		expect(info.incomingKit).toBe("marketing");
-		expect(info.existingKit).toBe("engineer");
+		expect(info.incomingKit).toBe("pro");
+		expect(info.existingKit).toBe("community");
 		expect(info.incomingTimestamp).toBe("2025-06-15T12:00:00Z");
 		expect(info.existingTimestamp).toBe("2025-01-01T12:00:00Z");
 		expect(info.winner).toBe("incoming");

@@ -34,7 +34,7 @@ export class ReleaseCache {
 	 * @example
 	 * ```typescript
 	 * const cache = new ReleaseCache();
-	 * const releases = await cache.get('pankit-engineer-latest-false');
+	 * const releases = await cache.get('pankit-community-latest-false');
 	 * if (releases) {
 	 *   console.log(`Found ${releases.length} cached releases`);
 	 * }
@@ -84,7 +84,7 @@ export class ReleaseCache {
 	 * @example
 	 * ```typescript
 	 * const cache = new ReleaseCache();
-	 * await cache.set('pankit-engineer-latest-false', releases);
+	 * await cache.set('pankit-community-latest-false', releases);
 	 * console.log('Releases cached successfully');
 	 * ```
 	 */
@@ -118,7 +118,7 @@ export class ReleaseCache {
 	 * ```typescript
 	 * const cache = new ReleaseCache();
 	 * // Clear specific kit cache
-	 * await cache.clear('pankit-engineer-latest-false');
+	 * await cache.clear('pankit-community-latest-false');
 	 * // Clear all caches
 	 * await cache.clear();
 	 * ```

@@ -29,7 +29,7 @@ export function registerCommands(cli: ReturnType<typeof cac>): void {
 	cli
 		.command("new", "Bootstrap a new Pankit project (with interactive version selection)")
 		.option("--dir <dir>", "Target directory (default: .)")
-		.option("--kit <kit>", "Kit to use: engineer, marketing, all, or comma-separated")
+		.option("--kit <kit>", "Kit to use: community, pro, all, or comma-separated")
 		.option(
 			"-r, --release <version>",
 			"Skip version selection, use specific version (e.g., latest, v1.0.0)",
@@ -67,7 +67,7 @@ export function registerCommands(cli: ReturnType<typeof cac>): void {
 	cli
 		.command("init", "Initialize or update Pankit project (with interactive version selection)")
 		.option("--dir <dir>", "Target directory (default: .)")
-		.option("--kit <kit>", "Kit to use: engineer, marketing, all, or comma-separated")
+		.option("--kit <kit>", "Kit to use: community, pro, all, or comma-separated")
 		.option(
 			"-r, --release <version>",
 			"Skip version selection, use specific version (e.g., latest, v1.0.0)",
@@ -166,7 +166,7 @@ export function registerCommands(cli: ReturnType<typeof cac>): void {
 	// Versions command
 	cli
 		.command("versions", "List available versions of Pankit repositories")
-		.option("--kit <kit>", "Filter by specific kit (engineer, marketing)")
+		.option("--kit <kit>", "Filter by specific kit (community, pro)")
 		.option("--limit <limit>", "Number of releases to show (default: 30)")
 		.option("--all", "Show all releases including prereleases")
 		.action(async (options) => {
@@ -192,7 +192,7 @@ export function registerCommands(cli: ReturnType<typeof cac>): void {
 		.option("-l, --local", "Uninstall only local installation (current project)")
 		.option("-g, --global", "Uninstall only global installation (~/.claude/)")
 		.option("-A, --all", "Uninstall from both local and global locations")
-		.option("-k, --kit <type>", "Uninstall specific kit only (engineer, marketing)")
+		.option("-k, --kit <type>", "Uninstall specific kit only (community, pro)")
 		.option("--dry-run", "Preview what would be removed without deleting")
 		.option("--force-overwrite", "Delete even user-modified files (requires confirmation)")
 		.action(async (options) => {

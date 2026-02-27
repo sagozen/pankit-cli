@@ -64,7 +64,7 @@ export interface InitContext {
 	/** Selected kit configuration */
 	kit?: KitConfig;
 
-	/** Kit type key (e.g., "engineer") */
+	/** Kit type key (e.g., "community") */
 	kitType?: KitType;
 
 	/** Resolved target directory (absolute path) */

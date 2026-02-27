@@ -61,7 +61,7 @@ export const SKILL_CATEGORY_OVERRIDES: Record<string, string> = {
 	planning: "Core",
 	scout: "Core",
 	"sequential-thinking": "Development",
-	"context-engineering": "Development",
+	"context-communitying": "Development",
 	"find-skills": "Core",
 	"skill-creator": "Core",
 	"problem-solving": "Development",

@@ -32,7 +32,7 @@ integrationDescribe("CLI Integration Tests", () => {
 		releaseVersion = process.env.CK_TEST_RELEASE || "";
 		if (!releaseVersion) {
 			try {
-				const output = execSync(`node ${cliPath} versions --kit engineer --limit 1`, {
+				const output = execSync(`node ${cliPath} versions --kit community --limit 1`, {
 					encoding: "utf-8",
 					stdio: "pipe",
 				});
@@ -64,7 +64,7 @@ integrationDescribe("CLI Integration Tests", () => {
 			try {
 				// Run ck new command with --kit, --force, and --version flags for non-interactive mode
 				execSync(
-					`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
+					`node ${cliPath} new --dir ${projectDir} --kit community --force --release ${releaseVersion}`,
 					{
 						cwd: testDir,
 						stdio: "pipe",
@@ -88,7 +88,7 @@ integrationDescribe("CLI Integration Tests", () => {
 
 			try {
 				execSync(
-					`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
+					`node ${cliPath} new --dir ${projectDir} --kit community --force --release ${releaseVersion}`,
 					{
 						cwd: testDir,
 						stdio: "pipe",
@@ -114,7 +114,7 @@ integrationDescribe("CLI Integration Tests", () => {
 
 			try {
 				// This should fail because --force is not provided
-				execSync(`node ${cliPath} new --dir ${projectDir} --kit engineer`, {
+				execSync(`node ${cliPath} new --dir ${projectDir} --kit community`, {
 					cwd: testDir,
 					stdio: "pipe",
 					timeout: 5000,
@@ -138,7 +138,7 @@ integrationDescribe("CLI Integration Tests", () => {
 
 			// First create a project with --kit, --force, and --version flags
 			execSync(
-				`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
+				`node ${cliPath} new --dir ${projectDir} --kit community --force --release ${releaseVersion}`,
 				{
 					cwd: testDir,
 					stdio: "pipe",
@@ -193,7 +193,7 @@ integrationDescribe("CLI Integration Tests", () => {
 			const projectDir = join(testDir, "test-structure");
 
 			execSync(
-				`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
+				`node ${cliPath} new --dir ${projectDir} --kit community --force --release ${releaseVersion}`,
 				{
 					cwd: testDir,
 					stdio: "pipe",
@@ -213,7 +213,7 @@ integrationDescribe("CLI Integration Tests", () => {
 			const projectDir = join(testDir, "test-files");
 
 			execSync(
-				`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
+				`node ${cliPath} new --dir ${projectDir} --kit community --force --release ${releaseVersion}`,
 				{
 					cwd: testDir,
 					stdio: "pipe",
@@ -233,7 +233,7 @@ integrationDescribe("CLI Integration Tests", () => {
 			const projectDir = join(testDir, "test-exclusions");
 
 			execSync(
-				`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
+				`node ${cliPath} new --dir ${projectDir} --kit community --force --release ${releaseVersion}`,
 				{
 					cwd: testDir,
 					stdio: "pipe",
@@ -291,7 +291,7 @@ integrationDescribe("CLI Integration Tests", () => {
 
 			// Create a Pankit project
 			execSync(
-				`node ${cliPath} new --dir ${projectDir} --kit engineer --force --release ${releaseVersion}`,
+				`node ${cliPath} new --dir ${projectDir} --kit community --force --release ${releaseVersion}`,
 				{
 					cwd: testDir,
 					stdio: "pipe",

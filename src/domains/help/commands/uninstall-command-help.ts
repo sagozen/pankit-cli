@@ -38,7 +38,7 @@ export const uninstallCommandHelp: CommandHelp = {
 				},
 				{
 					flags: "-k, --kit <type>",
-					description: "Uninstall specific kit only (engineer, marketing)",
+					description: "Uninstall specific kit only (community, pro)",
 				},
 			],
 		},

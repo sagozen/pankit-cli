@@ -343,7 +343,7 @@ The `.claude/metadata.json` file tracks all installed files with multi-kit suppo
 ```json
 {
   "kits": {
-    "engineer": {
+    "community": {
       "version": "0.5.0",
       "installedAt": "2025-01-21T10:30:00.000Z",
       "files": [

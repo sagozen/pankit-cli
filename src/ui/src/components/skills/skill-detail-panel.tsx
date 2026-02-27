@@ -169,10 +169,10 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
 									<>
 										<span className="text-dash-text-muted">{t("kitLabel")}</span>
 										<span className="text-dash-text">
-											{skill.kit === "engineer"
-												? t("kitBadgeEngineer")
-												: skill.kit === "marketing"
-													? t("kitBadgeMarketing")
+											{skill.kit === "community"
+												? t("kitBadgeCommunity")
+												: skill.kit === "pro"
+													? t("kitBadgePro")
 													: skill.kit}
 										</span>
 									</>
@@ -215,22 +215,20 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
 								<button
 									type="button"
 									onClick={() => setIsGlobal(true)}
-									className={`px-3.5 py-1.5 text-xs font-medium transition-colors ${
-										isGlobal
+									className={`px-3.5 py-1.5 text-xs font-medium transition-colors ${isGlobal
 											? "bg-dash-accent/10 text-dash-accent"
 											: "text-dash-text-muted hover:text-dash-text"
-									}`}
+										}`}
 								>
 									{t("scopeGlobal")}
 								</button>
 								<button
 									type="button"
 									onClick={() => setIsGlobal(false)}
-									className={`px-3.5 py-1.5 text-xs font-medium transition-colors ${
-										!isGlobal
+									className={`px-3.5 py-1.5 text-xs font-medium transition-colors ${!isGlobal
 											? "bg-dash-accent/10 text-dash-accent"
 											: "text-dash-text-muted hover:text-dash-text"
-									}`}
+										}`}
 								>
 									{t("scopeProject")}
 								</button>
@@ -266,11 +264,10 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
 												<div className="text-[11px] text-dash-text-muted">
 													{isSourceAgent
 														? t("skillSource")
-														: `${t("detected")} — ${
-																isInstalled
-																	? `${t("agentInstalled")} (${installation.isGlobal ? t("scopeGlobal").toLowerCase() : t("scopeProject").toLowerCase()})`
-																	: t("agentNotInstalled")
-															}`}
+														: `${t("detected")} — ${isInstalled
+															? `${t("agentInstalled")} (${installation.isGlobal ? t("scopeGlobal").toLowerCase() : t("scopeProject").toLowerCase()})`
+															: t("agentNotInstalled")
+														}`}
 												</div>
 											</div>
 										</div>
@@ -287,11 +284,10 @@ const DetailPanel: React.FC<DetailPanelProps> = ({
 														: handleAgentInstall(agent.name)
 												}
 												disabled={loading}
-												className={`px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors disabled:opacity-50 ${
-													isInstalled
+												className={`px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors disabled:opacity-50 ${isInstalled
 														? "bg-transparent text-dash-text-secondary border border-dash-border hover:bg-dash-surface-hover"
 														: "bg-dash-accent text-white hover:bg-dash-accent/90"
-												}`}
+													}`}
 											>
 												{isInstalled ? t("uninstall") : t("install")}
 											</button>

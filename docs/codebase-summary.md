@@ -327,7 +327,7 @@ Renamed from `skill` command. Includes detection, installation, uninstall, and r
 Detection, analysis, and safe removal with fallback for installations without metadata.json.
 
 #### update-cli.ts - CLI Self-Update with Smart Kit Detection
-Detects installed kits, builds kit-specific init commands (e.g., `pk init --kit engineer --yes --install-skills`), performs parallel version checks with non-blocking fallback.
+Detects installed kits, builds kit-specific init commands (e.g., `pk init --kit community --yes --install-skills`), performs parallel version checks with non-blocking fallback.
 
 #### migrate/ + portable/ - Idempotent Reconciliation Pipeline
 3-phase RECONCILE → EXECUTE → REPORT pipeline for safe repeated migrations. Pure reconciler (zero I/O, 8-case decision matrix), Registry v3.0 with SHA-256 checksums, portable manifest for cross-version evolution. Interactive CLI conflict resolution with diff preview. Dashboard UI with plan viewer and conflict resolver. See `docs/reconciliation-architecture.md`.
@@ -643,7 +643,7 @@ Always skipped during updates:
 - **Platform optimizations**: macOS native unzip fallback, adaptive concurrency
 - **Slow extraction warnings**: 30-second threshold notifications
 - **Environment detection**: Platform-aware concurrency tuning (macOS: 10, Windows: 15, Linux: 20)
-- **Smart Kit Detection for `pk update`**: Automatic detection of installed kits; displays kit-specific commands (e.g., `pk init --kit engineer --yes --install-skills`) instead of generic ones
+- **Smart Kit Detection for `pk update`**: Automatic detection of installed kits; displays kit-specific commands (e.g., `pk init --kit community --yes --install-skills`) instead of generic ones
 
 ### Multi-Kit Support (Phase 1 - IN PROGRESS)
 - **Selective merge with multi-kit awareness**: Detects and reuses files shared across kits
@@ -755,7 +755,7 @@ bun run build:platform-binaries  # Build all platforms
 ```typescript
 // Inside command handlers: throw instead of process.exit(1)
 // Process-lock will handle graceful cleanup on unexpected termination
-await withProcessLock("engineer-install", async () => {
+await withProcessLock("community-install", async () => {
   // Operation with lock protection
   throw new Error("User cancelled"); // ← Throws, not process.exit()
 });

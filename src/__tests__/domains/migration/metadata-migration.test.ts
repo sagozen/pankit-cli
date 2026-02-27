@@ -41,7 +41,7 @@ describe("metadata-migration", () => {
 
 		it("detects legacy format with name and version", async () => {
 			const legacy: Metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 				version: "v1.2.3",
 				installedAt: "2024-01-01T00:00:00.000Z",
 				scope: "local",
@@ -51,12 +51,12 @@ describe("metadata-migration", () => {
 
 			const result = await detectMetadataFormat(testDir);
 			expect(result.format).toBe("legacy");
-			expect(result.detectedKit).toBe("engineer");
+			expect(result.detectedKit).toBe("community");
 		});
 
-		it("detects legacy format with marketing kit", async () => {
+		it("detects legacy format with pro kit", async () => {
 			const legacy: Metadata = {
-				name: "Pankit Marketing",
+				name: "Pankit Pro",
 				version: "v0.1.0",
 				installedAt: "2024-01-01T00:00:00.000Z",
 				scope: "global",
@@ -66,10 +66,10 @@ describe("metadata-migration", () => {
 
 			const result = await detectMetadataFormat(testDir);
 			expect(result.format).toBe("legacy");
-			expect(result.detectedKit).toBe("marketing");
+			expect(result.detectedKit).toBe("pro");
 		});
 
-		it("defaults to engineer for unnamed legacy installs", async () => {
+		it("defaults to community for unnamed legacy installs", async () => {
 			const legacy: Metadata = {
 				version: "v1.0.0",
 				installedAt: "2024-01-01T00:00:00.000Z",
@@ -79,13 +79,13 @@ describe("metadata-migration", () => {
 
 			const result = await detectMetadataFormat(testDir);
 			expect(result.format).toBe("legacy");
-			expect(result.detectedKit).toBe("engineer");
+			expect(result.detectedKit).toBe("community");
 		});
 
 		it("detects multi-kit format", async () => {
 			const multiKit: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.2.3",
 						installedAt: "2024-01-01T00:00:00.000Z",
 						files: [],
@@ -97,17 +97,17 @@ describe("metadata-migration", () => {
 
 			const result = await detectMetadataFormat(testDir);
 			expect(result.format).toBe("multi-kit");
-			expect(result.detectedKit).toBe("engineer");
+			expect(result.detectedKit).toBe("community");
 		});
 
 		it("detects multi-kit format with multiple kits", async () => {
 			const multiKit: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.2.3",
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
-					marketing: {
+					pro: {
 						version: "v0.1.0",
 						installedAt: "2024-02-01T00:00:00.000Z",
 					},
@@ -140,7 +140,7 @@ describe("metadata-migration", () => {
 			const detection = {
 				format: "legacy" as const,
 				metadata: {} as Metadata,
-				detectedKit: "engineer" as const,
+				detectedKit: "community" as const,
 			};
 			expect(needsMigration(detection)).toBe(true);
 		});
@@ -149,7 +149,7 @@ describe("metadata-migration", () => {
 			const detection = {
 				format: "multi-kit" as const,
 				metadata: {} as Metadata,
-				detectedKit: "engineer" as const,
+				detectedKit: "community" as const,
 			};
 			expect(needsMigration(detection)).toBe(false);
 		});
@@ -163,7 +163,7 @@ describe("metadata-migration", () => {
 	describe("migrateToMultiKit", () => {
 		it("migrates legacy format to multi-kit", async () => {
 			const legacy: Metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 				version: "v1.2.3",
 				installedAt: "2024-01-01T00:00:00.000Z",
 				scope: "local",
@@ -188,14 +188,14 @@ describe("metadata-migration", () => {
 			// Verify migrated structure
 			const detection = await detectMetadataFormat(testDir);
 			expect(detection.format).toBe("multi-kit");
-			expect(detection.metadata?.kits?.engineer?.version).toBe("v1.2.3");
-			expect(detection.metadata?.kits?.engineer?.files?.length).toBe(1);
+			expect(detection.metadata?.kits?.community?.version).toBe("v1.2.3");
+			expect(detection.metadata?.kits?.community?.files?.length).toBe(1);
 		});
 
 		it("returns success without migration for multi-kit format", async () => {
 			const multiKit: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.2.3",
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
@@ -221,7 +221,7 @@ describe("metadata-migration", () => {
 
 		it("preserves legacy fields after migration for backward compat", async () => {
 			const legacy: Metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 				version: "v1.2.3",
 				installedAt: "2024-01-01T00:00:00.000Z",
 				scope: "local",
@@ -234,14 +234,14 @@ describe("metadata-migration", () => {
 
 			const detection = await detectMetadataFormat(testDir);
 			// Legacy fields preserved for backward compat
-			expect(detection.metadata?.name).toBe("Pankit Engineer");
+			expect(detection.metadata?.name).toBe("Pankit Community");
 			expect(detection.metadata?.version).toBe("v1.2.3");
 			expect(detection.metadata?.installedFiles).toEqual(["commands/test.md"]);
 		});
 
 		it("preserves scope during migration", async () => {
 			const legacy: Metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 				version: "v1.0.0",
 				scope: "global",
 			};
@@ -258,7 +258,7 @@ describe("metadata-migration", () => {
 		it("returns kit metadata from multi-kit structure", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.2.3",
 						installedAt: "2024-01-01T00:00:00.000Z",
 						files: [],
@@ -266,21 +266,21 @@ describe("metadata-migration", () => {
 				},
 			};
 
-			const result = getKitMetadata(metadata, "engineer");
+			const result = getKitMetadata(metadata, "community");
 			expect(result?.version).toBe("v1.2.3");
 		});
 
 		it("returns null for non-existent kit", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.2.3",
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
 				},
 			};
 
-			const result = getKitMetadata(metadata, "marketing");
+			const result = getKitMetadata(metadata, "pro");
 			expect(result).toBeNull();
 		});
 
@@ -291,7 +291,7 @@ describe("metadata-migration", () => {
 				files: [],
 			};
 
-			const result = getKitMetadata(metadata, "engineer");
+			const result = getKitMetadata(metadata, "community");
 			expect(result?.version).toBe("v1.0.0");
 		});
 	});
@@ -299,13 +299,13 @@ describe("metadata-migration", () => {
 	describe("getAllTrackedFiles", () => {
 		it("returns all files from multi-kit structure", () => {
 			const file1: TrackedFile = {
-				path: "commands/engineer.md",
+				path: "commands/community.md",
 				checksum: "abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123abc1",
 				ownership: "ck",
 				installedVersion: "v1.2.3",
 			};
 			const file2: TrackedFile = {
-				path: "commands/marketing.md",
+				path: "commands/pro.md",
 				checksum: "def456def456def456def456def456def456def456def456def456def456def4",
 				ownership: "ck",
 				installedVersion: "v0.1.0",
@@ -313,12 +313,12 @@ describe("metadata-migration", () => {
 
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.2.3",
 						installedAt: "2024-01-01T00:00:00.000Z",
 						files: [file1],
 					},
-					marketing: {
+					pro: {
 						version: "v0.1.0",
 						installedAt: "2024-02-01T00:00:00.000Z",
 						files: [file2],
@@ -328,8 +328,8 @@ describe("metadata-migration", () => {
 
 			const result = getAllTrackedFiles(metadata);
 			expect(result.length).toBe(2);
-			expect(result.map((f) => f.path)).toContain("commands/engineer.md");
-			expect(result.map((f) => f.path)).toContain("commands/marketing.md");
+			expect(result.map((f) => f.path)).toContain("commands/community.md");
+			expect(result.map((f) => f.path)).toContain("commands/pro.md");
 		});
 
 		it("returns files from legacy format", () => {
@@ -353,7 +353,7 @@ describe("metadata-migration", () => {
 		it("returns empty array when no files", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.0.0",
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
@@ -369,11 +369,11 @@ describe("metadata-migration", () => {
 		it("returns kits from multi-kit structure", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v1.0.0",
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
-					marketing: {
+					pro: {
 						version: "v0.1.0",
 						installedAt: "2024-02-01T00:00:00.000Z",
 					},
@@ -381,49 +381,49 @@ describe("metadata-migration", () => {
 			};
 
 			const result = getInstalledKits(metadata);
-			expect(result).toContain("engineer");
-			expect(result).toContain("marketing");
+			expect(result).toContain("community");
+			expect(result).toContain("pro");
 		});
 
-		it("detects engineer from legacy name", () => {
+		it("detects community from legacy name", () => {
 			const metadata: Metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 				version: "v1.0.0",
 			};
 
 			const result = getInstalledKits(metadata);
-			expect(result).toEqual(["engineer"]);
+			expect(result).toEqual(["community"]);
 		});
 
-		it("detects marketing from legacy name", () => {
+		it("detects pro from legacy name", () => {
 			const metadata: Metadata = {
-				name: "Pankit Marketing",
+				name: "Pankit Pro",
 				version: "v0.1.0",
 			};
 
 			const result = getInstalledKits(metadata);
-			expect(result).toEqual(["marketing"]);
+			expect(result).toEqual(["pro"]);
 		});
 
 		it("detects BOTH kits from legacy name containing both", () => {
 			const metadata: Metadata = {
-				name: "Pankit Engineer + Marketing Bundle",
+				name: "Pankit Community + Pro Bundle",
 				version: "v1.0.0",
 			};
 
 			const result = getInstalledKits(metadata);
-			expect(result).toContain("engineer");
-			expect(result).toContain("marketing");
+			expect(result).toContain("community");
+			expect(result).toContain("pro");
 			expect(result.length).toBe(2);
 		});
 
-		it("defaults to engineer for unnamed legacy", () => {
+		it("defaults to community for unnamed legacy", () => {
 			const metadata: Metadata = {
 				version: "v1.0.0",
 			};
 
 			const result = getInstalledKits(metadata);
-			expect(result).toEqual(["engineer"]);
+			expect(result).toEqual(["community"]);
 		});
 
 		it("returns empty array for empty metadata", () => {

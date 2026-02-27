@@ -103,7 +103,7 @@ pk migrate --help
 pk new
 
 # With options
-pk new --dir my-project --kit engineer
+pk new --dir my-project --kit community
 
 # Show beta versions
 pk new --beta
@@ -121,7 +121,7 @@ pk new --install-skills
 pk new --prefix
 
 # Offline installation (from local archive or directory)
-pk new --archive ~/downloads/engineer-v1.16.0.zip
+pk new --archive ~/downloads/community-v1.16.0.zip
 pk new --kit-path ~/extracted-kit/
 ```
 
@@ -146,10 +146,10 @@ pk init --yes
 pk init -y
 
 # Combine with other flags
-pk init -g --kit engineer -y
+pk init -g --kit community -y
 
 # With options
-pk init --kit engineer --beta
+pk init --kit community --beta
 
 # Global mode (platform-specific paths)
 pk init --global
@@ -161,7 +161,7 @@ pk init --fresh
 pk init --exclude "*.local" --prefix
 
 # Offline installation (from local archive or directory)
-pk init --archive ~/downloads/engineer-v1.16.0.zip
+pk init --archive ~/downloads/community-v1.16.0.zip
 pk init --kit-path ~/extracted-kit/
 ```
 
@@ -178,7 +178,7 @@ pk init --kit-path ~/extracted-kit/
 
 | Prompt | Default |
 |--------|---------|
-| Select Pankit | engineer (first option) |
+| Select Pankit | community (first option) |
 | Target directory | Current directory (`.`) |
 | Version selection | Latest stable release |
 | Google Gemini setup | Skip |
@@ -218,8 +218,8 @@ The CLI notifies you when updates are available via `pk --version`.
 pk versions
 
 # Filter by specific kit
-pk versions --kit engineer
-pk versions --kit marketing
+pk versions --kit community
+pk versions --kit pro
 
 # Show more versions (default: 30)
 pk versions --limit 50
@@ -447,8 +447,8 @@ pk init --verbose
 
 Pankit offers premium starter kits available for purchase at [Pankit.cc](https://pankit.cc):
 
-- **engineer**: Pankit Engineer - Engineering toolkit for building with Claude (v1.0.0+)
-- **marketing**: Pankit Marketing - Content automation toolkit (v1.0.0 available)
+- **community**: Pankit Community - AI-powered coding with skills, hooks, and multi-agent workflows
+- **pro**: Pankit Pro - Advanced AI-powered coding with premium resources, training, and support (Features: All Community features + Private Support Group, Private Course, Latest Tips, Job Opportunities)
 
 Each kit provides a comprehensive project template with best practices, tooling, and workflows optimized for Claude Code development.
 
@@ -462,7 +462,7 @@ Configuration is stored in `~/.pankit/config.json`:
     "token": "stored_in_keychain"
   },
   "defaults": {
-    "kit": "engineer",
+    "kit": "community",
     "dir": "."
   }
 }
@@ -546,7 +546,7 @@ See [Development Guide](./docs/codebase-summary.md) for:
 **Quick Start:**
 ```bash
 bun install
-bun run dev new --kit engineer
+bun run dev new --kit community
 bun test
 # Optional: run expensive CLI integration tests explicitly
 bun run test:integration

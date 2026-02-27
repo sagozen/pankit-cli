@@ -14,7 +14,7 @@
 | User | Journey | Dashboard Role |
 |------|---------|----------------|
 | **Newcomer** | "What is Pankit?" | Onboarding → Kit comparison → Guided install |
-| **Evaluator** | "Engineer or Marketing?" | Side-by-side features → Try before commit |
+| **Evaluator** | "Community or Pro?" | Side-by-side features → Try before commit |
 | **Adopter** | "Set up my project" | Install wizard → Config editor → Success |
 | **Power user** | "Manage my stack" | Project switcher → Health dashboard → Quick actions |
 

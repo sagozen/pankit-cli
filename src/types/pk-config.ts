@@ -168,7 +168,7 @@ export const CkAssertionSchema = z.object({
 });
 export type CkAssertion = z.infer<typeof CkAssertionSchema>;
 
-// SYNC POINT: When adding/removing hooks in pankit-engineer settings.json,
+// SYNC POINT: When adding/removing hooks in pankit-community settings.json,
 // update ALL of: CkHooksConfigSchema, DEFAULT_CK_CONFIG.hooks, CK_HOOK_NAMES,
 // and src/schemas/pk-config.schema.json + GlobalConfigPage.tsx sections
 export const CkHooksConfigSchema = z.object({

@@ -10,9 +10,9 @@ describe("Version Command", () => {
 
 	describe("VersionCommandOptionsSchema", () => {
 		test("should accept valid options with kit filter", () => {
-			const options = { kit: "engineer" as const };
+			const options = { kit: "community" as const };
 			const result = VersionCommandOptionsSchema.parse(options);
-			expect(result.kit).toBe("engineer");
+			expect(result.kit).toBe("community");
 		});
 
 		test("should accept valid options with limit", () => {
@@ -28,9 +28,9 @@ describe("Version Command", () => {
 		});
 
 		test("should accept all options combined", () => {
-			const options = { kit: "marketing" as const, limit: 20, all: true };
+			const options = { kit: "pro" as const, limit: 20, all: true };
 			const result = VersionCommandOptionsSchema.parse(options);
-			expect(result.kit).toBe("marketing");
+			expect(result.kit).toBe("pro");
 			expect(result.limit).toBe(20);
 			expect(result.all).toBe(true);
 		});
@@ -50,18 +50,18 @@ describe("Version Command", () => {
 	});
 
 	describe("Kit Configuration", () => {
-		test("should have engineer kit configured", () => {
-			const engineerKit = AVAILABLE_KITS.engineer;
-			expect(engineerKit.name).toBe("Pankit Engineer");
-			expect(engineerKit.repo).toBe("pankit-engineer");
-			expect(engineerKit.owner).toBe("pankit");
+		test("should have community kit configured", () => {
+			const communityKit = AVAILABLE_KITS.community;
+			expect(communityKit.name).toBe("Pankit Community");
+			expect(communityKit.repo).toBe("pankit-community");
+			expect(communityKit.owner).toBe("sagozen");
 		});
 
-		test("should have marketing kit configured", () => {
-			const marketingKit = AVAILABLE_KITS.marketing;
-			expect(marketingKit.name).toBe("Pankit Marketing");
-			expect(marketingKit.repo).toBe("pankit-marketing");
-			expect(marketingKit.owner).toBe("pankit");
+		test("should have pro kit configured", () => {
+			const proKit = AVAILABLE_KITS.pro;
+			expect(proKit.name).toBe("Pankit Pro");
+			expect(proKit.repo).toBe("pankit-pro");
+			expect(proKit.owner).toBe("sagozen");
 		});
 	});
 
@@ -291,30 +291,30 @@ describe("Version Command", () => {
 	describe("Integration Scenarios", () => {
 		test("should handle both kits in parallel", () => {
 			const kits = Object.keys(AVAILABLE_KITS);
-			expect(kits).toContain("engineer");
-			expect(kits).toContain("marketing");
+			expect(kits).toContain("community");
+			expect(kits).toContain("pro");
 			expect(kits).toHaveLength(2);
 		});
 
-		test("should support filtering by engineer kit", () => {
-			const options = { kit: "engineer" as const };
+		test("should support filtering by community kit", () => {
+			const options = { kit: "community" as const };
 			const result = VersionCommandOptionsSchema.parse(options);
-			expect(result.kit).toBe("engineer");
+			expect(result.kit).toBe("community");
 
 			if (result.kit) {
 				const kitConfig = AVAILABLE_KITS[result.kit];
-				expect(kitConfig.repo).toBe("pankit-engineer");
+				expect(kitConfig.repo).toBe("pankit-community");
 			}
 		});
 
-		test("should support filtering by marketing kit", () => {
-			const options = { kit: "marketing" as const };
+		test("should support filtering by pro kit", () => {
+			const options = { kit: "pro" as const };
 			const result = VersionCommandOptionsSchema.parse(options);
-			expect(result.kit).toBe("marketing");
+			expect(result.kit).toBe("pro");
 
 			if (result.kit) {
 				const kitConfig = AVAILABLE_KITS[result.kit];
-				expect(kitConfig.repo).toBe("pankit-marketing");
+				expect(kitConfig.repo).toBe("pankit-pro");
 			}
 		});
 	});

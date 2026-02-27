@@ -83,7 +83,7 @@ async function ensureLocksDir(): Promise<void> {
 /**
  * Execute function with process lock
  *
- * @param lockName Name of the lock file (e.g., 'engineer-install', 'migration')
+ * @param lockName Name of the lock file (e.g., 'community-install', 'migration')
  * @param fn Function to execute with lock held
  * @returns Result of the function
  * @throws {Error} If lock cannot be acquired or function fails

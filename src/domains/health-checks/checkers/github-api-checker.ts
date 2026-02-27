@@ -218,9 +218,9 @@ export async function checkTokenScopes(): Promise<CheckResult> {
 
 /**
  * Test actual repository access
- * @param kitType - Optional kit type to check access for. Defaults to 'engineer'.
+ * @param kitType - Optional kit type to check access for. Defaults to 'community'.
  */
-export async function checkRepositoryAccess(kitType: KitType = "engineer"): Promise<CheckResult> {
+export async function checkRepositoryAccess(kitType: KitType = "community"): Promise<CheckResult> {
 	// Skip in test environment and CI
 	if (process.env.NODE_ENV === "test" || process.env.CI === "true") {
 		return {

@@ -21,8 +21,8 @@ vi.mock("../../i18n", () => ({
 				installSuccessDesc: "You have successfully installed {kit}.",
 				getStarted: "Get Started",
 				goToDashboard: "Go to Dashboard",
-				kitEngineerName: "Pankit Engineer",
-				kitMarketingName: "Pankit Marketing",
+				kitCommunityName: "Pankit Community",
+				kitProName: "Pankit Pro",
 			};
 			return translations[key] || key;
 		},
@@ -31,7 +31,7 @@ vi.mock("../../i18n", () => ({
 
 describe("SuccessScreen", () => {
 	const defaultProps = {
-		kit: KitType.ENGINEER,
+		kit: KitType.COMMUNITY,
 		onGetStarted: vi.fn(),
 	};
 
@@ -71,14 +71,14 @@ describe("SuccessScreen", () => {
 	});
 
 	describe("Kit Name Display", () => {
-		it("displays Engineer kit name when kit is ENGINEER", () => {
-			render(<SuccessScreen {...defaultProps} kit={KitType.ENGINEER} />);
-			expect(screen.getByText(/Pankit Engineer/)).toBeInTheDocument();
+		it("displays Community kit name when kit is COMMUNITY", () => {
+			render(<SuccessScreen {...defaultProps} kit={KitType.COMMUNITY} />);
+			expect(screen.getByText(/Pankit Community/)).toBeInTheDocument();
 		});
 
-		it("displays Marketing kit name when kit is MARKETING", () => {
-			render(<SuccessScreen {...defaultProps} kit={KitType.MARKETING} />);
-			expect(screen.getByText(/Pankit Marketing/)).toBeInTheDocument();
+		it("displays Pro kit name when kit is PRO", () => {
+			render(<SuccessScreen {...defaultProps} kit={KitType.PRO} />);
+			expect(screen.getByText(/Pankit Pro/)).toBeInTheDocument();
 		});
 	});
 

@@ -33,31 +33,31 @@ describe("version-display helpers", () => {
 		it("formats multiple kits alphabetically", () => {
 			const metadata: Metadata = {
 				kits: {
-					marketing: { version: "v1.0.0", installedAt: "2024-01-01T00:00:00.000Z" },
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					pro: { version: "v1.0.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("engineer@v2.2.0, marketing@v1.0.0");
+			expect(result).toBe("community@v2.2.0, pro@v1.0.0");
 		});
 
 		it("formats single kit", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("engineer@v2.2.0");
+			expect(result).toBe("community@v2.2.0");
 		});
 
 		it("filters out kits with undefined versions", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
-					marketing: {
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					pro: {
 						version: undefined as unknown as string,
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
@@ -65,38 +65,38 @@ describe("version-display helpers", () => {
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("engineer@v2.2.0");
+			expect(result).toBe("community@v2.2.0");
 		});
 
 		it("filters out kits with empty string versions", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
-					marketing: { version: "", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					pro: { version: "", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("engineer@v2.2.0");
+			expect(result).toBe("community@v2.2.0");
 		});
 
 		it("filters out kits with whitespace-only versions", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
-					marketing: { version: "   ", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					pro: { version: "   ", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("engineer@v2.2.0");
+			expect(result).toBe("community@v2.2.0");
 		});
 
 		it("returns null when all kits have invalid versions", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: { version: "", installedAt: "2024-01-01T00:00:00.000Z" },
-					marketing: { version: "   ", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "", installedAt: "2024-01-01T00:00:00.000Z" },
+					pro: { version: "   ", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
@@ -122,12 +122,12 @@ describe("version-display helpers", () => {
 
 		it("falls back to legacy format when no kits but has root version", () => {
 			const metadata: Metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 				version: "v2.0.0",
 			};
 
 			const result = formatInstalledKits(metadata);
-			expect(result).toBe("v2.0.0 (Pankit Engineer)");
+			expect(result).toBe("v2.0.0 (Pankit Community)");
 		});
 
 		it("uses default name in legacy fallback when name is undefined", () => {
@@ -141,7 +141,7 @@ describe("version-display helpers", () => {
 
 		it("returns null when no kits and no root version", () => {
 			const metadata: Metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 			};
 
 			const result = formatInstalledKits(metadata);
@@ -153,14 +153,14 @@ describe("version-display helpers", () => {
 		it("returns kit types from kits object", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
-					marketing: { version: "v1.0.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					pro: { version: "v1.0.0", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
 			const result = getInstalledKitTypes(metadata);
-			expect(result).toContain("engineer");
-			expect(result).toContain("marketing");
+			expect(result).toContain("community");
+			expect(result).toContain("pro");
 			expect(result.length).toBe(2);
 		});
 
@@ -183,12 +183,12 @@ describe("version-display helpers", () => {
 		it("returns single kit type", () => {
 			const metadata: Metadata = {
 				kits: {
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
 			const result = getInstalledKitTypes(metadata);
-			expect(result).toEqual(["engineer"]);
+			expect(result).toEqual(["community"]);
 		});
 	});
 });

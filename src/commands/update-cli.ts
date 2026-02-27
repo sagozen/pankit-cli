@@ -124,7 +124,7 @@ export function isBetaVersion(version: string | undefined): boolean {
 }
 
 /**
- * Parse CLI version from `ck --version` output.
+ * Parse CLI version from `pk --version` output.
  * Returns null when output does not contain a recognizable version line.
  * @internal Exported for testing
  */
@@ -527,13 +527,13 @@ export async function updateCliCommand(
 		// Verify installation
 		s.start("Verifying installation...");
 		try {
-			const versionResult = await execAsyncFn("ck --version", { timeout: 5000 });
+			const versionResult = await execAsyncFn("pk --version", { timeout: 5000 });
 			const stdout = extractCommandStdout(versionResult);
 			const activeVersion = parseCliVersionFromOutput(stdout);
 			if (!activeVersion) {
 				s.stop("Verification failed");
-				const message = `Update completed but could not parse 'ck --version' output.
-Please restart your terminal and run 'ck --version'. Expected: ${targetVersion}
+				const message = `Update completed but could not parse 'pk --version' output.
+Please restart your terminal and run 'pk --version'. Expected: ${targetVersion}
 
 Manual update: ${redactCommandForLog(updateCmd)}`;
 				logger.error(message);
@@ -545,12 +545,12 @@ Manual update: ${redactCommandForLog(updateCmd)}`;
 			if (activeVersion !== targetVersion) {
 				const mismatchMessage = `Update did not activate the requested version.
 Expected: ${targetVersion}
-Active ck: ${activeVersion}
+Active pk: ${activeVersion}
 
 Likely causes: multiple global installations (npm/bun/pnpm/yarn) or stale shell shim/cache (common on Windows).
 Run '${redactCommandForLog(updateCmd)}' manually, restart terminal, then check command resolution:
-- Windows: where ck
-- macOS/Linux: which -a ck`;
+- Windows: where pk
+- macOS/Linux: which -a pk`;
 				logger.error(mismatchMessage);
 				throw new CliUpdateError(mismatchMessage);
 			}
@@ -564,7 +564,7 @@ Run '${redactCommandForLog(updateCmd)}' manually, restart terminal, then check c
 			}
 			s.stop("Verification failed");
 			const message = `Update completed but automatic verification failed.
-Please restart your terminal and run 'ck --version'. Expected: ${targetVersion}
+Please restart your terminal and run 'pk --version'. Expected: ${targetVersion}
 
 Manual update: ${redactCommandForLog(updateCmd)}`;
 			logger.error(message);

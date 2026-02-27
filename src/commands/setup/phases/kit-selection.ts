@@ -17,18 +17,18 @@ export async function handleKitSelection(ctx: SetupContext): Promise<SetupContex
 
 	// Prompt for kit selection
 	const kit = await clack.select<
-		{ value: "engineer" | "marketing"; label: string }[],
-		"engineer" | "marketing"
+		{ value: "community" | "pro"; label: string }[],
+		"community" | "pro"
 	>({
 		message: "Which Pankit starter kit do you want to install?",
 		options: [
 			{
-				value: "engineer",
-				label: "Pankit Engineer - AI-powered coding toolkit",
+				value: "community",
+				label: "Pankit Community - AI-powered coding toolkit",
 			},
 			{
-				value: "marketing",
-				label: "Pankit Marketing - Content automation toolkit",
+				value: "pro",
+				label: "Pankit Pro - Content automation toolkit",
 			},
 		],
 	});
@@ -39,7 +39,7 @@ export async function handleKitSelection(ctx: SetupContext): Promise<SetupContex
 
 	// Run init command with selected kit and --yes flag
 	clack.log.info(
-		`Installing ${kit === "engineer" ? "Pankit Engineer" : "Pankit Marketing"}...`,
+		`Installing ${kit === "community" ? "Pankit Community" : "Pankit Pro"}...`,
 	);
 
 	try {

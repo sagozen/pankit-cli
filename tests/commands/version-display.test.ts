@@ -35,9 +35,9 @@ describe("Version Display Functionality", () => {
 
 	describe("MetadataSchema validation", () => {
 		test("should validate metadata with both name and version", () => {
-			const metadata = { name: "Pankit Engineer", version: "1.0.0" };
+			const metadata = { name: "Pankit Community", version: "1.0.0" };
 			const result = MetadataSchema.parse(metadata);
-			expect(result.name).toBe("Pankit Engineer");
+			expect(result.name).toBe("Pankit Community");
 			expect(result.version).toBe("1.0.0");
 		});
 
@@ -110,7 +110,7 @@ describe("Version Display Functionality", () => {
 			mkdirSync(claudeDir, { recursive: true });
 
 			const metadata = {
-				name: "Pankit Engineer",
+				name: "Pankit Community",
 				version: "1.5.0",
 			};
 
@@ -125,7 +125,7 @@ describe("Version Display Functionality", () => {
 			const parsed = JSON.parse(content);
 			const validated = MetadataSchema.parse(parsed);
 
-			expect(validated.name).toBe("Pankit Engineer");
+			expect(validated.name).toBe("Pankit Community");
 			expect(validated.version).toBe("1.5.0");
 		});
 

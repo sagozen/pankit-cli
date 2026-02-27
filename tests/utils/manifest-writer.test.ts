@@ -141,7 +141,7 @@ describe("ManifestWriter", () => {
 			writer.addInstalledFile("commands/test.md");
 			writer.addInstalledFile("skills/skill1.md");
 
-			await writer.writeManifest(testClaudeDir, "engineer", "1.0.0", "local");
+			await writer.writeManifest(testClaudeDir, "community", "1.0.0", "local");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			expect(existsSync(metadataPath)).toBe(true);
@@ -149,11 +149,11 @@ describe("ManifestWriter", () => {
 			const content = await Bun.file(metadataPath).text();
 			const metadata: Metadata = JSON.parse(content);
 
-			expect(metadata.name).toBe("engineer");
+			expect(metadata.name).toBe("community");
 			expect(metadata.version).toBe("1.0.0");
 			expect(metadata.scope).toBe("local");
 			// File tracking now in kits[kit].files only (DRY - no root-level duplication)
-			expect(metadata.kits?.engineer).toBeDefined();
+			expect(metadata.kits?.community).toBeDefined();
 			expect(metadata.installedAt).toBeDefined();
 			// Verify root-level file fields are NOT written (DRY)
 			expect(metadata.files).toBeUndefined();
@@ -163,7 +163,7 @@ describe("ManifestWriter", () => {
 		test("should include USER_CONFIG_PATTERNS in userConfigFiles", async () => {
 			writer.addInstalledFile("commands/test.md");
 
-			await writer.writeManifest(testClaudeDir, "engineer", "1.0.0", "local");
+			await writer.writeManifest(testClaudeDir, "community", "1.0.0", "local");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			const content = await Bun.file(metadataPath).text();
@@ -182,7 +182,7 @@ describe("ManifestWriter", () => {
 			writer.addInstalledFile("commands/test.md");
 			writer.addUserConfigFile("custom-config.json");
 
-			await writer.writeManifest(testClaudeDir, "engineer", "1.0.0", "local");
+			await writer.writeManifest(testClaudeDir, "community", "1.0.0", "local");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			const content = await Bun.file(metadataPath).text();
@@ -196,12 +196,12 @@ describe("ManifestWriter", () => {
 			// Write initial metadata (multi-kit format)
 			const initialMetadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: "2025-01-01T00:00:00.000Z",
 					},
 				},
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -214,7 +214,7 @@ describe("ManifestWriter", () => {
 
 			// Update with new manifest
 			writer.addInstalledFile("commands/new.md");
-			await writer.writeManifest(testClaudeDir, "engineer", "1.1.0", "local");
+			await writer.writeManifest(testClaudeDir, "community", "1.1.0", "local");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			const content = await Bun.file(metadataPath).text();
@@ -222,24 +222,24 @@ describe("ManifestWriter", () => {
 
 			expect(metadata.version).toBe("1.1.0");
 			// File tracking now in kits[kit].files only (DRY - no root-level duplication)
-			expect(metadata.kits?.engineer?.version).toBe("1.1.0");
+			expect(metadata.kits?.community?.version).toBe("1.1.0");
 		});
 
 		test("should handle empty installed files", async () => {
-			await writer.writeManifest(testClaudeDir, "engineer", "1.0.0", "local");
+			await writer.writeManifest(testClaudeDir, "community", "1.0.0", "local");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			const content = await Bun.file(metadataPath).text();
 			const metadata: Metadata = JSON.parse(content);
 
 			// With no tracked files, kits[kit].files should be undefined (not empty array)
-			expect(metadata.kits?.engineer).toBeDefined();
-			expect(metadata.kits?.engineer?.files).toBeUndefined();
+			expect(metadata.kits?.community).toBeDefined();
+			expect(metadata.kits?.community?.files).toBeUndefined();
 		});
 
 		test("should write valid JSON with proper formatting", async () => {
 			writer.addInstalledFile("commands/test.md");
-			await writer.writeManifest(testClaudeDir, "engineer", "1.0.0", "local");
+			await writer.writeManifest(testClaudeDir, "community", "1.0.0", "local");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			const content = await Bun.file(metadataPath).text();
@@ -253,7 +253,7 @@ describe("ManifestWriter", () => {
 
 		test("should handle global scope", async () => {
 			writer.addInstalledFile("commands/test.md");
-			await writer.writeManifest(testClaudeDir, "engineer", "1.0.0", "global");
+			await writer.writeManifest(testClaudeDir, "community", "1.0.0", "global");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			const content = await Bun.file(metadataPath).text();
@@ -268,22 +268,22 @@ describe("ManifestWriter", () => {
 
 			// Should still write new manifest successfully
 			writer.addInstalledFile("commands/test.md");
-			await writer.writeManifest(testClaudeDir, "engineer", "1.0.0", "local");
+			await writer.writeManifest(testClaudeDir, "community", "1.0.0", "local");
 
 			const metadataPath = join(testClaudeDir, "metadata.json");
 			const content = await Bun.file(metadataPath).text();
 			const metadata: Metadata = JSON.parse(content);
 
-			expect(metadata.name).toBe("engineer");
+			expect(metadata.name).toBe("community");
 			// File tracking now in kits[kit].files only (DRY - no root-level duplication)
-			expect(metadata.kits?.engineer).toBeDefined();
+			expect(metadata.kits?.community).toBeDefined();
 		});
 	});
 
 	describe("readManifest", () => {
 		test("should read existing manifest", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -296,7 +296,7 @@ describe("ManifestWriter", () => {
 			const result = await ManifestWriter.readManifest(testClaudeDir);
 
 			expect(result).not.toBeNull();
-			expect(result?.name).toBe("engineer");
+			expect(result?.name).toBe("community");
 			expect(result?.version).toBe("1.0.0");
 			expect(result?.installedFiles).toEqual(["commands/test.md", "skills/skill1.md"]);
 		});
@@ -316,7 +316,7 @@ describe("ManifestWriter", () => {
 		test("should validate schema using Zod", async () => {
 			// Write metadata with invalid scope
 			const invalidMetadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				scope: "invalid-scope", // This should fail validation
 			};
@@ -343,7 +343,7 @@ describe("ManifestWriter", () => {
 	describe("getUninstallManifest", () => {
 		test("should use manifest when available", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -379,7 +379,7 @@ describe("ManifestWriter", () => {
 
 		test("should fallback when manifest exists but installedFiles is empty", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -397,7 +397,7 @@ describe("ManifestWriter", () => {
 
 		test("should fallback when manifest exists but installedFiles is undefined", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -434,7 +434,7 @@ describe("ManifestWriter", () => {
 
 		test("should preserve custom user config files from manifest", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -457,10 +457,10 @@ describe("ManifestWriter", () => {
 		});
 
 		test("should use multi-kit format files for uninstall", async () => {
-			// Multi-kit format with kits.engineer.files
+			// Multi-kit format with kits.community.files
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: "2025-01-01T00:00:00.000Z",
 						files: [
@@ -480,7 +480,7 @@ describe("ManifestWriter", () => {
 					},
 				},
 				scope: "local",
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 			};
 
@@ -495,10 +495,10 @@ describe("ManifestWriter", () => {
 		});
 
 		test("should handle backward compat: existing installations with duplicate root-level files", async () => {
-			// Existing installations before fix may have BOTH kits.engineer.files AND root files (duplicate)
+			// Existing installations before fix may have BOTH kits.community.files AND root files (duplicate)
 			const metadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: "2025-01-01T00:00:00.000Z",
 						files: [
@@ -512,7 +512,7 @@ describe("ManifestWriter", () => {
 					},
 				},
 				scope: "local",
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				// Legacy duplicate root-level files (from before the DRY fix)
 				files: [
@@ -530,7 +530,7 @@ describe("ManifestWriter", () => {
 
 			const result = await ManifestWriter.getUninstallManifest(testClaudeDir);
 
-			// Should use kits.engineer.files (multi-kit format takes precedence)
+			// Should use kits.community.files (multi-kit format takes precedence)
 			expect(result.hasManifest).toBe(true);
 			expect(result.isMultiKit).toBe(true);
 			expect(result.filesToRemove).toContain("commands/test.md");

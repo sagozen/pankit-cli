@@ -17,8 +17,8 @@ vi.mock("../../i18n", () => ({
 				back: "Back",
 				next: "Next",
 				install: "Install",
-				kitEngineerName: "Pankit Engineer",
-				kitMarketingName: "Pankit Marketing",
+				kitCommunityName: "Pankit Community",
+				kitProName: "Pankit Pro",
 			};
 			return translations[key] || key;
 		},
@@ -27,7 +27,7 @@ vi.mock("../../i18n", () => ({
 
 describe("InstallWizard", () => {
 	const defaultProps = {
-		selectedKit: KitType.ENGINEER,
+		selectedKit: KitType.COMMUNITY,
 		onKitSelect: vi.fn(),
 		onInstall: vi.fn(),
 		installing: false,
@@ -48,7 +48,7 @@ describe("InstallWizard", () => {
 
 		it("shows step 1 content initially", () => {
 			render(<InstallWizard {...defaultProps} />);
-			expect(screen.getByText(/Selected: Pankit Engineer/)).toBeInTheDocument();
+			expect(screen.getByText(/Selected: Pankit Community/)).toBeInTheDocument();
 		});
 	});
 
@@ -80,7 +80,7 @@ describe("InstallWizard", () => {
 			render(<InstallWizard {...defaultProps} />);
 			fireEvent.click(screen.getByTestId("wizard-next")); // Go to step 2
 			fireEvent.click(screen.getByTestId("wizard-back")); // Go back to step 1
-			expect(screen.getByText(/Selected: Pankit Engineer/)).toBeInTheDocument();
+			expect(screen.getByText(/Selected: Pankit Community/)).toBeInTheDocument();
 		});
 
 		it("advances to step 3 from step 2", () => {
@@ -125,21 +125,21 @@ describe("InstallWizard", () => {
 		it("calls onKitSelect when switch kit button is clicked", () => {
 			const onKitSelect = vi.fn();
 			render(<InstallWizard {...defaultProps} onKitSelect={onKitSelect} />);
-			const switchButton = screen.getByText(/Switch to Pankit Marketing/);
+			const switchButton = screen.getByText(/Switch to Pankit Pro/);
 			fireEvent.click(switchButton);
-			expect(onKitSelect).toHaveBeenCalledWith(KitType.MARKETING);
+			expect(onKitSelect).toHaveBeenCalledWith(KitType.PRO);
 		});
 	});
 
 	describe("Kit Selection", () => {
-		it("shows Marketing kit switch option when Engineer selected", () => {
-			render(<InstallWizard {...defaultProps} selectedKit={KitType.ENGINEER} />);
-			expect(screen.getByText(/Switch to Pankit Marketing/)).toBeInTheDocument();
+		it("shows Pro kit switch option when Community selected", () => {
+			render(<InstallWizard {...defaultProps} selectedKit={KitType.COMMUNITY} />);
+			expect(screen.getByText(/Switch to Pankit Pro/)).toBeInTheDocument();
 		});
 
-		it("shows Engineer kit switch option when Marketing selected", () => {
-			render(<InstallWizard {...defaultProps} selectedKit={KitType.MARKETING} />);
-			expect(screen.getByText(/Switch to Pankit Engineer/)).toBeInTheDocument();
+		it("shows Community kit switch option when Pro selected", () => {
+			render(<InstallWizard {...defaultProps} selectedKit={KitType.PRO} />);
+			expect(screen.getByText(/Switch to Pankit Community/)).toBeInTheDocument();
 		});
 
 		it("shows prompt when no kit selected", () => {

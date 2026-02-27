@@ -6,8 +6,8 @@ import { AVAILABLE_KITS, type KitType } from "@/types";
 
 // Create mock prompts manager with configurable selectKit and selectKits
 function createMockPrompts(
-	selectKitResult: KitType = "engineer",
-	selectKitsResult: KitType[] = ["engineer"],
+	selectKitResult: KitType = "community",
+	selectKitsResult: KitType[] = ["community"],
 ) {
 	return {
 		selectKit: mock(async (_default?: KitType, _accessible?: KitType[]) => selectKitResult),
@@ -67,8 +67,8 @@ describe("selection-handler kit access logic", () => {
 	describe("explicit --kit flag validation", () => {
 		it("allows kit when user has access", () => {
 			const ctx = createKitAccessContext({
-				options: { kit: "engineer" },
-				accessibleKits: ["engineer", "marketing"],
+				options: { kit: "community" },
+				accessibleKits: ["community", "pro"],
 			});
 
 			const hasAccess = ctx.accessibleKits?.includes(ctx.options.kit as KitType);
@@ -77,8 +77,8 @@ describe("selection-handler kit access logic", () => {
 
 		it("rejects kit when user lacks access", () => {
 			const ctx = createKitAccessContext({
-				options: { kit: "marketing" },
-				accessibleKits: ["engineer"],
+				options: { kit: "pro" },
+				accessibleKits: ["community"],
 			});
 
 			const hasAccess = ctx.accessibleKits?.includes(ctx.options.kit as KitType);
@@ -87,7 +87,7 @@ describe("selection-handler kit access logic", () => {
 
 		it("skips access check for --kit in --use-git mode", () => {
 			const ctx = createKitAccessContext({
-				options: { kit: "marketing", useGit: true },
+				options: { kit: "pro", useGit: true },
 				accessibleKits: undefined, // Not detected
 			});
 
@@ -101,7 +101,7 @@ describe("selection-handler kit access logic", () => {
 		it("auto-selects first accessible kit in non-interactive mode", () => {
 			const ctx = createKitAccessContext({
 				isNonInteractive: true,
-				accessibleKits: ["marketing", "engineer"],
+				accessibleKits: ["pro", "community"],
 			});
 
 			// Logic from selection-handler.ts:69-78
@@ -110,7 +110,7 @@ describe("selection-handler kit access logic", () => {
 				selectedKit = ctx.accessibleKits[0];
 			}
 
-			expect(selectedKit).toBe("marketing");
+			expect(selectedKit).toBe("pro");
 		});
 
 		it("throws error in non-interactive mode with no accessible kits", () => {
@@ -141,7 +141,7 @@ describe("selection-handler kit access logic", () => {
 		it("auto-selects when only one kit is accessible", () => {
 			const ctx = createKitAccessContext({
 				isNonInteractive: false,
-				accessibleKits: ["engineer"],
+				accessibleKits: ["community"],
 			});
 
 			// Logic from selection-handler.ts:79-82
@@ -150,13 +150,13 @@ describe("selection-handler kit access logic", () => {
 				selectedKit = ctx.accessibleKits[0];
 			}
 
-			expect(selectedKit).toBe("engineer");
+			expect(selectedKit).toBe("community");
 		});
 
 		it("does not auto-select when multiple kits are accessible", () => {
 			const ctx = createKitAccessContext({
 				isNonInteractive: false,
-				accessibleKits: ["engineer", "marketing"],
+				accessibleKits: ["community", "pro"],
 			});
 
 			let selectedKit: KitType | undefined;
@@ -171,7 +171,7 @@ describe("selection-handler kit access logic", () => {
 	describe("prompt filtering", () => {
 		it("passes accessible kits to selectKit prompt", async () => {
 			const prompts = createMockPrompts();
-			const accessibleKits: KitType[] = ["engineer"];
+			const accessibleKits: KitType[] = ["community"];
 
 			// Simulate selection-handler.ts:84-85
 			await prompts.selectKit(undefined, accessibleKits);
@@ -199,10 +199,10 @@ describe("selection-handler kit access logic", () => {
 		});
 
 		it("generates correct error for specific kit access denied", () => {
-			const kitType: KitType = "marketing";
+			const kitType: KitType = "pro";
 			const errorMessage = `No access to ${AVAILABLE_KITS[kitType].name}`;
 
-			expect(errorMessage).toBe("No access to Pankit Marketing");
+			expect(errorMessage).toBe("No access to Pankit Pro");
 		});
 	});
 
@@ -226,17 +226,17 @@ describe("selection-handler kit access logic", () => {
 		});
 
 		it("preserves kit order from detection", () => {
-			const detectedOrder: KitType[] = ["marketing", "engineer"];
+			const detectedOrder: KitType[] = ["pro", "community"];
 
 			// Order should be preserved (first accessible is auto-selected in non-interactive)
-			expect(detectedOrder[0]).toBe("marketing");
+			expect(detectedOrder[0]).toBe("pro");
 		});
 	});
 
 	describe("multi-kit selection", () => {
 		it("uses multi-select when multiple kits are accessible", async () => {
-			const prompts = createMockPrompts("engineer", ["engineer", "marketing"]);
-			const accessibleKits: KitType[] = ["engineer", "marketing"];
+			const prompts = createMockPrompts("community", ["community", "pro"]);
+			const accessibleKits: KitType[] = ["community", "pro"];
 
 			// Simulate selection-handler.ts:86-98 - uses selectKits when >1 accessible
 			if (accessibleKits.length > 1) {
@@ -247,31 +247,31 @@ describe("selection-handler kit access logic", () => {
 		});
 
 		it("sets pendingKits when multiple kits selected", () => {
-			const selectedKits: KitType[] = ["engineer", "marketing"];
+			const selectedKits: KitType[] = ["community", "pro"];
 
 			// Logic from selection-handler.ts:92-98
 			const kitType = selectedKits[0];
 			const pendingKits = selectedKits.length > 1 ? selectedKits.slice(1) : undefined;
 
-			expect(kitType).toBe("engineer");
-			expect(pendingKits).toEqual(["marketing"]);
+			expect(kitType).toBe("community");
+			expect(pendingKits).toEqual(["pro"]);
 		});
 
 		it("does not set pendingKits when only one kit selected", () => {
-			const selectedKits: KitType[] = ["engineer"];
+			const selectedKits: KitType[] = ["community"];
 
 			const kitType = selectedKits[0];
 			const pendingKits = selectedKits.length > 1 ? selectedKits.slice(1) : undefined;
 
-			expect(kitType).toBe("engineer");
+			expect(kitType).toBe("community");
 			expect(pendingKits).toBeUndefined();
 		});
 
 		it("generates correct log message for multi-kit selection", () => {
-			const selectedKits: KitType[] = ["engineer", "marketing"];
+			const selectedKits: KitType[] = ["community", "pro"];
 			const message = `Selected ${selectedKits.length} kits: ${selectedKits.map((k) => AVAILABLE_KITS[k].name).join(", ")}`;
 
-			expect(message).toBe("Selected 2 kits: Pankit Engineer, Pankit Marketing");
+			expect(message).toBe("Selected 2 kits: Pankit Community, Pankit Pro");
 		});
 
 		it("throws error when no kits selected from multi-select", () => {

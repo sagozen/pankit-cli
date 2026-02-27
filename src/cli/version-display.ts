@@ -17,7 +17,7 @@ const packageVersion = packageInfo.version;
 
 /**
  * Format installed kits from metadata for display
- * Returns format like "engineer@2.2.0, marketing@1.0.0" or null if no kits
+ * Returns format like "community@2.2.0, pro@1.0.0" or null if no kits
  */
 function formatInstalledKits(metadata: Metadata): string | null {
 	if (!metadata.kits || Object.keys(metadata.kits).length === 0) {
@@ -32,7 +32,7 @@ function formatInstalledKits(metadata: Metadata): string | null {
 	const kitVersions = Object.entries(metadata.kits)
 		.filter(([_, meta]) => meta.version && meta.version.trim() !== "")
 		.map(([kit, meta]) => `${kit}@${meta.version}`)
-		.sort() // Alphabetical: engineer, marketing
+		.sort() // Alphabetical: community, pro
 		.join(", ");
 
 	return kitVersions.length > 0 ? kitVersions : null;

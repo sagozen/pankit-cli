@@ -44,7 +44,7 @@ describe("applyPrefix", () => {
 		});
 
 		it("wraps mkt/ directory into ck/mkt/", async () => {
-			// Marketing kit's pre-prefixed mkt/ should end up inside ck/
+			// Pro kit's pre-prefixed mkt/ should end up inside ck/
 			const commandsDir = join(tempDir, ".claude", "commands");
 			const mktDir = join(commandsDir, "mkt");
 			await mkdir(mktDir, { recursive: true });

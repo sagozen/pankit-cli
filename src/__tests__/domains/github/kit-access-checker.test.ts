@@ -32,15 +32,15 @@ describe("kit-access-checker", () => {
 
 			const result = await detectAccessibleKits();
 
-			expect(result).toContain("engineer");
-			expect(result).toContain("marketing");
+			expect(result).toContain("community");
+			expect(result).toContain("pro");
 			expect(result.length).toBe(2);
 			expect(mockSpinner.succeed).toHaveBeenCalled();
 		});
 
-		test("returns only engineer when marketing fails", async () => {
+		test("returns only community when pro fails", async () => {
 			spyOn(GitHubClient.prototype, "checkAccess").mockImplementation(async (config) => {
-				if (config.repo === "pankit-marketing") {
+				if (config.repo === "pankit-pro") {
 					throw new Error("Access denied");
 				}
 				return true;
@@ -48,15 +48,15 @@ describe("kit-access-checker", () => {
 
 			const result = await detectAccessibleKits();
 
-			expect(result).toContain("engineer");
-			expect(result).not.toContain("marketing");
+			expect(result).toContain("community");
+			expect(result).not.toContain("pro");
 			expect(result.length).toBe(1);
 			expect(mockSpinner.succeed).toHaveBeenCalled();
 		});
 
-		test("returns only marketing when engineer fails", async () => {
+		test("returns only pro when community fails", async () => {
 			spyOn(GitHubClient.prototype, "checkAccess").mockImplementation(async (config) => {
-				if (config.repo === "pankit-engineer") {
+				if (config.repo === "pankit-community") {
 					throw new Error("Access denied");
 				}
 				return true;
@@ -64,8 +64,8 @@ describe("kit-access-checker", () => {
 
 			const result = await detectAccessibleKits();
 
-			expect(result).not.toContain("engineer");
-			expect(result).toContain("marketing");
+			expect(result).not.toContain("community");
+			expect(result).toContain("pro");
 			expect(result.length).toBe(1);
 			expect(mockSpinner.succeed).toHaveBeenCalled();
 		});
@@ -107,7 +107,7 @@ describe("kit-access-checker", () => {
 			for (let i = 0; i < 10; i++) {
 				spyOn(GitHubClient.prototype, "checkAccess").mockImplementation(async (config) => {
 					await new Promise((r) => setTimeout(r, Math.random() * 20));
-					if (config.repo === "pankit-marketing") {
+					if (config.repo === "pankit-pro") {
 						throw new Error("Access denied");
 					}
 					return true;
@@ -115,9 +115,9 @@ describe("kit-access-checker", () => {
 
 				const result = await detectAccessibleKits();
 
-				// Should consistently return only engineer
-				expect(result).toContain("engineer");
-				expect(result).not.toContain("marketing");
+				// Should consistently return only community
+				expect(result).toContain("community");
+				expect(result).not.toContain("pro");
 				expect(result.length).toBe(1);
 
 				mock.restore();

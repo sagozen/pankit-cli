@@ -60,10 +60,10 @@ describe("help-types", () => {
 
 	test("HelpExample type usage", () => {
 		const example: HelpExample = {
-			command: "ck new --kit engineer",
-			description: "Create new engineer kit",
+			command: "ck new --kit community",
+			description: "Create new community kit",
 		};
-		expect(example.command).toBe("ck new --kit engineer");
+		expect(example.command).toBe("ck new --kit community");
 	});
 
 	test("HelpSection type usage", () => {

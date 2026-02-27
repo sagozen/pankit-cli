@@ -27,11 +27,10 @@ const KitCard: React.FC<KitCardProps> = ({ kit, selected, onSelect, features }) 
 		<button
 			type="button"
 			onClick={onSelect}
-			className={`p-6 rounded-lg border-2 text-left transition-all w-full ${
-				selected
+			className={`p-6 rounded-lg border-2 text-left transition-all w-full ${selected
 					? "border-[var(--dash-accent)] bg-[var(--dash-surface)] shadow-md"
 					: "border-[var(--dash-border)] hover:border-[var(--dash-accent)]/50"
-			}`}
+				}`}
 		>
 			<h3 className={`text-xl font-bold ${kit.primaryColor}`}>{t(kit.name as TranslationKey)}</h3>
 			<p className="text-[var(--dash-text-muted)] mt-1">{t(kit.tagline as TranslationKey)}</p>
@@ -88,7 +87,7 @@ const OnboardingPage: React.FC = () => {
 
 	// Map string kit IDs to KitType enum
 	const getKitTypeFromId = (id: string): KitType => {
-		return id === "engineer" ? KitType.ENGINEER : KitType.MARKETING;
+		return id === "community" ? KitType.COMMUNITY : KitType.PRO;
 	};
 
 	return (

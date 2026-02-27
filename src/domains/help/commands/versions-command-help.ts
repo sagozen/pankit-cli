@@ -12,8 +12,8 @@ export const versionsCommandHelp: CommandHelp = {
 	usage: "pk versions [options]",
 	examples: [
 		{
-			command: "pk versions --kit engineer --limit 10",
-			description: "Show latest 10 versions of engineer kit",
+			command: "pk versions --kit community --limit 10",
+			description: "Show latest 10 versions of community kit",
 		},
 		{
 			command: "pk versions --all",
@@ -26,7 +26,7 @@ export const versionsCommandHelp: CommandHelp = {
 			options: [
 				{
 					flags: "--kit <kit>",
-					description: "Filter by specific kit (engineer, marketing)",
+					description: "Filter by specific kit (community, pro)",
 				},
 				{
 					flags: "--limit <number>",

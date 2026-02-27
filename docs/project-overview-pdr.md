@@ -23,7 +23,7 @@
 1. **Educate** — Users understand what Pankit is, what each kit offers, why it matters
 2. **Install** — Zero friction from discovery to working setup
 
-Design: Show features not marketing copy. Guide users, not gatekeep. Succeed with working config + clear next steps.
+Design: Show features not pro copy. Guide users, not gatekeep. Succeed with working config + clear next steps.
 
 ## Executive Summary
 
@@ -53,9 +53,9 @@ Pankit CLI provides a comprehensive solution with:
 
 ### Primary Users
 1. **Professional Developers**: Purchasing Pankit kits for production projects
-2. **Engineering Teams**: Using Pankit for collaborative development
+2. **Communitying Teams**: Using Pankit for collaborative development
 3. **Solo Developers**: Building projects with Claude Code assistance
-4. **CI/CD Engineers**: Automating project setup in pipelines
+4. **CI/CD Communitys**: Automating project setup in pipelines
 
 ### User Personas
 
@@ -64,7 +64,7 @@ Pankit CLI provides a comprehensive solution with:
 - **Pain Points**: Manual project configuration, dependency management
 - **Goals**: Focus on feature development rather than boilerplate setup
 
-#### Persona 2: DevOps Engineer
+#### Persona 2: DevOps Community
 - **Needs**: Automated deployment, CI/CD integration, non-interactive mode
 - **Pain Points**: Manual environment setup, inconsistent configurations
 - **Goals**: Streamlined automated project initialization
@@ -85,7 +85,7 @@ Pankit CLI provides a comprehensive solution with:
 
 #### Functional Requirements
 - Create new projects from GitHub releases
-- Interactive kit selection (engineer, marketing)
+- Interactive kit selection (community, pro)
 - Directory validation and conflict handling
 - Support for specific version selection
 - Force overwrite option for non-empty directories
@@ -303,14 +303,14 @@ Pankit CLI provides a comprehensive solution with:
 
 #### Functional Requirements
 - `pk setup` command launches interactive onboarding flow
-- Kit comparison: Side-by-side feature matrix (Engineer vs Marketing)
+- Kit comparison: Side-by-side feature matrix (Community vs Pro)
 - Kit features preview: Visual feature cards and descriptions
 - Guided install wizard: Step-by-step kit selection → installation
 - Feature preview: Show concrete capabilities before committing
 - Success screen: Congratulations + clear next steps + quick actions
 - User journeys:
   1. **Newcomer**: "What is Pankit?" → onboarding → kit comparison → guided install
-  2. **Evaluator**: "Engineer or Marketing?" → side-by-side features → try before commit
+  2. **Evaluator**: "Community or Pro?" → side-by-side features → try before commit
   3. **Adopter**: "Set up my project" → install wizard → config → success
   4. **Power user**: Project switcher → health dashboard → quick actions
 
@@ -459,7 +459,7 @@ Pankit CLI provides a comprehensive solution with:
 - 🔄 User feedback integration
 
 ### Phase 4: Multi-Kit & Dashboard (Completed)
-- ✅ Marketing kit support (v1.0.0 released)
+- ✅ Pro kit support (v1.0.0 released)
 - ✅ Web dashboard with React UI (`pk config ui`)
 - ✅ Projects registry (centralized project management)
 - ✅ Configuration management UI
@@ -616,7 +616,7 @@ ck diagnose [--verbose]     # Check authentication and access
     "token": "stored_in_keychain"
   },
   "defaults": {
-    "kit": "engineer",
+    "kit": "community",
     "dir": "."
   }
 }
@@ -635,8 +635,8 @@ dist/**, build/**
 
 ### Appendix D: Available Kits
 
-1. **engineer**: Pankit Engineer - Engineering toolkit for building with Claude (v1.0.0+)
-2. **marketing**: Pankit Marketing - Content automation toolkit (v1.0.0 - AVAILABLE)
+1. **community**: Pankit Community - Communitying toolkit for building with Claude (v1.0.0+)
+2. **pro**: Pankit Pro - Content automation toolkit (v1.0.0 - AVAILABLE)
 
 ### Appendix E: Error Codes
 

@@ -6,7 +6,7 @@ import { downloadAndExtract } from "@/domains/installation/download-extractor.js
 import { AVAILABLE_KITS } from "@/types";
 
 const TEST_DIR = path.join(os.tmpdir(), "ck-test-offline");
-const mockKit = AVAILABLE_KITS.engineer;
+const mockKit = AVAILABLE_KITS.community;
 
 describe("downloadAndExtract - offline options", () => {
 	beforeEach(async () => {

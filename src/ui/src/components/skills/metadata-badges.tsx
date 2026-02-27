@@ -4,13 +4,13 @@
  */
 import type React from "react";
 
-/** Kit badge colors: orange for engineer, blue for marketing, gray fallback */
+/** Kit badge colors: orange for community, blue for pro, gray fallback */
 const KIT_COLORS: Record<string, string> = {
-	engineer: "#F7A072",
-	marketing: "#4A9BD9",
+	community: "#F7A072",
+	pro: "#4A9BD9",
 };
 
-/** Small colored pill showing kit origin (Engineer/Marketing) */
+/** Small colored pill showing kit origin (Community/Pro) */
 export const KitBadge: React.FC<{ kit: string }> = ({ kit }) => {
 	const color = KIT_COLORS[kit] || "#6B6560";
 	const label = kit.charAt(0).toUpperCase() + kit.slice(1);

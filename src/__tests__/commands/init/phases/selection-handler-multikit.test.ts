@@ -10,7 +10,7 @@ import type { KitType, Metadata } from "@/types";
 // Create mock prompts manager
 function createMockPrompts(confirmResult: boolean | Error = true) {
 	return {
-		selectKit: mock(async () => "engineer" as const),
+		selectKit: mock(async () => "community" as const),
 		getDirectory: mock(async () => "."),
 		selectVersionEnhanced: mock(async () => "v1.0.0"),
 		confirm: mock(async () => {
@@ -57,7 +57,7 @@ function createTestContext(overrides: {
 	return {
 		rawOptions: {},
 		options: {
-			kit: "engineer",
+			kit: "community",
 			dir: ".",
 			beta: false,
 			global: false,
@@ -106,10 +106,10 @@ describe("selection-handler multi-kit flow", () => {
 
 	describe("multi-kit confirmation prompt", () => {
 		it("shows confirmation when other kit exists and user is interactive", async () => {
-			// Setup: existing engineer kit metadata
+			// Setup: existing community kit metadata
 			const existingMetadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v2.2.0",
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
@@ -119,25 +119,25 @@ describe("selection-handler multi-kit flow", () => {
 
 			// This tests the logic pattern used in selection-handler.ts:103-133
 			const otherKits = Object.keys(existingMetadata.kits ?? {}).filter(
-				(k) => k !== "marketing", // Installing marketing kit
+				(k) => k !== "pro", // Installing pro kit
 			);
 
 			expect(otherKits.length).toBeGreaterThan(0);
-			expect(otherKits).toContain("engineer");
+			expect(otherKits).toContain("community");
 		});
 
 		it("skips confirmation when installing same kit (update scenario)", async () => {
 			const existingMetadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "v2.0.0",
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
 				},
 			};
 
-			// Installing same kit (engineer)
-			const otherKits = Object.keys(existingMetadata.kits ?? {}).filter((k) => k !== "engineer");
+			// Installing same kit (community)
+			const otherKits = Object.keys(existingMetadata.kits ?? {}).filter((k) => k !== "community");
 
 			expect(otherKits.length).toBe(0);
 		});
@@ -147,7 +147,7 @@ describe("selection-handler multi-kit flow", () => {
 				kits: {},
 			};
 
-			const otherKits = Object.keys(existingMetadata.kits ?? {}).filter((k) => k !== "engineer");
+			const otherKits = Object.keys(existingMetadata.kits ?? {}).filter((k) => k !== "community");
 
 			expect(otherKits.length).toBe(0);
 		});
@@ -165,13 +165,13 @@ describe("selection-handler multi-kit flow", () => {
 		it("formats existing kits display correctly", async () => {
 			const existingMetadata: Metadata = {
 				kits: {
-					engineer: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
-					marketing: { version: "v1.0.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					community: { version: "v2.2.0", installedAt: "2024-01-01T00:00:00.000Z" },
+					pro: { version: "v1.0.0", installedAt: "2024-01-01T00:00:00.000Z" },
 				},
 			};
 
 			const otherKits = (Object.keys(existingMetadata.kits ?? {}) as KitType[]).filter(
-				(k) => k !== "marketing",
+				(k) => k !== "pro",
 			);
 
 			// Format like selection-handler.ts:109-111
@@ -179,13 +179,13 @@ describe("selection-handler multi-kit flow", () => {
 				.map((k) => `${k}@${existingMetadata.kits?.[k]?.version || "unknown"}`)
 				.join(", ");
 
-			expect(existingKitsDisplay).toBe("engineer@v2.2.0");
+			expect(existingKitsDisplay).toBe("community@v2.2.0");
 		});
 
 		it("handles kit with undefined version using 'unknown' fallback", async () => {
 			const existingMetadata: Metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: undefined as unknown as string,
 						installedAt: "2024-01-01T00:00:00.000Z",
 					},
@@ -193,14 +193,14 @@ describe("selection-handler multi-kit flow", () => {
 			};
 
 			const otherKits = (Object.keys(existingMetadata.kits ?? {}) as KitType[]).filter(
-				(k) => k !== "marketing",
+				(k) => k !== "pro",
 			);
 
 			const existingKitsDisplay = otherKits
 				.map((k) => `${k}@${existingMetadata.kits?.[k]?.version || "unknown"}`)
 				.join(", ");
 
-			expect(existingKitsDisplay).toBe("engineer@unknown");
+			expect(existingKitsDisplay).toBe("community@unknown");
 		});
 	});
 
@@ -307,48 +307,48 @@ describe("selection-handler multi-kit flow", () => {
 	});
 
 	describe("--kit option parsing", () => {
-		const allKitTypes: KitType[] = ["engineer", "marketing"];
+		const allKitTypes: KitType[] = ["community", "pro"];
 
 		describe("--kit all", () => {
 			it("expands 'all' to all kit types", () => {
 				const kitOption = "all";
-				const accessibleKits: KitType[] = ["engineer", "marketing"];
+				const accessibleKits: KitType[] = ["community", "pro"];
 
 				const kitsToInstall = kitOption === "all" ? accessibleKits : [kitOption as KitType];
 
-				expect(kitsToInstall).toEqual(["engineer", "marketing"]);
-				expect(kitsToInstall[0]).toBe("engineer");
-				expect(kitsToInstall.slice(1)).toEqual(["marketing"]);
+				expect(kitsToInstall).toEqual(["community", "pro"]);
+				expect(kitsToInstall[0]).toBe("community");
+				expect(kitsToInstall.slice(1)).toEqual(["pro"]);
 			});
 
 			it("respects accessible kits when using 'all'", () => {
 				const kitOption = "all";
-				const accessibleKits: KitType[] = ["engineer"]; // Only has access to engineer
+				const accessibleKits: KitType[] = ["community"]; // Only has access to community
 
 				const kitsToInstall = kitOption === "all" ? accessibleKits : [kitOption as KitType];
 
-				expect(kitsToInstall).toEqual(["engineer"]);
+				expect(kitsToInstall).toEqual(["community"]);
 				expect(kitsToInstall.length).toBe(1);
 			});
 		});
 
 		describe("comma-separated kits", () => {
 			it("parses comma-separated kit names", () => {
-				const kitOption = "engineer,marketing";
+				const kitOption = "community,pro";
 				const requestedKits = kitOption.split(",").map((k) => k.trim()) as KitType[];
 
-				expect(requestedKits).toEqual(["engineer", "marketing"]);
+				expect(requestedKits).toEqual(["community", "pro"]);
 			});
 
 			it("handles whitespace around commas", () => {
-				const kitOption = "engineer , marketing";
+				const kitOption = "community , pro";
 				const requestedKits = kitOption.split(",").map((k) => k.trim()) as KitType[];
 
-				expect(requestedKits).toEqual(["engineer", "marketing"]);
+				expect(requestedKits).toEqual(["community", "pro"]);
 			});
 
 			it("detects invalid kit names", () => {
-				const kitOption = "engineer,invalid";
+				const kitOption = "community,invalid";
 				const requestedKits = kitOption.split(",").map((k) => k.trim());
 				const invalidKits = requestedKits.filter((k) => !allKitTypes.includes(k as KitType));
 
@@ -356,28 +356,28 @@ describe("selection-handler multi-kit flow", () => {
 			});
 
 			it("validates access for all requested kits", () => {
-				const kitOption = "engineer,marketing";
+				const kitOption = "community,pro";
 				const requestedKits = kitOption.split(",").map((k) => k.trim()) as KitType[];
-				const accessibleKits: KitType[] = ["engineer"]; // Only has access to engineer
+				const accessibleKits: KitType[] = ["community"]; // Only has access to community
 
 				const noAccessKits = requestedKits.filter((k) => !accessibleKits.includes(k));
 
-				expect(noAccessKits).toEqual(["marketing"]);
+				expect(noAccessKits).toEqual(["pro"]);
 			});
 
 			it("sets first kit as primary and rest as pending", () => {
-				const kitOption = "engineer,marketing";
+				const kitOption = "community,pro";
 				const requestedKits = kitOption.split(",").map((k) => k.trim()) as KitType[];
 
 				const kitType = requestedKits[0];
 				const pendingKits = requestedKits.length > 1 ? requestedKits.slice(1) : undefined;
 
-				expect(kitType).toBe("engineer");
-				expect(pendingKits).toEqual(["marketing"]);
+				expect(kitType).toBe("community");
+				expect(pendingKits).toEqual(["pro"]);
 			});
 
 			it("handles single kit without comma", () => {
-				const kitOption = "engineer";
+				const kitOption = "community";
 				const hasComma = kitOption.includes(",");
 
 				expect(hasComma).toBe(false);

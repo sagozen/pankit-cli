@@ -66,7 +66,7 @@ describe("Fresh Installer", () => {
 			// Create metadata with tracked files
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -113,7 +113,7 @@ describe("Fresh Installer", () => {
 		test("should handle empty files array in metadata", async () => {
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [],
@@ -181,7 +181,7 @@ describe("Fresh Installer", () => {
 			// Create metadata with mixed ownership
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -245,7 +245,7 @@ describe("Fresh Installer", () => {
 			// Create metadata tracking both CK and user files
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -293,7 +293,7 @@ describe("Fresh Installer", () => {
 			// Create metadata tracking only CK files
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -338,7 +338,7 @@ describe("Fresh Installer", () => {
 			// Create metadata with tracked files
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
@@ -371,7 +371,7 @@ describe("Fresh Installer", () => {
 			const updatedMetadata = JSON.parse(await Bun.file(join(claudeDir, "metadata.json")).text());
 
 			// CK file entry should be removed from metadata
-			const files = updatedMetadata.kits.engineer.files;
+			const files = updatedMetadata.kits.community.files;
 			expect(files.length).toBe(1);
 			expect(files[0].path).toBe("skills/user-skill.md");
 		});
@@ -382,24 +382,24 @@ describe("Fresh Installer", () => {
 			// Create metadata with files from two kits
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
 							{
-								path: "commands/engineer-cmd.md",
+								path: "commands/community-cmd.md",
 								checksum: CHECKSUM_1,
 								ownership: "ck",
 								installedVersion: "1.0.0",
 							},
 						],
 					},
-					marketing: {
+					pro: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [
 							{
-								path: "commands/marketing-cmd.md",
+								path: "commands/pro-cmd.md",
 								checksum: CHECKSUM_2,
 								ownership: "ck",
 								installedVersion: "1.0.0",
@@ -415,8 +415,8 @@ describe("Fresh Installer", () => {
 				},
 			};
 			await writeFile(join(claudeDir, "metadata.json"), JSON.stringify(metadata));
-			await writeFile(join(claudeDir, "commands", "engineer-cmd.md"), "engineer");
-			await writeFile(join(claudeDir, "commands", "marketing-cmd.md"), "marketing");
+			await writeFile(join(claudeDir, "commands", "community-cmd.md"), "community");
+			await writeFile(join(claudeDir, "commands", "pro-cmd.md"), "pro");
 			await writeFile(join(claudeDir, "skills", "custom.md"), "custom");
 
 			// Mock promptFreshConfirmation to return true
@@ -428,8 +428,8 @@ describe("Fresh Installer", () => {
 			expect(result).toBe(true);
 
 			// CK files from both kits should be removed
-			expect(existsSync(join(claudeDir, "commands", "engineer-cmd.md"))).toBe(false);
-			expect(existsSync(join(claudeDir, "commands", "marketing-cmd.md"))).toBe(false);
+			expect(existsSync(join(claudeDir, "commands", "community-cmd.md"))).toBe(false);
+			expect(existsSync(join(claudeDir, "commands", "pro-cmd.md"))).toBe(false);
 
 			// User file should be preserved
 			expect(existsSync(join(claudeDir, "skills", "custom.md"))).toBe(true);
@@ -441,7 +441,7 @@ describe("Fresh Installer", () => {
 			// Create metadata referencing files that don't exist
 			const metadata = {
 				kits: {
-					engineer: {
+					community: {
 						version: "1.0.0",
 						installedAt: new Date().toISOString(),
 						files: [

@@ -41,7 +41,7 @@ export const DEFAULT_FOLDERS: Required<FoldersConfig> = {
 export const NewCommandOptionsSchema = z
 	.object({
 		dir: z.string().default("."),
-		kit: z.string().optional(), // Accepts "all", "engineer,marketing", or single kit - validated in selection-handler
+		kit: z.string().optional(), // Accepts "all", "community,pro", or single kit - validated in selection-handler
 		release: z.string().min(1, "Release tag cannot be empty").optional(),
 		force: z.boolean().default(false),
 		exclude: z.array(ExcludePatternSchema).optional().default([]),
@@ -66,7 +66,7 @@ export type NewCommandOptions = z.infer<typeof NewCommandOptionsSchema>;
 export const UpdateCommandOptionsSchema = z
 	.object({
 		dir: z.string().default("."),
-		kit: z.string().optional(), // Accepts "all", "engineer,marketing", or single kit - validated in selection-handler
+		kit: z.string().optional(), // Accepts "all", "community,pro", or single kit - validated in selection-handler
 		release: z.string().min(1, "Release tag cannot be empty").optional(),
 		exclude: z.array(ExcludePatternSchema).optional().default([]),
 		only: z.array(ExcludePatternSchema).optional().default([]),
@@ -109,7 +109,7 @@ export const UninstallCommandOptionsSchema = z
 		all: z.boolean().default(false),
 		dryRun: z.boolean().default(false), // Preview without deleting
 		forceOverwrite: z.boolean().default(false), // Delete even modified files
-		kit: KitType.optional(), // Kit-scoped uninstall (engineer, marketing)
+		kit: KitType.optional(), // Kit-scoped uninstall (community, pro)
 	})
 	.merge(GlobalOutputOptionsSchema);
 export type UninstallCommandOptions = z.infer<typeof UninstallCommandOptionsSchema>;

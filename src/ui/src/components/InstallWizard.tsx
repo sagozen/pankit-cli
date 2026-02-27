@@ -116,18 +116,18 @@ const KitSelection: React.FC<{
 		<div className="space-y-4">
 			<p className="text-[var(--dash-text-muted)]">
 				{selected
-					? `Selected: ${selected === KitType.ENGINEER ? t("kitEngineerName") : t("kitMarketingName")}`
+					? `Selected: ${selected === KitType.COMMUNITY ? t("kitCommunityName") : t("kitProName")}`
 					: "Please select a kit above"}
 			</p>
 			{selected && (
 				<button
 					type="button"
 					onClick={() =>
-						onSelect(selected === KitType.ENGINEER ? KitType.MARKETING : KitType.ENGINEER)
+						onSelect(selected === KitType.COMMUNITY ? KitType.PRO : KitType.COMMUNITY)
 					}
 					className="text-sm text-[var(--dash-accent)] hover:underline"
 				>
-					Switch to {selected === KitType.ENGINEER ? t("kitMarketingName") : t("kitEngineerName")}
+					Switch to {selected === KitType.COMMUNITY ? t("kitProName") : t("kitCommunityName")}
 				</button>
 			)}
 		</div>

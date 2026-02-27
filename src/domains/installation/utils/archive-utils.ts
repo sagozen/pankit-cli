@@ -21,7 +21,7 @@ export function detectArchiveType(filename: string): ArchiveType {
 
 /**
  * Check if directory name is a version/release wrapper
- * Examples: pankit-engineer-v1.0.0, pankit-engineer-1.0.0, repo-abc1234,
+ * Examples: pankit-community-v1.0.0, pankit-community-1.0.0, repo-abc1234,
  *           project-v1.0.0-alpha, project-1.2.3-beta.1, repo-v2.0.0-rc.5
  * @param dirName - Directory name to check
  * @returns true if directory is a wrapper that should be stripped

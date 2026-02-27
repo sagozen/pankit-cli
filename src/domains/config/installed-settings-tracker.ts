@@ -22,7 +22,7 @@ export class InstalledSettingsTracker {
 	private isGlobal: boolean;
 	private kitName: string;
 
-	constructor(projectDir: string, isGlobal: boolean, kitName = "engineer") {
+	constructor(projectDir: string, isGlobal: boolean, kitName = "community") {
 		this.projectDir = projectDir;
 		this.isGlobal = isGlobal;
 		this.kitName = kitName;

@@ -59,25 +59,25 @@ export async function handleSync(ctx: InitContext): Promise<InitContext> {
 	}
 
 	// Try to determine kit type from options or existing metadata
-	let kitType = ctx.options.kit as "engineer" | "marketing" | undefined;
+	let kitType = ctx.options.kit as "community" | "pro" | undefined;
 
 	// If no kit specified, try to auto-detect from metadata
 	if (!kitType) {
-		const engineerMeta = await readKitManifest(claudeDir, "engineer");
-		const marketingMeta = await readKitManifest(claudeDir, "marketing");
+		const communityMeta = await readKitManifest(claudeDir, "community");
+		const proMeta = await readKitManifest(claudeDir, "pro");
 
-		if (engineerMeta && marketingMeta) {
+		if (communityMeta && proMeta) {
 			// Both installed - need user to specify
 			if (!ctx.isNonInteractive) {
-				kitType = (await ctx.prompts.selectKit()) as "engineer" | "marketing";
+				kitType = (await ctx.prompts.selectKit()) as "community" | "pro";
 			} else {
-				logger.error("Multiple kits installed. Please specify --kit engineer or --kit marketing");
+				logger.error("Multiple kits installed. Please specify --kit community or --kit pro");
 				return { ...ctx, cancelled: true };
 			}
-		} else if (engineerMeta) {
-			kitType = "engineer";
-		} else if (marketingMeta) {
-			kitType = "marketing";
+		} else if (communityMeta) {
+			kitType = "community";
+		} else if (proMeta) {
+			kitType = "pro";
 		} else {
 			logger.error("Cannot sync: no kit installation found in metadata");
 			return { ...ctx, cancelled: true };

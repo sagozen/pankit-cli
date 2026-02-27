@@ -67,7 +67,7 @@ function hasCliUpdate(currentVersion: string, latestVersion: string | null): boo
 }
 
 export function registerSystemRoutes(app: Express): void {
-	// GET /api/system/check-updates?target=cli|kit&kit=engineer&channel=stable|beta
+	// GET /api/system/check-updates?target=cli|kit&kit=community&channel=stable|beta
 	app.get("/api/system/check-updates", async (req: Request, res: Response) => {
 		const { target, kit, channel = "stable" } = req.query;
 		const normalizedChannel = typeof channel === "string" ? channel.toLowerCase() : "stable";
@@ -105,7 +105,7 @@ export function registerSystemRoutes(app: Express): void {
 				res.json(response);
 			} else {
 				// Kit update check
-				const kitName = (kit as string) ?? "engineer";
+				const kitName = (kit as string) ?? "community";
 				const metadata = await getKitMetadata(kitName);
 				const currentVersion = metadata?.version ?? "0.0.0";
 				const result = await VersionChecker.check(currentVersion);
@@ -129,7 +129,7 @@ export function registerSystemRoutes(app: Express): void {
 		}
 	});
 
-	// GET /api/system/versions?target=cli|kit&kit=engineer - List available versions
+	// GET /api/system/versions?target=cli|kit&kit=community - List available versions
 	app.get("/api/system/versions", async (req: Request, res: Response) => {
 		const { target, kit } = req.query;
 
@@ -174,7 +174,7 @@ export function registerSystemRoutes(app: Express): void {
 				}
 			} else {
 				// Fetch from GitHub releases
-				const kitName = (kit as string) ?? "engineer";
+				const kitName = (kit as string) ?? "community";
 				const kitConfig = AVAILABLE_KITS[kitName as KitType];
 				if (kitConfig) {
 					const githubClient = new GitHubClient();
@@ -217,7 +217,7 @@ export function registerSystemRoutes(app: Express): void {
 		}
 	});
 
-	// POST /api/system/update?target=cli|kit&kit=engineer&version=x.x.x - SSE update stream
+	// POST /api/system/update?target=cli|kit&kit=community&version=x.x.x - SSE update stream
 	app.post("/api/system/update", async (req: Request, res: Response) => {
 		const { target, kit, version } = req.query;
 

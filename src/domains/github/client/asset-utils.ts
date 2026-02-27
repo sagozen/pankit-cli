@@ -7,7 +7,7 @@ import type { GitHubRelease } from "@/types";
 /**
  * Get downloadable asset or source code URL from release
  * Priority:
- * 1. "Pankit Engineer Package" or "Pankit Marketing Package" zip file
+ * 1. "Pankit Community Package" or "Pankit Pro Package" zip file
  * 2. Other custom uploaded assets (.tar.gz, .tgz, .zip) excluding "Source code" archives
  * 3. GitHub's automatic tarball URL
  */

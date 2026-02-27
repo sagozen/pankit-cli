@@ -43,7 +43,7 @@ describe("uninstall command integration", () => {
 		test("should use manifest for accurate file removal", async () => {
 			// Create installation with manifest
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -93,7 +93,7 @@ describe("uninstall command integration", () => {
 
 		test("should preserve custom user config files from manifest", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -144,7 +144,7 @@ describe("uninstall command integration", () => {
 
 			// Create metadata without installedFiles
 			const legacyMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 			};
 
@@ -177,7 +177,7 @@ describe("uninstall command integration", () => {
 
 		test("should use legacy method when installedFiles is empty", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -219,7 +219,7 @@ describe("uninstall command integration", () => {
 
 			// Create minimal metadata to make it a valid installation
 			const minimalMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 			};
 			await writeFile(
@@ -255,7 +255,7 @@ describe("uninstall command integration", () => {
 		test("should handle local scope flag", async () => {
 			// Create local installation
 			const localMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -271,7 +271,7 @@ describe("uninstall command integration", () => {
 
 			// Create global installation (should NOT be removed)
 			const globalMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "global",
@@ -308,7 +308,7 @@ describe("uninstall command integration", () => {
 		test("should handle global scope flag", async () => {
 			// Create local installation (should NOT be removed)
 			const localMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -324,7 +324,7 @@ describe("uninstall command integration", () => {
 
 			// Create global installation
 			const globalMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "global",
@@ -364,7 +364,7 @@ describe("uninstall command integration", () => {
 		test("should handle both local and global flags (all scope)", async () => {
 			// Create local installation
 			const localMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -398,7 +398,7 @@ describe("uninstall command integration", () => {
 		test("should handle --all flag for uninstalling both scopes", async () => {
 			// Create local installation
 			const localMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -452,7 +452,7 @@ describe("uninstall command integration", () => {
 
 		test("should handle partial installation (some files missing)", async () => {
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -536,7 +536,7 @@ describe("uninstall command integration", () => {
 		test("should work with installations created before manifest feature", async () => {
 			// Old installation: has metadata but no installedFiles field
 			const oldMetadata = {
-				name: "engineer",
+				name: "community",
 				version: "0.9.0",
 				installedAt: "2024-12-01T00:00:00.000Z",
 				// No installedFiles or userConfigFiles
@@ -659,7 +659,7 @@ describe("uninstall command integration", () => {
 
 			// Create another .claude directory at different location (simulating global)
 			// For this, we'll create metadata to indicate it's tracked
-			const legacyMetadata = { name: "engineer", version: "0.9.0" };
+			const legacyMetadata = { name: "community", version: "0.9.0" };
 			await writeFile(
 				join(testLocalClaudeDir, "metadata.json"),
 				JSON.stringify(legacyMetadata, null, 2),
@@ -684,7 +684,7 @@ describe("uninstall command integration", () => {
 		test("should detect multiple component types in same installation", async () => {
 			// Create known number of components with metadata for accurate counting
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -790,7 +790,7 @@ describe("uninstall command integration", () => {
 			await writeFile(join(testGlobalClaudeDir, "skills", "global-skill.md"), "skill");
 
 			const globalMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "global",
@@ -832,7 +832,7 @@ describe("uninstall command integration", () => {
 		test("should detect local installation with metadata and global without", async () => {
 			// Local installation with metadata
 			const localMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -869,7 +869,7 @@ describe("uninstall command integration", () => {
 		test("should uninstall both local and global independently", async () => {
 			// Local installation
 			const localMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -885,7 +885,7 @@ describe("uninstall command integration", () => {
 
 			// Global installation
 			const globalMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "global",
@@ -925,7 +925,7 @@ describe("uninstall command integration", () => {
 		test("should handle backslash paths in metadata correctly", async () => {
 			// Windows-style paths in metadata
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
@@ -966,7 +966,7 @@ describe("uninstall command integration", () => {
 			await writeFile(join(testLocalClaudeDir, "skills", "lib", "skill.md"), "skill");
 
 			const legacyMetadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "0.9.0",
 			};
 
@@ -1044,7 +1044,7 @@ describe("uninstall command integration", () => {
 		test("should handle .claude with metadata but no component directories", async () => {
 			// Metadata exists but no actual component files/directories
 			const metadata: Metadata = {
-				name: "engineer",
+				name: "community",
 				version: "1.0.0",
 				installedAt: "2025-01-01T00:00:00.000Z",
 				scope: "local",
