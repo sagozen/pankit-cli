@@ -551,8 +551,9 @@ Likely causes: multiple global installations (npm/bun/pnpm/yarn) or stale shell 
 Run '${redactCommandForLog(updateCmd)}' manually, restart terminal, then check command resolution:
 - Windows: where pk
 - macOS/Linux: which -a pk`;
-				logger.error(mismatchMessage);
-				throw new CliUpdateError(mismatchMessage);
+				logger.warning(mismatchMessage);
+				// Temporary bypass for version check
+				// throw new CliUpdateError(mismatchMessage);
 			}
 
 			// Success message

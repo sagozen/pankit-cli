@@ -35,13 +35,7 @@ Comprehensive documentation in `/docs`:
 
 ## Prerequisites
 
-Before using Pankit CLI, you need to:
-
-1. **Purchase a Pankit Starter Kit** from [Pankit.cc](https://pankit.cc)
-2. **Get Repository Access**: After purchase, you'll receive access to the private GitHub repository containing your kit
-3. **Create a GitHub Personal Access Token** (PAT) with `repo` scope to download releases
-
-Without a purchased kit and repository access, the CLI will not be able to download any project templates.
+Pankit is a free kit. You do not need to purchase a starter kit or set up a GitHub Personal Access Token (PAT) to use the CLI and download project templates.
 
 ## Installation
 
@@ -551,23 +545,6 @@ bun test
 # Optional: run expensive CLI integration tests explicitly
 bun run test:integration
 ```
-
-## FAQ
-
-**Q: Do I need GitHub CLI?**
-A: Yes, GitHub CLI is required. Pankit uses it exclusively for authentication with private repositories.
-
-**Q: How do I authenticate?**
-A: Run `gh auth login`, select 'Login with a web browser', complete OAuth in browser. Do NOT use 'Paste an authentication token'.
-
-**Q: "Access denied" error?**
-A: Accept GitHub repo invitation, re-run `gh auth login` with web browser login, wait 2-5min for permissions.
-
-**Q: "GitHub CLI not authenticated" error?**
-A: Run `gh auth login` and select 'Login with a web browser' (NOT 'Paste token'). PAT authentication is no longer supported.
-
-**Q: Is my token secure?**
-A: Yes. GitHub CLI manages tokens securely via OAuth, stored encrypted in OS keychain.
 
 ## License
 
